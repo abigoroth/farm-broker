@@ -50,8 +50,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
 gem 'bootstrap-sass', '~> 3.3.6'
-<<<<<<< HEAD
-=======
+
 
 gem 'simple_form'
->>>>>>> 823f4197d064b07d8c193c1959ff8e2cad2bddc1
+
