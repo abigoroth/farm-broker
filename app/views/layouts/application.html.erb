@@ -6,8 +6,23 @@
 
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<style>
+	/* Remove the navbar's default margin-bottom and rounded borders */
+.carousel-inner img {
+		width: 100%; /* Set width to 100% */
+		margin: auto;
+		min-height:200px;
+}
 
-<<<<<<< HEAD
+/* Hide the carousel text when the screen is less than 600 pixels wide */
+@media (max-width: 600px) {
+	.carousel-caption {
+		display: none;
+	}
+}
+</style>
+
+</head>
   <body>
   <!--Navigation Bar Here -->
   <nav class="navbar">
@@ -22,7 +37,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="<%= root_path  %>">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Auction News</a></li>
         <li><a href="#">Contact</a></li>
@@ -50,15 +65,10 @@
   <!--Please use div class container in your page so it come out perfect!-->
     <%= yield %>
   </body>
+<<<<<<< HEAD
+
+
 =======
-	
-
-
+>>>>>>> 0659d49b4ab95e311840a1b9e3a08e047b976072
 </head>
-
-<body>
-
-	<%= yield %>
-</body>
->>>>>>> 823f4197d064b07d8c193c1959ff8e2cad2bddc1
 </html>
