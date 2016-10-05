@@ -5,4 +5,7 @@ class Bidder < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :district
+
+  has_many :bid_processes
+	has_many :bidders, through: :bid_processes
 end
