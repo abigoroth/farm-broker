@@ -5,7 +5,7 @@ class Broker < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :district
-
+  has_many :farmsites
   has_many :bids
   has_many :produces , through: :bids
 end
