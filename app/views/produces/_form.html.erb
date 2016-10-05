@@ -1,0 +1,54 @@
+<%= form_for(produce) do |f| %>
+  <% if produce.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(produce.errors.count, "error") %> prohibited this produce from being saved:</h2>
+
+      <ul>
+      <% produce.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="field">
+  <%= f.label :farmsite_id %>
+  <div class="col-lg-12"%>
+  <%= f.collection_select(:farmsite_id,Farmsite.all,:id,:farmsitename,{:prompt=>"Please Select"})%>
+ </div>
+ </div>
+
+  <div class="field">
+    Produce name:
+    <%= f.text_field :producename %>
+  </div>
+
+
+  Produce type:
+  <%=f.radio_button :producetype,"Vegetable",:checked => true %> Vegetable
+  <%=f.radio_button :producetype,"Meat",:checked => true %> Meat
+  <%=f.radio_button :producetype,"Grain",:checked => true %> Grain
+  <%=f.radio_button :producetype,"Poultry",:checked => true %> Poultry
+  <%=f.radio_button :producetype,"Dairy Product",:checked => true %> Dairy Product
+   <%=f.radio_button :producetype,"Seafood",:checked => true %> Seafood 
+
+  <div class="field">
+    <%= f.label :producedate %>
+    <%= f.datetime_select :producedate %>
+  </div>
+
+  <div class="field">
+    <%= f.label :producequantity %>
+    <%= f.number_field :producequantity %>
+  </div>
+
+  <div class="field">
+    <%= f.label :producedescription %>
+    <%= f.text_area :producedescription %>
+  </div>
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

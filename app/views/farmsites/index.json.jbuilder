@@ -1,0 +1,1 @@
+json.array! @farmsites, partial: 'farmsites/farmsite', as: :farmsite

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+
+  resources :produces
+  resources :farmsites
+
   root 'home#index'
 
   devise_for :brokers, controllers: { sessions: 'brokers/sessions'}
