@@ -1,5 +1,8 @@
 class District < ApplicationRecord
+
 	has_many :farmsites
-	has_many :brokers
-	has_many :bidders
+  belongs_to :state
+  has_many :bidders
+  has_many :brokers
+
 end

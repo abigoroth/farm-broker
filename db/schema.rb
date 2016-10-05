@@ -17,10 +17,12 @@ ActiveRecord::Schema.define(version: 20161005092504) do
     t.datetime "bidding_time"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+
     t.integer  "bid_id"
     t.integer  "bidder_id"
     t.index ["bid_id"], name: "index_bid_processes_on_bid_id"
     t.index ["bidder_id"], name: "index_bid_processes_on_bidder_id"
+
   end
 
   create_table "bidders", force: :cascade do |t|
@@ -57,10 +59,12 @@ ActiveRecord::Schema.define(version: 20161005092504) do
     t.decimal  "highest_price"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+
     t.integer  "broker_id"
     t.integer  "produce_id"
     t.index ["broker_id"], name: "index_bids_on_broker_id"
     t.index ["produce_id"], name: "index_bids_on_produce_id"
+
   end
 
   create_table "brokers", force: :cascade do |t|
@@ -91,6 +95,8 @@ ActiveRecord::Schema.define(version: 20161005092504) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "state_id"
+    t.index ["state_id"], name: "index_districts_on_state_id"
   end
 
   create_table "farmsites", force: :cascade do |t|
@@ -121,5 +127,4 @@ ActiveRecord::Schema.define(version: 20161005092504) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
 end
