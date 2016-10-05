@@ -10,8 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20161005072431) do
+ActiveRecord::Schema.define(version: 20161005093540) do
+
+  create_table "bid_processes", force: :cascade do |t|
+    t.decimal  "price"
+    t.datetime "bidding_time"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "bidders", force: :cascade do |t|
     t.string   "name"
@@ -37,6 +43,18 @@ ActiveRecord::Schema.define(version: 20161005072431) do
     t.index ["reset_password_token"], name: "index_bidders_on_reset_password_token", unique: true
   end
 
+  create_table "bids", force: :cascade do |t|
+    t.string   "bid_status"
+    t.string   "day"
+    t.date     "date"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.decimal  "start_price"
+    t.decimal  "highest_price"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "brokers", force: :cascade do |t|
     t.string   "name"
     t.date     "dob"
@@ -59,42 +77,20 @@ ActiveRecord::Schema.define(version: 20161005072431) do
     t.index ["district_id"], name: "index_brokers_on_district_id"
     t.index ["email"], name: "index_brokers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_brokers_on_reset_password_token", unique: true
-=======
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20161005075532) do
+  end
 
   create_table "districts", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "state_id"
+    t.index ["state_id"], name: "index_districts_on_state_id"
   end
 
   create_table "states", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-=======
-ActiveRecord::Schema.define(version: 20161005064021) do
-
-  create_table "bid_processes", force: :cascade do |t|
-    t.decimal  "price"
-    t.datetime "bidding_time"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  create_table "bids", force: :cascade do |t|
-    t.string   "bid_status"
-    t.string   "day"
-    t.date     "date"
-    t.time     "start_time"
-    t.time     "end_time"
-    t.decimal  "start_price"
-    t.decimal  "highest_price"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
->>>>>>> 8736c6db1764aa93f01dd3feb7d8e9ae0b775426
->>>>>>> 823f4197d064b07d8c193c1959ff8e2cad2bddc1
   end
 
 end
