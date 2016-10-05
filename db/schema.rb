@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20161005075532) do
 
   create_table "districts", force: :cascade do |t|
@@ -22,6 +23,27 @@ ActiveRecord::Schema.define(version: 20161005075532) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+=======
+ActiveRecord::Schema.define(version: 20161005064021) do
+
+  create_table "bid_processes", force: :cascade do |t|
+    t.decimal  "price"
+    t.datetime "bidding_time"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "bids", force: :cascade do |t|
+    t.string   "bid_status"
+    t.string   "day"
+    t.date     "date"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.decimal  "start_price"
+    t.decimal  "highest_price"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+>>>>>>> 8736c6db1764aa93f01dd3feb7d8e9ae0b775426
   end
 
 end

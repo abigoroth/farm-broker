@@ -1,0 +1,1 @@
+json.array! @bid_processes, partial: 'bid_processes/bid_process', as: :bid_process
