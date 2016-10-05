@@ -9,6 +9,7 @@
 	<style>
 	.container{
 		min-height: 450px;
+
 	}
 	.navbar {
 		 margin-bottom: 0;
@@ -76,6 +77,7 @@
   <!--Please use div class container in your page so it come out perfect!-->
 	<%= content_tag(:div, flash[:alert], :id => "flash_alert", class: 'alert alert-danger') if flash[:alert] %>
 	<%= content_tag(:div, flash[:notice], :id => "flash_notice", class: 'alert alert-success') if flash[:notice] %>
+
     <%= yield %>
 <!--footer -->
 		<footer class="container-fluid text-center">
