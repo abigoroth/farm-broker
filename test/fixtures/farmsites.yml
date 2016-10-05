@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  farmsitename: MyString
+  farmsitesize: 1
+  farmsiteaddress: MyText
+  farmsiteownername: MyString
+  farmsiteownerphoneno: 1
+  districtid: 1
+  brokerid: 1
+
+two:
+  farmsitename: MyString
+  farmsitesize: 1
+  farmsiteaddress: MyText
+  farmsiteownername: MyString
+  farmsiteownerphoneno: 1
+  districtid: 1
+  brokerid: 1

@@ -1,0 +1,1 @@
+json.partial! "farmsites/farmsite", farmsite: @farmsite
