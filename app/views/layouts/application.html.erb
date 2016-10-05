@@ -7,6 +7,11 @@
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 	<style>
+	.navbar {
+		height: 90px;
+		 margin-bottom: 0;
+		 border-radius: 0;
+	 }
 	/* Remove the navbar's default margin-bottom and rounded borders */
 .carousel-inner img {
 		width: 100%; /* Set width to 100% */
@@ -25,7 +30,7 @@
 </head>
   <body>
   <!--Navigation Bar Here -->
-  <nav class="navbar">
+  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -33,7 +38,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><%= image_tag 'logo-farm.png', width: '70px'%></a>
+      <a class="navbar-brand" href="#"><%= image_tag 'logo-farm.png', width: '70px' %></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -52,8 +57,8 @@
 
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
           <ul class="dropdown-menu">
-            <li><a href="#">Bidder</a></li>
-            <li><a href="#">Broker</a></li>
+            <li><a href="<%= new_bidder_session_path %>">Bidder</a></li>
+            <li><a href="<%= new_broker_session_path %>">Broker</a></li>
           </ul>
         </li>
       </ul>
@@ -62,13 +67,9 @@
 </nav>
 <!--End of Navigation Bar -->
 <br>
+<br>
   <!--Please use div class container in your page so it come out perfect!-->
     <%= yield %>
   </body>
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 0659d49b4ab95e311840a1b9e3a08e047b976072
-</head>
 </html>
