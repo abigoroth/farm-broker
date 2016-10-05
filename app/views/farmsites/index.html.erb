@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>List Farm</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Farmsitename</th>
+      <th>Farmsitesize</th>
+      <th>Farmsiteaddress</th>
+      <th>Farmsiteownername</th>
+      <th>Farmsiteownerphoneno</th>
+      <th>Districtid</th>
+      <th>Brokerid</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @farmsites.each do |farmsite| %>
+      <tr>
+        <td><%= farmsite.farmsitename %></td>
+        <td><%= farmsite.farmsitesize %></td>
+        <td><%= farmsite.farmsiteaddress %></td>
+        <td><%= farmsite.farmsiteownername %></td>
+        <td><%= farmsite.farmsiteownerphoneno %></td>
+        <td><%= farmsite.district_id %></td>
+        <td><%= farmsite.broker_id %></td>
+        <td><%= link_to 'Show', farmsite %></td>
+        <td><%= link_to 'Edit', edit_farmsite_path(farmsite) %></td>
+        <td><%= link_to 'Destroy', farmsite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Farm', new_farmsite_path %>

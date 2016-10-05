@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  producename: MyString
+  producetype: MyString
+  producedate: 2016-10-05 10:20:12
+  producequantity: 1
+  producedescription: MyText
+  farmsiteid: 1
+
+two:
+  producename: MyString
+  producetype: MyString
+  producedate: 2016-10-05 10:20:12
+  producequantity: 1
+  producedescription: MyText
+  farmsiteid: 1

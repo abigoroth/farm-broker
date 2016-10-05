@@ -1,0 +1,2 @@
+json.extract! farmsite, :id, :farmsitename, :farmsitesize, :farmsiteaddress, :farmsiteownername, :farmsiteownerphoneno, :districtid, :brokerid, :created_at, :updated_at
+json.url farmsite_url(farmsite, format: :json)

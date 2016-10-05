@@ -1,0 +1,42 @@
+<h1>Information of the Farm</h1>
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Farmsitename:</strong>
+  <%= @farmsite.farmsitename %>
+</p>
+
+<p>
+  <strong>Farmsitesize:</strong>
+  <%= @farmsite.farmsitesize %>
+</p>
+
+<p>
+  <strong>Farmsiteaddress:</strong>
+  <%= @farmsite.farmsiteaddress %>
+</p>
+
+<p>
+  <strong>Farmsiteownername:</strong>
+  <%= @farmsite.farmsiteownername %>
+</p>
+
+<p>
+  <strong>Farmsiteownerphoneno:</strong>
+  <%= @farmsite.farmsiteownerphoneno %>
+</p>
+
+<p>
+  <strong>Districtid:</strong>
+  <%= @farmsite.district_id %>
+</p>
+
+<p>
+  <strong>Brokerid:</strong>
+  <%= @farmsite.broker_id %>
+</p>
+
+<%= link_to 'Edit', edit_farmsite_path(@farmsite) %> |
+<%= link_to 'Back', farmsites_path %>
