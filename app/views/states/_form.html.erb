@@ -1,3 +1,4 @@
+
 <%= simple_form_for(@state) do |f| %>
   <%= f.error_notification %>
 
@@ -5,12 +6,8 @@
     <%= f.input :name %>
   </div>
 
-<<<<<<< HEAD
+<br>
   <div class="form-actions">
-    <%= f.button :submit %>
-=======
-  <div class="actions">
-    <%= f.submit 'submit', class:"btn btn-primary"  %>
->>>>>>> 793f6f30a323e0d1c12de750859255d27d8cd464
-  </div>
+    <%= f.button :submit, class:"btn btn-primary" %>
+<br>
 <% end %>

@@ -13,6 +13,7 @@
   <div class="field">
     <%= f.label 'Date of Birth' %><br />
     <%= f.text_field :dob, autofocus: true, class:'form-control', id: 'datetimepicker4' %>
+    <!-- JS script for datetimepicker4 -->
     <script type="text/javascript">
      $(function () {
          $('#datetimepicker4').datetimepicker(
@@ -22,6 +23,7 @@
          );
      });
  </script>
+ <!-- JS script for datetimepicker4 -->
   </div>
   <div class="field">
     <%= f.label :address %><br />
