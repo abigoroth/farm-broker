@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   resources :farmsites
 
   root 'home#index'
-
-  devise_for :brokers, controllers: { sessions: 'brokers/sessions'}
-  devise_for :bidders, controllers: { sessions: 'bidders/sessions'}
+  get 'home/about'
+  get 'home/news'
+  get 'home/contact'
+  devise_for :brokers, controllers: { registrations: 'brokers/registrations',sessions: 'brokers/sessions'}
+  devise_for :bidders, controllers: { registrations: 'bidders/registrations',sessions: 'bidders/sessions'}
 
   resources :districts
   resources :states
