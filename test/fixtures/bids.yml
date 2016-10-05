@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bid_status: MyString
+  day: MyString
+  date: 2016-10-05
+  start_time: 2016-10-05 14:39:38
+  end_time: 2016-10-05 14:39:38
+  start_price: 9.99
+  highest_price: 9.99
+
+two:
+  bid_status: MyString
+  day: MyString
+  date: 2016-10-05
+  start_time: 2016-10-05 14:39:38
+  end_time: 2016-10-05 14:39:38
+  start_price: 9.99
+  highest_price: 9.99

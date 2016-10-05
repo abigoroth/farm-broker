@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bid status:</strong>
+  <%= @bid.bid_status %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @bid.day %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @bid.date %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @bid.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @bid.end_time %>
+</p>
+
+<p>
+  <strong>Start price:</strong>
+  <%= @bid.start_price %>
+</p>
+
+<p>
+  <strong>Highest price:</strong>
+  <%= @bid.highest_price %>
+</p>
+
+<%= link_to 'Edit', edit_bid_path(@bid) %> |
+<%= link_to 'Back', bids_path %>
