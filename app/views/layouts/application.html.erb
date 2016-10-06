@@ -55,12 +55,7 @@
         <li><a href="<%= home_contact_path %>">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Register</a>
-          <ul class="dropdown-menu">
-            <li><%= link_to 'Bidder', new_bidder_registration_path %></li>
-            <li><%= link_to 'Broker', new_broker_registration_path %></li>
-          </ul>
-        </li>
+        <li><a href="<%= home_district_page_path %>"><span class="glyphicon glyphicon-user"></span> Register</a>
 
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
           <ul class="dropdown-menu">
@@ -74,7 +69,7 @@
 </nav>
 <!--End of Navigation Bar -->
 
-  <!--Please use div class container in your page so it come out perfect!-->
+  <!--Please use div class container in your page so it come out perfectly!-->
 	<%= content_tag(:div, flash[:alert], :id => "flash_alert", class: 'alert alert-danger') if flash[:alert] %>
 	<%= content_tag(:div, flash[:notice], :id => "flash_notice", class: 'alert alert-success') if flash[:notice] %>
 
