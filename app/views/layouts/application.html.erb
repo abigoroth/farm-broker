@@ -61,6 +61,7 @@
 								<li><a href="<%= farmsites_path %>">Farm Sites</a></li>
 								<li><a href="<%= produces_path %>">Produces</a></li>
 								<li><a href="<%= bids_path %>">Bids</a></li>
+								<li><a href="/bid_processes">Bid Process</a></li>
 							</ul>
 						</li>
 					<% end %>
@@ -71,7 +72,7 @@
 								<li><a href="/farmsites">Farm Sites</a></li><!--edit_farmsite_path-->
 								<li><a href="/produces">Produces</a></li><!--edit_produce_path-->
 								<li><a href="/bids">Bids</a></li><!--edit_bid_path-->
-								<li><a href="/bid_processes">Bid Process</a></li><!--edit_bid_process_path-->
+								<!--edit_bid_process_path-->
 							</ul>
 						</li>
 					<% end %>
@@ -96,9 +97,11 @@
 						</ul>
 						<%end%>
 						<%if bidder_signed_in? %>
+							<li><a href="#">Bidder: <%= current_bidder.name %></a></li>
 							<li><%= link_to 'Sign Out', destroy_bidder_session_path, :method=> :delete %></li>
 						<%end%>
 						<%if broker_signed_in? %>
+						  <li><a href="#">Broker: <%= current_broker.name %></a></li>
 							<li><%= link_to 'Sign Out', destroy_broker_session_path, :method=> :delete %></li>
 						<%end%>
 				</ul>
