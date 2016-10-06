@@ -14,8 +14,13 @@ ActiveRecord::Schema.define(version: 20161006105221) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "bidding_time"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "bid_id"
+    t.integer  "bidder_id"
+    t.index ["bid_id"], name: "index_bid_processes_on_bid_id"
+    t.index ["bidder_id"], name: "index_bid_processes_on_bidder_id"
   end
 
   create_table "bidders", force: :cascade do |t|
@@ -86,13 +91,6 @@ ActiveRecord::Schema.define(version: 20161006105221) do
     t.integer  "broker_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.string   "title"
-    t.string   "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "produces", force: :cascade do |t|
