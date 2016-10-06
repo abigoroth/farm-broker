@@ -54,75 +54,49 @@
           <li><a href="<%= home_news_path %>">Auction News</a></li>
           <li><a href="<%= home_contact_path %>">Contact</a></li>
 
-<<<<<<< HEAD
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-          <ul class="dropdown-menu">
-            <li><a href="<%= new_bidder_session_path %>">Bidder</a></li>
-            <li><a href="<%= new_broker_session_path %>">Broker</a></li>
-          </ul>
-        </li>
-      </ul>
+					        <% if bidder_signed_in? %>
+					          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
+					            <ul class="dropdown-menu">
+					              <li><a href="<%= farmsites_path %>">Farm Sites</a></li>
+					              <li><a href="<%= produces_path %>">Produces</a></li>
+					              <li><a href="<%= bids_path %>">Bids</a></li>
+					            </ul>
+					          </li>
+					        <% end %>
+
+					        <% if broker_signed_in? %>
+					          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
+					            <ul class="dropdown-menu">
+					              <li><a href="<%= edit_farmsite_path %>">Farm Sites</a></li>
+					              <li><a href="<%= edit_produce_path %>">Produces</a></li>
+					              <li><a href="<%= edit_bid_path %>">Bids</a></li>
+					              <li><a href="<%= edit_bid_process_path %>">Bid Process</a></li>
+					            </ul>
+					          </li>
+					        <% end %>
+
+					        </ul>
+					        <ul class="nav navbar-nav navbar-right">
+					          <li><a href="<%= home_district_page_path %>"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+
+					            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Sign In</a>
+					              <ul class="dropdown-menu">
+					                <li><a href="<%= new_bidder_session_path %>">Bidder</a></li>
+					                <li><a href="<%= new_broker_session_path %>">Broker</a></li>
+					              </ul>
+					            </li>
+					          </ul>
+      					</ul>
     </div>
   </div>
 </nav>
 <!--End of Navigation Bar -->
-<br>
-<br>
+
   <!--Please use div class container in your page so it come out perfect!-->
-    <%= yield %>
-  </body>
 
-
-</html>
-
-=======
-        <% if bidder_signed_in? %>
-          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
-            <ul class="dropdown-menu">
-              <li><a href="<%= farmsites_path %>">Farm Sites</a></li>
-              <li><a href="<%= produces_path %>">Produces</a></li>
-              <li><a href="<%= bids_path %>">Bids</a></li>
-            </ul>
-          </li>
-        <% end %>
-
-        <% if broker_signed_in? %>
-          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
-            <ul class="dropdown-menu">
-              <li><a href="<%= edit_farmsite_path %>">Farm Sites</a></li>
-              <li><a href="<%= edit_produce_path %>">Produces</a></li>
-              <li><a href="<%= edit_bid_path %>">Bids</a></li>
-              <li><a href="<%= edit_bid_process_path %>">Bid Process</a></li>
-            </ul>
-          </li>
-        <% end %>
->>>>>>> 570d4bab7bb5280ced90812de88b5805802bbf5d
-
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="<%= home_district_page_path %>"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
-
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Sign In</a>
-              <ul class="dropdown-menu">
-                <li><a href="<%= new_bidder_session_path %>">Bidder</a></li>
-                <li><a href="<%= new_broker_session_path %>">Broker</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!--End of Navigation Bar -->
-
-    <!--Please use div class container in your page so it come out perfectly!-->
     <%= content_tag(:div, flash[:alert], :id => "flash_alert", class: 'alert alert-danger') if flash[:alert] %>
     <%= content_tag(:div, flash[:notice], :id => "flash_notice", class: 'alert alert-success') if flash[:notice] %>
 
-<<<<<<< HEAD
-</head>
-</html>
-
-=======
     <%= yield %>
     <!--footer -->
     <footer class="container-fluid text-center">
@@ -132,4 +106,3 @@
   </body>
 
   </html>
->>>>>>> 570d4bab7bb5280ced90812de88b5805802bbf5d
