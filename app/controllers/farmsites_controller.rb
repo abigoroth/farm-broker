@@ -24,7 +24,8 @@ class FarmsitesController < ApplicationController
   # POST /farmsites
   # POST /farmsites.json
   def create
-    @farmsite = Farmsite.new(farmsite_params)
+
+    @farmsite =current_broker.farmsites.new(farmsite_params)
 
     respond_to do |format|
       if @farmsite.save
