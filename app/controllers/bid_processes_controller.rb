@@ -14,7 +14,7 @@ class BidProcessesController < ApplicationController
 
   # GET /bid_processes/new
   def new
-    @bid_process = BidProcess.new
+    @bid_process = BidProcess.new(bid_id:params[:bid_id])
   end
 
   # GET /bid_processes/1/edit
