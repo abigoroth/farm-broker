@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Farmbroker</title>
+	<title>Localhost Livestocks Auctions</title>
 	<%= csrf_meta_tags %>
 
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -106,20 +106,3 @@
   </body>
 
   </html>
-
-  <!--End of Navigation Bar -->
-
-  <!--Please use div class container in your page so it come out perfectly!-->
-  <%= content_tag(:div, flash[:alert], :id => "flash_alert", class: 'alert alert-danger') if flash[:alert] %>
-  <%= content_tag(:div, flash[:notice], :id => "flash_notice", class: 'alert alert-success') if flash[:notice] %>
-
-
-  <%= yield %>
-  <!--footer -->
-  <footer class="container-fluid text-center">
-    <p>2016@LocalhostSdnBhd</p>
-  </footer>
-  <!--footer-->
-</body>
-
-</html>
