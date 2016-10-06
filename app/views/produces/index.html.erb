@@ -35,5 +35,5 @@
 
 <br>
 
-<%= link_to 'New Produce', new_produce_path %>
+<% if broker_signed_in? %><%= link_to 'New Produce', new_produce_path %><%end%>
 </center>
