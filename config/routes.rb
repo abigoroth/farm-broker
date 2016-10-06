@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   devise_for :brokers, controllers: { registrations: 'brokers/registrations',sessions: 'brokers/sessions'}
   devise_for :bidders, controllers: { registrations: 'bidders/registrations',sessions: 'bidders/sessions'}
 
-  resources :districts
-  resources :states
 
   resources :bid_processes
   resources :bids

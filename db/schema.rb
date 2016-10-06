@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005114605) do
+ActiveRecord::Schema.define(version: 20161006040611) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -41,8 +41,6 @@ ActiveRecord::Schema.define(version: 20161005114605) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "district_id"
-    t.index ["district_id"], name: "index_bidders_on_district_id"
     t.index ["email"], name: "index_bidders_on_email", unique: true
     t.index ["reset_password_token"], name: "index_bidders_on_reset_password_token", unique: true
   end
@@ -81,18 +79,8 @@ ActiveRecord::Schema.define(version: 20161005114605) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "district_id"
-    t.index ["district_id"], name: "index_brokers_on_district_id"
     t.index ["email"], name: "index_brokers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_brokers_on_reset_password_token", unique: true
-  end
-
-  create_table "districts", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "state_id"
-    t.index ["state_id"], name: "index_districts_on_state_id"
   end
 
   create_table "farmsites", force: :cascade do |t|
@@ -107,13 +95,6 @@ ActiveRecord::Schema.define(version: 20161005114605) do
     t.datetime "updated_at",           null: false
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string   "title"
-    t.string   "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "produces", force: :cascade do |t|
     t.string   "producename"
     t.string   "producetype"
@@ -123,12 +104,6 @@ ActiveRecord::Schema.define(version: 20161005114605) do
     t.integer  "farmsite_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-  end
-
-  create_table "states", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end
