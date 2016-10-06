@@ -3,7 +3,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
+    <%= f.input :name, as: :select, collection: ["On", "Off"], include_blank: false %>
   </div>
 
 <br>

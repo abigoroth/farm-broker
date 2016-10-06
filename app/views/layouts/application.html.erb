@@ -7,23 +7,23 @@
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 	<style>
-	.container{
-		min-height: 450px;
+   .container{
+    min-height: 450px;
 
-	}
-	.navbar {
-		 margin-bottom: 0;
-		 border-radius: 0;
-	 }
-	 footer {
-		 background-color: #f2f2f2;
-		 padding: 25px;
-	 }
-	/* Remove the navbar's default margin-bottom and rounded borders */
-.carousel-inner img {
-		width: 100%; /* Set width to 100% */
-		margin: auto;
-		min-height:200px;
+  }
+  .navbar {
+   margin-bottom: 0;
+   border-radius: 0;
+ }
+ footer {
+   background-color: #f2f2f2;
+   padding: 25px;
+ }
+ /* Remove the navbar's default margin-bottom and rounded borders */
+ .carousel-inner img {
+  width: 100%; /* Set width to 100% */
+  margin: auto;
+  min-height:200px;
 }
 
 /* Hide the carousel text when the screen is less than 600 pixels wide */
@@ -35,50 +35,72 @@
 </style>
 
 </head>
-  <body>
+<body>
   <!--Navigation Bar Here -->
   <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="navbar-brand">Elite Livestocks</div>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="<%= root_path  %>">Home</a></li>
-        <li><a href="<%= home_about_path %>">About</a></li>
-        <li><a href="<%= home_news_path %>">Auction News</a></li>
-        <li><a href="<%= home_contact_path %>">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="<%= home_district_page_path %>"><span class="glyphicon glyphicon-user"></span> Register</a>
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-brand">Localhost Farm Broker</div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="<%= root_path  %>">Home</a></li>
+          <li><a href="<%= home_about_path %>">About</a></li>
+          <li><a href="<%= home_news_path %>">Auction News</a></li>
+          <li><a href="<%= home_contact_path %>">Contact</a></li>
 
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-          <ul class="dropdown-menu">
-            <li><a href="<%= new_bidder_session_path %>">Bidder</a></li>
-            <li><a href="<%= new_broker_session_path %>">Broker</a></li>
+        <% if bidder_signed_in? %>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
+            <ul class="dropdown-menu">
+              <li><a href="<%= farmsites_path %>">Farm Sites</a></li>
+              <li><a href="<%= produces_path %>">Produces</a></li>
+              <li><a href="<%= bids_path %>">Bids</a></li>
+            </ul>
+          </li>
+        <% end %>
+
+        <% if broker_signed_in? %>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
+            <ul class="dropdown-menu">
+              <li><a href="<%= edit_farmsite_path %>">Farm Sites</a></li>
+              <li><a href="<%= edit_produce_path %>">Produces</a></li>
+              <li><a href="<%= edit_bid_path %>">Bids</a></li>
+              <li><a href="<%= edit_bid_process_path %>">Bid Process</a></li>
+            </ul>
+          </li>
+        <% end %>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="<%= home_district_page_path %>"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Sign In</a>
+              <ul class="dropdown-menu">
+                <li><a href="<%= new_bidder_session_path %>">Bidder</a></li>
+                <li><a href="<%= new_broker_session_path %>">Broker</a></li>
+              </ul>
+            </li>
           </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<!--End of Navigation Bar -->
+        </div>
+      </div>
+    </nav>
+    <!--End of Navigation Bar -->
 
-  <!--Please use div class container in your page so it come out perfectly!-->
-	<%= content_tag(:div, flash[:alert], :id => "flash_alert", class: 'alert alert-danger') if flash[:alert] %>
-	<%= content_tag(:div, flash[:notice], :id => "flash_notice", class: 'alert alert-success') if flash[:notice] %>
+    <!--Please use div class container in your page so it come out perfectly!-->
+    <%= content_tag(:div, flash[:alert], :id => "flash_alert", class: 'alert alert-danger') if flash[:alert] %>
+    <%= content_tag(:div, flash[:notice], :id => "flash_notice", class: 'alert alert-success') if flash[:notice] %>
 
     <%= yield %>
-<!--footer -->
-		<footer class="container-fluid text-center">
-		  <p>2016@EliteLivestock</p>
-		</footer>
-<!--footer-->
+    <!--footer -->
+    <footer class="container-fluid text-center">
+      <p>2016@LocalhostSdnBhd</p>
+    </footer>
+    <!--footer-->
   </body>
 
-</html>
+  </html>
