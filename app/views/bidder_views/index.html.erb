@@ -1,0 +1,33 @@
+<div class="container">
+  <h3>My profile</h3>
+  <br>
+    <p>
+      <div class="panel panel-default">
+        <table class="table">
+          <tr>
+          <th>Name: </th>
+          <td><%= current_bidder.name %></td>
+        </tr>
+        <tr>
+        <th>Email: </th>
+        <td><%= current_bidder.email %></td>
+        </tr>
+        <tr>
+        <th>Date Of Birth: </th>
+        <td><%= current_bidder.dob.strftime('%d/%m/%Y') %></td>
+        </tr>
+        <tr>
+        <th>Address: </th>
+        <td><%= current_bidder.address %></td>
+        </tr>
+        <tr>
+        <th>Credit card No.: </th>
+        <td><%= current_bidder.credit_card %></td>
+        </tr>
+        <tr>
+        <td colspan="2"><a href="<%= edit_bidder_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a></td>
+        </tr>
+        </table>
+      </div>
+    </p>
+</div>
