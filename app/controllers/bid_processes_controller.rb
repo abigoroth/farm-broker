@@ -24,7 +24,7 @@ class BidProcessesController < ApplicationController
   # POST /bid_processes
   # POST /bid_processes.json
   def create
-    @bid_process = BidProcess.new(bid_process_params)
+    @bid_process = current_bidder.bid_process.new(bid_process_params)
 
     respond_to do |format|
       if @bid_process.save
@@ -69,6 +69,6 @@ class BidProcessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bid_process_params
-      params.require(:bid_process).permit(:bid_id, :price, :bidding_time)
+      params.require(:bid_process).permit(:bid_id, :price)
     end
 end

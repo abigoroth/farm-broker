@@ -18,7 +18,7 @@
       <tr>
         <td><%= bid_process.bid.id %></td>
         <td><%= bid_process.price %></td>
-        <td><%= bid_process.bidding_time %></td>
+        <td><%= bid_process.created_at %></td>
         <td><%= link_to 'Show', bid_process %></td>
         <td><%= link_to 'Edit', edit_bid_process_path(bid_process) %></td>
         <td><%= link_to 'Destroy', bid_process, method: :delete, data: { confirm: 'Are you sure?' } %></td>

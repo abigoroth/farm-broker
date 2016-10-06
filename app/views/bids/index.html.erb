@@ -23,14 +23,16 @@
         <td><%= bid.bid_status %></td>
         <td><%= bid.day %></td>
         <td><%= bid.date %></td>
+        <td><%= bid.produce.producename %></td>
         <td><%= bid.start_time %></td>
         <td><%= bid.end_time %></td>
         <td><%= bid.start_price %></td>
         <td><%= bid.highest_price %></td>
-        <% if bidder_signed_in? %><%= render 'form', bid_process: @bid_process %><%end%>
+        <% if broker_signed_in? %>
         <td><%= link_to 'Show', bid %></td>
         <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
         <td><%= link_to 'Destroy', bid, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
