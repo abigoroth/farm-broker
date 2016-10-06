@@ -28,8 +28,8 @@
         <td><%= bid.end_time %></td>
         <td><%= bid.start_price %></td>
         <% if bidder_signed_in? %>
-        <% if Time.now < bid.start_time and Time.now < bid.end_time %>
-        <td><%= link_to 'new', new_bid_process_path%></td>
+        <% if Time.now > bid.start_time and Time.now < bid.end_time %>
+        <td><%= link_to 'new', new_bid_process_path(bid_id: bid.id)%></td>
         <% end %>
         <% end %>
         <% if broker_signed_in? %>
