@@ -14,7 +14,7 @@
         </tr>
         <tr>
         <th>Date Of Birth: </th>
-        <td><%= current_bidder.dob %></td>
+        <td><%= current_bidder.dob.strftime('%d/%m/%Y') %></td>
         </tr>
         <tr>
         <th>Address: </th>
@@ -25,7 +25,7 @@
         <td><%= current_bidder.credit_card %></td>
         </tr>
         <tr>
-        <td colspan="2"><a href="<%= edit_bidder_registration_path %>"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a></td>
+        <td colspan="2"><a href="<%= edit_bidder_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a></td>
         </tr>
         </table>
       </div>

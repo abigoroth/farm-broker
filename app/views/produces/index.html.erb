@@ -26,7 +26,7 @@
         <td><%= produce.producedate %></td>
         <td><%= produce.producequantity %></td>
         <td><%= produce.producedescription %></td>
-        <td><%= produce.farmsite_id %></td>
+        <td><%= produce.farmsite.farmsitename %></td>
         <% if broker_signed_in? %>
         <td><%= link_to 'Show', produce %></td>
         <td><%= link_to 'Edit', edit_produce_path(produce) %></td>
