@@ -1,22 +1,13 @@
-<%= form_for(state) do |f| %>
-  <% if state.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(state.errors.count, "error") %> prohibited this state from being saved:</h2>
 
-      <ul>
-      <% state.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= simple_form_for(@state) do |f| %>
+  <%= f.error_notification %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <div class="form-inputs">
+    <%= f.input :name, as: :select, collection: ["On", "Off"], include_blank: false %>
   </div>
 
-  <div class="actions">
-    <%= f.submit 'submit', class:"btn btn-primary"  %>
-  </div>
+<br>
+  <div class="form-actions">
+    <%= f.button :submit, class:"btn btn-primary" %>
+<br>
 <% end %>

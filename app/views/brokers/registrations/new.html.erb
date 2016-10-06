@@ -1,11 +1,45 @@
-<h2>Sign up</h2>
-
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12"><h2>Step 2: Broker Registration</h2></div>
+  </div>
+  <div class="row">
+  <div class="col-md-4">
+<div class="form-group">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, class:'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label 'Date of Birth' %><br />
+    <%= f.text_field :dob, autofocus: true, class:'form-control', id: 'datetimepicker4' %>
+    <script type="text/javascript">
+     $(function () {
+         $('#datetimepicker4').datetimepicker(
+           {
+             format: 'YYYY-MM-DD'
+           }
+         );
+     });
+ </script>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address, autofocus: true, class:'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :account_no %><br />
+    <%= f.text_field :account_no, autofocus: true, class:'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label 'Phone Number' %><br />
+    <%= f.text_field :phone, autofocus: true, class:'form-control' %>
+  </div>
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, class:'form-control' %>
   </div>
 
   <div class="field">
@@ -13,17 +47,21 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", class:'form-control' %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:'form-control' %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: 'btn btn-md btn-info' %>
   </div>
 <% end %>
 
-<%= render "brokers/shared/links" %>
+Already a broker? <%= render "brokers/shared/links" %>
+</div>
+</div>
+</div>
+</div>
