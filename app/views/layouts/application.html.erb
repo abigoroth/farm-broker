@@ -1,121 +1,124 @@
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<title>Localhost Livestocks Auctions</title>
-			<%= csrf_meta_tags %>
 
-			<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-			<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-			<style>
-		   .container{
-		    min-height: 450px;
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Localhost Livestocks Auctions</title>
+	<%= csrf_meta_tags %>
 
-		  }
-		  .navbar {
-		   margin-bottom: 0;
-		   border-radius: 0;
-		 }
-		 footer {
-		   background-color: #f2f2f2;
-		   padding: 25px;
-		 }
-		 /* Remove the navbar's default margin-bottom and rounded borders */
-		 .carousel-inner img {
-		  width: 100%; /* Set width to 100% */
-		  margin: auto;
-		  min-height:200px;
-		}
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<style>
+   .container{
+    min-height: 450px;
 
-		/* Hide the carousel text when the screen is less than 600 pixels wide */
-		@media (max-width: 600px) {
-			.carousel-caption {
-				display: none;
-			}
-		}
-		</style>
+  }
+  .navbar {
+   margin-bottom: 0;
+   border-radius: 0;
+ }
+ footer {
+   background-color: #f2f2f2;
+   padding: 25px;
+ }
+ /* Remove the navbar's default margin-bottom and rounded borders */
+ .carousel-inner img {
+  width: 100%; /* Set width to 100% */
+  margin: auto;
+  min-height:200px;
+}
 
-		</head>
-		<body>
-		  <!--Navigation Bar Here -->
-		  <nav class="navbar navbar-inverse">
-		    <div class="container-fluid">
-		      <div class="navbar-header">
-		        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-		          <span class="icon-bar"></span>
-		          <span class="icon-bar"></span>
-		          <span class="icon-bar"></span>
-		        </button>
-		        <div class="navbar-brand">Localhost Farm</div>
-		      </div>
-		      <div class="collapse navbar-collapse" id="myNavbar">
-		        <ul class="nav navbar-nav">
-		          <li class="active"><a href="<%= root_path  %>">Home</a></li>
-		          <li><a href="<%= home_about_path %>">About</a></li>
-		          <li><a href="<%= home_news_path %>">Auction News</a></li>
-		          <li><a href="<%= home_contact_path %>">Contact</a></li>
-						</ul>
+/* Hide the carousel text when the screen is less than 600 pixels wide */
+@media (max-width: 600px) {
+	.carousel-caption {
+		display: none;
+	}
+}
+</style>
 
+</head>
+<body>
+  <!--Navigation Bar Here -->
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-brand">Localhost Farm</div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="<%= root_path  %>">Home</a></li>
+          <li><a href="<%= home_about_path %>">About</a></li>
+          <li><a href="<%= home_news_path %>">Auction News</a></li>
+          <li><a href="<%= home_contact_path %>">Contact</a></li>
 
-						<% if bidder_signed_in? %>
-							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
+					<% if bidder_signed_in? %>
+						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
+							<ul class="dropdown-menu">
+								<li><a href="<%= farmsites_path %>">Farm Sites</a></li>
+								<li><a href="<%= produces_path %>">Produces</a></li>
+								<li><a href="<%= bids_path %>">Bids</a></li>
+							</ul>
+						</li>
+					<% end %>
+
+					<% if broker_signed_in? %>
+						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
+							<ul class="dropdown-menu">
+								<li><a href="/farmsites">Farm Sites</a></li><!--edit_farmsite_path-->
+								<li><a href="/produces">Produces</a></li><!--edit_produce_path-->
+								<li><a href="/bids">Bids</a></li><!--edit_bid_path-->
+								<li><a href="/bid_processes">Bid Process</a></li><!--edit_bid_process_path-->
+							</ul>
+						</li>
+					<% end %>
+
+</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<% if !bidder_signed_in? and !broker_signed_in? %>
+						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+							<ul class="dropdown-menu">
+								<li><a href="<%= new_bidder_registration_path %>">Bidder</a></li>
+								<li><a href="<%= new_broker_registration_path %>">Broker</a></li>
+							</ul>
+						</li>
+
+							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Sign In</a>
 								<ul class="dropdown-menu">
-									<li><a href="/farmsites/:id">Farm Sites</a></li>
-									<li><a href="/produces/:id">Produces</a></li>
-									<li><a href="/bids/:id">Bids</a></li>
-									<li><a href="/bid_processes/:id">Bid Process</a></li>
-
+									<li><a href="<%= new_bidder_session_path %>">Bidder</a></li>
+									<li><a href="<%= new_broker_session_path %>">Broker</a></li>
 								</ul>
 							</li>
-						<% end %>
-
-						<% if broker_signed_in? %>
-							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
-								<ul class="dropdown-menu">
-
-									<li><a href="/farmsites">Farm Sites</a></li>
-									<li><a href="/produces">Produces</a></li>
-									<li><a href="/bids">Bids</a></li>
-									</ul>
-								</li>
-							<% end %>
-
-
-		                  <ul class="nav navbar-nav navbar-right">
-		                    <% if !bidder_signed_in? and !broker_signed_in? %>
-		                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
-		                      <ul class="dropdown-menu">
-		                        <li><a href="<%= new_bidder_registration_path %>">Bidder</a></li>
-		                        <li><a href="<%= new_broker_registration_path %>">Broker</a></li>
-		                      </ul>
-		                    </li>
-												  <%end%>
-		                  </ul>
-
-		                    <%if bidder_signed_in? %>
-		                      <li><%= link_to 'Sign Out', destroy_bidder_session_path, :method=> :delete %></li>
-		                    <%end%>
-		                    <%if broker_signed_in? %>
-		                      <li><%= link_to 'Sign Out', destroy_broker_session_path, :method=> :delete %></li>
-		                    <%end%>
-		                </ul>
-										</div>
-										</div>
-										</nav>
-
-		<!--End of Navigation Bar -->
-
-		  <!--Please use div class container in your page so it come out perfect!-->
-
-		    <%= content_tag(:div, flash[:alert], :id => "flash_alert", class: 'alert alert-danger') if flash[:alert] %>
-		    <%= content_tag(:div, flash[:notice], :id => "flash_notice", class: 'alert alert-success') if flash[:notice] %>
+						</ul>
+						<%end%>
+						<%if bidder_signed_in? %>
+							<li><%= link_to 'Sign Out', destroy_bidder_session_path, :method=> :delete %></li>
+						<%end%>
+						<%if broker_signed_in? %>
+							<li><%= link_to 'Sign Out', destroy_broker_session_path, :method=> :delete %></li>
+						<%end%>
+				</ul>
+</div>
+</div>
+</nav>
 
 
-		    <%= yield %>
-		    <!--footer -->
-		    <footer class="container-fluid text-center">
-		      <p>2016@LocalhostSdnBhd</p>
-		    </footer>
-		    <!--footer-->
-		  </body>
 
-		  </html>
+  <!--Please use div class container in your page so it come out perfect!-->
+
+    <%= content_tag(:div, flash[:alert], :id => "flash_alert", class: 'alert alert-danger') if flash[:alert] %>
+    <%= content_tag(:div, flash[:notice], :id => "flash_notice", class: 'alert alert-success') if flash[:notice] %>
+
+    <%= yield %>
+    <!--footer -->
+    <footer class="container-fluid text-center">
+      <p>2016@LocalhostSdnBhd</p>
+    </footer>
+    <!--footer-->
+  </body>
+
+  </html>
