@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'broker_views/index'
+
+  get 'bidder_views/index'
+
   resources :produces
   resources :farmsites
 

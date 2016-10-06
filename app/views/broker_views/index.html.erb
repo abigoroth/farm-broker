@@ -1,0 +1,33 @@
+<div class="container">
+  <h3>My profile</h3>
+  <br>
+    <p>
+      <div class="panel panel-default">
+        <table class="table">
+          <tr>
+          <th>Name: </th>
+          <td><%= current_broker.name %></td>
+        </tr>
+        <tr>
+        <th>Email: </th>
+        <td><%= current_broker.email %></td>
+        </tr>
+        <tr>
+        <th>Date Of Birth: </th>
+        <td><%= current_broker.dob %></td>
+        </tr>
+        <tr>
+        <th>Address: </th>
+        <td><%= current_broker.address %></td>
+        </tr>
+        <tr>
+        <th>Credit card No.: </th>
+        <td><%= current_broker.account_no %></td>
+        </tr>
+        <tr>
+        <td colspan="2"><a href="<%= edit_broker_registration_path %>"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a></td>
+        </tr>
+        </table>
+      </div>
+    </p>
+</div>
