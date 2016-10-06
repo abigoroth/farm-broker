@@ -24,7 +24,7 @@ class BidProcessesController < ApplicationController
   # POST /bid_processes
   # POST /bid_processes.json
   def create
-    @bid_process = current_bidder.bid_process.new(bid_process_params)
+    @bid_process = current_bidder.bid_processes.new(bid_process_params)
 
     respond_to do |format|
       if @bid_process.save

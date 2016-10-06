@@ -27,7 +27,9 @@
         <td><%= bid.start_time %></td>
         <td><%= bid.end_time %></td>
         <td><%= bid.start_price %></td>
-        <td><%= bid.highest_price %></td>
+        <% if bidder_signed_in? %>
+        <td><%= link_to 'new', new_bid_process_path%></td>
+        <% end %>
         <% if broker_signed_in? %>
         <td><%= link_to 'Show', bid %></td>
         <td><%= link_to 'Edit', edit_bid_path(bid) %></td>

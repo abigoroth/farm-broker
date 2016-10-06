@@ -1,6 +1,7 @@
 <center>
 <%= simple_form_for(@bid_process) do |f| %>
 <%= f.error_notification %>
+<%= @bid_process.errors.inspect %>
 
 <div class="row">
   <div class="col-sm-4"></div>
@@ -10,7 +11,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="form-inputs">
-            <%= f.association :bid, value_method: :id, label_method: :id%>
+            <%= f.association :bid%>
             <%= f.input :price, input_html: { min: 0 }%>
           </div>
 
