@@ -14,18 +14,18 @@
         </tr>
         <tr>
         <th>Date Of Birth: </th>
-        <td><%= current_broker.dob %></td>
+        <td><%= current_broker.dob.strftime('%d/%m/%Y') %></td>
         </tr>
         <tr>
         <th>Address: </th>
         <td><%= current_broker.address %></td>
         </tr>
         <tr>
-        <th>Credit card No.: </th>
+        <th>Bank Account No.: </th>
         <td><%= current_broker.account_no %></td>
         </tr>
         <tr>
-        <td colspan="2"><a href="<%= edit_broker_registration_path %>"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a></td>
+        <td colspan="2"><a href="<%= edit_broker_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a></td>
         </tr>
         </table>
       </div>
