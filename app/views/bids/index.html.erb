@@ -8,12 +8,12 @@
     <tr>
       <th>Bid status</th>
       <th>Day</th>
-      <th>Date</th>
+      <th>Broker</th>
       <th>Produce</th>
       <th>Start time</th>
       <th>End time</th>
       <th>Start price</th>
-      <th>Highest price</th>
+      <th>Bid now:</th>
     </tr>
   </thead>
 
@@ -22,13 +22,15 @@
       <tr>
         <td><%= bid.bid_status %></td>
         <td><%= bid.day %></td>
-        <td><%= bid.date %></td>
+        <td><%= bid.broker.name %></td>
         <td><%= bid.produce.producename %></td>
         <td><%= bid.start_time %></td>
         <td><%= bid.end_time %></td>
         <td><%= bid.start_price %></td>
         <% if bidder_signed_in? %>
+        <% if Time.now < bid.start_time and Time.now < bid.end_time %>
         <td><%= link_to 'new', new_bid_process_path%></td>
+        <% end %>
         <% end %>
         <% if broker_signed_in? %>
         <td><%= link_to 'Show', bid %></td>

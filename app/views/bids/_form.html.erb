@@ -13,7 +13,6 @@
   <div class="form-inputs">
     <%= f.input :bid_status, as: :select, collection: ["On", "Off"], include_blank: false%>
     <%= f.input :day, as: :select, collection: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], include_blank: false%>
-    <%= f.input :date %>
     <%= f.association :produce, value_method: :id, label_method: :producename%>
     <%= f.input :start_time %>
     <%= f.input :end_time %>

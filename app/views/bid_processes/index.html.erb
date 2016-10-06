@@ -8,6 +8,7 @@
   <thead>
     <tr>
       <th>Bid</th>
+      <th>Bidder</th>
       <th>Price</th>
       <th>Bidding time</th>
     </tr>
@@ -17,6 +18,7 @@
     <% @bid_processes.each do |bid_process| %>
       <tr>
         <td><%= bid_process.bid.id %></td>
+        <td><%= bid_process.bidder.name %></td>
         <td><%= bid_process.price %></td>
         <td><%= bid_process.created_at %></td>
         <td><%= link_to 'Show', bid_process %></td>
