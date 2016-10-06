@@ -54,7 +54,6 @@
           <li><a href="<%= home_news_path %>">Auction News</a></li>
           <li><a href="<%= home_contact_path %>">Contact</a></li>
 
-<<<<<<< HEAD
 					        <% if bidder_signed_in? %>
 					          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
 					            <ul class="dropdown-menu">
@@ -107,60 +106,7 @@
   </body>
 
   </html>
-=======
-        <% if bidder_signed_in? %>
-          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
-            <ul class="dropdown-menu">
-              <li><a href="<%= farmsite_path %>">Farm Sites</a></li>
-              <li><a href="<%= produce_path %>">Produces</a></li>
-              <li><a href="<%= bid_path %>">Bids</a></li>
-            </ul>
-          </li>
-          <% end %>
 
-          <% if broker_signed_in? %>
-          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
-            <ul class="dropdown-menu">
-              <li><a href="<%= edit_farmsite_path %>">Farm Sites</a></li>
-              <li><a href="<%= edit_produce_path %>">Produces</a></li>
-              <li><a href="<%= edit_bid_path %>">Bids</a></li>
-              <li><a href="<%= edit_bid_process_path %>">Bid Process</a></li>
-            </ul>
-          </li>
-        <% end %>
-
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="<%= home_district_page_path %>"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
-
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Sign In</a>
-              <ul class="dropdown-menu">
-                <li><a href="<%= new_bidder_session_path %>">Bidder</a></li>
-                <li><a href="<%= new_broker_session_path %>">Broker</a></li>
-              </li>
-            </li>
-
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i></a>
-              <ul class="dropdown-menu">
-              
-                <% if broker_signed_in? %> 
-                <li><a data-method="delete" href="/users/sign_out"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
-                <li><a href="/users/edit"> Edit Account</a></li>
-                <% end %>
-
-                <% if bidder_signed_in? %> 
-                <li><a data-method="delete" href="/users/sign_out"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
-                <li><a href="/users/edit"> Edit Account</a></li>
-                <% end %>
-              </ul>
-            </ul>
-
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
   <!--End of Navigation Bar -->
 
   <!--Please use div class container in your page so it come out perfectly!-->
@@ -177,4 +123,3 @@
 </body>
 
 </html>
->>>>>>> b7c17382e665739ec695e9b614a6b5b85f530ec2
