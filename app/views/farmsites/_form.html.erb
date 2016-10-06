@@ -1,8 +1,16 @@
-<%= form_for(farmsite) do |f| %>
-  <% if farmsite.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(farmsite.errors.count, "error") %> prohibited this farmsite from being saved:</h2>
+<%= simple_form_for(@farmsite) do |f| %>
+  <%= f.error_notification %>
 
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :size %>
+    <%= f.input :address %>
+    <%= f.input :ownername %>
+    <%= f.input :ownerphoneno %>
+    <%= f.input :district_id %>
+    <%= f.input :broker_id %>
+
+<<<<<<< HEAD
       <ul>
       <% farmsite.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -67,3 +75,4 @@
       </div>  
   <div class="col-sm-1"></div>
 </div>
+
