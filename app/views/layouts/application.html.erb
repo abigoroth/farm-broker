@@ -57,9 +57,11 @@
 					        <% if bidder_signed_in? %>
 					          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
 					            <ul class="dropdown-menu">
-					              <li><a href="<%= farmsites_path %>">Farm Sites</a></li>
-					              <li><a href="<%= produces_path %>">Produces</a></li>
-					              <li><a href="<%= bids_path %>">Bids</a></li>
+					              <li><a href="/farmsites/:id">Farm Sites</a></li>
+					              <li><a href="/produces/:id">Produces</a></li>
+					              <li><a href="/bids/:id">Bids</a></li>
+												<li><a href="/bid_processes/:id">Bid Process</a></li>
+
 					            </ul>
 					          </li>
 					        <% end %>
@@ -67,11 +69,10 @@
 					        <% if broker_signed_in? %>
 					          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">See</a>
 					            <ul class="dropdown-menu">
-					              <li><a href="<%= edit_farmsite_path %>">Farm Sites</a></li>
-					              <li><a href="<%= edit_produce_path %>">Produces</a></li>
-					              <li><a href="<%= edit_bid_path %>">Bids</a></li>
-					              <li><a href="<%= edit_bid_process_path %>">Bid Process</a></li>
-					            </ul>
+					              <li><a href="/farmsites">Farm Sites</a></li>
+					              <li><a href="/produces">Produces</a></li>
+					              <li><a href="/bids">Bids</a></li>
+					              </ul>
 					          </li>
 					        <% end %>
 
