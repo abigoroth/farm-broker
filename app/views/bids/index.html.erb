@@ -1,4 +1,4 @@
-
+<center>
   <div class="container">
     <div class="row">
       <div class="col-sm-12"><h1>Bids</h1></div>
@@ -27,6 +27,7 @@
         <td><%= bid.end_time %></td>
         <td><%= bid.start_price %></td>
         <td><%= bid.highest_price %></td>
+        <% if bidder_signed_in? %><%= render 'form', bid_process: @bid_process %><%end%>
         <td><%= link_to 'Show', bid %></td>
         <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
         <td><%= link_to 'Destroy', bid, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -38,3 +39,4 @@
 <br>
 <% if broker_signed_in? %><%= link_to 'New Bid', new_bid_path %><%end%>
 </div>
+</center>
