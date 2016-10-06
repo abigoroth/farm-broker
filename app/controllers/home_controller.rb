@@ -11,7 +11,4 @@ class HomeController < ApplicationController
   def contact
   end
 
-  def district_page
-    @districts = District.all
-  end
 end
