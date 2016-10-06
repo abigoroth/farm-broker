@@ -33,23 +33,40 @@
 
 
 
-<form>
- <%= f.label "Produce type :" %>
-    <div class="checkbox">
-      <%=f.radio_button :producetype,"Vegetable",:checked => true %> Vegetable</div>
-    <div class="checkbox">
-      <%=f.radio_button :producetype,"Meat",:checked => true %> Meat</div>
-    <div class="checkbox">
-      <%=f.radio_button :producetype,"Grain",:checked => true %> Grain</div>
-    <div class="checkbox">
-      <%=f.radio_button :producetype,"Poultry",:checked => true %> Poultry</div>
-    <div class="checkbox">
-      <%=f.radio_button :producetype,"Dairy Product",:checked => true %> Dairy Product</div>
-</form>
+               <br>         
+               <%= f.label "Produce type :" %></br> 
+                <div class="row">
+                      <div class="col-sm-4">
+                       
+                    <div class="checkbox">
+                    <%=f.radio_button :producetype,"Vegetable",:checked => true %> Vegetable</div>
+                    
+                    <div class="checkbox">
+                    <%=f.radio_button :producetype,"Fruit",:checked => true %> Fruit</div>
+                    
+                    <div class="checkbox">
+                    <%=f.radio_button :producetype,"Flower",:checked => true %> Flower</div>
+                 
+                    <div class="checkbox">
+                    <%=f.radio_button :producetype,"Meat",:checked => true %> Meat</div>
+                </div>
+              
+                <div class="col-sm-4">
+                  <div class="checkbox">
+                    <%=f.radio_button :producetype,"Grain",:checked => true %> Grain</div>
+                  <div class="checkbox">
+                    <%=f.radio_button :producetype,"Poultry",:checked => true %> Poultry</div>
+                  <div class="checkbox">
+                    <%=f.radio_button :producetype,"Dairy Product",:checked => true %> Dairy Product</div>
+                    <div class="checkbox">
+                    <%=f.radio_button :producetype,"Seafood",:checked => true %> Seafood</div>
+                </div>
+              </div>
 
-                  <div class="field">
-                    <%= f.label "Produce time:" %>
-                    <%= f.datetime_select :producedate , :class => "form-control"%>
+
+                  <div class="field"><br>  
+                    <%= f.label "Produce time:" %></br>  <div><br>  
+                    <%= f.datetime_select :producedate , :class => "form-control"%></br>  </div>
                   </div>
 
 

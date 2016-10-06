@@ -1,8 +1,11 @@
 <center>
 <p id="notice"><%= notice %></p>
 
-<h1>List Produces</h1>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12"><h1>List Produces</h1></div>
+    </div>
 <table class="table table-bordered" width="50">
   <thead>
     <tr>
@@ -37,4 +40,4 @@
 <br>
 
 <% if broker_signed_in? %><%= link_to 'New Produce', new_produce_path %><%end%>
-</center>
+</center></div>
