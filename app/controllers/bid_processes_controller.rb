@@ -4,7 +4,7 @@ class BidProcessesController < ApplicationController
   # GET /bid_processes
   # GET /bid_processes.json
   def index
-    @bid_processes = BidProcess.all
+    @bid_processes = params[:bid_id].present? ? BidProcess.where(bid_id: params[:bid_id]) : BidProcess.all
   end
 
   # GET /bid_processes/1

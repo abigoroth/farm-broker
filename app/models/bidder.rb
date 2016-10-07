@@ -4,7 +4,7 @@ class Bidder < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, presence: true
+  validates :name, :dob, presence: true
 
   has_many :bid_processes
 end
