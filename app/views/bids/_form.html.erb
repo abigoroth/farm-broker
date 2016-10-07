@@ -1,6 +1,7 @@
 <center>
 <%= simple_form_for(@bid) do |f| %>
   <%= f.error_notification %>
+   <%= @bid.errors.inspect %>
 
   <div class="row">
     <div class="col-sm-4"></div>
