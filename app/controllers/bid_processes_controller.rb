@@ -4,7 +4,7 @@ class BidProcessesController < ApplicationController
   # GET /bid_processes
   # GET /bid_processes.json
   def index
-    @bid_processes = BidProcess.all
+    @bid_processes = params[:bid_id].present? ? BidProcess.where(bid_id: params[:bid_id]) : BidProcess.all
   end
 
   # GET /bid_processes/1
@@ -69,6 +69,6 @@ class BidProcessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bid_process_params
-      params.require(:bid_process).permit(:bid_id, :price)
+      params.require(:bid_process).permit(:bid_id, :price, :bidder_id)
     end
 end

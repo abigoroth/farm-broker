@@ -3,46 +3,70 @@
     <div class="row">
       <div class="col-sm-12"><h1>Bids</h1></div>
     </div>
-<table class="table table-bordered" width="50">
-  <thead>
-    <tr>
-      <th>Bid status</th>
-      <th>Day</th>
-      <th>Broker</th>
-      <th>Produce</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>Start price</th>
-      <th>Bid now:</th>
-    </tr>
-  </thead>
+    <table class="table table-bordered" width="50">
+      <thead>
+        <tr>
+          <th>Bid No</th>
+          <th>Bid status</th>
+          <th>Broker</th>
+          <th>Produce Name</th>
+          <th>Quantity</th>
+          <th>Start time</th>
+          <th>End time</th>
+          <th>Start price (RM)</th>
+          <th>See Now!</th>
+          <% if broker_signed_in? %>
+          <th></th>
+          <th></th>
+          <th></th>
+          <%end%>
+          <th>Highest Price</th>
+          <th>Winner</th>
 
-  <tbody>
-    <% @bids.each do |bid| %>
-      <tr>
-        <td><%= bid.bid_status %></td>
-        <td><%= bid.day %></td>
-        <td><%= bid.broker.name %></td>
-        <td><%= bid.produce.producename %></td>
-        <td><%= bid.start_time %></td>
-        <td><%= bid.end_time %></td>
-        <td><%= bid.start_price %></td>
-        <% if bidder_signed_in? %>
-        <% if Time.now > bid.start_time and Time.now < bid.end_time %>
-        <td><%= link_to 'new', new_bid_process_path(bid_id: bid.id)%></td>
-        <% end %>
-        <% end %>
-        <% if broker_signed_in? %>
-        <td><%= link_to 'Show', bid %></td>
-        <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
-        <td><%= link_to 'Destroy', bid, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
-<% if broker_signed_in? %><%= link_to 'New Bid', new_bid_path %><%end%>
-</div>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @bids.each do |bid| %>
+        <tr>
+          <td><%= bid.id %></td>
+
+          <% if Time.now >= bid.end_time %>
+          <td><%= bid.bid_status = "Off" %></td>
+          <%end%>
+
+
+          <td><%= bid.broker.name %></td>
+          <td><%= bid.produce.producename %></td>
+          <td><%= bid.produce.producequantity %></td>
+          <td><%= bid.start_time %></td>
+          <td><%= bid.end_time %></td>
+          <td><%= bid.start_price %></td>
+
+          <td><%= link_to 'See', bid_processes_path(bid_id: bid.id)%></td>
+
+          <% if broker_signed_in? and bid.broker==current_broker %>
+          
+          <td><%= link_to 'Show', bid %></td>
+          <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
+          <td><%= link_to 'Destroy', bid, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%end%>
+
+          <% if Time.now >= bid.end_time %>
+          <td><%= bid.bid_processes.maximum(:price) if bid.bid_processes.present? %></td>
+          <td><%= bid.bid_processes.order(:price).last.bidder.name rescue nil%></td>
+          <%end%>
+
+
+
+          
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+    <% if broker_signed_in? %><%= link_to 'New Bid', new_bid_path %><%end%>
+  </div>
 </center>

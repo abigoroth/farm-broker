@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20161007040414) do
+=======
+ActiveRecord::Schema.define(version: 20161007045451) do
+>>>>>>> f099a2fea98a8a511822d8ebca02e95c70075030
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
-    t.datetime "bidding_time"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "bid_id"
     t.integer  "bidder_id"
     t.index ["bid_id"], name: "index_bid_processes_on_bid_id"
@@ -41,13 +44,13 @@ ActiveRecord::Schema.define(version: 20161007040414) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.text     "profilephoto"
     t.index ["email"], name: "index_bidders_on_email", unique: true
     t.index ["reset_password_token"], name: "index_bidders_on_reset_password_token", unique: true
   end
 
   create_table "bids", force: :cascade do |t|
     t.string   "bid_status"
-    t.string   "day"
     t.datetime "start_time"
     t.datetime "end_time"
     t.decimal  "start_price"
@@ -78,6 +81,7 @@ ActiveRecord::Schema.define(version: 20161007040414) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.text     "profilephoto"
     t.index ["email"], name: "index_brokers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_brokers_on_reset_password_token", unique: true
   end
