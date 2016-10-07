@@ -34,6 +34,8 @@
 
           <% if Time.now >= bid.end_time %>
           <td><%= bid.bid_status = "Off" %></td>
+          <% else %>
+          <td><%= bid.bid_status = "On" %></td>
           <%end%>
 
 
