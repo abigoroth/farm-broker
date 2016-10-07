@@ -3,7 +3,8 @@
     <div class="col-sm-12"><h2>Bidder Registration</h2></div>
   </div>
 <div class="row">
-<div class="col-md-4">
+<div class="col-md-5">
+<div class="panel panel-default" style="padding: 20px">
 <div class="form-group">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -12,6 +13,7 @@
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, class:'form-control' %>
   </div>
+  <br />
   <div class="field">
     <%= f.label 'Date of Birth' %><br />
     <%= f.text_field :dob, autofocus: true, class:'form-control', id: 'datetimepicker4' %>
@@ -27,23 +29,27 @@
  </script>
  <!-- JS script for datetimepicker4 -->
   </div>
+  <br />
   <div class="field">
     <%= f.label :address %><br />
     <%= f.text_field :address, autofocus: true, class:'form-control' %>
   </div>
+  <br />
   <div class="field">
     <%= f.label 'Credit Card Number' %><br />
     <%= f.text_field :credit_card, class:'form-control' %>
   </div>
+  <br />
   <div class="field">
     <%= f.label 'Phone Number' %><br />
     <%= f.text_field :phone, autofocus: true, class:'form-control' %>
   </div>
+  <br />
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, class: 'form-control' %>
   </div>
-
+  <br />
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
@@ -51,18 +57,19 @@
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
   </div>
-
+  <br />
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
   </div>
-
+  <br>
   <div class="actions">
     <%= f.submit "Sign up", class: 'btn btn-md btn-info' %>
   </div>
 <% end %>
 
 Already a bidder? <%= render "bidders/shared/links" %>
+</div>
 </div>
 </div>
 </div>
