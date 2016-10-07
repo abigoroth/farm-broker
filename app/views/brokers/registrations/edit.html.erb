@@ -10,9 +10,9 @@
 
   <div class="field">
     <%= f.label 'Profile Photo' %><br />
-    <%= f.text_field :profilephoto, autofocus: true, class: 'form-control', placeholder:"Paste Image Link" %>
+    <%= f.file_field :profilephoto, autofocus: true, class: 'form-control', placeholder:"Paste Image Link" %>
   </div>
-  
+
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, class: 'form-control' %>
