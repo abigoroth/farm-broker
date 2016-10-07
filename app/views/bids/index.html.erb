@@ -9,11 +9,12 @@
           <th>Bid No</th>
           <th>Bid status</th>
           <th>Broker</th>
-          <th>Produce</th>
+          <th>Produce Name</th>
+          <th>Quantity</th>
           <th>Day</th>
           <th>Start time</th>
           <th>End time</th>
-          <th>Start price</th>
+          <th>Start price (RM)</th>
           <th>See Now!</th>
           <% if broker_signed_in? %>
           <th></th>
@@ -31,9 +32,15 @@
         <% @bids.each do |bid| %>
         <tr>
           <td><%= bid.id %></td>
-          <td><%= bid.bid_status %></td>
+
+          <% if Time.now >= bid.end_time %>
+          <td><%= bid.bid_status = "Off" %></td>
+          <%end%>
+
+
           <td><%= bid.broker.name %></td>
           <td><%= bid.produce.producename %></td>
+          <td><%= bid.produce.producequantity %></td>
           <td><%= bid.day %></td>
           <td><%= bid.start_time %></td>
           <td><%= bid.end_time %></td>
@@ -42,6 +49,7 @@
           <td><%= link_to 'See', bid_processes_path(bid_id: bid.id)%></td>
 
           <% if broker_signed_in? and bid.broker==current_broker %>
+          
           <td><%= link_to 'Show', bid %></td>
           <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
           <td><%= link_to 'Destroy', bid, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -9,7 +9,7 @@
     <tr>
       <th>Bid</th>
       <th>Bidder</th>
-      <th>Price</th>
+      <th>Price (RM)</th>
       <th>Bidding time</th>
     </tr>
   </thead>
@@ -23,6 +23,7 @@
         <td><%= bid_process.created_at %></td>
 
         <% if bidder_signed_in? and bid_process.bidder==current_bidder %>
+          
           <% if Time.now > bid_process.bid.start_time and Time.now < bid_process.bid.end_time %>
           <td><%= link_to 'Bid Now', new_bid_process_path(bid_id: bid_process.bid.id)%></td>
           <% end %>
