@@ -28,4 +28,7 @@ module DeviseHelper
 
    html.html_safe
  end
+ def devise_error_messages?
+    !resource.errors.empty?
+  end
 end
