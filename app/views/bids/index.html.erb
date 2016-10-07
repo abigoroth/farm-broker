@@ -53,10 +53,10 @@
                 <%end%>
             <%end%>
           </td>
-               
+
 
          <% if broker_signed_in? and bid.broker==current_broker %>
-          
+
           <td><%= link_to 'Show', bid %></td>
           <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
           <td><%= link_to 'Destroy', bid, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -69,7 +69,7 @@
 
 
 
-          
+
         </tr>
         <% end %>
       </tbody>

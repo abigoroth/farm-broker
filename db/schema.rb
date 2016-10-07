@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20161007082440) do
     t.text     "farmsiteaddress"
     t.string   "farmsiteownername"
     t.integer  "farmsiteownerphoneno"
+    t.integer  "district_id"
     t.integer  "broker_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
