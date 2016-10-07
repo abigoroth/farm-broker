@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007025700) do
+ActiveRecord::Schema.define(version: 20161007045451) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20161007025700) do
 
   create_table "bids", force: :cascade do |t|
     t.string   "bid_status"
-    t.string   "day"
     t.datetime "start_time"
     t.datetime "end_time"
     t.decimal  "start_price"
