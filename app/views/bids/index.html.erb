@@ -22,7 +22,7 @@
           <%end%>
           <th>Highest Price</th>
           <th>Winner</th>
-          
+
 
         </tr>
       </thead>
@@ -32,25 +32,29 @@
         <tr>
           <td><%= bid.id %></td>
           <td><%= bid.bid_status %></td>
-          <td><%= bid.day %></td>
           <td><%= bid.broker.name %></td>
           <td><%= bid.produce.producename %></td>
+          <td><%= bid.day %></td>
           <td><%= bid.start_time %></td>
           <td><%= bid.end_time %></td>
           <td><%= bid.start_price %></td>
+
           <td><%= link_to 'See', bid_processes_path(bid_id: bid.id)%></td>
-          <% if Time.now >= bid.end_time %>
-          <td><%= bid.bid_processes.maximum(:price) if bid.bid_processes.present? %></td>
-          <td><%= bid.bid_processes.order(:price).last.bidder.name rescue nil%></td>
-          <%end%>
-          
-          
-          
+
           <% if broker_signed_in? and bid.broker==current_broker %>
           <td><%= link_to 'Show', bid %></td>
           <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
           <td><%= link_to 'Destroy', bid, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <%end%>
+
+          <% if Time.now >= bid.end_time %>
+          <td><%= bid.bid_processes.maximum(:price) if bid.bid_processes.present? %></td>
+          <td><%= bid.bid_processes.order(:price).last.bidder.name rescue nil%></td>
+          <%end%>
+
+
+
+          
         </tr>
         <% end %>
       </tbody>
