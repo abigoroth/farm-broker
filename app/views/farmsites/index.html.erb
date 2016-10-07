@@ -10,7 +10,7 @@
   <thead>
     <tr>
       <th>Farm Name</th>
-      <th>Farms Size</th>
+      <th>Farms Size(Acres)</th>
       <th>Farm Address</th>
       <th>Farm owner</th>
       <th>Farm Phoneno</th>
@@ -27,9 +27,8 @@
         <td><%= farmsite.farmsiteownername %></td>
         <td><%= farmsite.farmsiteownerphoneno %></td>
         <td><%= farmsite.broker.name%></td>
-
-
-        <% if broker_signed_in? %>
+        <td><%= link_to 'produce', produces_path(farmsite_id: farmsite.id)%></td>
+        <% if broker_signed_in? and farmsite.broker==current_broker %>
         <td><%= link_to 'Show', farmsite %></td>
         <td><%= link_to 'Edit', edit_farmsite_path(farmsite) %></td>
         <td><%= link_to 'Destroy', farmsite, method: :delete, data: { confirm: 'Are you sure?' } %></td>

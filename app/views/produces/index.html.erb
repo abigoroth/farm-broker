@@ -3,8 +3,10 @@
 
 
   <div class="container">
+
     <div class="row">
       <div class="col-sm-12"><h1>List Produces</h1></div>
+      <% if broker_signed_in?  and  @farmsite.present? and @farmsite.broker == current_broker %><%= link_to 'New Produce', new_produce_path %><%end%>
     </div>
 <table class="table table-bordered" width="50">
   <thead>
@@ -12,22 +14,29 @@
       <th>Produce Name</th>
       <th>Produce Type</th>
       <th>Produce Date</th>
-      <th>Produce Quantity</th>
+      <th>Produce Quantity(KG)</th>
       <th>Produce Description</th>
       <th>Farm Name</th>
+      <th>Broker Name</th>
+      <th>Produce Picture</th> 
     </tr>
   </thead>
 
   <tbody>
+
     <% @produces.each do |produce| %>
+
       <tr>
         <td><%= produce.producename %></td>
         <td><%= produce.producetype %></td>
+        <!-- <td><img src="<%= produce.produceimage %>"/></td> -->
         <td><%= produce.producedate %></td>
         <td><%= produce.producequantity %></td>
         <td><%= produce.producedescription %></td>
         <td><%= produce.farmsite.farmsitename %></td>
-        <% if broker_signed_in? %>
+        <td><%= produce.broker.name rescue nil %></td>
+        <td><%= image_tag produce.avatar.url (:thumb)%></td>
+        <% if broker_signed_in? and produce.broker == current_broker %>
         <td><%= link_to 'Show', produce %></td>
         <td><%= link_to 'Edit', edit_produce_path(produce) %></td>
         <td><%= link_to 'Destroy', produce, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -39,5 +48,5 @@
 
 <br>
 
-<% if broker_signed_in? %><%= link_to 'New Produce', new_produce_path %><%end%>
+
 </center></div>

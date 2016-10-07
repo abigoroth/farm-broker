@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+<%= image_tag @produce.avatar.url (:medium)%>
+</p>
+
+<p>
   <strong>Producename:</strong>
   <%= @produce.producename %>
 </p>
@@ -29,6 +33,12 @@
   <strong>Farmsiteid:</strong>
   <%= @produce.farmsite_id %>
 </p>
+
+<!-- <p>
+  <strong>Farmsiteid:</strong>
+  <%= @produce.produceimage %>
+</p>
+ -->
 
 <%= link_to 'Edit', edit_produce_path(@produce) %> |
 <%= link_to 'Back', produces_path %>

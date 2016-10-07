@@ -4,7 +4,8 @@ class ProducesController < ApplicationController
   # GET /produces
   # GET /produces.json
   def index
-    @produces = Produce.all
+    @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]) : Produce.all
+    @farmsite = Farmsite.find(params[:farmsite_id]) if params[:farmsite_id].present?
   end
 
   # GET /produces/1
@@ -24,7 +25,7 @@ class ProducesController < ApplicationController
   # POST /produces
   # POST /produces.json
   def create
-    @produce = Produce.new(produce_params)
+    @produce = current_broker.produces.new(produce_params)
 
     respond_to do |format|
       if @produce.save
@@ -69,6 +70,6 @@ class ProducesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def produce_params
-      params.require(:produce).permit(:producename, :producetype, :producedate, :producequantity, :producedescription, :produceimage, :farmsite_id)
+      params.require(:produce).permit(:producename, :producetype, :producedate, :producequantity, :producedescription, :produceimage, :farmsite_id, :avatar, :broker_id)
     end
 end

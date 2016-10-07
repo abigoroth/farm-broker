@@ -1,4 +1,4 @@
-<%= form_for(produce) do |f| %>
+<%= form_for(produce,html:{multipart: true}) do |f| %>
   <% if produce.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(produce.errors.count, "error") %> prohibited this produce from being saved:</h2>
@@ -21,7 +21,7 @@
                  <div class="field">
                   <%= f.label "Farm Name" %>
                   <div class="input-group input-group-lg " %>
-                  <%= f.collection_select(:farmsite_id,Farmsite.all,:id,:farmsitename,{:prompt=>"Please Select"},{:class => "form-control"})%>
+                  <%= f.collection_select(:farmsite_id,Farmsite.where(broker_id:current_broker.id),:id,:farmsitename,{:prompt=>"Please Select"},{:class => "form-control"})%>
                   </div>
                   </div>
 
@@ -32,9 +32,14 @@
                   </div>
                   <br>
                   <div class="input-group input-group-lg col-md-10">
+                    <%= f.label "Produce picture:" %>
+                    <%= f.file_field :avatar %>
+                  </div>
+                 <!--  <br>
+                  <div class="input-group input-group-lg col-md-10">
                     <%= f.label "Upload Image:" %>
                     <%= f.text_field :produceimage, :class => "form-control", :placeholder => "Add image link" %>
-                  </div>
+                  </div> -->
                <br>
                <%= f.label "Produce type :" %></br>
                 <div class="row">
@@ -83,6 +88,9 @@
                     <%= f.label "Produce information:" %>
                     <%= f.text_area :producedescription, :class => "form-control", :placeholder => "Detail information" %>
                   </div>
+
+
+
               </div>
             </div>
 
@@ -95,3 +103,4 @@
   </div>
     <div class="col-sm-1"></div>
 </div>
+

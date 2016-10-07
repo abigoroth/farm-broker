@@ -9,4 +9,5 @@ class Broker < ApplicationRecord
   has_many :farmsites
   has_many :bids
   has_many :produces , through: :bids
+  has_many :produces
 end

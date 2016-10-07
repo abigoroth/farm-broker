@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007011648) do
+ActiveRecord::Schema.define(version: 20161007040414) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -100,9 +100,15 @@ ActiveRecord::Schema.define(version: 20161007011648) do
     t.integer  "producequantity"
     t.text     "producedescription"
     t.integer  "farmsite_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "produceimage"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "broker_id"
+    t.index ["broker_id"], name: "index_produces_on_broker_id"
   end
 
 end
