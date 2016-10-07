@@ -10,7 +10,7 @@
           <th>Bid status</th>
           <th>Broker</th>
           <th>Produce Name</th>
-          <th>Quantity</th>
+          <th>Quantity (KG)</th>
           <th>Start time</th>
           <th>End time</th>
           <th>Start price (RM)</th>
@@ -61,9 +61,14 @@
           <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
           <td><%= link_to 'Destroy', bid, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <%end%>
-           <td><%= bid.bid_processes.maximum(:price) if bid.bid_processes.present? %></td>    
+          
+          <td><%= bid.bid_processes.maximum(:price) if bid.bid_processes.present? %></td>    
+          
+          <% if Time.now < bid.end_time %>
+<td></td>
+          <%end%>
+
           <% if Time.now >= bid.end_time %>
-         
           <td><%= bid.bid_processes.order(:price).last.bidder.name rescue nil%></td>
           <%end%>
 
