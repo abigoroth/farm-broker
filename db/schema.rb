@@ -14,9 +14,8 @@ ActiveRecord::Schema.define(version: 20161007082440) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
-    t.datetime "bidding_time"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "bid_id"
     t.integer  "bidder_id"
     t.index ["bid_id"], name: "index_bid_processes_on_bid_id"
