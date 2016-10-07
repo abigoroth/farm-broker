@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20161007071840) do
 
+
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
     t.datetime "bidding_time"
