@@ -40,8 +40,8 @@
 
 
           <td><%= bid.broker.name %></td>
-          <td><%= bid.produce.producename %></td>
-          <td><%= bid.produce.producequantity %></td>
+          <td><%= bid.produce.producename if bid.produce.present? %></td>
+          <td><%= bid.produce.producequantity if bid.produce.present? %></td>
           <td><%= bid.start_time %></td>
           <td><%= bid.end_time %></td>
           <td><%= bid.start_price %></td>
