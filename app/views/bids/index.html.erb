@@ -14,13 +14,13 @@
           <th>Start time</th>
           <th>End time</th>
           <th>Start price (RM)</th>
-          <th>See Now!</th>
+          <th>Action</th>
           <% if broker_signed_in? %>
           <th></th>
           <th></th>
           <th></th>
           <%end%>
-          <th>Highest Price</th>
+          <th>Highest Price (RM)</th>
           <th>Winner</th>
 
 
@@ -46,7 +46,11 @@
           <td><%= bid.end_time %></td>
           <td><%= bid.start_price %></td>
 
-          <td><%= link_to 'See', bid_processes_path(bid_id: bid.id)%></td>
+          <td><%= link_to 'See ', bid_processes_path(bid_id: bid.id)%>
+
+          <% if Time.now > bid.start_time and Time.now < bid.end_time %>
+          <%= link_to '/ Bid Now', new_bid_process_path(bid_id: bid.id)%></td>
+           <%end%>
 
           <% if broker_signed_in? and bid.broker==current_broker %>
           
