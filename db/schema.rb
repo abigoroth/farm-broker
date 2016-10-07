@@ -10,16 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20161007040414) do
-=======
 ActiveRecord::Schema.define(version: 20161007045451) do
->>>>>>> f099a2fea98a8a511822d8ebca02e95c70075030
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "bidding_time"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "bid_id"
     t.integer  "bidder_id"
     t.index ["bid_id"], name: "index_bid_processes_on_bid_id"
