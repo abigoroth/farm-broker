@@ -1,7 +1,7 @@
 <center>
 <%= simple_form_for(@bid) do |f| %>
   <%= f.error_notification %>
-   <%= @bid.errors.inspect %>
+
 
   <div class="row">
     <div class="col-sm-4"></div>
@@ -13,7 +13,7 @@
 
   <div class="form-inputs">
     <%= f.input :bid_status, as: :select, collection: ["On"], include_blank: false%>
-    <%= f.association :produce, value_method: :id, label_method: :producename%>
+    <%= f.input :produce_id, collection: current_broker.produces, label_method: :producename%>
     <%= f.input :start_time %>
     <%= f.input :end_time %>
     <%= f.input :start_price, input_html: { min: 0 } %>
