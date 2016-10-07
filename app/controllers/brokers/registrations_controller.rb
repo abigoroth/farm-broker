@@ -59,7 +59,7 @@ class Brokers::RegistrationsController < Devise::RegistrationsController
   # end
   private
   def sign_up_params
-    params.require(:broker).permit(:name, :dob, :address, :phone, :account_no, :email, :password, :password_confirmation)
+    params.require(:broker).permit(:name,:profilephoto, :dob, :address, :phone, :account_no, :email, :password, :password_confirmation)
   end
   def account_update_params
     params.require(:broker).permit(:name,:profilephoto, :dob, :address, :phone, :account_no, :email, :password, :password_confirmation, :current_password)
