@@ -63,6 +63,6 @@ class Bidders::RegistrationsController < Devise::RegistrationsController
     params.require(:bidder).permit(:name, :dob, :address, :phone, :credit_card, :email, :password, :password_confirmation)
   end
   def account_update_params
-    params.require(:bidder).permit(:name, :dob, :address, :phone, :credit_card, :email, :password, :password_confirmation, :current_password)
+    params.require(:bidder).permit(:name,:profilephoto, :dob, :address, :phone, :credit_card, :email, :password, :password_confirmation, :current_password)
   end
 end
