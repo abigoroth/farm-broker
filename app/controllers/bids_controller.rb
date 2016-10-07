@@ -25,12 +25,13 @@ class BidsController < ApplicationController
   # POST /bids.json
   def create
     @bid = current_broker.bids.new(bid_params)
-
+	logger.debug @bid.inspect
     respond_to do |format|
       if @bid.save
         format.html { redirect_to @bid, notice: 'Bid was successfully created.' }
         format.json { render :show, status: :created, location: @bid }
       else
+	logger.debug @bid.errors.inspect
         format.html { render :new }
         format.json { render json: @bid.errors, status: :unprocessable_entity }
       end
