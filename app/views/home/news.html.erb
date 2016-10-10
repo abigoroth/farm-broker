@@ -10,15 +10,15 @@
   <% @bids.each do |bid| %>
 
   <div class="col-sm-4">
+    <% if Time.now > bid.start_time and Time.now < bid.end_time %>
     <div class="panel panel-default">
     <center>
       <%= image_tag bid.produce.avatar.url (:medium)%>
     </center>
-    <h4 align="center">Item: <%= bid.produce.producename %><br><% if Time.now > bid.start_time and Time.now < bid.end_time %>
+
+    <h4 align="center">Item: <%= bid.produce.producename %><br>
     <font style="color:green"><em> Open Now!</em></font>
-    <%else%>
-    <font style="color:red"><em> Closed!</em></font>
-    <%end%></h4>
+    </h4>
     <table class="table" style="height: 200px">
     <tr>
     <th>Created by: </th> <td><%= bid.broker.name %></td>
@@ -37,6 +37,9 @@
   </tr>
   </table>
   </div>
+  <%else%>
+  No news updated
+  <%end%>
   </div>
   <% end %>
 
