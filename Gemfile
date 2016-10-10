@@ -57,3 +57,4 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 gem "paperclip", "~> 5.0.0"
 gem 'will_paginate-bootstrap'
+gem 'jquery-countdown-rails', '~> 2.0', '>= 2.0.2'
