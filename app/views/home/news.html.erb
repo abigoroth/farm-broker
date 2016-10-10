@@ -13,7 +13,7 @@
     <% if Time.now > bid.start_time and Time.now < bid.end_time %>
     <div class="panel panel-default">
     <center>
-      <%= image_tag bid.produce.avatar.url (:medium)%>
+      <%= image_tag bid.produce.avatar.url , style: 'height:200px'%>
     </center>
 
     <h4 align="center">Item: <%= bid.produce.producename %><br>
@@ -37,8 +37,7 @@
   </tr>
   </table>
   </div>
-  <%else%>
-  No news updated
+
   <%end%>
   </div>
   <% end %>
