@@ -1,4 +1,4 @@
 class Farmsite < ApplicationRecord
 	belongs_to :broker
-	has_many :produces
+	has_many :produces, through: :farmsites
 end
