@@ -11,8 +11,7 @@
 <!-- row 2 -->
 <div class="row">
         <% @bids.each do |bid| %>
-            <%if !bid.blank? %>
-            <% if Time.now > bid.start_time and Time.now < bid.end_time %>
+
               <div class="col-md-4">
                   <div class="panel panel-default">
                     <center>
@@ -41,8 +40,6 @@
                     </table>
                   </div>
 
-                <%end%>
-              <%end%>
               </div>
         <% end %>
 </div>

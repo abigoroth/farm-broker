@@ -6,7 +6,8 @@ class HomeController < ApplicationController
   end
 
   def news
-    @bids = Bid.order('created_at DESC').paginate(:page => params[:page], :per_page => 3)
+    @today = Time.now
+    @bids = Bid.where('? BETWEEN start_time AND end_time', @today).order('created_at DESC').paginate(:page => params[:page], :per_page => 3)
   end
 
   def contact
