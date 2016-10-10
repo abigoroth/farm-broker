@@ -1,16 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12"><h2>Broker Registration</h2></div>
+    <div class="col-sm-12"><h2><center>Broker Registration</center></h2></div>
   </div>
   <div class="row">
-  <div class="col-md-5">
+    <div class="col-md-3"></div>
+  <div class="col-md-6">
 <div class="panel panel-default" style="padding: 20px">
 <div class="form-group">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 <%= devise_error_messages! %>
 <div class="field">
   <%= f.label 'Profile Photo' %><br />
-  <%= f.file_field :profilephoto, autofocus: true, class: 'form-control', placeholder:"Paste Image Link" %>
+  <%= f.file_field :profilephoto, class: 'form-control', placeholder:"Paste Image Link" %>
 </div>
 <br />
   <div class="field">
@@ -65,12 +66,15 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class:'form-control' %>
   </div>
   <br>
+  <center>
   <div class="actions">
     <%= f.submit "Sign up", class: 'btn btn-md btn-info' %>
   </div>
 <% end %>
 
 Already a broker? <%= render "brokers/shared/links" %>
+</center>
+<div class="col-md-3"></div>
 </div>
 </div>
 </div>

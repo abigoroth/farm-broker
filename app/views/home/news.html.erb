@@ -14,7 +14,7 @@
     <center>
       <%= image_tag bid.produce.avatar.url (:medium)%>
     </center>
-    <h4 align="center">Item: <%= bid.produce.producename %><br><% if bid.bid_status == "On" %>
+    <h4 align="center">Item: <%= bid.produce.producename %><br><% if Time.now > bid.start_time and Time.now < bid.end_time %>
     <font style="color:green"><em> Open Now!</em></font>
     <%else%>
     <font style="color:red"><em> Closed!</em></font>
