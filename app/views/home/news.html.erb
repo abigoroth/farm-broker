@@ -17,7 +17,7 @@
     </center>
 
     <h4 align="center">Item: <%= bid.produce.producename %><br>
-    <font style="color:green"><em> Open Now!</em></font>
+    <font style="color:green"><em> Open!</em></font>
     </h4>
     <table class="table" style="height: 200px">
     <tr>
@@ -27,17 +27,17 @@
     <th>Item Weight: </th> <td><%= bid.produce.producequantity %></td>
   </tr>
   <tr>
-    <th>Start Time: </th><td><%= bid.start_time %></td>
+    <th>Start Time: </th><td><%= bid.start_time.strftime('%d %B %Y at %l:%M %p') %></td>
   </tr>
   <tr>
-    <th>End Time: </th> <td><%= bid.end_time %></td>
+    <th>End Time: </th> <td><%= bid.end_time.strftime('%d %B %Y at %l:%M %p') %></td>
   </tr>
   <tr>
     <th>Start Price: </th> <td>RM <%= bid.start_price %></td>
   </tr>
   </table>
   </div>
-  
+
   <%end%>
   </div>
   <% end %>
