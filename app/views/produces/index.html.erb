@@ -29,7 +29,14 @@
         <td><%= produce.producename %></td>
         <td><%= produce.producetype %></td>
         <!-- <td><img src="<%= produce.produceimage %>"/></td> -->
-        <td><%= produce.producedate %></td>
+        <td><span><%= produce.producedate.strftime("%d/%m/%Y") %></span>
+            <br><span><%= produce.producedate.strftime("%I:%M %p") %></span>
+        </td>
+
+
+
+
+
         <td><%= produce.producequantity %></td>
         <td><%= produce.producedescription %></td>
         <td><%= produce.farmsite.farmsitename rescue nil%></td>

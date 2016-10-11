@@ -30,7 +30,12 @@
         <td><%= farmsite.farmsiteownername %></td>
         <td><%= farmsite.farmsiteownerphoneno %></td>
         <td><%= farmsite.broker.name%></td>
-            <td><%= link_to 'Produce', produces_path(farmsite_id: farmsite.id) , class: "btn btn-info" %></td>
+ 
+
+<td><%= link_to produces_path(farmsite_id: farmsite.id)   , class: "btn btn-info" do %> 
+          <i class= "glyphicon glyphicon-open">  </i> Produce
+            <% end %></td>
+
         <% if broker_signed_in? and farmsite.broker==current_broker %>
         <td><%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary" do %> 
           <i class= "glyphicon glyphicon-edit">  </i> Edit
