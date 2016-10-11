@@ -15,7 +15,10 @@
   <strong>Bidding time:</strong>
   <%= @bid_process.created_at %>
 </p>
+
+
+
 <% bid = @bid_process.bid %>
-<%= link_to 'Back', bid_processes_path(bid_id: bid.id) %>
+<%= link_to 'Back', bid_processes_path(bid_id: bid.id), class: "btn btn-default" %>
 
 </center>
