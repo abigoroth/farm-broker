@@ -20,14 +20,6 @@
                     <h4 align="center">Item: <%= bid.produce.producename %><br>
                       <font style="color:green"><em> Open!</em></font>
                     </h4>
-                    <center><div class="countdown"></div></center>
-                    <!--javascript for countdown timer-->
-                    <script type="text/javascript">
-                      $('.countdown').countdown('<%= bid.end_time %>', function(event) {
-                        $(this).html(event.strftime('%w weeks %d days %H:%M:%S'));
-                      });
-                    </script>
-                    <!--javascript for countdown timer-->
                     <br>
                       <table class="table" style="height: 200px">
                         <tr>
