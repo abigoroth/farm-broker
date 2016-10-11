@@ -4,7 +4,7 @@ class FarmsitesController < ApplicationController
   # GET /farmsites
   # GET /farmsites.json
   def index
-    @farmsites = Farmsite.all
+    @farmsites = params[:broker_id].present? ? Farmsite.all.where( broker_id: params[:broker_id] ).order(created_at: :desc) : Farmsite.all.where.not(broker_id: current_broker.try(:id)).order(created_at: :desc)
   end
 
   # GET /farmsites/1
@@ -29,7 +29,7 @@ class FarmsitesController < ApplicationController
 
     respond_to do |format|
       if @farmsite.save
-        format.html { redirect_to @farmsite, notice: 'Farmsite was successfully created.' }
+        format.html { redirect_to farmsites_path(broker_id:current_broker.id), notice: 'Farmsite was successfully created.' }
         format.json { render :show, status: :created, location: @farmsite }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class FarmsitesController < ApplicationController
   def update
     respond_to do |format|
       if @farmsite.update(farmsite_params)
-        format.html { redirect_to @farmsite, notice: 'Farmsite was successfully updated.' }
+        format.html { redirect_to farmsites_path(broker_id:current_broker.id), notice: 'Farmsite was successfully updated.' }
         format.json { render :show, status: :ok, location: @farmsite }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class FarmsitesController < ApplicationController
   def destroy
     @farmsite.destroy
     respond_to do |format|
-      format.html { redirect_to farmsites_url, notice: 'Farmsite was successfully destroyed.' }
+      format.html { redirect_to farmsites_path(broker_id:current_broker.id), notice: 'Farmsite was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

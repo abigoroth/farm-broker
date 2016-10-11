@@ -6,9 +6,8 @@
 
     <div class="row">
       <div class="col-sm-12"><h1>List Produces</h1></div>
-      <% if broker_signed_in?  and  @farmsite.present? and @farmsite.broker == current_broker %><%= link_to 'New Produce', new_produce_path %><%end%>
-    </div>
-<table class="table table-bordered" width="50">
+      <h1><%=@farmsite.farmsitename %></h1>
+<table class="table table-striped custab" width="50">
   <thead>
     <tr>
       <th>Produce Name</th>
@@ -33,13 +32,19 @@
         <td><%= produce.producedate %></td>
         <td><%= produce.producequantity %></td>
         <td><%= produce.producedescription %></td>
-        <td><%= produce.farmsite.farmsitename %></td>
+        <td><%= produce.farmsite.farmsitename rescue nil%></td>
         <td><%= produce.broker.name rescue nil %></td>
         <td><%= image_tag produce.avatar.url (:thumb)%></td>
         <% if broker_signed_in? and produce.broker == current_broker %>
-        <td><%= link_to 'Show', produce %></td>
-        <td><%= link_to 'Edit', edit_produce_path(produce) %></td>
-        <td><%= link_to 'Destroy', produce, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <td><%= link_to edit_produce_path(produce)   , class: "btn btn-primary" do %> 
+          <i class= "glyphicon glyphicon-edit">  </i> Edit
+            <% end %></td>
+          <td><%= link_to  produce_path(produce,farmsite_id: params[:farmsite_id]), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove
+            <% end %>
+          </td>
+
+
+
         <%end%>
       </tr>
     <% end %>
@@ -48,5 +53,5 @@
 
 <br>
 
-
+ <% if broker_signed_in?  and  @farmsite.present? and @farmsite.broker == current_broker %><%= link_to 'New Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success" %><%end%>
 </center></div>

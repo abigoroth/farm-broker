@@ -4,7 +4,7 @@ class ProducesController < ApplicationController
   # GET /produces
   # GET /produces.json
   def index
-    @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]) : Produce.all
+    @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]).order(created_at: :desc) : Produce.all
     @farmsite = Farmsite.find(params[:farmsite_id]) if params[:farmsite_id].present?
   end
 
@@ -15,7 +15,7 @@ class ProducesController < ApplicationController
 
   # GET /produces/new
   def new
-    @produce = Produce.new
+    @produce = Produce.new(farmsite_id: params[:farmsite_id])
   end
 
   # GET /produces/1/edit
@@ -29,7 +29,7 @@ class ProducesController < ApplicationController
 
     respond_to do |format|
       if @produce.save
-        format.html { redirect_to @produce, notice: 'Produce was successfully created.' }
+        format.html { redirect_to produces_path(farmsite_id: @produce.farmsite.id), notice: 'Produce was successfully created.' }
         format.json { render :show, status: :created, location: @produce }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class ProducesController < ApplicationController
   def update
     respond_to do |format|
       if @produce.update(produce_params)
-        format.html { redirect_to @produce, notice: 'Produce was successfully updated.' }
+        format.html { redirect_to produces_path(farmsite_id: @produce.farmsite.id), notice: 'Produce was successfully updated.' }
         format.json { render :show, status: :ok, location: @produce }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class ProducesController < ApplicationController
   def destroy
     @produce.destroy
     respond_to do |format|
-      format.html { redirect_to produces_url, notice: 'Produce was successfully destroyed.' }
+      format.html { redirect_to produces_path(farmsite_id: params[:farmsite_id]), notice: 'Produce was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
