@@ -1,7 +1,7 @@
 <center>
-<p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
-<div class="row">
+  <div class="row">
     <div class="col-sm-4"></div>
 
     <div class="col-sm-4">
@@ -9,44 +9,26 @@
         <div class="panel panel-default">
           <div class="panel-body">
 
-<p>
-  <strong>Bid status:</strong>
-  <%= @bid.bid_status %>
-</p>
+            <p><strong>Bid status:</strong><%= @bid.bid_status %></p>
 
-<p>
-  <strong>Produce:</strong>
-  <%= @bid.produce.producename  %>
-</p>
+            <p><strong>Produce:</strong><%= @bid.produce.producename  %></p>
 
-<p>
-  <strong>Start time:</strong>
-  <%= @bid.start_time %>
-</p>
+            <p><strong>Start time:</strong><%= @bid.start_time %></p>
 
-<p>
-  <strong>End time:</strong>
-  <%= @bid.end_time %>
-</p>
+            <p><strong>End time:</strong><%= @bid.end_time %></p>
 
-<p>
-  <strong>Start price:</strong>
-  <%= @bid.start_price %>
-</p>
+            <p><strong>Start price: RM</strong><%= @bid.start_price %></p>
 
-<p>
-  <strong>Max price:</strong>
-  <%= @bid.max_price %>
-</p>
+            <p><strong>Max price: RM</strong><%= @bid.max_price %></p>
 
 
-<%= link_to 'Edit', edit_bid_path(@bid) %> |
-<%= link_to 'Back', bids_path %>
+            <%= link_to 'Edit', edit_bid_path(@bid), class: "btn btn-default" %> 
+            <%= link_to 'Back', bids_path, class: "btn btn-default" %>
 
 
-</div>
-</div>
-<div class="col-sm-1"></div>
-</div>
+          </div>
+        </div>
+        <div class="col-sm-1"></div>
+      </div>
 
-</center>
+    </center>

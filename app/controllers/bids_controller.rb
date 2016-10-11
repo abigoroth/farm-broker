@@ -4,8 +4,9 @@ class BidsController < ApplicationController
   # GET /bids
   # GET /bids.json
   def index
-    @bids = Bid.order("bid_status: :desc")
-  end
+    update_bid_status
+    @bids = Bid.all.order(bid_status: :desc)
+end
 
   # GET /bids/1
   # GET /bids/1.json
@@ -78,6 +79,18 @@ class BidsController < ApplicationController
     def bid_params
       params.require(:bid).permit(:bid_status, :produce_id, :start_time, :end_time, :start_price, :max_price, :highest_price, :bidder_id)
     end
+
+    def update_bid_status
+        Bid.all.each do |bid|
+
+          if Time.now >= bid.end_time or bid.bid_processes.maximum(:price) == bid.max_price
+          bid.update(bid_status: "Off" )
+          else
+          bid.update(bid_status: "On" ) 
+          end
+        end
+    end
+      
 
 
   end
