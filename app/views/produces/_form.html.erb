@@ -21,7 +21,7 @@
                  <div class="field">
                   <%= f.label "Farm Name" %>
                   <div class="input-group input-group-lg " %>
-                  <%= f.collection_select(:farmsite_id,Farmsite.where(broker_id:current_broker.id),:id,:farmsitename,{:prompt=>"Please Select"},{:class => "form-control"})%>
+                  <%= f.collection_select(:farmsite_id,Farmsite.where(broker_id:current_broker.id),:id,:farmsitename,{:prompt=>"Please Select"},{:class => "form-control",readonly: true})%>
                   </div>
                   </div>
 
