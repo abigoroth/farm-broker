@@ -11,11 +11,17 @@
 <!-- row 2 -->
 <div class="row">
         <% @bids.each do |bid| %>
+          <!--Date compare -->
+            <% @timenow = Time.now %>
+            <% @timeend = bid.end_time %>
+            <% @days = (@timeend - @timenow).to_i/1.day %>
 
+          <!--Date compare -->
               <div class="col-md-4">
                   <div class="panel panel-default">
                     <center>
-                      <%= image_tag bid.produce.avatar.url , style: 'height:200px'%>
+                      <%= image_tag bid.produce.avatar.url , style: 'height:200px'%><br>
+                      <div class="badge"><%= @days %> days left
                     </center>
                     <h4 align="center">Item: <%= bid.produce.producename %><br>
                       <font style="color:green"><em> Open!</em></font>
