@@ -1,10 +1,9 @@
 <center>
-<p id="notice"><%= notice %></p>
 
 
 <div class="container">
     <div class="row col-md-6 col-md-offset-2 custyle">
-     
+
     </div>
 <table class=" table table-striped custab " width="50">
      <div class="col-sm-12"><h1>List Farm</h1></div>
@@ -17,7 +16,7 @@
       <th>Farm Phoneno</th>
       <th>Broker Name</th>
       <th>Farm Produce</th>
-      <th colspan="3"></th> 
+      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -32,7 +31,7 @@
         <td><%= farmsite.broker.name%></td>
             <td><%= link_to 'Produce', produces_path(farmsite_id: farmsite.id) , class: "btn btn-info" %></td>
         <% if broker_signed_in? and farmsite.broker==current_broker %>
-        <td><%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary" do %> 
+        <td><%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary" do %>
           <i class= "glyphicon glyphicon-edit">  </i> Edit
             <% end %></td>
 
@@ -51,4 +50,3 @@
 <% if broker_signed_in? %><%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success" %><%end%>
 
 </center></div>
-
