@@ -18,4 +18,6 @@
 //= require datatables
 //= require turbolinks
 //= require jquery.countdown
+//= require underscore
+//= require gmaps/google
 //= require_tree .
