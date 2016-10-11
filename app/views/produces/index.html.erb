@@ -1,5 +1,4 @@
 <center>
-<p id="notice"><%= notice %></p>
 
 
   <div class="container">
@@ -17,7 +16,7 @@
       <th>Produce Description</th>
       <th>Farm Name</th>
       <th>Broker Name</th>
-      <th>Produce Picture</th> 
+      <th>Produce Picture</th>
     </tr>
   </thead>
 
@@ -36,7 +35,7 @@
         <td><%= produce.broker.name rescue nil %></td>
         <td><%= image_tag produce.avatar.url (:thumb)%></td>
         <% if broker_signed_in? and produce.broker == current_broker %>
-         <td><%= link_to edit_produce_path(produce)   , class: "btn btn-primary" do %> 
+         <td><%= link_to edit_produce_path(produce)   , class: "btn btn-primary" do %>
           <i class= "glyphicon glyphicon-edit">  </i> Edit
             <% end %></td>
           <td><%= link_to  produce_path(produce,farmsite_id: params[:farmsite_id]), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove
