@@ -8,6 +8,8 @@
   <thead>
     <tr>
       <th>Bid</th>
+      <th>Produce</th>
+      <th>BidPro</th>
       <th>Bidder</th>
       <th>Price (RM)</th>
       <th>Bidding time</th>
@@ -18,20 +20,17 @@
     <% @bid_processes.each do |bid_process| %>
       <tr>
         <td><%= bid_process.bid.id %></td>
+        <td><%= bid_process.bid.produce.producename %></td>
+        <td><%= bid_process.id %></td>
         <td><%= bid_process.bidder.name %></td>
         <td><%= bid_process.price %></td>
         <td><%= bid_process.created_at %></td>
-
-        <% if bidder_signed_in? and bid_process.bidder==current_bidder %>
-
-        <td><%= link_to 'Show', bid_process %></td>
-        <td><%= link_to 'Destroy', bid_process, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        
-        <%end%>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+
 <%= link_to 'Back', bids_path %>
 <br>
 </div>

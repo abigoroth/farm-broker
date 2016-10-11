@@ -4,7 +4,7 @@ class BidsController < ApplicationController
   # GET /bids
   # GET /bids.json
   def index
-    @bids = Bid.all
+    @bids = Bid.order("bid_status: :desc")
   end
 
   # GET /bids/1
@@ -25,18 +25,18 @@ class BidsController < ApplicationController
   # POST /bids.json
   def create
     @bid = current_broker.bids.new(bid_params)
-	logger.debug @bid.inspect
+    logger.debug @bid.inspect
     respond_to do |format|
       if @bid.save
         format.html { redirect_to @bid, notice: 'Bid was successfully created.' }
         format.json { render :show, status: :created, location: @bid }
       else
-	logger.debug @bid.errors.inspect
-        format.html { render :new }
-        format.json { render json: @bid.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+       logger.debug @bid.errors.inspect
+       format.html { render :new }
+       format.json { render json: @bid.errors, status: :unprocessable_entity }
+     end
+   end
+ end
 
   # PATCH/PUT /bids/1
   # PATCH/PUT /bids/1.json
@@ -62,6 +62,12 @@ class BidsController < ApplicationController
     end
   end
 
+  def purchase
+    bid = Bid.find(params[:bid_id])
+    BidProcess.create(bid_id: bid.id, price: bid.max_price, bidder_id: current_bidder.id)
+    redirect_to bids_path    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bid
@@ -70,6 +76,8 @@ class BidsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bid_params
-      params.require(:bid).permit(:bid_status, :produce_id, :start_time, :end_time, :start_price, :highest_price, :bidder_id)
+      params.require(:bid).permit(:bid_status, :produce_id, :start_time, :end_time, :start_price, :max_price, :highest_price, :bidder_id)
     end
-end
+
+
+  end
