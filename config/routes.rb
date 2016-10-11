@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :cities
+  resources :states
   get 'broker_views/index'
 
   get 'bidder_views/index'

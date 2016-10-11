@@ -4,9 +4,11 @@
 <div class="container">
     <div class="row col-md-6 col-md-offset-2 custyle">
 
-    </div>
-<table class=" table table-striped custab " width="50">
-     <div class="col-sm-12"><h1>List Farm</h1></div>
+    </div>  
+    <div class="col-sm-12"><h1>List Farm</h1></div>
+
+<table class=" table table-striped custab " id="dttb">
+   
   <thead>
     <tr>
       <th>Farm Name</th>
@@ -31,16 +33,16 @@
         <td><%= farmsite.broker.name%></td>
  
 
-<td><%= link_to produces_path(farmsite_id: farmsite.id)   , class: "btn btn-info" do %> 
+        <td colspan="3"><%= link_to produces_path(farmsite_id: farmsite.id)   , class: "btn btn-info" do %> 
           <i class= "glyphicon glyphicon-open">  </i> Produce
-            <% end %></td>
+            <% end %>
 
         <% if broker_signed_in? and farmsite.broker==current_broker %>
-        <td><%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary" do %>
+        <%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary" do %>
           <i class= "glyphicon glyphicon-edit">  </i> Edit
-            <% end %></td>
+            <% end %>
 
-        <td><%= link_to  farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove
+       <%= link_to  farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove
             <% end %>
           </td>
 
@@ -55,3 +57,10 @@
 <% if broker_signed_in? %><%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success" %><%end%>
 
 </center></div>
+
+
+
+<script >
+$(document).ready(function() {
+  $("#dttb").dataTable();
+});</script>

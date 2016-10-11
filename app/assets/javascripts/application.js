@@ -15,6 +15,7 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require jquery_ujs
+//= require datatables
 //= require turbolinks
 //= require jquery.countdown
 //= require_tree .

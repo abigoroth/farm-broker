@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007082440) do
+ActiveRecord::Schema.define(version: 20161011084359) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -93,6 +93,12 @@ ActiveRecord::Schema.define(version: 20161007082440) do
     t.index ["reset_password_token"], name: "index_brokers_on_reset_password_token", unique: true
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "farmsites", force: :cascade do |t|
     t.string   "farmsitename"
     t.integer  "farmsitesize"
@@ -120,6 +126,12 @@ ActiveRecord::Schema.define(version: 20161007082440) do
     t.datetime "avatar_updated_at"
     t.integer  "broker_id"
     t.index ["broker_id"], name: "index_produces_on_broker_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
