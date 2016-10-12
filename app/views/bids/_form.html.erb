@@ -13,8 +13,8 @@
 
   <div class="form-inputs">
     <%= f.input :produce_id, collection: current_broker.produces, label_method: :producename%>
-    <%= f.input :start_time %>
-    <%= f.input :end_time %>
+    <%= f.input :start_time, :input_html => { :value => Date.today}, autofocus: true, class:'form-control', id: 'datetimepicker4'%>
+    <%= f.input :end_time :input_html => { :value => Date.today}, autofocus: true, class:'form-control', id: 'datetimepicker4'%>
     <%= f.input :start_price, input_html: { min: 0 } %>
     <%= f.input :max_price, input_html: { min: 0 } %>
   </div>
