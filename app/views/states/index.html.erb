@@ -2,7 +2,7 @@
 
 <h1>States</h1>
 
-<table>
+<table class="table table-striped custab" >
   <thead>
     <tr>
       <th>Name</th>
@@ -25,46 +25,23 @@
 <br>
 
 <%= link_to 'New State', new_state_path %>
- <div style='width: 800px;'>
-    <div id="geolocation" style='width: 800px; height: 400px;'></div>
-  </div>
+
+
+
+<div style='width: 200px;'>
+  <div id="multi_markers" style='width: 800px; height: 400px;'></div>
+</div>
+
 
 
 <script >
 var handler = Gmaps.build('Google');
-handler.buildMap({ internal: {id: 'geolocation'} }, function(){
-  // be aware chrome >= 50 requires https for geolocation to work
-  if(navigator.geolocation)
-    navigator.geolocation.getCurrentPosition(displayOnMap);
-});
-
-function displayOnMap(position){
-  var marker = handler.addMarker({
-    lat: position.coords.latitude,
-    lng: position.coords.longitude
-  });
-  handler.map.centerOn(marker);
-};
-
-handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers([
-    {
-      "lat": 0,
-      "lng": 0,
-      "picture": {
-        "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-        "width":  32,
-        "height": 32
-      },
-      "infowindow": "hello!"
-    }
+handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
+  var markers = handler.addMarkers([
+    { lat: 3.0650319, lng: 101.5243395},
   ]);
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
 });
-
-
-
 
 </script>
