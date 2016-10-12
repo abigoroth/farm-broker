@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'broker_views/index'
 
   get 'bidder_views/index'
-
+  get 'cities/:state', to: 'application#cities'
   resources :produces
   resources :farmsites
 
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
 
   resources :bid_processes
-  resources :bids do 
+  resources :bids do
     get 'purchase', on: :collection
   end
 
