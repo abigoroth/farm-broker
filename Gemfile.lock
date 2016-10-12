@@ -49,6 +49,8 @@ GEM
       momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     byebug (9.0.6)
+    city-state (0.0.13)
+      rubyzip (~> 1.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -75,11 +77,13 @@ GEM
       thor (~> 0.14)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    gmaps4rails (2.1.2)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-countdown-rails (2.0.2)
+    jquery-datatables (1.10.12)
     jquery-rails (4.2.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -144,6 +148,7 @@ GEM
       ffi (>= 0.5.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rubyzip (1.2.0)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -177,6 +182,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.2)
       execjs (>= 0.3.0, < 3)
+    underscore-rails (1.8.3)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.3.1)
@@ -198,11 +204,14 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   bootstrap3-datetimepicker-rails (~> 4.14.30)
   byebug
+  city-state
   coffee-rails (~> 4.2)
   devise
   figaro
+  gmaps4rails
   jbuilder (~> 2.5)
   jquery-countdown-rails (~> 2.0, >= 2.0.2)
+  jquery-datatables
   jquery-rails
   listen (~> 3.0.5)
   momentjs-rails (>= 2.9.0)
@@ -217,5 +226,9 @@ DEPENDENCIES
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
+  underscore-rails
   web-console
   will_paginate-bootstrap
+
+BUNDLED WITH
+   1.13.0
