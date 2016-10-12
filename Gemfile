@@ -64,6 +64,9 @@ gem 'jquery-countdown-rails', '~> 2.0', '>= 2.0.2'
 gem 'city-state'
 
 
-gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
-
 gem 'jquery-datatables'
+
+
+gem 'gmaps4rails'
+
+gem 'underscore-rails'
