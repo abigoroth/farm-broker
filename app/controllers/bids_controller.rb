@@ -6,7 +6,8 @@ class BidsController < ApplicationController
   def index
     update_bid_status
     @bids = Bid.all.order(bid_status: :desc)
-end
+    @bid = Bid.new
+  end
 
   # GET /bids/1
   # GET /bids/1.json
@@ -81,16 +82,16 @@ end
     end
 
     def update_bid_status
-        Bid.all.each do |bid|
+      Bid.all.each do |bid|
 
-          if Time.now >= bid.end_time or bid.bid_processes.maximum(:price) == bid.max_price
+        if Time.now >= bid.end_time or bid.bid_processes.maximum(:price) == bid.max_price
           bid.update(bid_status: "Off" )
-          else
+        else
           bid.update(bid_status: "On" ) 
-          end
         end
+      end
     end
-      
+
 
 
   end

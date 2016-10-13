@@ -1,126 +1,110 @@
+<div class = "modal-dialog modal-md" > 
+  <div class = "modal-content" >  
 
-
-
-
-
-<%= form_for(produce,html:{multipart: true}) do |f| %>
-  <% if produce.errors.any? %>
+    <%= form_for(@produce,html:{multipart: true}) do |f| %>
+    <% if @produce.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(produce.errors.count, "error") %> prohibited this produce from being saved:</h2>
 
       <ul>
-      <% produce.errors.full_messages.each do |message| %>
+        <% @produce.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
-  <% end %>
+    <% end %>
 
- <div class="row">
-        <div class="col-sm-4"></div>
+    <div class = "modal-header" >
+      <center><h4 class = "modal-title" >Farm Site</h4></center>
+    </div>
+    
+    <div class = "modal-body" >
 
-            <div class="col-sm-4">
-                <div class="well">
-              <div class="panel panel-default">
-                <div class="panel-body">
-                 <div class="field">
-                  <%= f.label "Farm Name" %>
-                  <div class="input-group input-group-lg " %>
+    <div class="row">
+      <div class="well">
+        <div class="panel panel-default">
+          <div class="panel-body">
 
-                  <%= f.hidden_field :farmsite_id, value: Farmsite.find(params[:farmsite_id]).id,:class => "form-control",readonly: true %>
-                  <%= f.text_field :farmsite_name, value: Farmsite.find(params[:farmsite_id]).farmsitename,:class => "form-control",readonly: true %>
-                  </div>
-                  </div>
+            <div class="input-group input-group-lg " %>
 
+              <%= f.label "Farm Name" %>
+              <%= f.hidden_field :farmsite_id, value: Farmsite.find(params[:farmsite_id]).id,:class => "form-control",readonly: true %>
+              <%= f.text_field :farmsite_name, value: Farmsite.find(params[:farmsite_id]).farmsitename,:class => "form-control",readonly: true %>
+              <br>
+              <%= f.label "Name:" %>
+              <%= f.text_field :producename, :class => "form-control", :placeholder => "Product name" %>
+              <br>
+              <%= f.label "Produce Picture:" %>
+              <%= f.file_field :avatar %>
 
-                  <div class="input-group input-group-lg col-md-10">
-                    <%= f.label "Name:" %>
-                    <%= f.text_field :producename, :class => "form-control", :placeholder => "Product name" %>
-                  </div>
-                  <br>
-                  <div class="input-group input-group-lg col-md-10">
-                    <%= f.label "Produce picture:" %>
-                    <%= f.file_field :avatar %>
-                  </div>
-                 <!--  <br>
-                  <div class="input-group input-group-lg col-md-10">
-                    <%= f.label "Upload Image:" %>
-                    <%= f.text_field :produceimage, :class => "form-control", :placeholder => "Add image link" %>
-                  </div> -->
-               <br>
-               <%= f.label "Produce type :" %></br>
-                <div class="row">
-                      <div class="col-sm-4 ">
-                        
+           <!--  <br>
+            <div class="input-group input-group-lg col-md-10">
+              <%= f.label "Upload Image:" %>
+              <%= f.text_field :produceimage, :class => "form-control", :placeholder => "Add image link" %>
+            </div> -->
+            <br>
 
-                    <div class="checkbox">
+            <%= f.label "Produce type :" %></br>
+            <div class="row">
 
-                    <%=f.radio_button :producetype,"Vegetable",:checked => true %> Vegetable</div>
-
-                    <div class="checkbox">
-                    <%=f.radio_button :producetype,"Fruit",:checked => true %> Fruit</div>
-
-                    <div class="checkbox">
-                    <%=f.radio_button :producetype,"Flower",:checked => true %> Flower</div>
-
-                    <div class="checkbox">
-                    <%=f.radio_button :producetype,"Meat",:checked => true %> Meat</div>
-                </div>
-
-                <div class="col-sm-4">
-                  <div class="checkbox">
-                    <%=f.radio_button :producetype,"Grain",:checked => true %> Grain</div>
-                  <div class="checkbox">
-                    <%=f.radio_button :producetype,"Poultry",:checked => true %> Poultry</div>
-                  <div class="checkbox">
-                    <%=f.radio_button :producetype,"Dairy Product",:checked => true %> Dairy Product</div>
-                    <div class="checkbox">
-                    <%=f.radio_button :producetype,"Seafood",:checked => true %> Seafood</div>
+              <div class="col-sm-4 ">
+                <div class="checkbox">
+                  <%=f.radio_button :producetype,"Vegetable",:checked => true %> Vegetable<br>
+                  <%=f.radio_button :producetype,"Fruit",:checked => true %> Fruit<br>
+                  <%=f.radio_button :producetype,"Flower",:checked => true %> Flower<br>  
+                  <%=f.radio_button :producetype,"Meat",:checked => true %> Meat
                 </div>
               </div>
 
-                  <div class="field"><br>
-                    <%= f.label "Produce time:" %></br>  <div><br>
-                     <div class='input-group date' id='datetimepicker5'>
-                    <%= f.text_field :producedate , :class => "form-control"%></br>  
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                  </div>
-                  </div></div>
-
-
-                  <%= f.label "Produce quantity:" %>
-                  <div class="input-group input-group-lg col-md-10">
-                   <%= f.text_field :producequantity, :class => "form-control", :placeholder => "Quantity in kilogram" %>
-                   <span class="input-group-addon" id="basic-addon2">KG</span>
-                  </div>
-
-
-                  <div class="input-group input-group-lg col-md-10">
-                    <%= f.label "Produce information:" %>
-                    <%= f.text_area :producedescription, :class => "form-control", :placeholder => "Detail information" %>
-                  </div>
-
-
-
+              <div class="col-sm-4">
+                <div class="checkbox">
+                  <%=f.radio_button :producetype,"Grain",:checked => true %> Grain<br>
+                  <%=f.radio_button :producetype,"Poultry",:checked => true %> Poultry<br>
+                  <%=f.radio_button :producetype,"Dairy Product",:checked => true %> Dairy Product<br>
+                  <%=f.radio_button :producetype,"Seafood",:checked => true %> Seafood
+                </div>
               </div>
             </div>
 
-          <center><div class="actions">
-              <%= f.submit 'Create',class: 'btn btn-lg btn-success'%>
-          </div></center>
+            <br>
 
-        <% end %>
+            <%= f.label "Produce time:" %>
+            <div class='input-group date' id='datetimepicker5'>
+              <%= f.text_field :producedate , :class => "form-control"%></br>  
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+            
+            <%= f.label "Produce quantity:" %>
+            <%= f.text_field :producequantity, :class => "form-control", :placeholder => "Quantity in kilogram" %>
+            <div>
+            <span class="input-group-addon" id="basic-addon2">KG</span>
+            <br>
+
+            <%= f.label "Produce information:" %>
+            <%= f.text_area :producedescription, :class => "form-control", :placeholder => "Detail information" %>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
-    <div class="col-sm-1"></div>
-</div>
 
+  <center><div class="actions"><%= f.submit 'Create',class: 'btn btn-lg btn-success btn-sm'%></div></center>
+
+  <% end %>
+
+  <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+
+</div>
 
 <script type="text/javascript">
   $(function () {
-        $("#produce_producedate").datetimepicker();
-    });
-    
+    $("#produce_producedate").datetimepicker();
+  });
+
 </script>
+
+</div>
+</div>
