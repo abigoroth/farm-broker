@@ -5,6 +5,11 @@ class FarmsitesController < ApplicationController
   # GET /farmsites.json
   def index
     @farmsites = params[:broker_id].present? ? Farmsite.all.where( broker_id: params[:broker_id] ).order(created_at: :desc) : Farmsite.all.where.not(broker_id: current_broker.try(:id)).order(created_at: :desc)
+     @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+    marker.lat farmsite.latitude
+    marker.lng farmsite.longitude
+    marker.infowindow farmsite.farmsitename
+end
   end
 
   # GET /farmsites/1

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013021142) do
+ActiveRecord::Schema.define(version: 20161013060422) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -109,6 +109,8 @@ ActiveRecord::Schema.define(version: 20161013021142) do
     t.integer  "broker_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.string   "latitude"
+    t.string   "longitude"
   end
 
   create_table "places", force: :cascade do |t|
