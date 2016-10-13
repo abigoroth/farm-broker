@@ -5,7 +5,7 @@
 
     </div>
     <table class=" table table-striped custab " width="50">
-     <div class="col-sm-12"><h1>List Bids</h1></div>
+     <div class="col-sm-12"><h1>Bids</h1></div>
      <thead>
 
       <tr>
@@ -14,10 +14,10 @@
         <th>Broker</th>
         <th>Produce Name</th>
         <th>Quantity (KG)</th>
-        <th>Start time</th>
-        <th>End time</th>
-        <th>Start price (RM)</th>
-        <th>Last price (RM)</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Start Price (RM)</th>
+        <th>Last Price (RM)</th>
         <th></th>
         <th></th>
         <th></th>
@@ -33,7 +33,6 @@
       <tr>
 
         <td><%= bid.bid_status %></td>
-
         <td><%= bid.broker.name %></td>
         <td><%= bid.produce.producename if bid.produce.present? %></td>
         <td><%= bid.produce.producequantity if bid.produce.present? %></td>
@@ -41,14 +40,24 @@
         <td><%= bid.end_time.strftime('%d %B %Y at %l:%M %p') %></td>
         <td><%= bid.start_price %></td>
         <td><%= bid.max_price %></td>
+      
+        <td><%= link_to 'See ', bid_processes_path(bid_id: bid.id), class:"btn btn-info btn-sm" %></td>
 
 
-        <div class="btn-group btn-group-xs">
-          <td><%= link_to 'See ', bid_processes_path(bid_id: bid.id), class:"btn btn-primary" %></td>
+        <% if bidder_signed_in? %>
 
+          <% if bid.bid_status == "On"  %>
 
-            <% if bidder_signed_in? %>
+            <td><%= link_to 'Bid Now', new_bid_process_path(bid_id: bid.id), class:"btn btn-warning btn-sm", remote: true %></td>     
 
+<<<<<<< HEAD
+            <td><%= link_to 'Buy Now', purchase_bids_path(bid_id: bid.id), data: { confirm: 'Are you sure to buy this bid?' }, class:"btn btn-danger btn-sm"%></td>
+
+          <%end%>
+
+          <td></td><td></td>
+        <%end%>  
+=======
             <td><% if bid.bid_status == "On"  %><%= link_to 'Bid Now', new_bid_process_path(bid_id: bid.id), class:"btn btn-info"%><%end%></td>
             <td><% if bid.bid_status == "On"  %><%= link_to 'Buy Now', purchase_bids_path(bid_id: bid.id), class:"btn btn-warning"%><%end%></td>
 
@@ -59,34 +68,39 @@
             <td></td>
             <td></td>
           <%end%>
+>>>>>>> d09771115f810a9dac5c79c9888194df919759a8
 
-          <% if broker_signed_in? and bid.broker==current_broker %>
 
-          <td><%= link_to edit_bid_path(bid), class: "btn btn-primary" do %><i class= "glyphicon glyphicon-edit"></i>Edit<%end %></td>
+        <% if broker_signed_in? and bid.broker==current_broker %>
 
-          <td><%= link_to bid, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" do %> <i class= "glyphicon glyphicon-remove"></i> Remove<%end%></td>
+          <td><%= link_to edit_bid_path(bid), class: "btn btn-primary btn-sm", remote: true do %><i class= "glyphicon glyphicon-edit"></i> Edit<%end %></td>
 
-          <%end%>
-        </div>
-        <% if broker_signed_in? and bid.broker!=current_broker %><td></td><td></td><%end%>
+          <td><%= link_to bid, method: :delete, data: { confirm: 'Are you sure to delete this bid?' }, class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove"></i> Remove<%end%></td>
+
+        <%end%>
+    
+        <% if broker_signed_in? and bid.broker!=current_broker %>
+        <td></td><td></td>
+        <%end%>
 
 
         <td><%= bid.bid_processes.maximum(:price) if bid.bid_processes.present? %></td>
 
 
         <td>
-          <% if bid.bid_status == "Off" %>
-          <%= bid.bid_processes.order(:price).last.bidder.name rescue nil%>
-          <%end%>
+            <% if bid.bid_status == "Off" %>
+                 <%= bid.bid_processes.order(:price).last.bidder.name rescue nil%>
+            <%end%>
         </td>
 
       </tr>
       <% end %>
     </tbody>
   </table>
-  <br>
+<br>
 
-  <% if broker_signed_in? %><%= link_to 'New Bid', new_bid_path, class: "btn btn-success" %><%end%>
+<% if broker_signed_in? %><%= link_to 'New Bid', new_bid_path, class: "btn btn-success btn-sm", remote: true %><%end%>
+</div>
 
 </div>
 </center>

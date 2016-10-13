@@ -1,13 +1,10 @@
 <center>
-
-
 <div class="container">
-    <div class="row col-md-6 col-md-offset-2 custyle">
+  <div class="row col-md-6 col-md-offset-2 custyle">
+  </div>  
+  <div class="col-sm-12"><h1>List Farm</h1></div>
 
-    </div>  
-    <div class="col-sm-12"><h1>List Farm</h1></div>
-
-<table class=" table table-striped custab " id="dttb">
+  <table class=" table table-striped custab " id="dttb">
    
   <thead>
     <tr>
@@ -31,17 +28,17 @@
         <td><%= farmsite.farmsiteownername %></td>
         <td><%= farmsite.farmsiteownerphoneno %></td>
         <td><%= farmsite.broker.name%></td>
-        <td ><%= link_to produces_path(farmsite_id: farmsite.id)  , data: {turbolinks: false} , class: "btn btn-info" do %> 
-          <i class= "glyphicon glyphicon-open">  </i> Produce <% end %></td>
+        <td >
+        <%= link_to produces_path(farmsite_id: farmsite.id)  , data: {turbolinks: false} , class: "btn btn-info btn-sm" do %><i class= "glyphicon glyphicon-open">  </i> Produce <% end %>
+        </td>
 
         <td> 
         <% if broker_signed_in? and farmsite.broker==current_broker %>
-        <%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary" do %>
-          <i class= "glyphicon glyphicon-edit"> </i> Edit 
-        <% end %>
+          
+          <%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit"> </i> Edit <% end %>
 
-        <%= link_to  farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove
-        <% end %></td>
+          <%= link_to  farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
+        </td>
 
         <%end%>
       </tr>
@@ -51,7 +48,9 @@
 
 <br>
 
-<% if broker_signed_in? %><%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success" , data: {turbolinks: false}%><%end%>
+<% if broker_signed_in? %>
+<%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
+<%end%>
 
 </center></div>
 

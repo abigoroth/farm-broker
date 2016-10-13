@@ -1,31 +1,55 @@
-<center>
-<%= simple_form_for(@bid_process) do |f| %>
+<div class = "modal-dialog modal-md" > 
+  <div class = "modal-content" > 
+
+    <center>
+      <%= simple_form_for(@bid_process) do |f| %>
+      <%= f.error_notification %>
+
+      <div class = "modal-header" >
+        <h4 class = "modal-title" >Bid Process</h4>
+      </div>
+      <div class = "modal-body" >
 
 
-<%= f.error_notification %>
-
-<div class="row">
- <div class="col-sm-4"></div>
-
+<<<<<<< HEAD
+          <div class="well">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-inputs">
+                <%= f.association :bid, as: :string, as: :hidden, value_method: :id, label_method: :id, readonly: true%>
+                  <%= f.input :price, input_html: { min: 0 }%>
+                </div>
+=======
  <div class="col-sm-4">
    <div class="well">
      <div class="panel panel-default">
        <div class="panel-body">
          <div class="form-inputs">
-           <%= f.association :bid, as: :string, value_method: :id, label_method: :id, readonly: true%>
+           <%= f.association :bid, as: :string, value_method: :id, label_method: :id, as: :hidden%>
            <%= f.input :price, input_html: { min: 0 }%>
          </div>
+>>>>>>> d09771115f810a9dac5c79c9888194df919759a8
 
-       </div>
-     </div>
+              </div>
+            </div>
+          </div>
 
-     <center><div class="actions">
-       <%= f.submit 'Create',class: 'btn btn-lg btn-success'%>
-     </div></center>
+          <center><div class="actions">
+            <%= f.submit 'Create',class: 'btn btn-lg btn-success'%>
+          </div></center>
+        </div>
+      <% end %>
+      <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
 
+<<<<<<< HEAD
+    </center>
+  </div>
+</div>
+=======
      <% end %>
    </div>
  </div>
  <div class="col-sm-1"></div>
 </div>
 </center>
+>>>>>>> d09771115f810a9dac5c79c9888194df919759a8

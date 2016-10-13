@@ -1,77 +1,57 @@
-<%= form_for(farmsite) do |f| %>
-  <% if farmsite.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(farmsite.errors.count, "error") %> prohibited this farmsite from being saved:</h2>
+<div class = "modal-dialog modal-md" > 
+  <div class = "modal-content" > 
+  
+    <%= simple_form_for(@farmsite) do |f| %>
+    <% if @farmsite.errors.any? %>
+        <div id="error_explanation">
+        <h2><%= pluralize(farmsite.errors.count, "error") %> prohibited this farmsite from being saved:</h2>
 
-      <% farmsite.errors.full_messages.each do |message| %>
+        <% @farmsite.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %></div>
-      </ul>
+        <% end %>
+        </div>
+    
+    <% end %>
+
+    <div class = "modal-header" >
+      <center><h4 class = "modal-title" >Farm Site</h4></center>
     </div>
-  <% end %>
-
-
+    
+    <div class = "modal-body" >
       <div class="row">
-        <div class="col-sm-4"></div>
-       
-            <div class="col-sm-4">
-                <div class="well">
-              <div class="panel panel-default">
-                <div class="panel-body">
-            
+        <div class="well">
+          <div class="panel panel-default">
+           <div class="panel-body">
 
+            <div class="form-inputs">
+              
+              <%= f.label "Name:" %>
+              <%= f.text_field :farmsitename, :class => "form-control", :placeholder => "Farm name" %>
 
-             
+              <%= f.label "Size:" %>
+              <%= f.text_field :farmsitesize, :class => "form-control", :placeholder => "Farm size in acres" %>
+              <span class="input-group-addon" id="basic-addon2">acres</span>
 
+              <%= f.label "Address:" %>
+              <%= f.text_area :farmsiteaddress, :class => "form-control", :placeholder => "Farm address" %>
 
-
-                  <div class="input-group input-group-lg col-md-10">
-                    <%= f.label "Name:" %>
-                   <%= f.text_field :farmsitename, :class => "form-control", :placeholder => "Farm name" %>
-                    </div>
-
-
-                    <%= f.label "Size:" %>
-                    <div class="input-group input-group-lg col-md-10">
-                    <%= f.text_field :farmsitesize, :class => "form-control", :placeholder => "Farm size in acres" %>
-                    <span class="input-group-addon" id="basic-addon2">acres</span>
-                    </div>
-
-               
-                   <div class="input-group input-group-lg col-md-10">
-                    <%= f.label "Address:" %>
-                   <%= f.text_area :farmsiteaddress, :class => "form-control", :placeholder => "Farm address" %>
-                    </div>
-
-
-
-                    <div class="input-group input-group-lg col-md-10">
-                    <%= f.label "Owner name:" %>
-                   <%= f.text_field :farmsiteownername, :class => "form-control", :placeholder => "Owner name" %>
-                    </div>
-
-
-
-
-                    <div class="input-group input-group-lg col-md-10">
-                    <%= f.label "Phone number :" %>
-                   <%= f.text_field :farmsiteownerphoneno, :class => "form-control", :placeholder => "Phone number" %>
-                    </div>
-               </div>
+              <%= f.label "Owner Name:" %>
+              <%= f.text_field :farmsiteownername, :class => "form-control", :placeholder => "Owner name" %>
+           
+              <%= f.label "Owner Phone:" %>
+              <%= f.text_field :farmsiteownerphoneno, :class => "form-control", :placeholder => "Phone number" %>
             </div>
+          </div>
+        </div>
 
+        <center><div class="actions">
+          <%= f.submit 'Create',class: 'btn btn-lg btn-success'%>
+        </div></center>
 
-
-
-
-                    <center><div class="actions">
-                      <%= f.submit 'Create',class: 'btn btn-lg btn-success'%>
-                    </div></center>
-
-            <% end %>
-               </div>
+        <% end %>
+      </div>
+    </div>
+    </div>
+    <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+  </div>
 </div>
-    <div class="col-sm-1"></div>
-</div>
-
-
