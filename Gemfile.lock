@@ -231,6 +231,3 @@ DEPENDENCIES
   underscore-rails
   web-console
   will_paginate-bootstrap
-
-BUNDLED WITH
-   1.13.0

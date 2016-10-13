@@ -12,7 +12,7 @@
      <div class="panel panel-default">
        <div class="panel-body">
          <div class="form-inputs">
-           <%= f.association :bid, as: :string, value_method: :id, label_method: :id, readonly: true%>
+           <%= f.association :bid, as: :string, value_method: :id, label_method: :id, as: :hidden%>
            <%= f.input :price, input_html: { min: 0 }%>
          </div>
 
