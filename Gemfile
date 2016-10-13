@@ -70,3 +70,6 @@ gem 'jquery-datatables'
 gem 'gmaps4rails'
 
 gem 'underscore-rails'
+
+
+gem "geocoder"
