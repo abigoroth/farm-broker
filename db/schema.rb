@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161011084359) do
+ActiveRecord::Schema.define(version: 20161013060422) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -109,6 +109,18 @@ ActiveRecord::Schema.define(version: 20161011084359) do
     t.integer  "broker_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.string   "latitude"
+    t.string   "longitude"
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "name"
+    t.string   "address"
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "produces", force: :cascade do |t|
@@ -131,6 +143,16 @@ ActiveRecord::Schema.define(version: 20161011084359) do
 
   create_table "states", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longtitude"
+    t.string   "name"
+    t.text     "address"
+    t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
