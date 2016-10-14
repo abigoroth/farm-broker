@@ -5,7 +5,7 @@ class BidsController < ApplicationController
   # GET /bids.json
   def index
     update_bid_status
-    @bids = Bid.all.order(bid_status: :desc)
+    @bids = params[:broker_id].present? ? Bid.all.where( broker_id: params[:broker_id] ).order(bid_status: :desc) : Bid.all.where.not(broker_id: current_broker.try(:id)).order(bid_status: :desc)
     @bid = Bid.new
   end
 

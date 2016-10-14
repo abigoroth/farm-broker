@@ -147,14 +147,4 @@ ActiveRecord::Schema.define(version: 20161013060422) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.float    "latitude"
-    t.float    "longtitude"
-    t.string   "name"
-    t.text     "address"
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 end
