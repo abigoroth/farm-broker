@@ -14,9 +14,8 @@ ActiveRecord::Schema.define(version: 20161013060422) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
-    t.datetime "bidding_time"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "bid_id"
     t.integer  "bidder_id"
     t.index ["bid_id"], name: "index_bid_processes_on_bid_id"
@@ -106,6 +105,7 @@ ActiveRecord::Schema.define(version: 20161013060422) do
     t.text     "farmsiteaddress"
     t.string   "farmsiteownername"
     t.integer  "farmsiteownerphoneno"
+    t.integer  "district_id"
     t.integer  "broker_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
@@ -143,16 +143,6 @@ ActiveRecord::Schema.define(version: 20161013060422) do
 
   create_table "states", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.float    "latitude"
-    t.float    "longtitude"
-    t.string   "name"
-    t.text     "address"
-    t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
