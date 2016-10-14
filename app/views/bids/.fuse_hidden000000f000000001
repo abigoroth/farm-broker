@@ -56,23 +56,12 @@
 
           <td></td><td></td>
         <%end%>
-<<<<<<< HEAD
 
         <% if !broker_signed_in? and !bidder_signed_in? %>
               <td></td>
               <td></td>
             <%end%>
 
-=======
-
-          <% if !broker_signed_in? and !bidder_signed_in? %>
-            <td></td>
-            <td></td>
-          <%end%>
-
-
-
->>>>>>> 08f5f0f5602d2d2a15cd3612ca4dd043573fc418
         <% if broker_signed_in? and bid.broker==current_broker %>
 
           <td><%= link_to edit_bid_path(bid), class: "btn btn-primary btn-sm", remote: true do %><i class= "glyphicon glyphicon-edit"></i> Edit<%end %></td>
