@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013060422) do
+ActiveRecord::Schema.define(version: 20161018042152) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -99,6 +99,17 @@ ActiveRecord::Schema.define(version: 20161013060422) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string   "comment_message"
+    t.datetime "comment_date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "wallpost_id"
+    t.integer  "broker_id"
+    t.index ["broker_id"], name: "index_comments_on_broker_id"
+    t.index ["wallpost_id"], name: "index_comments_on_wallpost_id"
+  end
+
   create_table "farmsites", force: :cascade do |t|
     t.string   "farmsitename"
     t.integer  "farmsitesize"
@@ -121,6 +132,7 @@ ActiveRecord::Schema.define(version: 20161013060422) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float    "distance"
   end
 
   create_table "produces", force: :cascade do |t|
@@ -155,6 +167,15 @@ ActiveRecord::Schema.define(version: 20161013060422) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "wallposts", force: :cascade do |t|
+    t.string   "wall_status"
+    t.datetime "wall_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "broker_id"
+    t.index ["broker_id"], name: "index_wallposts_on_broker_id"
   end
 
 end

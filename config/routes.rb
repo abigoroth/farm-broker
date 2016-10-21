@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :wallposts
+  resources :comments
   resources :places
   resources :cities
   resources :states

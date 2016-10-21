@@ -5,6 +5,16 @@
 
 <h1>Places</h1>
 
+<%= form_tag places_path, :method => :get do %>
+<p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search Near" , :name => nil %>
+  </p>
+  <% end %>
+
+
+
+
 <table>
   <thead>
     <tr>
@@ -20,10 +30,11 @@
   <tbody>
     <% @places.each do |place| %>
       <tr>
+       
         <td><%= place.latitude %></td>
         <td><%= place.longitude %></td>
-        <td><%= place.name %></td>
         <td><%= place.address %></td>
+        <td><%= place.name %></td>     
         <td><%= place.title %></td>
         <td><%= link_to 'Show', place %></td>
         <td><%= link_to 'Edit', edit_place_path(place) %></td>
@@ -53,3 +64,5 @@ handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
 });
 
 </script>
+
+

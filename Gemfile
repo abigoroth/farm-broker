@@ -73,3 +73,5 @@ gem 'underscore-rails'
 
 
 gem "geocoder"
+
+gem 'geokit-rails'
