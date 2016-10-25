@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :broker_friends
   resources :places
   resources :cities
   resources :states
@@ -23,8 +24,6 @@ Rails.application.routes.draw do
   resources :bids do
     get 'purchase', on: :collection
   end
-
-  get 'friends', to: "broker_views#friends"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
