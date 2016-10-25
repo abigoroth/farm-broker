@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
+
 ActiveRecord::Schema.define(version: 20161018042152) do
-=======
-ActiveRecord::Schema.define(version: 20161014030006) do
->>>>>>> df7ae9febddbcfed70bda0c1dbeeb35592cc31a1
+
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -165,6 +163,7 @@ ActiveRecord::Schema.define(version: 20161014030006) do
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   create_table "users", force: :cascade do |t|
     t.float    "latitude"
     t.float    "longtitude"
@@ -186,4 +185,36 @@ ActiveRecord::Schema.define(version: 20161014030006) do
 
 =======
 >>>>>>> df7ae9febddbcfed70bda0c1dbeeb35592cc31a1
+=======
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.date     "dob"
+    t.string   "address"
+    t.string   "phone_no"
+    t.string   "role"
+    t.string   "email",                     default: "", null: false
+    t.string   "encrypted_password",        default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",             default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "profilephoto_file_name"
+    t.string   "profilephoto_content_type"
+    t.integer  "profilephoto_file_size"
+    t.datetime "profilephoto_updated_at"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+>>>>>>> b5918e8b316d5f342f04d8a677270c02625f8025
 end

@@ -53,7 +53,7 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'simple_form'
-
+gem 'simple-form-datepicker'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 gem "paperclip", "~> 5.0.0"
@@ -73,5 +73,8 @@ gem 'underscore-rails'
 
 
 gem "geocoder"
+<<<<<<< HEAD
 
 gem 'geokit-rails'
+=======
+>>>>>>> b5918e8b316d5f342f04d8a677270c02625f8025
