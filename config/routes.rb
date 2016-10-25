@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'user_views/profile'
+  get 'user_views/:id/remove_photo', to: 'user_views#remove_photo', as: 'remove_user_photo'
+  devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions',
+  confirmations: 'users/confirmations'}
   resources :places
   resources :cities
   resources :states
