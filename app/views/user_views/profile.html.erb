@@ -7,7 +7,7 @@
             <div class="panel-body">
               <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px">
                 <% if !@user.profilephoto.blank? %><br><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %>
-              <br><br><strong><%= @user.role %></strong></div></center>
+              <br><br><strong style="text-transform:capitalize"><%= @user.role %></strong></div></center>
               <br>
               <table class="table">
                 <tr>
