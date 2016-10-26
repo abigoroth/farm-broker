@@ -1,0 +1,28 @@
+<%= simple_form_for(@wallpost) do |f| %>
+  <%= f.error_notification %>
+
+
+
+
+<div class="row">
+   <div class="col-sm-2"></div>
+      <div class="col-sm-8">.
+          <div class="well well-lg" > 
+            <h4>What's New</h4>
+              <form class="form-horizontal" role="form">
+                  <div class="form-group" style="padding:14px;">
+  <div class="form-inputs">
+    <%= f.input :wall_status ,placeholder: "What you think..." , class:"col-lg-12" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary pull-right" %>
+  </div>
+          <% end %>
+              </form>
+          </div>
+      </div>  
+  <div class="col-sm-1"></div>
+</div>
+
+</div>

@@ -48,9 +48,13 @@
 
           <% if bid.bid_status == "On"  %>
 
+<<<<<<< HEAD
             <td><%= link_to 'Place Bid', new_bid_process_path(bid_id: bid.id), class:"btn btn-warning btn-sm", remote: true %></td>     
+=======
+>>>>>>> 4e82d598213e7df31dc2cdb30c31436eeec2db37
 
             <td><%= link_to 'Bid Now', new_bid_process_path(bid_id: bid.id), class:"btn btn-warning btn-sm", remote: true %></td>
+
 
             <td><%= link_to 'Buy Now', purchase_bids_path(bid_id: bid.id), data: { confirm: 'Are you sure to buy this bid?' }, class:"btn btn-danger btn-sm"%></td>
 

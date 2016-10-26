@@ -1,6 +1,7 @@
 <%= simple_form_for(@place) do |f| %>
   <%= f.error_notification %>
 
+
   <div class="form-inputs">
     <%= f.input :latitude %>
     <%= f.input :longitude %>
@@ -13,3 +14,29 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+
+
+
+<button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";}
+    }
+    
+function showPosition(position) {
+    x.innerHTML="Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+
+
+
+

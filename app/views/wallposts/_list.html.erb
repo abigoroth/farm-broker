@@ -1,0 +1,49 @@
+
+<% @wallpost = Wallpost.new(broker_id: current_broker.id) %>
+
+<%= render "wallposts/form", :wallpost => @wallpost %>
+
+ <div class="row">
+    <div class="col-sm-2"></div>
+   
+      <div class="col-sm-8">.
+        <div class="well well-lg" >
+          <div class="well well-lg" >
+              <% @wallposts.each do |wallpost| %><br>
+                <br><div class="panel panel-default">
+                <div class="panel-heading"><b><h4><%= wallpost.broker.name %></b><span><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></span></div>
+              
+              
+                <div class="panel-body">
+                    <br><h4><%= wallpost.wall_status %></h4><br>
+              
+                </div></div>
+                    <td><%= link_to 'Edit', edit_wallpost_path(wallpost) %></td>
+                    <td><%= link_to 'Destroy', wallpost, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+  
+         
+                <div id="comments">
+                    <h3><p><%= wallpost.comments.count%> Comments</p></h3>
+                    <% wallpost.comments.each do |comment|%>
+                      <div class="panel panel-default">
+                        <b><span> <%= comment.broker.name %> </span></b>
+                        <span> <%= comment.comment_message %> </span><br>
+                        <span><%= comment.created_at.strftime("%d/%m/%y at %l:%M %p") %></span>
+                        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
+                        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td><br>
+                      </div>
+                    <% end %>
+       
+              Comment:<br>
+                <% @comment= wallpost.comments.build(broker_id: current_broker.id) %>
+                <%= render "comments/form" %>
+                <% end %>
+                </div>       
+      </div><br>
+      <div class="col-sm-2"></div>
+    </div>
+  </div>
+    </div>
+     </div>
+      </div>
+         </div>

@@ -1,13 +1,24 @@
 Rails.application.routes.draw do
 
+<<<<<<< HEAD
 
   resources :broker_friends
 
+=======
+<<<<<<< HEAD
+  resources :wallposts
+  resources :comments
+=======
+>>>>>>> 4e82d598213e7df31dc2cdb30c31436eeec2db37
   get 'user_views/profile'
   get 'user_views/:id/remove_photo', to: 'user_views#remove_photo', as: 'remove_user_photo'
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions',
   confirmations: 'users/confirmations'}
+<<<<<<< HEAD
 
+=======
+>>>>>>> b5918e8b316d5f342f04d8a677270c02625f8025
+>>>>>>> 4e82d598213e7df31dc2cdb30c31436eeec2db37
   resources :places
   resources :cities
   resources :states

@@ -4,16 +4,21 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.json
   def index
-    @places = Place.all
-    @hash = Gmaps4rails.build_markers(@places) do |place, marker|
-    marker.lat place.latitude
-    marker.lng place.longitude
-    marker.infowindow place.name
+    if params[:search].present?
+      @places = Place.near(params[:search], 50, :order => :distance)
+    else
+      @places = Place.all
+      @hash = Gmaps4rails.build_markers(@places) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      marker.infowindow place.name
+    end
   end
 end
   # GET /places/1
   # GET /places/1.json
   def show
+    @place = Place.find(params[:id])
   end
 
   # GET /places/new
@@ -54,6 +59,9 @@ end
       end
     end
   end
+
+
+
 
   # DELETE /places/1
   # DELETE /places/1.json
