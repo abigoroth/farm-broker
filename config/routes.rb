@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   resources :wallposts
   resources :comments
 
+  resources :broker_friends
+
+  resources :wallposts
+  resources :comments
+
   get 'user_views/profile'
   get 'user_views/:id/remove_photo', to: 'user_views#remove_photo', as: 'remove_user_photo'
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions',
