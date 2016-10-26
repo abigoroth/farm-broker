@@ -100,7 +100,7 @@
   </table>
 <br>
 
-<% if broker_signed_in? %><%= link_to 'New Bid', new_bid_path, class: "btn btn-success btn-sm", remote: true %><%end%>
+<% if user_signed_in? and current_user.role == "broker" %><%= link_to 'New Bid', new_bid_path, class: "btn btn-success btn-sm", remote: true %><%end%>
 </div>
 
 </div>
