@@ -6,7 +6,10 @@
             <div class="panel-heading"><center><strong><%= @user.name %></strong></center></div>
             <div class="panel-body">
               <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px">
-                <%if @user.id == current_user.id %><% if !@user.profilephoto.blank? %><br><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %><%end%>
+                <%if @user.id == current_user.id %><% if !@user.profilephoto.blank? %><br><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %>
+                <%else%>
+                <a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: @user.id) %>" class="btn btn-danger" data-method="post">Message</a>
+                <%end%>
               <br><br><strong style="text-transform:capitalize"><%= @user.role %></strong></div></center>
               <br>
               <table class="table">
