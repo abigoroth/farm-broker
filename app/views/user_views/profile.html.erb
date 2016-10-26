@@ -77,9 +77,30 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="panel panel-default">
-              <div class="panel-heading">Messages</div>
+              <div class="panel-heading">Message Inbox</div>
               <div class="panel-body">
-                No message.
+                <%if !@chat_rooms.blank? %>
+                <table class="table">
+                <% @chat_rooms.each do |chat_room| %>
+                <% if chat_room.sender_id == current_user.id || chat_room.receiver_id == current_user.id %>
+                      <% if chat_room.sender_id == current_user.id %>
+                        <% receiver = User.find(chat_room.receiver_id) %>
+                      <% else %>
+                        <% receiver = User.find(chat_room.sender_id) %>
+                      <% end %>
+                      <tr>
+                      <td><%= receiver.name %></td>
+                      <td><a href="<%= chat_room_path(chat_room.id)%>" data-method="get" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-envelope"></span></a></td>
+                    </tr>
+                     <% end %>
+                    <% end %>
+                <tr>
+                  <td colspan="2"><a href="<%= chat_rooms_path %>"> View All Chat</a></td>
+                </tr>
+              </table>
+                <% else %>
+                No message. <a href="<%= chat_rooms_path %>"> Chat Now!</a>
+                <%end%>
               </div>
             </div>
           </div>

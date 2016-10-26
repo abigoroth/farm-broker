@@ -14,4 +14,7 @@ class User < ApplicationRecord
          def birth_date
            dob.strftime('%d/%m/%Y')
          end
+
+         has_many :chat_rooms, foreign_key: :sender_id
+         has_many :messages
 end

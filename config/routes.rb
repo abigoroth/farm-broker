@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
 
-<<<<<<< HEAD
+  resources :chat_rooms do
+  resources :messages
+  end
+
   resources :wallposts
   resources :comments
-=======
+
   get 'user_views/profile'
   get 'user_views/:id/remove_photo', to: 'user_views#remove_photo', as: 'remove_user_photo'
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions',
   confirmations: 'users/confirmations'}
->>>>>>> b5918e8b316d5f342f04d8a677270c02625f8025
+
   resources :places
   resources :cities
   resources :states
@@ -32,6 +35,6 @@ Rails.application.routes.draw do
   resources :bids do
     get 'purchase', on: :collection
   end
-
+    mount ActionCable.server => '/cable'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
