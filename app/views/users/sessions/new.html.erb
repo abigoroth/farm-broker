@@ -10,11 +10,6 @@
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
             <div class="field">
-              <%= f.label 'Sign Up As:' %><br />
-              <%= f.collection_select :role, User::ROLES, :to_s, :humanize, {prompt: "Select a Role"}, class:'form-control' %>
-            </div>
-
-            <div class="field">
               <%= f.label :email %><br />
               <%= f.email_field :email, autofocus: true, class: 'form-control' %>
             </div>
@@ -39,7 +34,7 @@
             </div>
             </center>
             <% end %>
-          
+
 
       <%= render "users/shared/links" %>
        </div>

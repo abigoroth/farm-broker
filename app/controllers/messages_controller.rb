@@ -3,10 +3,6 @@ class MessagesController < ApplicationController
   def create
     @message = Message.create! body: params[:message][:body], chat_room: @chat_room, user: current_user
 
-    @message.mentions.each do |mention|
-        ActionCable.server.broadcast "room_channel_user_#{mention.id}",
-                                     mention: true
-      end
   end
 
   private

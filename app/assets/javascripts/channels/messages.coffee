@@ -14,7 +14,6 @@ App.messages = App.cable.subscriptions.create "MessagesChannel",
     , 1000
 
   received: (data) ->
-    alert("You have a new mention") if data.mention
     @collection().append(data.message) unless @userIsCurrentUser(data.message)
     messages_to_bottom()
 
