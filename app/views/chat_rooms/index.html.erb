@@ -1,0 +1,49 @@
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-sm-5" >
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong>People</strong></div>
+
+      <table class="table table-default">
+     <% @users.each do |user| %>
+       <tr>
+      <% if user.id != current_user.id %>
+      <td>
+      <img src="<%= user.profilephoto.url %>" style="width:50px;height:50px; border-radius:90px" />
+     </td>
+     <td>
+     <%= user.name %>
+    </td>
+     <td>
+     <a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: user.id) %>" class="btn btn-success" data-method="post">Message</a>
+    </td>
+    <% end %>
+  </tr>
+   <% end %>
+
+   </table>
+    </div>
+  </div>
+  <div class="col-sm-7">
+      <div class="panel panel-default">
+      <div class="panel-heading"><strong>Inbox (<%= @inbox.count %>)</strong></div>
+      <table class="table">
+      <% @chat_rooms.each do |chat_room| %>
+   <% if chat_room.sender_id == current_user.id || chat_room.receiver_id == current_user.id %>
+    <% if chat_room.sender_id == current_user.id %>
+      <% receiver = User.find(chat_room.receiver_id) %>
+    <% else %>
+      <% receiver = User.find(chat_room.sender_id) %>
+    <% end %>
+    <tr>
+    <td><%= receiver.name %></td>
+      <td><a href="<%= chat_room_path(chat_room.id)%>" data-method="get" class="btn btn-success">See Message</a></td>
+  </tr>
+   <% end %>
+  <% end %>
+</table>
+</div>
+</div>
+  </div>
+</div>

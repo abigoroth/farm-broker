@@ -23,7 +23,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
+ gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -73,7 +73,11 @@ gem 'underscore-rails'
 
 
 gem "geocoder"
+<<<<<<< HEAD
 
 
 gem 'geokit-rails'
 
+=======
+gem 'geokit-rails'
+>>>>>>> 6234c12f03d4da75920ac9fc78642af3123a8d85

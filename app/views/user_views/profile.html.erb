@@ -6,15 +6,13 @@
             <div class="panel-heading"><center><strong><%= @user.name %></strong></center></div>
             <div class="panel-body">
               <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px">
-                <% if !@user.profilephoto.blank? %><br><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %>
+                <%if @user.id == current_user.id %><% if !@user.profilephoto.blank? %><br><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %>
+                <%else%>
+                <a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: @user.id) %>" class="btn btn-danger" data-method="post">Message</a>
+                <%end%>
               <br><br><strong style="text-transform:capitalize"><%= @user.role %></strong></div></center>
               <br>
               <table class="table">
-                <tr>
-                <th>Name: </th>
-                <td><%= @user.name %></td>
-              </tr>
-              <tr>
               <th>Email: </th>
               <td><%= @user.email %></td>
               </tr>
@@ -31,7 +29,7 @@
               <td><%= @user.phone_no %></td>
               </tr>
               <tr>
-              <td colspan="2" align="right"><a href="<%= edit_user_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a></td>
+              <td colspan="2" align="right"><%if @user.id == current_user.id %><a href="<%= edit_user_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a><%end%></td>
               </tr>
               </table>
             </div>
@@ -59,7 +57,7 @@
             <div class="panel panel-default">
               <div class="panel-heading">Wall Post</div>
               <div class="panel-body">
-                <p>Nothing here. Make a post now!</p>
+                <p align="center">No post</p>
               </div>
             </div>
           </div>
@@ -74,19 +72,42 @@
             <div class="panel panel-default">
               <div class="panel-heading">Friends</div>
               <div class="panel-body">
-                No Friend :( .<br><a href="#">Add Now!</a>
+                No Friend :( .<br><%if @user.id == current_user.id %><a href="#">Add Now!</a><% end %>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-12">
+            <%if @user.id == current_user.id %>
             <div class="panel panel-default">
-              <div class="panel-heading">Messages</div>
+              <div class="panel-heading">Message Inbox</div>
               <div class="panel-body">
-                No message.
+                <%if !@chat_rooms.blank? %>
+                <table class="table">
+                <% @chat_rooms.each do |chat_room| %>
+                <% if chat_room.sender_id == current_user.id || chat_room.receiver_id == current_user.id %>
+                      <% if chat_room.sender_id == current_user.id %>
+                        <% receiver = User.find(chat_room.receiver_id) %>
+                      <% else %>
+                        <% receiver = User.find(chat_room.sender_id) %>
+                      <% end %>
+                      <tr>
+                      <td><a href="<%= user_views_profile_path(id: receiver.id)%>"><%= receiver.name %></a></td>
+                      <td><a href="<%= chat_room_path(chat_room.id)%>" data-method="get" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-envelope"></span></a></td>
+                    </tr>
+                     <% end %>
+                    <% end %>
+                <tr>
+                  <td colspan="2"><a href="<%= chat_rooms_path %>"> View All Chat</a></td>
+                </tr>
+              </table>
+                <% else %>
+                No message. <a href="<%= chat_rooms_path %>"> Chat Now!</a>
+                <%end%>
               </div>
             </div>
+            <%end%>
           </div>
         </div>
         <div class="row">

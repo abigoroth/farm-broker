@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20161018042152) do
-
+ActiveRecord::Schema.define(version: 20161026023505) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -96,6 +94,15 @@ ActiveRecord::Schema.define(version: 20161018042152) do
     t.index ["reset_password_token"], name: "index_brokers_on_reset_password_token", unique: true
   end
 
+  create_table "chat_rooms", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["receiver_id"], name: "index_chat_rooms_on_receiver_id"
+    t.index ["sender_id"], name: "index_chat_rooms_on_sender_id"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -125,6 +132,16 @@ ActiveRecord::Schema.define(version: 20161018042152) do
     t.datetime "updated_at",           null: false
     t.string   "latitude"
     t.string   "longitude"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "chat_room_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -162,30 +179,6 @@ ActiveRecord::Schema.define(version: 20161018042152) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  create_table "users", force: :cascade do |t|
-    t.float    "latitude"
-    t.float    "longtitude"
-    t.string   "name"
-    t.text     "address"
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "wallposts", force: :cascade do |t|
-    t.string   "wall_status"
-    t.datetime "wall_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "broker_id"
-    t.index ["broker_id"], name: "index_wallposts_on_broker_id"
-  end
-
-=======
->>>>>>> df7ae9febddbcfed70bda0c1dbeeb35592cc31a1
-=======
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.date     "dob"
@@ -216,5 +209,13 @@ ActiveRecord::Schema.define(version: 20161018042152) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
->>>>>>> b5918e8b316d5f342f04d8a677270c02625f8025
+  create_table "wallposts", force: :cascade do |t|
+    t.string   "wall_status"
+    t.datetime "wall_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "broker_id"
+    t.index ["broker_id"], name: "index_wallposts_on_broker_id"
+  end
+
 end

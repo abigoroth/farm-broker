@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
 
 
+  resources :chat_rooms do
+  resources :messages
+  end
+
+  resources :broker_friends
+
   resources :wallposts
   resources :comments
+
 
   get 'user_views/profile'
   get 'user_views/:id/remove_photo', to: 'user_views#remove_photo', as: 'remove_user_photo'
@@ -32,6 +39,6 @@ Rails.application.routes.draw do
   resources :bids do
     get 'purchase', on: :collection
   end
-
+    mount ActionCable.server => '/cable'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

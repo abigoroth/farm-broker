@@ -1,0 +1,6 @@
+<div class="container">
+<section id="messages" data-channel="messages" data-chat-room-id="<%= chat_room.id %>">
+  <%= render chat_room.messages %>
+</section>
+</div>
+<%= render 'messages/new', chat_room: chat_room %>

@@ -1,6 +1,8 @@
 class UserViewsController < ApplicationController
   def profile
     @user = User.find(params[:id])
+    @inbox = current_user.chat_rooms.pluck(@user.id)
+    @chat_rooms = ChatRoom.all
   end
 
   def remove_photo
