@@ -2,6 +2,7 @@ class FriendshipsController < ApplicationController
 
   def index
     @users = User.all
+    @friends= current_user.friendships.pluck(:friend_id)
   end
 
   def create

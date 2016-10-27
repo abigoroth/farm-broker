@@ -8,10 +8,12 @@
     <table class="table">
     <% @users.each do |user|%>
     <% if (current_user.id != user.id) %>
+    <%if !@friends.include?(user.id) %>
     <tr>
       <td><%= user.name%></td>
       <td><a class="btn btn-success" href="<%= friendships_path(:friend_id => user.id)%>" data-method="<%= :post %>">Follow</a></td>
     </tr>
+    <%end%>
     <%end%>
     <%end%>
   </table>
@@ -19,9 +21,16 @@
 </div>
 </div>
 <div class="col-xs-6">
-  <% for user in current_user.friends %>
-  <p><%= user.name %></p>
-  <%end%>
+  <div class="panel panel-default">
+    <div class="panel-heading">Friends</div>
+    <div class="panel-body">
+      <table class="table">
+      <% for friend in current_user.friends %>
+        <tr><td><p><a href="<%= user_views_profile_path(id:friend.id)%>"><%= friend.name %></a></p></td></tr>
+        <%end%>
+    </table>
+  </div>
+  </div>
 </div>
 
 </div>
