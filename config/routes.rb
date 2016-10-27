@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :comments
 
   get 'user_views/profile'
+  post 'user_views/profile', to: 'user_views#create'
   get 'user_views/:id/remove_photo', to: 'user_views#remove_photo', as: 'remove_user_photo'
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions',
   confirmations: 'users/confirmations', passwords: 'users/passwords'}
