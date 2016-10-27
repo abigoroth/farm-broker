@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :friendships
   resources :chat_rooms do
   resources :messages
   end
