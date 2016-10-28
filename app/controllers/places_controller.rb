@@ -5,7 +5,7 @@ class PlacesController < ApplicationController
   # GET /places.json
   def index
     if params[:search].present?
-      @places = Place.near(params[:search], 50, :order => :distance)
+      @places = Place.near(params[:search], 50, :order => :title)
     else
       @places = Place.all
       @hash = Gmaps4rails.build_markers(@places) do |place, marker|
