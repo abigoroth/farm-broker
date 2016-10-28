@@ -27,13 +27,13 @@
         <td><%= farmsite.farmsiteaddress %></td>
         <td><%= farmsite.farmsiteownername %></td>
         <td><%= farmsite.farmsiteownerphoneno %></td>
-        <td><%= farmsite.broker.name%></td>
+        <td><%= farmsite.user_broker.name%></td>
         <td >
         <%= link_to produces_path(farmsite_id: farmsite.id)  , data: {turbolinks: false} , class: "btn btn-info btn-sm" do %><i class= "glyphicon glyphicon-open">  </i> Produce <% end %>
         </td>
 
         <td> 
-        <% if user_signed_in? and current_user.role == "broker" and farmsite.broker==current_broker %>
+        <% if current_user.farmer? and farmsite.farmer==current_user %>
           
           <%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit"> </i> Edit <% end %>
 

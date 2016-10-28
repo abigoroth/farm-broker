@@ -69,11 +69,11 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="<%= root_path  %>">Home</a></li>
 					<li><a href="<%= home_about_path %>">About</a></li>
-					<li><a href="<%= home_contact_path %>">Contact</a></li>
-					<li><a href="<%= home_news_path %>">Auction News</a></li>
+					<li><a href="<%= home_contact_path %>">Contact</a></li>	
 					<li><a href="<%= farmsites_path %>">Farm Sites</a></li>
 					<li><a href="<%= bids_path %>">Bids</a></li>
-					<li><a href="<%= bids_path %>">News</a></li>
+					<li><a href="<%= home_news_path %>">Auction News</a></li>
+					<li><a href="<%= wallposts_path %>">News</a></li>
 
 				</ul>
 
@@ -118,9 +118,9 @@
 					<ul class="dropdown-menu">
 						<li><a href="<%= user_views_profile_path(id: current_user.id) %>">My Profile</a></li>
 
-						<%if current_user.role == "broker" %>
-						<li><a href="/farmsites?broker_id=<%= current_broker.id if current_broker %>"> My Farm</a></li>
-						<li><a href="/bids?broker_id=<%= current_broker.id if current_broker %>"> My Bid</a></li>
+						<%if current_user.farmer? %>
+						<li><a href="/farmsites?broker_id=<%= current_user.id if current_user.farmer? %>"> My Farm</a></li>
+						<li><a href="/bids?broker_id=<%= current_user.id if current_user.farmer?  %>"> My Bid</a></li>
 						<%end%>
 
 					</ul>
@@ -140,7 +140,7 @@
 
 <%= content_tag(:div, flash[:alert], :id => "flash_alert", class: 'alert alert-danger') if flash[:alert] %>
 <%= content_tag(:div, flash[:notice], :id => "flash_notice", class: 'alert alert-success') if flash[:notice] %>
-
+<br>
 <%= yield %>
 <!--footer -->
 <footer class="footer">
@@ -156,4 +156,3 @@
 
 </html>
 
-	p

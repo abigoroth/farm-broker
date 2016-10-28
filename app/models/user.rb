@@ -25,6 +25,19 @@ class User < ApplicationRecord
          has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
          has_many :wallposts, foreign_key: :broker_id
+         has_many :farmsites
 
+        #  #broker
+        #      has_many :farmsites
+        #      has_many :bids
+        #      has_many :produces , through: :bids
+        #      has_many :produces , through: :farmsites
+        #      has_many :produces
+        #      has_many :wallposts
+        #      has_many :comments
+
+        # #bIDDER
+        # has_many :bid_processes
+        # has_many :bids
 
 end
