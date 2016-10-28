@@ -76,3 +76,5 @@ gem "geocoder"
 
 
 gem 'geokit-rails'
+
+gem 'bootswatch-rails'

@@ -1,0 +1,37 @@
+// Example using 'Cerulean' bootswatch
+
+//Import bootstrap-sprockets
+@import "bootstrap-sprockets";
+
+// Import cerulean variables
+@import "bootswatch/sandstone/variables";
+
+// Then bootstrap itself
+@import "bootstrap";
+
+// And finally bootswatch style itself
+@import "bootswatch/sandstone/bootswatch";
+
+// Whatever application styles you have go last
+@import 'bootstrap-datetimepicker';
+
+// Bootstrap body padding for fixed navbar
+body { padding-top: 60px; }
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
