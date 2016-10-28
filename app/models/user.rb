@@ -1,9 +1,11 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
+  devise :database_authenticatable, :registerable,      #:confirmable,
          :recoverable, :rememberable, :trackable, :validatable
          #role
+
+         enum role: [:broker, :bidder, :farmer]
          ROLES = %w[broker bidder farmer].freeze
          validates :role, presence: true
          #photo upload
@@ -23,4 +25,6 @@ class User < ApplicationRecord
          has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
          has_many :wallposts, foreign_key: :broker_id
+
+
 end

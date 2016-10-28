@@ -33,7 +33,7 @@
         </td>
 
         <td> 
-        <% if user_signed_in? and broker_signed_in? and farmsite.broker==current_broker %>
+        <% if user_signed_in? and current_user.role == "broker" and farmsite.broker==current_broker %>
           
           <%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit"> </i> Edit <% end %>
 

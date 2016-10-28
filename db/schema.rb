@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027020227) do
+ActiveRecord::Schema.define(version: 20161028045700) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -193,7 +193,6 @@ ActiveRecord::Schema.define(version: 20161027020227) do
     t.date     "dob"
     t.string   "address"
     t.string   "phone_no"
-    t.string   "role"
     t.string   "email",                     default: "",    null: false
     t.string   "encrypted_password",        default: "",    null: false
     t.string   "reset_password_token"
@@ -214,6 +213,7 @@ ActiveRecord::Schema.define(version: 20161027020227) do
     t.integer  "profilephoto_file_size"
     t.datetime "profilephoto_updated_at"
     t.string   "timezone",                  default: "UTC"
+    t.integer  "role",                      default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
