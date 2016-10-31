@@ -28,6 +28,7 @@ class BrokersController < ApplicationController
 
     respond_to do |format|
       if @broker.save
+        current_user.update(meta_id: @broker.id,meta_type: "Broker")
         format.html { redirect_to @broker, notice: 'Broker was successfully created.' }
         format.json { render :show, status: :created, location: @broker }
       else

@@ -28,6 +28,7 @@ class BiddersController < ApplicationController
 
     respond_to do |format|
       if @bidder.save
+        current_user.update(meta_id: @bidder.id,meta_type: "Bidder")
         format.html { redirect_to @bidder, notice: 'Bidder was successfully created.' }
         format.json { render :show, status: :created, location: @bidder }
       else

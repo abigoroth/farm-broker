@@ -25,9 +25,9 @@ class FarmersController < ApplicationController
   # POST /farmers.json
   def create
     @farmer = Farmer.new(farmer_params)
-
     respond_to do |format|
       if @farmer.save
+        current_user.update(meta_id: @farmer.id,meta_type: "Farmer")
         format.html { redirect_to @farmer, notice: 'Farmer was successfully created.' }
         format.json { render :show, status: :created, location: @farmer }
       else

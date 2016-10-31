@@ -1,15 +1,51 @@
 <%= simple_form_for(@farmer) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :dob %>
-    <%= f.input :address %>
-    <%= f.input :phone %>
-    <%= f.input :account_no %>
-  </div>
+<div class="row">
+    <div class="col-sm-4"></div>
+   
+      <div class="col-sm-4">
+        <div class="well well-lg" >
+          <div class="well well-lg" >
+                <div class="form-inputs">
+                  <%= f.input :name %>
+                  
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+            <div class="field">
+            <%= f.label 'Date of Birth' %><br />
+             <div class='input-group date' id='datetimepicker4'>
+            <%= f.text_field :dob, autofocus: true, class:'form-control'%> 
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            <!-- JS script for datetimepicker4 -->
+            <script type="text/javascript">
+             $(function () {
+                 $('#datetimepicker4').datetimepicker(
+                   {
+                     format: 'YYYY-MM-DD'
+                   }
+                 );
+             });
+         </script>
+         <!-- JS script for datetimepicker4 -->
+          </div></div>
+<br>
+
+
+
+                  <%= f.input :address %>
+                  <%= f.input :phone %>
+                  <%= f.input :account_no %>
+                </div>
+<center>
+                <div class="form-actions">
+                  <%= f.button :submit %>
+                </div></center>
+              <% end %>
+              </div>
+              </div>
+              </div>
+
+
+ <div class="col-sm-4"></div></div>

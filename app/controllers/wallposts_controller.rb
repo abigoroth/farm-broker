@@ -1,4 +1,5 @@
 class WallpostsController < ApplicationController
+  before_action :check_meta , if: "user_signed_in?"
   before_action :set_wallpost, only: [:show, :edit, :update, :destroy]
 
   # GET /wallposts
@@ -27,7 +28,7 @@ class WallpostsController < ApplicationController
   def create
 
     @wallpost = Wallpost.new(wallpost_params)
-     @wallpost.broker_id = current_broker.id
+     
     
     respond_to do |format|
       if @wallpost.save

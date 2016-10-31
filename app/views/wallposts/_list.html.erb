@@ -1,5 +1,5 @@
 
-<% @wallpost = Wallpost.new(broker_id: current_broker.id) %>
+<% @wallpost = Wallpost.new %>
 
 <%= render "wallposts/form", :wallpost => @wallpost %>
 
@@ -11,7 +11,7 @@
           <div class="well well-lg" >
               <% @wallposts.each do |wallpost| %><br>
                 <br><div class="panel panel-default">
-                <div class="panel-heading"><b><h4><%= wallpost.broker.name %></b><span><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></span></div>
+                <div class="panel-heading"><b><h4></b><span><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></span></div>
               
               
                 <div class="panel-body">
@@ -35,7 +35,7 @@
                     <% end %>
        
               Comment:<br>
-                <% @comment= wallpost.comments.build(broker_id: current_broker.id) %>
+                <% @comment= wallpost.comments.build%>
                 <%= render "comments/form" %>
                 <% end %>
                 </div>       

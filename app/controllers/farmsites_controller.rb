@@ -1,4 +1,5 @@
 class FarmsitesController < ApplicationController
+  before_action :check_meta , if: "user_signed_in?"
   before_action :set_farmsite, only: [:show, :edit, :update, :destroy]
 
   # GET /farmsites
