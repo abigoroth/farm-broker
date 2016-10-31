@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :farmers
+  resources :bidders
+  resources :brokers
+  devise_for :farmers
   resources :friendships
   resources :chat_rooms do
   resources :messages

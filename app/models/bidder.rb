@@ -1,10 +1,6 @@
 class Bidder < ApplicationRecord
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
+  has_one :user, as: :meta, dependent: :destroy
   validates :name, :dob, presence: true
 
   has_many :bid_processes
@@ -18,4 +14,5 @@ class Bidder < ApplicationRecord
   def welcome_send
     WelcomeMailer.welcome_send(self).deliver
   end
+
 end
