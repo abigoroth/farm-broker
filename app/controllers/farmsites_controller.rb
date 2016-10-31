@@ -30,7 +30,7 @@ end
   # POST /farmsites.json
   def create
 
-    @farmsite =current_broker.farmsites.new(farmsite_params)
+    @farmsite = current_broker.farmsites.new(farmsite_params)
 
     respond_to do |format|
       if @farmsite.save
