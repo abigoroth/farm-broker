@@ -48,7 +48,7 @@
 
 <br>
 
-<% if broker_signed_in? %>
+<% if user_signed_in? and current_user = "broker" %>
 <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
 <%end%>
 
