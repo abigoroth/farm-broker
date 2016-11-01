@@ -11,7 +11,7 @@
       <tr>
 
         <th>Status</th>
-        <th>Broker</th>
+        <th>Farmer</th>
         <th>Produce Name</th>
         <th>Quantity (KG)</th>
         <th>Start Time</th>
@@ -33,7 +33,7 @@
       <tr>
 
         <td><%= bid.bid_status %></td>
-        <td><%= bid.broker.name %></td>
+        <td><%= bid.broker.meta.name %></td>
         <td><%= bid.produce.producename if bid.produce.present? %></td>
         <td><%= bid.produce.producequantity if bid.produce.present? %></td>
         <td><%= bid.start_time.strftime('%d %B %Y at %l:%M %p') %></td>
@@ -49,7 +49,7 @@
           <% if bid.bid_status == "On"  %>
 
 
-            <td><%= link_to 'Place Bid', new_bid_process_path(bid_id: bid.id), class:"btn btn-warning btn-sm", remote: true %></td>     
+            <td><%= link_to 'Place Bid', new_bid_process_path(bid_id: bid.id), class:"btn btn-warning btn-sm", remote: true %></td>
 
             <td><%= link_to 'Bid Now', new_bid_process_path(bid_id: bid.id), class:"btn btn-warning btn-sm", remote: true %></td>
 
@@ -69,7 +69,7 @@
           <%end%>
 
 
-        <% if user_signed_in? and bid.farmer==current_user.meta %>
+        <% if user_signed_in? and bid.broker.id == current_user.id %>
 
           <td><%= link_to edit_bid_path(bid), class: "btn btn-primary btn-sm", remote: true do %><i class= "glyphicon glyphicon-edit"></i> Edit<%end %></td>
 
@@ -85,7 +85,7 @@
             <td></td>
             <td></td>
           <%end%>
-      
+
 
         <td><%= bid.bid_processes.maximum(:price) if bid.bid_processes.present? %></td>
 
@@ -102,10 +102,8 @@
   </table>
 <br>
 
-<% if user_signed_in? and current_user.meta_type == "Farmer" or current_user.meta_type == "Broker" %><%= link_to 'New Bid', new_bid_path, class: "btn btn-success btn-sm", remote: true %><%end%>
+<% if user_signed_in? and (current_user.meta_type == "Farmer" or current_user.meta_type == "Broker") %><%= link_to 'New Bid', new_bid_path, class: "btn btn-success btn-sm", remote: true %><%end%>
 </div>
 
 </div>
 </center>
-
-
