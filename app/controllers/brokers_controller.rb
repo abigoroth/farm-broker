@@ -29,7 +29,7 @@ class BrokersController < ApplicationController
     respond_to do |format|
       if @broker.save
         current_user.update(meta_id: @broker.id,meta_type: "Broker")
-        format.html { redirect_to @broker, notice: 'Broker was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Your information was successfully saved.' }
         format.json { render :show, status: :created, location: @broker }
       else
         format.html { render :new }

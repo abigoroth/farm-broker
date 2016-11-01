@@ -20,6 +20,10 @@
           <span class="glyphicon glyphicon-info-sign">&nbsp;</span><em><%= @minimum_password_length %> characters minimum</em>
         <% end %>
         <%= f.input :password_confirmation, autocomplete: "off", class:'form-control' %>
+        <div class="field">
+          <%= f.label :timezone %><br />
+          <%= f.time_zone_select :timezone, nil, {}, {class: 'form-control'} %>
+        </div>
         <%= f.input :current_password, autocomplete: "off", class:'form-control' %>
 
         <div class="actions">
@@ -47,7 +51,7 @@
                     <div class="field">
                       <%= g.label 'Date of Birth' %><br />
                    <div class='input-group date' id='datetimepicker4'>
-                      <%= g.text_field :dob, autofocus: true, class:'form-control'%> 
+                      <%= g.text_field :dob, autofocus: true, class:'form-control'%>
                       <span class="input-group-addon">
                       <span class="glyphicon glyphicon-calendar"></span>
                       </span>
@@ -66,7 +70,7 @@
                   <%= g.input :credit_card %>
                   <%end%>
                   </div>
-           
+
                 </div>
               </div>
             </div>

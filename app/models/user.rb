@@ -13,9 +13,7 @@ class User < ApplicationRecord
          has_attached_file :profilephoto, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "http://www.rogerbrayrestoration.com/wp-content/uploads/2014/08/Blank-Profile.jpg"
          validates_attachment_content_type :profilephoto, content_type: /\Aimage\/.*\z/
          #birth date format
-         def birth_date
-           dob.strftime('%d/%m/%Y')
-         end
+
          #Messages
          has_many :chat_rooms, foreign_key: :sender_id
          has_many :messages
