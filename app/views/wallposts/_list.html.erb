@@ -11,16 +11,26 @@
           <div class="well well-lg" >
               <% @wallposts.each do |wallpost| %><br>
                 <br><div class="panel panel-default">
-                <div class="panel-heading"><b><h4><%= wallpost.broker.meta.name %></b>&nbsp;<span><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></span></h4></div>
+                <div class="panel-heading"><b><h4><%= wallpost.broker.meta.name %></b>&nbsp;<span><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></span>
+                  <%if wallpost.broker.id == current_user.id %>
+                  <div align="right">
+                      <%= link_to edit_wallpost_path(wallpost) do %>
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <% end %>
+                        &nbsp;&nbsp;&nbsp;
+                      <%= link_to wallpost, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                        <i class="glyphicon glyphicon-remove"></i>
+                        <% end %>
+                      </div>
+                  <%end%>
+                </h4></div>
+
 
 
                 <div class="panel-body">
                     <br><h4><%= wallpost.wall_status %></h4><br>
 
                 </div></div>
-                    <td><%= link_to 'Edit', edit_wallpost_path(wallpost) %></td>
-                    <td><%= link_to 'Destroy', wallpost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
 
                 <div id="comments">
                     <h3><p><%= wallpost.comments.count%> Comments</p></h3>
