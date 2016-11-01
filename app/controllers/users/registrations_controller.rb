@@ -56,10 +56,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
      params.require(:user).permit(:name,:profilephoto, :dob, :address, :phone_no, :email, :password, :password_confirmation, :timezone, :current_password)
    end
 
-   protected
-   def after_sign_up_path_for(resource)
-    user_views_profile_path(resource) # Or :prefix_to_your_route
-  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
