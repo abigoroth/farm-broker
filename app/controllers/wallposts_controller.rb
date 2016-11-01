@@ -30,7 +30,6 @@ class WallpostsController < ApplicationController
     @wallpost = Wallpost.create! wall_status: params[:wallpost][:wall_status], broker: current_user
     flash[:notice] = 'Post created'
     redirect_to wallposts_path
-     
   end
 
   # PATCH/PUT /wallposts/1
