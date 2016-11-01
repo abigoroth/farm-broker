@@ -1,4 +1,5 @@
 class BidsController < ApplicationController
+  before_action :check_meta , if: "user_signed_in?"
   before_action :set_bid, only: [:show, :edit, :update, :destroy]
 
   # GET /bids

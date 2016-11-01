@@ -1,10 +1,11 @@
 class FarmsitesController < ApplicationController
+  before_action :check_meta , if: "user_signed_in?"
   before_action :set_farmsite, only: [:show, :edit, :update, :destroy]
 
   # GET /farmsites
   # GET /farmsites.json
   def index
-    @farmsites = params[:broker_id].present? ? Farmsite.all.where( broker_id: params[:broker_id] ).order(created_at: :desc) : Farmsite.all.where.not(broker_id: current_broker.try(:id)).order(created_at: :desc)
+    @farmsites = params[:farmer_id].present? ? Farmsite.all.where(farmer_id: params[:farmer_id] ).order(created_at: :desc) : Farmsite.all.where.not(farmer_id: current_user.meta.try(:id)).order(created_at: :desc)
      @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
     marker.lat farmsite.latitude
     marker.lng farmsite.longitude
@@ -30,11 +31,13 @@ end
   # POST /farmsites.json
   def create
 
-    @farmsite = current_broker.farmsites.new(farmsite_params)
+
+    @farmsite =current_user.meta.farmsites.new(farmsite_params) if(current_user.meta_type == "Farmer")
+
 
     respond_to do |format|
       if @farmsite.save
-        format.html { redirect_to farmsites_path(broker_id:current_broker.id), notice: 'Farmsite was successfully created.' }
+        format.html { redirect_to farmsites_path(farmer_id:current_user.meta_id), notice: 'Farmsite was successfully created.' }
         format.json { render :show, status: :created, location: @farmsite }
       else
         format.html { render :new }
@@ -48,7 +51,7 @@ end
   def update
     respond_to do |format|
       if @farmsite.update(farmsite_params)
-        format.html { redirect_to farmsites_path(broker_id:current_broker.id), notice: 'Farmsite was successfully updated.' }
+        format.html { redirect_to farmsites_path(farmer_id:current_user.meta_id), notice: 'Farmsite was successfully updated.' }
         format.json { render :show, status: :ok, location: @farmsite }
       else
         format.html { render :edit }
@@ -62,7 +65,7 @@ end
   def destroy
     @farmsite.destroy
     respond_to do |format|
-      format.html { redirect_to farmsites_path(broker_id:current_broker.id), notice: 'Farmsite was successfully destroyed.' }
+      format.html { redirect_to farmsites_path(farmer_id:current_user.meta_id), notice: 'Farmsite was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

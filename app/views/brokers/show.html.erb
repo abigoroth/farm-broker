@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @broker.name %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @broker.dob %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @broker.address %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @broker.phone %>
+</p>
+
+<p>
+  <strong>Account no:</strong>
+  <%= @broker.account_no %>
+</p>
+
+<%= link_to 'Edit', edit_broker_path(@broker) %> |
+<%= link_to 'Back', brokers_path %>

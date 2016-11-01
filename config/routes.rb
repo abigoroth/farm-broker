@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :farmers
+  resources :bidders
+  resources :brokers
+  devise_for :farmers
   resources :friendships
   resources :chat_rooms do
   resources :messages
@@ -10,7 +14,7 @@ Rails.application.routes.draw do
   resources :wallposts
   resources :comments
 
-
+  get 'user_views/meta'
   get 'user_views/profile'
   post 'user_views/profile', to: 'user_views#create'
   get 'user_views/:id/remove_photo', to: 'user_views#remove_photo', as: 'remove_user_photo'
