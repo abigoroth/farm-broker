@@ -27,18 +27,10 @@ class WallpostsController < ApplicationController
   # POST /wallposts.json
   def create
 
-    @wallpost = Wallpost.new(wallpost_params)
+    @wallpost = Wallpost.create! wall_status: params[:wallpost][:wall_status], broker: current_user
+    flash[:notice] = 'Post created'
+    redirect_to wallposts_path
      
-    
-    respond_to do |format|
-      if @wallpost.save
-        format.html { redirect_to :back, notice: 'Wallpost was successfully created.' }
-        format.json { render :show, status: :created, location: @wallpost }
-      else
-        format.html { render :new }
-        format.json { render json: @wallpost.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /wallposts/1

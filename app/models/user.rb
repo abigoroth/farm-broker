@@ -28,6 +28,8 @@ class User < ApplicationRecord
          has_many :wallposts, foreign_key: :broker_id
          has_many :farmsites
 
+         has_many :comments, foreign_key: :broker_id
+
         #  #broker
         #      has_many :farmsites
         #      has_many :bids

@@ -19,7 +19,9 @@
               <tr>
               <tr>
               <td colspan="2" align="right"> 
+               <%if @user.id == current_user.id %>
                 <a href="<%= edit_user_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>Edit Profile</a></td>
+                <%end%>
               </tr>
               </table>
             </div>

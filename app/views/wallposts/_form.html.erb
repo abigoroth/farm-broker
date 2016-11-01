@@ -1,4 +1,4 @@
-<%= simple_form_for(@wallpost) do |f| %>
+<%= simple_form_for [current_user, Wallpost.new], url: wallposts_path, method: :post do |f|%>
   <%= f.error_notification %>
 
 
