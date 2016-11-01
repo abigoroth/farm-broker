@@ -20,6 +20,14 @@ class UserViewsController < ApplicationController
     redirect_to user_views_profile_path(id: @user.id), flash: { success: 'User profile photo has been removed.' }
   end
 
+  def index
+    @users = User.all
+  end
+  
+  def show
+    @user = current_user
+  end
+
   private
   def wallpost_params
     params.permit(:wall_status)
