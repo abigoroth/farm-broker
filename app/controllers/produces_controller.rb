@@ -25,7 +25,7 @@ class ProducesController < ApplicationController
   # POST /produces
   # POST /produces.json
   def create
-    @produce = current_broker.produces.new(produce_params)
+    @produce = current_user.meta.produces.new(produce_params) if(current_user.meta_type == "Farmer")
 
     respond_to do |format|
       if @produce.save

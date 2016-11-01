@@ -53,7 +53,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
      params.require(:user).permit(:name,:profilephoto, :dob, :address, :phone_no, :email, :password, :password_confirmation, :role, :timezone)
    end
    def account_update_params
-     params.require(:user).permit(:name,:profilephoto, :dob, :address, :phone_no, :email, :password, :password_confirmation, :timezone, :current_password)
+     params.require(:user).permit(:name,:profilephoto, :dob, :address, :phone_no, :email, :password, :password_confirmation, :timezone, :current_password, meta_attributes: [:id,:name])
    end
 
 

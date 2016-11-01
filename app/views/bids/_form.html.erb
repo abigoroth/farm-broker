@@ -16,8 +16,10 @@
           <div class="panel panel-default">
             <div class="panel-body">
 
+              
+
               <div class="form-inputs">
-                <%= f.input :produce_id, collection: current_broker.produces, label_method: :producename%>
+                <%= f.input :produce_id, collection:  current_user.meta.produces, label_method: :producename%>
                 <%= f.input :start_time, start_year: Time.now.year %>
                 <%= f.input :end_time, start_year: Time.now.year %>
                 <%= f.input :start_price, input_html: { min: 0.0 } %>
