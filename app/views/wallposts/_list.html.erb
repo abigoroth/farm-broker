@@ -26,7 +26,7 @@
                     <h3><p><%= wallpost.comments.count%> Comments</p></h3>
                     <% wallpost.comments.each do |comment|%>
                       <div class="panel panel-default">
-                        <b><span> <%= comment.broker.name %> </span></b>
+                        <b><span> <%= comment.broker.meta.name %> </span></b>
                         <span> <%= comment.comment_message %> </span><br>
                         <span><%= comment.created_at.strftime("%d/%m/%y at %l:%M %p") %></span>
                         <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
@@ -35,7 +35,8 @@
                     <% end %>
        
               Comment:<br>
-                <%= render "comments/form" %>
+              <%@comment = wallpost.comments.new %>
+                <%= render "comments/form", :comment => @comment %>
                 <% end %>
                 </div>       
       </div><br>
