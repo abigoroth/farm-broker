@@ -35,12 +35,18 @@
                 <div id="comments">
                     <h3><p><%= wallpost.comments.count%> Comments</p></h3>
                     <% wallpost.comments.each do |comment|%>
-                      <div class="panel panel-default">
+                      <div class="panel panel-default" style="padding:5px">
                         <b><span> <%= comment.broker.meta.name %> </span></b>
+                        <%if comment.broker.id == current_user.id %>
+                        <span style="float:right;text-align:right"><%= link_to edit_comment_path(comment) do %> <i class="glyphicon glyphicon-pencil"></i><%end%>
+                        <%= link_to comment, method: :delete, data: { confirm: 'Are you sure?' } do %><i class="glyphicon glyphicon-remove"></i><%end%>
+                      </span>
+                        <%end%>
                         <span> <%= comment.comment_message %> </span><br>
                         <span><%= comment.created_at.strftime("%d/%m/%y at %l:%M %p") %></span>
-                        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-                        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td><br>
+
+
+                        <br>
                       </div>
                     <% end %>
 
