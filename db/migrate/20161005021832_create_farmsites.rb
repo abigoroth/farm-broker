@@ -7,8 +7,9 @@ class CreateFarmsites < ActiveRecord::Migration[5.0]
       t.string :farmsiteownername
       t.integer :farmsiteownerphoneno
       t.integer :district_id
-      t.integer :broker_id
-
+      t.integer :farmer_id
+      t.string :longitude
+      t.string :latitude
       t.timestamps
     end
   end

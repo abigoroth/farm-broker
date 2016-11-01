@@ -3,7 +3,7 @@ class CreateWallposts < ActiveRecord::Migration[5.0]
     create_table :wallposts do |t|
       t.string :wall_status
       t.datetime :wall_date
-
+      t.integer :broker_id
       t.timestamps
     end
   end

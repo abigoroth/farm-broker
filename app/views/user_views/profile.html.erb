@@ -3,7 +3,7 @@
   <div class="row">
       <div class="col-xs-3">
           <div class="panel panel-default">
-            <div class="panel-heading"><center><strong><%= @user.name %></strong></center></div>
+            <div class="panel-heading"><center><strong><%= @user.meta.name %></strong></center></div>
             <div class="panel-body">
               <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px">
                 <%if @user.id == current_user.id %><% if !@user.profilephoto.blank? %><br><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %>
@@ -17,19 +17,11 @@
               <td><%= @user.email %></td>
               </tr>
               <tr>
-              <th>Date Of Birth: </th>
-              <td><%= @user.birth_date %></td>
-              </tr>
               <tr>
-              <th>Address: </th>
-              <td><%= @user.address %></td>
-              </tr>
-              <tr>
-              <th>Phone no:</th>
-              <td><%= @user.phone_no %></td>
-              </tr>
-              <tr>
-              <td colspan="2" align="right"><%if @user.id == current_user.id %><a href="<%= edit_user_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a><%end%></td>
+              <td colspan="2" align="right"> 
+               <%if @user.id == current_user.id %>
+                <a href="<%= edit_user_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>Edit Profile</a></td>
+                <%end%>
               </tr>
               </table>
             </div>
@@ -54,14 +46,15 @@
           </div>
         </div>
         <%end%>
-        <!--Status -->
+        <!--Status-->
         <div class="row">
             <div class="col-xs-12">
             <div class="panel panel-default">
               <div class="panel-heading">Wall Post</div>
               <div class="panel-body">
-                <p align=""><% @wallposts.each do |post| %>
-                  <img src="<%=post.broker.profilephoto%>" style="width:50px; height:50px; border-radius:90px" />&nbsp;&nbsp;&nbsp;&nbsp;<strong><%= post.broker.name %></strong>
+                <p align="">
+                  <% @wallposts.each do |post| %>
+                  <img src="<%=post.broker.profilephoto%>" style="width:50px; height:50px; border-radius:90px" />&nbsp;&nbsp;&nbsp;&nbsp;<strong><%= post.broker.meta.name %></strong>
                   &nbsp;<%= post.created_at.strftime("%d/%m/%Y at %l:%M %p") %>
                   <br><div style="padding-left:70px"><%= post.wall_status %></div><br>
                   <%end%>
@@ -87,7 +80,7 @@
 
                   <% for friend in current_user.friends %>
                   <tr>
-                    <td><a href="<%= user_views_profile_path(id:friend.id)%>"><%= friend.name%></a></td>
+                    <td><a href="<%= user_views_profile_path(id:friend.id)%>"><%= friend.meta.name%></a></td>
                   </tr>
                   <% end%>
                 </table>
@@ -115,7 +108,7 @@
                         <% receiver = User.find(chat_room.sender_id) %>
                       <% end %>
                       <tr>
-                      <td><a href="<%= user_views_profile_path(id: receiver.id)%>"><%= receiver.name %></a></td>
+                      <td><a href="<%= user_views_profile_path(id: receiver.id)%>"><%= receiver.meta.name %></a></td>
                       <td><a href="<%= chat_room_path(chat_room.id)%>" data-method="get" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-envelope"></span></a></td>
                     </tr>
                      <% end %>

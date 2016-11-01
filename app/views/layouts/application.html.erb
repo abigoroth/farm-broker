@@ -69,13 +69,12 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="<%= root_path  %>">Home</a></li>
 					<li><a href="<%= home_about_path %>">About</a></li>
-					<li><a href="<%= home_contact_path %>">Contact</a></li>
-					<li><a href="<%= home_news_path %>">Auction News</a></li>
+					<li><a href="<%= home_contact_path %>">Contact</a></li>	
 					<li><a href="<%= farmsites_path %>">Farm Sites</a></li>
 					<li><a href="<%= bids_path %>">Bids</a></li>
-					<%if user_signed_in? %>
-					<li><a href="<%= bids_path %>">Wall</a></li>
-					<% end %>
+					<li><a href="<%= home_news_path %>">Auction News</a></li>
+					<li><a href="<%= wallposts_path %>">Wall</a></li>
+
 
 				</ul>
 
@@ -116,15 +115,16 @@
 					})();
 				</script>
 				<!-- Javascript Time -->
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.role %>: <%= current_user.name %></a>
+			
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><% if current_user.meta_type.present?%><%= current_user.meta_type %>: <%= current_user.meta.name %><%end%></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%= user_views_profile_path(id: current_user.id) %>">My Profile</a></li>
 						
 
-						<%if current_user.role == "broker" %>
-						<li><a href="/farmsites?broker_id=<%= current_broker.id if current_broker %>"> My Farm</a></li>
-						<li><a href="/bids?broker_id=<%= current_broker.id if current_broker %>"> My Bid</a></li>
-						<%end%>
+						<%if current_user.meta_type == "Farmer" %>
+						<li><a href="/farmsites?farmer_id=<%= current_user.meta_id if current_user.meta_type %>"> My Farm</a></li>
+						<li><a href="/bids?farmer_id=<%= current_user.meta_id if current_user.meta_type %>"> My Bid</a></li>
+<%end%>
 
 					</ul>
 				</li>
@@ -143,7 +143,7 @@
 
 <%= content_tag(:div, flash[:alert], :id => "flash_alert", class: 'alert alert-danger') if flash[:alert] %>
 <%= content_tag(:div, flash[:notice], :id => "flash_notice", class: 'alert alert-success') if flash[:notice] %>
-
+<br>
 <%= yield %>
 <!--footer -->
 <footer class="footer">
@@ -157,4 +157,7 @@
 
 </body>
 
+
 </html>
+
+
