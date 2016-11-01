@@ -1,4 +1,5 @@
 class UserViewsController < ApplicationController
+ before_action :check_meta , if: "user_signed_in?",except: :meta
   def profile
     @user = User.find(params[:id])
     @inbox = current_user.chat_rooms.pluck(@user.id)
