@@ -5,23 +5,23 @@
 
  <div class="row">
     <div class="col-sm-2"></div>
-   
+
       <div class="col-sm-8">.
         <div class="well well-lg" >
           <div class="well well-lg" >
               <% @wallposts.each do |wallpost| %><br>
                 <br><div class="panel panel-default">
-                <div class="panel-heading"><b><h4></b><span><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></span></div>
-              
-              
+                <div class="panel-heading"><b><h4><%= wallpost.broker.meta.name %></b>&nbsp;<span><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></span></h4></div>
+
+
                 <div class="panel-body">
                     <br><h4><%= wallpost.wall_status %></h4><br>
-              
+
                 </div></div>
                     <td><%= link_to 'Edit', edit_wallpost_path(wallpost) %></td>
-                    <td><%= link_to 'Destroy', wallpost, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
-  
-         
+                    <td><%= link_to 'Destroy', wallpost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+
                 <div id="comments">
                     <h3><p><%= wallpost.comments.count%> Comments</p></h3>
                     <% wallpost.comments.each do |comment|%>
@@ -33,12 +33,12 @@
                         <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td><br>
                       </div>
                     <% end %>
-       
+
               Comment:<br>
               <%@comment = wallpost.comments.new %>
                 <%= render "comments/form", :comment => @comment %>
                 <% end %>
-                </div>       
+                </div>
       </div><br>
       <div class="col-sm-2"></div>
     </div>

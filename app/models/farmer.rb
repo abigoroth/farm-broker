@@ -3,4 +3,8 @@ class Farmer < ApplicationRecord
 	has_many :farmsites
 	has_many :produces
 	has_many :bids
+
+	def birth_date
+    dob.strftime("%d/%m/%Y")
+  end
 end

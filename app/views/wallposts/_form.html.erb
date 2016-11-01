@@ -1,4 +1,4 @@
-<%= simple_form_for [current_user, Wallpost.new], url: wallposts_path, method: :post do |f|%>
+<%= simple_form_for (@wallpost), url: wallposts_path, method: :post do |f|%>
   <%= f.error_notification %>
 
 
@@ -7,7 +7,7 @@
 <div class="row">
    <div class="col-sm-2"></div>
       <div class="col-sm-8">.
-          <div class="well well-lg" > 
+          <div class="well well-lg" >
             <h4>What's New</h4>
               <form class="form-horizontal" role="form">
                   <div class="form-group" style="padding:14px;">
@@ -21,7 +21,7 @@
           <% end %>
               </form>
           </div>
-      </div>  
+      </div>
   <div class="col-sm-1"></div>
 </div>
 
