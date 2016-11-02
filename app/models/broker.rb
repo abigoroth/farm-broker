@@ -3,7 +3,6 @@ class Broker < ApplicationRecord
   validates :name, presence: true
 
   has_many :farmsites
-  has_many :bids
   has_many :produces , through: :bids
   has_many :produces , through: :farmsites
   has_many :produces

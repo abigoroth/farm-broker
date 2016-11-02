@@ -6,7 +6,7 @@ class BidsController < ApplicationController
   # GET /bids.json
   def index
     update_bid_status
-    @bids = params[:farmer_id].present? ? Bid.all.where( farmer_id: params[:farmer_id] ).order(bid_status: :desc) : Bid.all.where.not(farmer_id: current_broker.try(:id)).order(bid_status: :desc)
+    @bids = params[:farmer_id].present? ? Bid.all.where( farmer_id: params[:farmer_id] ).order(bid_status: :desc) : Bid.all.where.not(farmer_id: current_user.meta.try(:id)).order(bid_status: :desc)
     @bid = Bid.new
   end
 
@@ -68,7 +68,7 @@ class BidsController < ApplicationController
 
   def purchase
     bid = Bid.find(params[:bid_id])
-    BidProcess.create(bid_id: bid.id, price: bid.max_price, bidder_id: current_bidder.id)
+    BidProcess.create(bid_id: bid.id, price: bid.max_price, bidder_id: current_user.id)
     redirect_to bids_path
   end
 

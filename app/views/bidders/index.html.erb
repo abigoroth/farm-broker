@@ -16,16 +16,16 @@
 
   <tbody>
     <% @bidders.each do |bidder| %>
-      <tr>
-        <td><%= bidder.name %></td>
-        <td><%= bidder.dob %></td>
-        <td><%= bidder.address %></td>
-        <td><%= bidder.phone %></td>
-        <td><%= bidder.credit_card %></td>
-        <td><%= link_to 'Show', bidder %></td>
-        <td><%= link_to 'Edit', edit_bidder_path(bidder) %></td>
-        <td><%= link_to 'Destroy', bidder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= bidder.name %></td>
+      <td><%= bidder.dob %></td>
+      <td><%= bidder.address %></td>
+      <td><%= bidder.phone %></td>
+      <td><%= bidder.credit_card %></td>
+      <td><%= link_to 'Show', bidder %></td>
+      <td><%= link_to 'Edit', edit_bidder_path(bidder) %></td>
+      <td><%= link_to 'Destroy', bidder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

@@ -2,67 +2,67 @@
 
 <div class="row">
   <div class="col-sm-4">
-<h1>Farm Information</h1>
+    <h1>Farm Information</h1>
 
-<%= render 'form', place: @place %>
+    <%= render 'form', place: @place %>
 
-<%= link_to 'Show', @place %> |
-<%= link_to 'Back', places_path %>
-</div>
-
-
+    <%= link_to 'Show', @place %> |
+    <%= link_to 'Back', places_path %>
+  </div>
 
 
-    <div class="col-sm-4">
+
+
+  <div class="col-sm-4">
    
-<h1>Find Farm Location</h1>
-<head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript">
-var geocoder = new google.maps.Geocoder();
+    <h1>Find Farm Location</h1>
+    <head>
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+      <script type="text/javascript">
+        var geocoder = new google.maps.Geocoder();
 
-function geocodePosition(pos) {
-  geocoder.geocode({
-    latLng: pos
-  }, function(responses) {
-    if (responses && responses.length > 0) {
-      updateMarkerAddress(responses[0].formatted_address);
-    } else {
-      updateMarkerAddress('Cannot determine address at this location.');
-    }
-  });
-}
+        function geocodePosition(pos) {
+          geocoder.geocode({
+            latLng: pos
+          }, function(responses) {
+            if (responses && responses.length > 0) {
+              updateMarkerAddress(responses[0].formatted_address);
+            } else {
+              updateMarkerAddress('Cannot determine address at this location.');
+            }
+          });
+        }
 
-function updateMarkerStatus(str) {
-  document.getElementById('markerStatus').innerHTML = str;
-}
+        function updateMarkerStatus(str) {
+          document.getElementById('markerStatus').innerHTML = str;
+        }
 
-function updateMarkerPosition(latLng) {
-  document.getElementById('info').innerHTML = [
-    latLng.lat(),
-    latLng.lng()
-  ].join(', ');
-}
+        function updateMarkerPosition(latLng) {
+          document.getElementById('info').innerHTML = [
+          latLng.lat(),
+          latLng.lng()
+          ].join(', ');
+        }
 
-function updateMarkerAddress(str) {
-  document.getElementById('address').innerHTML = str;
-}
+        function updateMarkerAddress(str) {
+          document.getElementById('address').innerHTML = str;
+        }
 
-function initialize() {
+        function initialize() {
 
-  var latLng = new google.maps.LatLng(3.064736330699356, 101.5243415298462);
-  var map = new google.maps.Map(document.getElementById('mapCanvas'), {
-    zoom: 15,
-    center: latLng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-  var marker = new google.maps.Marker({
-    position: latLng,
-    title: 'Your Location',
-    map: map,
-    draggable: true
-  });
+          var latLng = new google.maps.LatLng(3.064736330699356, 101.5243415298462);
+          var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+            zoom: 15,
+            center: latLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          });
+          var marker = new google.maps.Marker({
+            position: latLng,
+            title: 'Your Location',
+            map: map,
+            draggable: true
+          });
 
   // Update current position info.
   updateMarkerPosition(latLng);
@@ -92,18 +92,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 <body>
   <style>
-  #mapCanvas {
-    width: 500px;
-    height: 400px;
-    float: left;
-  }
-  #infoPanel {
-    float: left;
-    margin-left: 10px;
-  }
-  #infoPanel div {
-    margin-bottom: 5px;
-  }
+    #mapCanvas {
+      width: 500px;
+      height: 400px;
+      float: left;
+    }
+    #infoPanel {
+      float: left;
+      margin-left: 10px;
+    }
+    #infoPanel div {
+      margin-bottom: 5px;
+    }
   </style>
 
   <div id="mapCanvas"></div>
@@ -115,7 +115,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <b>Closest matching address:</b>
     <div id="address"></div>
   </div>
-   <div>
-    </div>
+  <div>
+  </div>
 </body>
 </div></div>

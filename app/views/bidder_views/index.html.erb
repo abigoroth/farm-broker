@@ -2,38 +2,38 @@
   <h3>My profile</h3>
   <div class="row">
 
-  <div class="col-lg-12">
-  <br>
+    <div class="col-lg-12">
+      <br>
       <div class="panel panel-default">
         <br>
-	  <center><img src="<%= current_bidder.profilephoto %>" style="width:150px; height:150px; border-radius: 90px"></center>
-	  <br>
+        <center><img src="<%= current_bidder.profilephoto %>" style="width:150px; height:150px; border-radius: 90px"></center>
+        <br>
         <table class="table">
           <tr>
-          <th>Name: </th>
-          <td><%= current_bidder.name %></td>
-        </tr>
-        <tr>
-        <th>Email: </th>
-        <td><%= current_bidder.email %></td>
-        </tr>
-        <tr>
-        <th>Date Of Birth: </th>
-        <td><%= current_bidder.dob.strftime('%d/%m/%Y') %></td>
-        </tr>
-        <tr>
-        <th>Address: </th>
-        <td><%= current_bidder.address %></td>
-        </tr>
-        <tr>
-        <th>Credit card No.: </th>
-        <td><%= current_bidder.credit_card %></td>
-        </tr>
-        <tr>
-        <td colspan="2"><a href="<%= edit_bidder_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a></td>
-        </tr>
+            <th>Name: </th>
+            <td><%= current_bidder.name %></td>
+          </tr>
+          <tr>
+            <th>Email: </th>
+            <td><%= current_bidder.email %></td>
+          </tr>
+          <tr>
+            <th>Date Of Birth: </th>
+            <td><%= current_bidder.dob.strftime('%d/%m/%Y') %></td>
+          </tr>
+          <tr>
+            <th>Address: </th>
+            <td><%= current_bidder.address %></td>
+          </tr>
+          <tr>
+            <th>Credit card No.: </th>
+            <td><%= current_bidder.credit_card %></td>
+          </tr>
+          <tr>
+            <td colspan="2"><a href="<%= edit_bidder_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Profile</a></td>
+          </tr>
         </table>
       </div>
-	</div>
-	</div>
+    </div>
+  </div>
 </div>

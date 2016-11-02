@@ -3,48 +3,48 @@
 <h1>Farm Information</h1>
 <div class="row">
   <div class="col-sm-5">
-<div class="row">
-  <div class="col-sm-2">
-<p><strong>Latitude:</strong></p>
+    <div class="row">
+      <div class="col-sm-2">
+        <p><strong>Latitude:</strong></p>
 
-<p><strong>Longitude:</strong></p>
+        <p><strong>Longitude:</strong></p>
 
-<p><strong>Farm Name:</strong></p>
+        <p><strong>Farm Name:</strong></p>
 
-<p><strong>Farm Address:</strong></p>
+        <p><strong>Farm Address:</strong></p>
 
-<p><strong>Farm Produce:</strong></p>
-</div>
-  <div class="col-sm-8">
-  <p><%= @place.latitude %></p>
-  <p> <%= @place.longitude %></p>
-  <p> <%= @place.name %></p>
-   <p><%= @place.address %></p>
-   <p><%= @place.title %></p>
-
-
-</div>
-</div>
-
-<p>
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}"%>
-</p>
-<%= link_to 'Edit', edit_place_path(@place) %> |
-<%= link_to 'Back', places_path %>
-</div>
-
- <div class="col-sm-6">
+        <p><strong>Farm Produce:</strong></p>
+      </div>
+      <div class="col-sm-8">
+        <p><%= @place.latitude %></p>
+        <p> <%= @place.longitude %></p>
+        <p> <%= @place.name %></p>
+        <p><%= @place.address %></p>
+        <p><%= @place.title %></p>
 
 
-<h3>Near by location</h3>
-<p>
-<% for place in @place.nearbys(10) %>
-<ul>
-  </li><%= link_to place.address, place %> (<%= place.distance.round(10) %> miles)</li>
-  
-</ul>
-<%end%>
-</p>
+      </div>
+    </div>
+
+    <p>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}"%>
+    </p>
+    <%= link_to 'Edit', edit_place_path(@place) %> |
+    <%= link_to 'Back', places_path %>
+  </div>
+
+  <div class="col-sm-6">
+
+
+    <h3>Near by location</h3>
+    <p>
+      <% for place in @place.nearbys(10) %>
+      <ul>
+      </li><%= link_to place.address, place %> (<%= place.distance.round(10) %> miles)</li>
+      
+    </ul>
+    <%end%>
+  </p>
 
 
 </div>
@@ -120,7 +120,7 @@
     </script>
   </body>
 </html>
- -->
+-->
 
 
 

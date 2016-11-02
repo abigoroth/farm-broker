@@ -1,16 +1,13 @@
-
-
-
 <p id="notice"><%= notice %></p>
 
 <h1>Farm List</h1>
 
 <%= form_tag places_path, :method => :get do %>
 <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search Near" , :title => nil %>
-  </p>
-  <% end %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search Near" , :title => nil %>
+</p>
+<% end %>
 
 
 
@@ -19,29 +16,29 @@
   <thead>
     <tr>
   <!--     <th>Latitude</th>
-      <th>Longitude</th> -->
-      <th>Farm Name</th>
-      <th>Farm Address</th>
-      <th>Farm Produce</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <th>Longitude</th> -->
+  <th>Farm Name</th>
+  <th>Farm Address</th>
+  <th>Farm Produce</th>
+  <th colspan="3"></th>
+</tr>
+</thead>
 
-  <tbody>
-    <% @places.each do |place| %>
-      <tr>
-       
+<tbody>
+  <% @places.each do |place| %>
+  <tr>
+   
      <!--    <td><%= place.latitude %></td>
-        <td><%= place.longitude %></td> -->
-        <td><%= place.name %></td>  
-        <td><%= place.address %></td>   
-        <td><%= place.title %></td>
-        <td><%= link_to 'Show', place %></td>
-        <td><%= link_to 'Edit', edit_place_path(place) %></td>
-        <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+     <td><%= place.longitude %></td> -->
+     <td><%= place.name %></td>  
+     <td><%= place.address %></td>   
+     <td><%= place.title %></td>
+     <td><%= link_to 'Show', place %></td>
+     <td><%= link_to 'Edit', edit_place_path(place) %></td>
+     <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   </tr>
+   <% end %>
+ </tbody>
 </table>
 
 <br>
@@ -50,19 +47,19 @@
 
 
 <center>
-<div style='width: 800px;'>
-  <div id="multi_markers" style='width: 800px; height: 400px;'></div>
-</div></center>
+  <div style='width: 800px;'>
+    <div id="multi_markers" style='width: 800px; height: 400px;'></div>
+  </div></center>
 
 
-<script >
-var handler = Gmaps.build('Google');
-handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
-  var markers = handler.addMarkers(<%=raw @hash.to_json %>);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
-});
+  <script >
+    var handler = Gmaps.build('Google');
+    handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
+      var markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    });
 
-</script>
+  </script>
 
 

@@ -1,79 +1,79 @@
 <center>
-<div class="container">
-  <div class="row col-md-6 col-md-offset-2 custyle">
-  </div>
-  <div class="col-sm-12"><h1>List Farm</h1></div>
+  <div class="container">
+    <div class="row col-md-6 col-md-offset-2 custyle">
+    </div>
+    <div class="col-sm-12"><h1>List Farm</h1></div>
 
-  <table class=" table table-striped custab " id="dttb">
+    <table class=" table table-striped custab " id="dttb">
 
-  <thead>
-    <tr>
-      <th>Farm Name</th>
-      <th>Farms Size(Acres)</th>
-      <th>Farm Address</th>
-      <th>Farm owner</th>
-      <th>Farm Phoneno</th>
-      <th>Farm owner</th>
-      <th>Farm Produce</th>
-      <th width="20%"></th>
-    </tr>
-  </thead>
+      <thead>
+        <tr>
+          <th>Farm Name</th>
+          <th>Farms Size(Acres)</th>
+          <th>Farm Address</th>
+          <th>Farm owner</th>
+          <th>Farm Phoneno</th>
+          <th>Farm owner</th>
+          <th>Farm Produce</th>
+          <th width="20%"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @farmsites.each do |farmsite| %>
-      <tr>
-        <td><%= farmsite.farmsitename %></td>
-        <td><%= farmsite.farmsitesize %></td>
-        <td><%= farmsite.farmsiteaddress %></td>
-        <td><%= farmsite.farmsiteownername %></td>
-        <td><%= farmsite.farmsiteownerphoneno %></td>
-        <td><%= farmsite.farmer.name%></td>
-        <td >
-        <%= link_to produces_path(farmsite_id: farmsite.id)  , data: {turbolinks: false} , class: "btn btn-info btn-sm" do %><i class= "glyphicon glyphicon-open">  </i> Produce <% end %>
-        </td>
+      <tbody>
+        <% @farmsites.each do |farmsite| %>
+        <tr>
+          <td><%= farmsite.farmsitename %></td>
+          <td><%= farmsite.farmsitesize %></td>
+          <td><%= farmsite.farmsiteaddress %></td>
+          <td><%= farmsite.farmsiteownername %></td>
+          <td><%= farmsite.farmsiteownerphoneno %></td>
+          <td><%= farmsite.farmer.name%></td>
+          <td >
+            <%= link_to produces_path(farmsite_id: farmsite.id)  , data: {turbolinks: false} , class: "btn btn-info btn-sm" do %><i class= "glyphicon glyphicon-open">  </i> Produce <% end %>
+          </td>
 
-        <td>
-        <% if current_user.meta_type == "Farmer" and farmsite.farmer == current_user.meta %>
+          <td>
+            <% if current_user.meta_type == "Farmer" and farmsite.farmer == current_user.meta %>
 
-          <%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit"> </i> Edit <% end %>
+            <%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit"> </i> Edit <% end %>
 
-          <%= link_to  farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
-        </td>
+            <%= link_to  farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
+          </td>
 
-        <%end%>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <%end%>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<br>
-
-
-<% if user_signed_in? %>
-
-<%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
-<%end%>
-
-</center></div>
-
-<script >
-
-  $("#dttb").dataTable();
-</script>
+    <br>
 
 
-<center>
-<div style='width: 800px;'>
-  <div id="multi_markers" style='width: 800px; height: 400px;'></div>
-</div></center>
+    <% if user_signed_in? and (current_user.meta_type == "Farmer")%>
+
+    <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
+    <%end%>
+
+  </center></div>
+
+  <script >
+
+    $("#dttb").dataTable();
+  </script>
 
 
-<script >
-var handler = Gmaps.build('Google');
-handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
-  var markers = handler.addMarkers(<%=raw @hash.to_json %>);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
-});
+  <center>
+    <div style='width: 800px;'>
+      <div id="multi_markers" style='width: 800px; height: 400px;'></div>
+    </div></center>
 
-</script>
+
+    <script >
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
+        var markers = handler.addMarkers(<%=raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+
+    </script>
