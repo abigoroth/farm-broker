@@ -7,7 +7,7 @@ class CreateBids < ActiveRecord::Migration[5.0]
       t.decimal :start_price
       t.decimal :highest_price
       t.decimal :max_price
-      t.integer :broker_id
+      t.integer :farmer_id
       t.integer :produce_id
       t.integer :bidder_id
       t.timestamps

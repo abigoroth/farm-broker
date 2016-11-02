@@ -1,33 +1,33 @@
 <center>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12"><h1>Bid Process</h1></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12"><h1>Bid Process</h1></div>
+    </div>
+
+    <table class="table table-bordered" width="50">
+      <thead>
+        <tr>
+          <th>Produce</th>
+          <th>Bidder</th>
+          <th>Bid Amount (RM)</th>
+          <th>Bid Time</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @bid_processes.each do |bid_process| %>
+        <tr>
+          <td><%= bid_process.bid.produce.producename %></td>
+          <td><%= bid_process.bidder.name %></td>
+          <td><%= bid_process.price %></td>
+          <td><%= bid_process.created_at.strftime('%d %B %Y at %l:%M %p') %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+
+    <%= link_to 'Back', bids_path, class: "btn btn-default" %>
+    <br>
   </div>
-
-<table class="table table-bordered" width="50">
-  <thead>
-    <tr>
-      <th>Produce</th>
-      <th>Bidder</th>
-      <th>Bid Amount (RM)</th>
-      <th>Bid Time</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bid_processes.each do |bid_process| %>
-      <tr>
-        <td><%= bid_process.bid.produce.producename %></td>
-        <td><%= bid_process.bidder.name %></td>
-        <td><%= bid_process.price %></td>
-        <td><%= bid_process.created_at.strftime('%d %B %Y at %l:%M %p') %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-<%= link_to 'Back', bids_path, class: "btn btn-default" %>
-<br>
-</div>
 </center>

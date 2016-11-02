@@ -11,26 +11,26 @@
       <div class = "modal-body" >
 
 
-          <div class="well">
-            <div class="panel panel-default">
-              <div class="panel-body">
+        <div class="well">
+          <div class="panel panel-default">
+            <div class="panel-body">
               
-                <div class="form-inputs">
+              <div class="form-inputs">
 
-                  
-              
-                  <%= f.association :bid, as: :string, as: :hidden, value_method: :id, label_method: :id, readonly: true%>
-                  <%= f.input :price, input_html: { min: 0 }%>
-                </div>
-
+                
+                
+                <%= f.association :bid, as: :string, as: :hidden, value_method: :id, label_method: :id, readonly: true%>
+                <%= f.input :price, input_html: { min: 0 }%>
               </div>
+
             </div>
           </div>
-
-          <center><div class="actions">
-            <%= f.submit 'Create',class: 'btn btn-lg btn-success'%>
-          </div></center>
         </div>
+
+        <center><div class="actions">
+          <%= f.submit 'Create',class: 'btn btn-lg btn-success'%>
+        </div></center>
+      </div>
       <% end %>
       <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
 

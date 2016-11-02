@@ -1,24 +1,38 @@
 <center>
-<p id="notice"><%= notice %></p>
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Bid:</strong>
-  <%= @bid_process.bid.id %>
-</p>
+	<div class="row">
+		<div class="col-sm-4"></div>
 
-<p>
-  <strong>Price:</strong>
-  <%= @bid_process.price %>
-</p>
+		<div class="col-sm-4">
+			<div class="well">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Bidding time:</strong>
-  <%= @bid_process.created_at.strftime('%d %B %Y at %l:%M %p')%>
-</p>
+						<p>
+							<strong>Bid:</strong>
+							<%= @bid_process.bid.id %>
+						</p>
+
+						<p>
+							<strong>Price:</strong>
+							<%= @bid_process.price %>
+						</p>
+
+						<p>
+							<strong>Bidding time:</strong>
+							<%= @bid_process.created_at.strftime('%d %B %Y at %l:%M %p')%>
+						</p>
 
 
 
-<% bid = @bid_process.bid %>
-<%= link_to 'Back', bid_processes_path(bid_id: bid.id), class: "btn btn-default" %>
+						<% bid = @bid_process.bid %>
+						<%= link_to 'Back', bid_processes_path(bid_id: bid.id), class: "btn btn-default" %>
 
+
+					</div>
+				</div>
+			<div class="col-sm-1"></div>
+		</div>
 </center>
