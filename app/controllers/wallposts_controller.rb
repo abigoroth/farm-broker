@@ -1,4 +1,5 @@
 class WallpostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :check_meta , if: "user_signed_in?"
   before_action :set_wallpost, only: [:show, :edit, :update, :destroy]
 

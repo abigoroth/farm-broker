@@ -10,7 +10,7 @@
     <% if (current_user.id != user.id) %>
     <%if !@friends.include?(user.id) %>
     <tr>
-      <td><%= user.email%></td>
+      <td><%= user.meta.name%></td>
       <td><a class="btn btn-success" href="<%= friendships_path(:friend_id => user.id)%>" data-method="<%= :post %>">Follow</a></td>
     </tr>
     <%end%>
