@@ -6,7 +6,7 @@ class BidsController < ApplicationController
   # GET /bids.json
   def index
     update_bid_status
-    @bids = params[:broker_id].present? ? Bid.all.where( broker_id: params[:broker_id] ).order(bid_status: :desc) : Bid.all.where.not(broker_id: current_broker.try(:id)).order(bid_status: :desc)
+    @bids = params[:farmer_id].present? ? Bid.all.where( farmer_id: params[:farmer_id] ).order(bid_status: :desc) : Bid.all.where.not(farmer_id: current_broker.try(:id)).order(bid_status: :desc)
     @bid = Bid.new
   end
 
@@ -27,7 +27,7 @@ class BidsController < ApplicationController
   # POST /bids
   # POST /bids.json
   def create
-    @bid = current_broker.bids.new(bid_params)
+    @bid = current_user.meta.bids.new(bid_params) if(current_user.meta_type == "Farmer")
     logger.debug @bid.inspect
     respond_to do |format|
       if @bid.save

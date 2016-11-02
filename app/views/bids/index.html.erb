@@ -44,7 +44,7 @@
         <td><%= link_to 'See ', bid_processes_path(bid_id: bid.id), class:"btn btn-info btn-sm" %></td>
 
 
-        <% if bidder_signed_in? %>
+        <% if user_signed_in? and (current_user.meta_type == "Bidder")%>
 
           <% if bid.bid_status == "On"  %>
 
@@ -63,7 +63,7 @@
         <%end%>
 
 
-          <% if !broker_signed_in? and !bidder_signed_in? %>
+          <% if !user_signed_in? %>
             <td></td>
             <td></td>
           <%end%>
@@ -81,7 +81,7 @@
         <td></td><td></td>
         <%end%>
 
-        <% if !broker_signed_in? and !bidder_signed_in? %>
+        <% if !user_signed_in? %>
             <td></td>
             <td></td>
           <%end%>
@@ -102,7 +102,7 @@
   </table>
 <br>
 
-<% if user_signed_in? and current_user.meta_type == "Farmer" or current_user.meta_type == "Broker" %><%= link_to 'New Bid', new_bid_path, class: "btn btn-success btn-sm", remote: true %><%end%>
+<% if user_signed_in? and current_user.meta_type == "Farmer" %><%= link_to 'New Bid', new_bid_path, class: "btn btn-success btn-sm", remote: true %><%end%>
 </div>
 
 </div>
