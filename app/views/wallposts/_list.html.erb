@@ -4,20 +4,24 @@
 <%= render "wallposts/form", :wallpost => @wallpost %>
 
  <div class="row">
-    <div class="col-sm-2"></div>
+    <div class="col-sm-3"></div>
    
-      <div class="col-sm-8">.
-        <div class="well well-lg" >
-          <div class="well well-lg" >
-              <% @wallposts.each do |wallpost| %><br>
-                <br><div class="panel panel-default">
-                <div class="panel-heading"><b><h4></b><span><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></span></div>
-              
-              
+      <div class="col-sm-6">.
+       
+          <div class="well well-sm" >
+             <div class="panel panel-default">
                 <div class="panel-body">
-                    <br><h4><%= wallpost.wall_status %></h4><br>
-              
-                </div></div>
+
+
+                  <% @wallposts.each do |wallpost| %><br>
+                      <br><div class="panel panel-default">
+                    <div class="panel-heading">
+                      <b><h4></b><span><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></span></div>
+                    <div class="panel-body">
+                      <br><h4><%= wallpost.wall_status %></h4><br></div></div>
+
+
+
                     <td><%= link_to 'Edit', edit_wallpost_path(wallpost) %></td>
                     <td><%= link_to 'Destroy', wallpost, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
   
@@ -26,7 +30,7 @@
                     <h3><p><%= wallpost.comments.count%> Comments</p></h3>
                     <% wallpost.comments.each do |comment|%>
                       <div class="panel panel-default">
-                        <b><span> <%= comment.broker.meta.name %> </span></b>
+                        <b><span><%= comment.broker.meta.name %> </span></b>
                         <span> <%= comment.comment_message %> </span><br>
                         <span><%= comment.created_at.strftime("%d/%m/%y at %l:%M %p") %></span>
                         <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
@@ -34,16 +38,14 @@
                       </div>
                     <% end %>
        
-              Comment:<br>
-              <%@comment = wallpost.comments.new %>
+                Comment:<br>
+                <%@comment = wallpost.comments.new %>
                 <%= render "comments/form", :comment => @comment %>
                 <% end %>
-                </div>       
-      </div><br>
-      <div class="col-sm-2"></div>
-    </div>
-  </div>
-    </div>
-     </div>
-      </div>
-         </div>
+              </div>       
+            </div>
+          </div>
+        </div>   </div>
+      <div class="col-sm-3"></div>
+</div>
+  

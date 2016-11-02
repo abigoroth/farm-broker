@@ -9,9 +9,8 @@
   <thead>
     <tr>
       <th>Farm Name</th>
-      <th>Farms Size(Acres)</th>
       <th>Farm Address</th>
-      <th>Farm owner</th>
+      <th>Farms Size(Acres)</th>
       <th>Farm Phoneno</th>
       <th>Farm owner</th>
       <th>Farm Produce</th>
@@ -23,9 +22,8 @@
     <% @farmsites.each do |farmsite| %>
       <tr>
         <td><%= farmsite.farmsitename %></td>
-        <td><%= farmsite.farmsitesize %></td>
         <td><%= farmsite.farmsiteaddress %></td>
-        <td><%= farmsite.farmsiteownername %></td>
+        <td><%= farmsite.farmsitesize %></td>
         <td><%= farmsite.farmsiteownerphoneno %></td>
         <td><%= farmsite.farmer.name%></td>
         <td >
@@ -70,10 +68,11 @@
 
 <script >
 var handler = Gmaps.build('Google');
-handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
-  var markers = handler.addMarkers(<%=raw @hash.to_json %>);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
+ handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
+   var markers = handler.addMarkers(<%=raw @hash.to_json %>);
+   handler.bounds.extendWith(markers);
+   handler.fitMapToBounds();
 });
 
 </script>
+
