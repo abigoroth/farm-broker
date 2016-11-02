@@ -10,15 +10,26 @@
                 <%else%>
                 <a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: @user.id) %>" class="btn btn-danger" data-method="post">Message</a>
                 <%end%>
-              <br><br><strong style="text-transform:capitalize"><%= @user.role %></strong></div></center>
+              <br><br><strong style="text-transform:capitalize"><%= @user.meta_type %></strong></div></center>
               <br>
               <table class="table">
+              <tr>
               <th>Email: </th>
               <td><%= @user.email %></td>
               </tr>
               <tr>
+              <th>Birth Date: </th>
+              <td><%= @user.meta.birth_date %></td>
+              </tr>
               <tr>
-              <td colspan="2" align="right"> 
+              <th>Address: </th>
+              <td><%= @user.meta.address%></td>
+              </tr>
+              <th>Phone No: </th>
+              <td><%= @user.meta.phone%></td>
+              </tr>
+              <tr>
+              <td colspan="2" align="right">
                <%if @user.id == current_user.id %>
                 <a href="<%= edit_user_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>Edit Profile</a></td>
                 <%end%>
