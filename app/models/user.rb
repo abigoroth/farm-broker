@@ -70,9 +70,9 @@ class User < ApplicationRecord
     # #bidder
     # has_many :bid_processes
     # has_many :bids
-    has_many :bids, foreign_key: :broker_id
+    has_many :bids, foreign_key: :farmer_id
 
     has_many :comments, foreign_key: :broker_id
-    
+
 
 end

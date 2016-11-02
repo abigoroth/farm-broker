@@ -3,6 +3,7 @@ class Bid < ApplicationRecord
 	has_many :bidders, through: :bid_processes
 
 	belongs_to :broker, class_name: 'User'
+	belongs_to :farmer, class_name: 'User'
 	belongs_to :produce
 	validate :check_max_price, on: :create
 	validate :check_end_time, on: :create

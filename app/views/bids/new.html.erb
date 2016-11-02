@@ -3,5 +3,6 @@
 
 <%= render 'form', bid: @bid %>
 
-<%= link_to 'Back', bids_path, class: "btn btn-default" %>
+<%= link_to 'Back', bids_path if current_user.meta_type == "Farmer", class: "btn btn-default" %>
+
 </center>
