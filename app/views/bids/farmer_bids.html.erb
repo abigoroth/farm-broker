@@ -5,7 +5,7 @@
 
     </div>
     <table class=" table table-striped custab " width="50">
-     <div class="col-sm-12"><h1>Bids</h1></div>
+     <div class="col-sm-12"><h1>My Bids</h1></div>
      <thead>
 
       <tr>
@@ -29,7 +29,7 @@
     </thead>
 
     <tbody>
-      <% @bids.each do |bid| %>
+      <% @farmer_bids.each do |bid| %>
       <tr>
 
         <td><%= bid.bid_status %></td>
