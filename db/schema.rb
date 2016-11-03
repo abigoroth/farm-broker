@@ -38,11 +38,11 @@ ActiveRecord::Schema.define(version: 20161102054107) do
     t.decimal  "start_price"
     t.decimal  "highest_price"
     t.decimal  "max_price"
+    t.integer  "farmer_id"
     t.integer  "produce_id"
     t.integer  "bidder_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "farmer_id"
   end
 
   create_table "brokers", force: :cascade do |t|

@@ -126,7 +126,7 @@
 
 						<%if current_user.meta_type == "Farmer" %>
 						<li><a href="/farmsites?farmer_id=<%= current_user.meta_id if current_user.meta_type %>"> My Farm</a></li>
-						<li><a href="bids?farmer_id=<%= current_user.meta_id if current_user.meta_type %>"> My Bid</a></li>
+						<li><a href="/bids/farmer_bids"> My Bid</a></li>
 						<%end%>
 
 					</ul>
