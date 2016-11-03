@@ -6,31 +6,7 @@
 
     <table class=" table table-striped custab " id="dttb">
 
-<<<<<<< HEAD
-  <thead>
-    <tr>
-      <th>Farm Name</th>
-      <th>Farm Address</th>
-      <th>Farms Size(Acres)</th>
-      <th>Farm Phoneno</th>
-      <th>Farm owner</th>
-      <th>Farm Produce</th>
-      <th width="20%"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @farmsites.each do |farmsite| %>
-      <tr>
-        <td><%= farmsite.farmsitename %></td>
-        <td><%= farmsite.farmsiteaddress %></td>
-        <td><%= farmsite.farmsitesize %></td>
-        <td><%= farmsite.farmsiteownerphoneno %></td>
-        <td><%= farmsite.farmer.name%></td>
-        <td >
-        <%= link_to produces_path(farmsite_id: farmsite.id)  , data: {turbolinks: false} , class: "btn btn-info btn-sm" do %><i class= "glyphicon glyphicon-open">  </i> Produce <% end %>
-        </td>
-=======
       <thead>
         <tr>
           <th>Farm Name</th>
@@ -56,7 +32,7 @@
           <td >
             <%= link_to produces_path(farmsite_id: farmsite.id)  , data: {turbolinks: false} , class: "btn btn-info btn-sm" do %><i class= "glyphicon glyphicon-open">  </i> Produce <% end %>
           </td>
->>>>>>> d894ac4fe08e7bd023b111aff13ce7632c36f598
+
 
           <td>
             <% if current_user.meta_type == "Farmer" and farmsite.farmer == current_user.meta %>
@@ -94,18 +70,7 @@
     </div></center>
 
 
-<<<<<<< HEAD
-<script >
-var handler = Gmaps.build('Google');
- handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
-   var markers = handler.addMarkers(<%=raw @hash.to_json %>);
-   handler.bounds.extendWith(markers);
-   handler.fitMapToBounds();
-});
 
-</script>
-
-=======
     <script >
       var handler = Gmaps.build('Google');
       handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
@@ -115,4 +80,3 @@ var handler = Gmaps.build('Google');
       });
 
     </script>
->>>>>>> d894ac4fe08e7bd023b111aff13ce7632c36f598
