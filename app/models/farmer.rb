@@ -5,6 +5,8 @@ class Farmer < ApplicationRecord
 	has_many :bids
 
 	def birth_date
-    dob.strftime("%d/%m/%Y")
-  end
+    	dob.strftime("%d/%m/%Y")
+  	end
+
+  	validates :name, :dob, presence: true
 end
