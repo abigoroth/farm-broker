@@ -5,7 +5,7 @@ class Farmsite < ApplicationRecord
 	geocoded_by :farmsiteaddress
 
 	#geocoded_by :latitude
-	after_validation :geocode  , :if => :address_changed?
+	after_validation :geocode  #, :if => :address_changed?
  
 end
 
