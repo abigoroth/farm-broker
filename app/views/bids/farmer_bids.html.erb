@@ -5,7 +5,7 @@
 
     </div>
     <table class=" table table-striped custab " width="50">
-     <div class="col-sm-12"><h1>Bids</h1></div>
+     <div class="col-sm-12"><h1>My Bids</h1></div>
      <thead>
 
       <tr>
@@ -29,7 +29,7 @@
     </thead>
 
     <tbody>
-      <% @bids.each do |bid| %>
+      <% @farmer_bids.each do |bid| %>
       <tr>
 
         <td><%= bid.bid_status %></td>
@@ -99,6 +99,9 @@
     </tbody>
   </table>
   <br>
+
+
+  <% if user_signed_in? and (current_user.meta_type == "Farmer") %><%= link_to 'New Bid', new_bid_path, class: "btn btn-success btn-sm", remote: true %><%end%>
 
 </div>
 

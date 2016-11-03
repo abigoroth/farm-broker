@@ -73,7 +73,7 @@
 					<li><a href="<%= home_contact_path %>">Contact</a></li>
 					<%if user_signed_in? %>
 					<li><a href="<%= farmsites_path %>">Farm Sites</a></li>
-					<li><a href="<%= bids_path %>/">Bids</a></li>
+					<li><a href="<%= bids_path %>">Bids</a></li>
 					<% end %>
 					<li><a href="<%= home_news_path %>">Auction News</a></li>
 					<%if user_signed_in? %>
@@ -127,7 +127,7 @@
 
 						<%if current_user.meta_type == "Farmer" %>
 						<li><a href="/farmsites?farmer_id=<%= current_user.meta_id if current_user.meta_type %>"> My Farm</a></li>
-						<li><a href="bids?farmer_id=<%= current_user.meta_id if current_user.meta_type %>"> My Bid</a></li>
+						<li><a href="/bids/farmer_bids"> My Bid</a></li>
 						<%end%>
 
 					</ul>

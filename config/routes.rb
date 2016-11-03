@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :wallposts
   resources :comments
 
+  get 'bids/farmer_bids', to: 'bids#farmer_bids', as: 'farmer_bids'
+
   get 'user_views/meta'
   get 'user_views/profile'
   post 'user_views/profile', to: 'user_views#create'
