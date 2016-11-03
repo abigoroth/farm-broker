@@ -1,18 +1,36 @@
 class FarmsitesController < ApplicationController
-  before_action :authenticate_user!
   before_action :check_meta , if: "user_signed_in?"
   before_action :set_farmsite, only: [:show, :edit, :update, :destroy]
 
   # GET /farmsites
   # GET /farmsites.json
   def index
-    @farmsites = params[:farmer_id].present? ? Farmsite.all.where(farmer_id: params[:farmer_id] ).order(created_at: :desc) : Farmsite.all.where.not(farmer_id: current_user.meta.try(:id)).order(created_at: :desc)
-     @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
-    marker.lat farmsite.latitude
-    marker.lng farmsite.longitude
-    marker.infowindow farmsite.farmsitename
-end
+    if user_signed_in?
+        if current_user.meta_type == "Farmer"
+        @farmsites = Farmsite.where(farmer_id: params[:farmer_id] ).order(created_at: :desc)
+          @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+           marker.lat farmsite.latitude
+           marker.lng farmsite.longitude
+           marker.infowindow farmsite.farmsitename
+          end
+        else
+          @farmsites = Farmsite.all.order(created_at: :desc)
+          @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+           marker.lat farmsite.latitude
+           marker.lng farmsite.longitude
+           marker.infowindow farmsite.farmsitename
+           end
+        end
+    else
+      @farmsites = Farmsite.all.order(created_at: :desc)
+       @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+        marker.lat farmsite.latitude
+        marker.lng farmsite.longitude
+        marker.infowindow farmsite.farmsitename
+        end
+   end
   end
+
 
   # GET /farmsites/1
   # GET /farmsites/1.json

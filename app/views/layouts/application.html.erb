@@ -70,10 +70,8 @@
 					<li class="active"><a href="<%= root_path  %>">Home</a></li>
 					<li><a href="<%= home_about_path %>">About</a></li>
 					<li><a href="<%= home_contact_path %>">Contact</a></li>
-					<%if user_signed_in? %>
-					<li><a href="<%= farmsites_path %>">Farm Sites</a></li>
+					<li><a href="<%= farmsites_path %>">Farm Locator</a></li>
 					<li><a href="<%= bids_path %>">Bids</a></li>
-					<% end %>
 					<li><a href="<%= home_news_path %>">Auction News</a></li>
 					<%if user_signed_in? %>
 					<li><a href="<%= wallposts_path %>">Wall</a></li>

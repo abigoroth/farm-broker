@@ -31,14 +31,15 @@
           </td>
 
           <td>
+            <% if user_signed_in? %>
             <% if current_user.meta_type == "Farmer" and farmsite.farmer == current_user.meta %>
 
             <%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit"> </i> Edit <% end %>
 
             <%= link_to  farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
+            <%end%>
+            <%end%>
           </td>
-
-          <%end%>
         </tr>
         <% end %>
       </tbody>
