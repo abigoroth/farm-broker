@@ -20,22 +20,22 @@
     
     <div class = "modal-body" >
 
-    <div class="row">
-      <div class="well">
-        <div class="panel panel-default">
-          <div class="panel-body">
+      <div class="row">
+        <div class="well">
+          <div class="panel panel-default">
+            <div class="panel-body">
 
-            <div class="input-group input-group-lg " %>
+              <div class="input-group input-group-lg " %>
 
-              <%= f.label "Farm Name" %>
-              <%= f.hidden_field :farmsite_id, value: Farmsite.find(params[:farmsite_id]).id,:class => "form-control",readonly: true %>
-              <%= f.text_field :farmsite_name, value: Farmsite.find(params[:farmsite_id]).farmsitename,:class => "form-control",readonly: true %>
-              <br>
-              <%= f.label "Name:" %>
-              <%= f.text_field :producename, :class => "form-control", :placeholder => "Product name" %>
-              <br>
-              <%= f.label "Produce Picture:" %>
-              <%= f.file_field :avatar %>
+                <%= f.label "Farm Name" %>
+                <%= f.hidden_field :farmsite_id, value: Farmsite.find(params[:farmsite_id]).id,:class => "form-control",readonly: true %>
+                <%= f.text_field :farmsite_name, value: Farmsite.find(params[:farmsite_id]).farmsitename,:class => "form-control",readonly: true %>
+                <br>
+                <%= f.label "Name:" %>
+                <%= f.text_field :producename, :class => "form-control", :placeholder => "Product name" %>
+                <br>
+                <%= f.label "Produce Picture:" %>
+                <%= f.file_field :avatar %>
 
            <!--  <br>
             <div class="input-group input-group-lg col-md-10">
@@ -79,11 +79,11 @@
             <%= f.label "Produce quantity:" %>
             <%= f.text_field :producequantity, :class => "form-control", :placeholder => "Quantity in kilogram" %>
             <div>
-            <span class="input-group-addon" id="basic-addon2">KG</span>
-            <br>
+              <span class="input-group-addon" id="basic-addon2">KG</span>
+              <br>
 
-            <%= f.label "Produce information:" %>
-            <%= f.text_area :producedescription, :class => "form-control", :placeholder => "Detail information" %>
+              <%= f.label "Produce information:" %>
+              <%= f.text_area :producedescription, :class => "form-control", :placeholder => "Detail information" %>
             </div>
           </div>
         </div>

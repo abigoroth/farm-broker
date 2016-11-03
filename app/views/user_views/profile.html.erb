@@ -1,133 +1,144 @@
 <div class="container">
   <br>
   <div class="row">
-      <div class="col-xs-3">
-          <div class="panel panel-default">
-            <div class="panel-heading"><center><strong><%= @user.meta.name %></strong></center></div>
-            <div class="panel-body">
-              <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px">
-                <%if @user.id == current_user.id %><% if !@user.profilephoto.blank? %><br><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %>
-                <%else%>
-                <a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: @user.id) %>" class="btn btn-danger" data-method="post">Message</a>
-                <%end%>
-              <br><br><strong style="text-transform:capitalize"><%= @user.role %></strong></div></center>
-              <br>
-              <table class="table">
-              <th>Email: </th>
-              <td><%= @user.email %></td>
-              </tr>
-              <tr>
-              <tr>
-              <td colspan="2" align="right"> 
-               <%if @user.id == current_user.id %>
-                <a href="<%= edit_user_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>Edit Profile</a></td>
-                <%end%>
-              </tr>
-              </table>
-            </div>
-          </div>
-      </div>
-      <!--Status -->
-      <div class="col-xs-6">
-        <%if @user.id == current_user.id %>
-        <div class="row">
-            <div class="col-xs-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">Status</div>
-              <div class="panel-body">
-                <%= form_for [current_user, Wallpost.new], url: user_views_profile_path(id:current_user.id), method: :post do |f|%>
-                <%= f.text_area :wall_status, class: 'form-control', placeholder: "What's on your mind?" %>
-                <br>
-                <div align="right"><%= f.submit 'Post', class: 'btn btn-primary' %></div>
-                <%end%>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <%end%>
-        <!--Status-->
-        <div class="row">
-            <div class="col-xs-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">Wall Post</div>
-              <div class="panel-body">
-                <p align="">
-                  <% @wallposts.each do |post| %>
-                  <img src="<%=post.broker.profilephoto%>" style="width:50px; height:50px; border-radius:90px" />&nbsp;&nbsp;&nbsp;&nbsp;<strong><%= post.broker.meta.name %></strong>
-                  &nbsp;<%= post.created_at.strftime("%d/%m/%Y at %l:%M %p") %>
-                  <br><div style="padding-left:70px"><%= post.wall_status %></div><br>
-                  <%end%>
-                </p>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <!--Wall -->
-      <!--Box -->
-      <div class="col-xs-3">
-        <div class="row">
-          <div class="col-xs-12">
-            <% if @user.id == current_user.id %>
-            <div class="panel panel-default">
-              <div class="panel-heading">Following (<a href="<%= friendships_path %>">View All</a>)</div>
-              <div class="panel-body">
-                <%if current_user.friends.exists? %>
-                <table>
-
-                  <% for friend in current_user.friends %>
-                  <tr>
-                    <td><a href="<%= user_views_profile_path(id:friend.id)%>"><%= friend.meta.name%></a></td>
-                  </tr>
-                  <% end%>
-                </table>
-                <%else%>
-                No Friend :( .<br><%if @user.id == current_user.id %><a href="<%= friendships_path %>">Add Now!</a><% end %>
-                <%end%>
-              </div>
-            </div>
+    <div class="col-xs-3">
+      <div class="panel panel-default">
+        <div class="panel-heading"><center><strong><%= @user.meta.name %></strong></center></div>
+        <div class="panel-body">
+          <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px">
+            <%if @user.id == current_user.id %><% if !@user.profilephoto.blank? %><br><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %>
+            <%else%>
+            <a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: @user.id) %>" class="btn btn-danger" data-method="post">Message</a>
             <%end%>
+            <br><br><strong style="text-transform:capitalize"><%= @user.meta_type %></strong></div></center>
+            <br>
+            <table class="table">
+              <tr>
+                <th>Email: </th>
+                <td><%= @user.email %></td>
+              </tr>
+              <tr>
+                <th>Birth Date: </th>
+                <td><%= @user.meta.birth_date %></td>
+              </tr>
+              <tr>
+                <th>Address: </th>
+                <td><%= @user.meta.address%></td>
+              </tr>
+              <th>Phone No: </th>
+              <td><%= @user.meta.phone%></td>
+            </tr>
+            <tr>
+              <td colspan="2" align="right">
+               <%if @user.id == current_user.id %>
+               <a href="<%= edit_user_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>Edit Profile</a></td>
+               <%end%>
+             </tr>
+           </table>
+         </div>
+       </div>
+     </div>
+     <!--Status -->
+     <div class="col-xs-6">
+      <%if @user.id == current_user.id %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">Status</div>
+            <div class="panel-body">
+              <%= form_for [current_user, Wallpost.new], url: user_views_profile_path(id:current_user.id), method: :post do |f|%>
+              <%= f.text_area :wall_status, class: 'form-control', placeholder: "What's on your mind?" %>
+              <br>
+              <div align="right"><%= f.submit 'Post', class: 'btn btn-primary' %></div>
+              <%end%>
+
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <%if @user.id == current_user.id %>
-            <div class="panel panel-default">
-              <div class="panel-heading">Message Inbox</div>
-              <div class="panel-body">
-                <%if !@chat_rooms.blank? %>
-                <table class="table">
+      </div>
+      <%end%>
+      <!--Status-->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">Wall Post</div>
+            <div class="panel-body">
+              <p align="">
+                <% @wallposts.each do |post| %>
+                <img src="<%=post.broker.profilephoto%>" style="width:50px; height:50px; border-radius:90px" />&nbsp;&nbsp;&nbsp;&nbsp;<strong><%= post.broker.meta.name %></strong>
+                &nbsp;<%= post.created_at.strftime("%d/%m/%Y at %l:%M %p") %>
+                <br><div style="padding-left:70px"><%= post.wall_status %></div><br>
+                <%end%>
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--Wall -->
+    <!--Box -->
+    <div class="col-xs-3">
+      <div class="row">
+        <div class="col-xs-12">
+          <% if @user.id == current_user.id %>
+          <div class="panel panel-default">
+            <div class="panel-heading">Following (<a href="<%= friendships_path %>">View All</a>)</div>
+            <div class="panel-body">
+              <%if current_user.friends.exists? %>
+              <table>
+
+                <% for friend in current_user.friends %>
+                <tr>
+                  <td><a href="<%= user_views_profile_path(id:friend.id)%>"><%= friend.meta.name%></a></td>
+                </tr>
+                <% end%>
+              </table>
+              <%else%>
+              No Friend :( .<br><%if @user.id == current_user.id %><a href="<%= friendships_path %>">Add Now!</a><% end %>
+              <%end%>
+            </div>
+          </div>
+          <%end%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <%if @user.id == current_user.id %>
+          <div class="panel panel-default">
+            <div class="panel-heading">Message Inbox</div>
+            <div class="panel-body">
+              <%if !@chat_rooms.blank? %>
+              <table class="table">
                 <% @chat_rooms.each do |chat_room| %>
                 <% if chat_room.sender_id == current_user.id || chat_room.receiver_id == current_user.id %>
-                      <% if chat_room.sender_id == current_user.id %>
-                        <% receiver = User.find(chat_room.receiver_id) %>
-                      <% else %>
-                        <% receiver = User.find(chat_room.sender_id) %>
-                      <% end %>
-                      <tr>
-                      <td><a href="<%= user_views_profile_path(id: receiver.id)%>"><%= receiver.meta.name %></a></td>
-                      <td><a href="<%= chat_room_path(chat_room.id)%>" data-method="get" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-envelope"></span></a></td>
-                    </tr>
-                     <% end %>
-                    <% end %>
+                <% if chat_room.sender_id == current_user.id %>
+                <% receiver = User.find(chat_room.receiver_id) %>
+                <% else %>
+                <% receiver = User.find(chat_room.sender_id) %>
+                <% end %>
+                <tr>
+                  <td><a href="<%= user_views_profile_path(id: receiver.id)%>"><%= receiver.meta.name %></a></td>
+                  <td><a href="<%= chat_room_path(chat_room.id)%>" data-method="get" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-envelope"></span></a></td>
+                </tr>
+                <% end %>
+                <% end %>
                 <tr>
                   <td colspan="2"><a href="<%= chat_rooms_path %>"> View All Chat</a></td>
                 </tr>
               </table>
-                <% else %>
-                No message. <a href="<%= chat_rooms_path %>"> Chat Now!</a>
-                <%end%>
-              </div>
+              <% else %>
+              No message. <a href="<%= chat_rooms_path %>"> Chat Now!</a>
+              <%end%>
             </div>
-            <%end%>
           </div>
-        </div>
-        <div class="row">
+          <%end%>
         </div>
       </div>
-      <!--Box -->
+      <div class="row">
+      </div>
+    </div>
+    <!--Box -->
   </div>
 </div>

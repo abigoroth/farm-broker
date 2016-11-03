@@ -3,8 +3,8 @@
     <div class="col-sm-12"><h2><center>Edit Profile</center></h2></div>
   </div>
 
-<div class="row">
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <div class="row">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= devise_error_messages! %>
     <div class="col-sm-6">
       <div class="panel panel-default" style="padding: 20px">
@@ -12,14 +12,18 @@
         <%= f.input :email, autofocus: true, class:'form-control' %>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
         <%= f.input :password, autocomplete: "off", class:'form-control' %>
         <% if @minimum_password_length %>
-          <span class="glyphicon glyphicon-info-sign">&nbsp;</span><em><%= @minimum_password_length %> characters minimum</em>
+        <span class="glyphicon glyphicon-info-sign">&nbsp;</span><em><%= @minimum_password_length %> characters minimum</em>
         <% end %>
         <%= f.input :password_confirmation, autocomplete: "off", class:'form-control' %>
+        <div class="field">
+          <%= f.label :timezone %><br />
+          <%= f.time_zone_select :timezone, nil, {}, {class: 'form-control'} %>
+        </div>
         <%= f.input :current_password, autocomplete: "off", class:'form-control' %>
 
         <div class="actions">
@@ -35,26 +39,26 @@
 
 
 
-      <div class="col-md-6">
-          <%= f.simple_fields_for :meta do |g| %>
-            <%= g.error_notification %>
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="well well-lg" >
-                <div class="well well-lg" >
-                  <div class="form-inputs">
-                  <%= g.input :name %>
-                    <div class="field">
-                      <%= g.label 'Date of Birth' %><br />
-                   <div class='input-group date' id='datetimepicker4'>
-                      <%= g.text_field :dob, autofocus: true, class:'form-control'%> 
-                      <span class="input-group-addon">
+    <div class="col-md-6">
+      <%= f.simple_fields_for :meta do |g| %>
+      <%= g.error_notification %>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="well well-lg" >
+            <div class="well well-lg" >
+              <div class="form-inputs">
+                <%= g.input :name %>
+                <div class="field">
+                  <%= g.label 'Date of Birth' %><br />
+                  <div class='input-group date' id='datetimepicker4'>
+                    <%= g.text_field :dob, autofocus: true, class:'form-control'%>
+                    <span class="input-group-addon">
                       <span class="glyphicon glyphicon-calendar"></span>
-                      </span>
-                        <!-- JS script for datetimepicker4 -->
+                    </span>
+                    <!-- JS script for datetimepicker4 -->
 
-                        <!-- JS script for datetimepicker4 -->
-                      </div></div>
+                    <!-- JS script for datetimepicker4 -->
+                  </div></div>
                   <br>
 
                   <%= g.input :address %>
@@ -65,24 +69,24 @@
                   <% elsif current_user.meta_type == "Bidder"%>
                   <%= g.input :credit_card %>
                   <%end%>
-                  </div>
-           
                 </div>
+
               </div>
             </div>
-          <%end%>
           </div>
+          <%end%>
         </div>
       </div>
+    </div>
     <% end %>
 
 
-            <script type="text/javascript">
-             $(function () {
-                 $('#datetimepicker4').datetimepicker(
-                   {
-                     format: 'YYYY-MM-DD'
-                   }
-                 );
-             });
-            </script>
+    <script type="text/javascript">
+     $(function () {
+       $('#datetimepicker4').datetimepicker(
+       {
+         format: 'YYYY-MM-DD'
+       }
+       );
+     });
+   </script>
