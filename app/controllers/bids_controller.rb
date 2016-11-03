@@ -6,12 +6,12 @@ class BidsController < ApplicationController
   # GET /bids.json
   def index
     update_bid_status
-    @bids = Bid.all.where.not(farmer_id: current_user.meta.try(:id)).order(bid_status: :desc)
+    @bids = Bid.where.not(farmer_id: current_user.meta.id).order(bid_status: :desc)
     @bid = Bid.new
   end
 
   def farmer_bids
-    @bids = Bid.all.where(farmer_id: current_user.meta.id).order(bid_status: :desc)
+    @farmer_bids = Bid.where(farmer_id: current_user.meta.id).order(bid_status: :desc)
   end
 
   # GET /bids/1
