@@ -100,6 +100,9 @@
   </table>
   <br>
 
+
+  <% if user_signed_in? and (current_user.meta_type == "Farmer") %><%= link_to 'New Bid', new_bid_path, class: "btn btn-success btn-sm", remote: true %><%end%>
+
 </div>
 
 </div>
