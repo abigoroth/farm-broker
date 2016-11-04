@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
-    Rails.logger.debug"COMMENT : #{@comment.inspect}"
+    # Rails.logger.debug"COMMENT : #{@comment.inspect}"
     @comment.broker_id = current_user.id
 
     respond_to do |format|

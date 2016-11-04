@@ -1,13 +1,20 @@
 <%= simple_form_for(@comment) do |f| %>
-<%= f.error_notification %>
-<%= @comment.inspect %>
-<div class="form-inputs">
-	<%= f.input :wallpost_id , as: :hidden %>
-	<%= f.input :comment_message %>
-	
-</div>
 
-<div class="form-actions">
-	<%= f.button :submit %>
-</div>
+  <%= f.error_notification %>
+
+
+<!-- <%= @comment.inspect %>
+<%= @comment.errors.inspect %> -->
+
+
+
+<div class="form-inputs">
+  	<%= f.input :wallpost_id , as: :hidden %>
+    <%= f.input :comment_message %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-success pull-right"%>
+  </div>
+
 <% end %>
