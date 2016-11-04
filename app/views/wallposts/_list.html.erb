@@ -1,7 +1,9 @@
+<h1 align="center">Wall</h1>
 <% @wallpost = Wallpost.new %>
 
+<% if user_signed_in? %>
 <%= render "wallposts/form", :wallpost => @wallpost %>
-
+<%end%>
 
 <div class="row">
   <div class="col-sm-2"></div>
@@ -12,7 +14,7 @@
         <% @wallposts.each do |wallpost| %><br>
         <br><div class="panel panel-default">
         <div class="panel-heading"><b><h4><%= wallpost.broker.meta.name %></b>&nbsp;<span><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></span>
-          <%if wallpost.broker.id == current_user.id %>
+          <%if user_signed_in? and (wallpost.broker.id == current_user.id) %>
           <div align="right">
             <%= link_to edit_wallpost_path(wallpost) do %>
             <i class="glyphicon glyphicon-pencil"></i>
@@ -34,11 +36,11 @@
 
 
         <div id="comments">
-          <h3><p><%= wallpost.comments.count%> Comments</p></h3>
+          <p><h3><%= wallpost.comments.count%> Comments</h3> <%if !user_signed_in? %><em>Please login to comment</em><%end%></p>
           <% wallpost.comments.each do |comment|%>
           <div class="panel panel-default" style="padding:5px">
             <b><span> <%= comment.broker.meta.name %> </span></b>
-            <%if comment.broker.id == current_user.id %>
+            <%if user_signed_in? and comment.broker.id == current_user.id %>
             <span style="float:right;text-align:right"><%= link_to edit_comment_path(comment) do %> <i class="glyphicon glyphicon-pencil"></i><%end%>
               <%= link_to comment, method: :delete, data: { confirm: 'Are you sure?' } do %><i class="glyphicon glyphicon-remove"></i><%end%>
             </span>
@@ -51,11 +53,12 @@
             <br>
           </div>
           <% end %>
-
+        <%if user_signed_in? %>
           Comment:<br>
           <%@comment = wallpost.comments.new %>
           <%= render "comments/form", :comment => @comment %>
           <% end %>
+        <%end%>
         </div>
 
       </div><br>
@@ -66,4 +69,3 @@
      </div>
       </div>
          </div>
-

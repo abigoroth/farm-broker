@@ -26,7 +26,7 @@
           <td><%= farmsite.farmsitesize %></td>
           <td><%= farmsite.farmsiteaddress %></td>
           <td><%= farmsite.farmsiteownerphoneno %></td>
-          <td><%= farmsite.farmer.name%></td>
+          <td><a href="/user_views/profile?id=<%= farmsite.farmer.user.id %>"><%= farmsite.farmer.name%></a></td>
           <td >
             <%= link_to produces_path(farmsite_id: farmsite.id)  , data: {turbolinks: false} , class: "btn btn-info btn-sm" do %><i class= "glyphicon glyphicon-open">  </i> Produce <% end %>
           </td>

@@ -1,10 +1,15 @@
 class UserViewsController < ApplicationController
  before_action :check_meta , if: "user_signed_in?",except: :meta
   def profile
-    @user = User.find(params[:id])
-    @inbox = current_user.chat_rooms.pluck(@user.id)
-    @chat_rooms = ChatRoom.all
-    @wallposts = Wallpost.where(broker_id: @user.id).order('created_at DESC')
+    if user_signed_in?
+      @user = User.find(params[:id])
+      @inbox = current_user.chat_rooms.pluck(@user.id)
+      @chat_rooms = ChatRoom.all
+      @wallposts = Wallpost.where(broker_id: @user.id).order('created_at DESC')
+    else
+      @user = User.find(params[:id])
+      @wallposts = Wallpost.where(broker_id: @user.id).order('created_at DESC')
+    end
   end
 
   def create
@@ -23,7 +28,7 @@ class UserViewsController < ApplicationController
   def index
     @users = User.all
   end
-  
+
   def show
     @user = current_user
   end
