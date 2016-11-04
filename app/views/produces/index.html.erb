@@ -15,7 +15,7 @@
             <th>Produce Quantity(KG)</th>
             <th>Produce Description</th>
             <th>Farm Name</th>
-            <th>Broker Name</th>
+            <th>Farmmer Name</th>
             <th>Produce Picture</th>
             <th width="17%"></th>
           </tr>
@@ -35,7 +35,7 @@
             <td><%= produce.producequantity %></td>
             <td><%= produce.producedescription %></td>
             <td><%= produce.farmsite.farmsitename rescue nil%></td>
-            <td><%= produce.broker.name rescue nil %></td>
+            <td><%= produce.farmer.name rescue nil %></td>
             <td><%= image_tag produce.avatar.url (:thumb)%></td>
             
             
