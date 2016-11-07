@@ -7,16 +7,15 @@
         <div class="panel-body">
           <table class="table">
             <% @users.each do |user|%>
-            <% if (current_user.id != user.id) %>
             <%if !@friends.include?(user.id) %>
             <tr>
-              <td><%= user.meta.name%></td>
+              <td><a href="<%= user_views_profile_path(id: user.id)%>"><%= user.meta.name%></a></td>
               <td><a class="btn btn-success" href="<%= friendships_path(:friend_id => user.id)%>" data-method="<%= :post %>">Follow</a></td>
             </tr>
             <%end%>
             <%end%>
-            <%end%>
           </table>
+          <center><%= will_paginate @users, renderer: BootstrapPagination::Rails %></center>
         </div>
       </div>
     </div>
