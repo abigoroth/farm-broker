@@ -8,8 +8,8 @@ class CreateFarmsites < ActiveRecord::Migration[5.0]
       t.integer :farmsiteownerphoneno
       t.integer :district_id
       t.integer :farmer_id
-      t.string :longitude
-      t.string :latitude
+      t.float :longitude
+      t.float :latitude
       t.timestamps
     end
   end

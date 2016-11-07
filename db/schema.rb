@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102054107) do
+ActiveRecord::Schema.define(version: 20161107033611) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -162,7 +162,6 @@ ActiveRecord::Schema.define(version: 20161102054107) do
     t.integer  "meta_id"
     t.string   "meta_type"
     t.string   "timezone",                  default: "UTC"
-    t.integer  "role",                      default: 0
     t.string   "profilephoto_file_name"
     t.string   "profilephoto_content_type"
     t.integer  "profilephoto_file_size"
