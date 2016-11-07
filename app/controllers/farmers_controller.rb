@@ -5,6 +5,7 @@ class FarmersController < ApplicationController
   # GET /farmers.json
   def index
     @farmers = Farmer.all
+     @farmers = @farmers.search("#{params[:search]}") if params[:search].present?
   end
 
   # GET /farmers/1

@@ -6,6 +6,7 @@ class Farmsite < ApplicationRecord
 	geocoded_by :latitude
 	after_validation :geocode  #, :if => :address_changed?
 	validates_presence_of :latitude, :longitude
+	scope :search, -> (keyword) { where("farmsitename like ?", "#{keyword}%")}
  
 end
 

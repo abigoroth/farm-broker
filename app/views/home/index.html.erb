@@ -1,4 +1,36 @@
+<div class="row">    
+        <div class="col-xs-8 col-xs-offset-2">
+        <form action="/"
+          <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      <span id="search_concept">Search by</span> <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="<%= produces_path %>">Produce </a></li>
+                      <li><a href="<%= farmsites_path %>">Farmsite </a></li>
+                      <li><a href="<%= farmers_path %>">Farmer </a></li>
+                      <li><a href="#company">Company </a></li>
+                      <li class="divider"></li>
+                      <li><a href="#all">Anything</a></li>
+                    </ul>
+                </div>
+
+                <input type="hidden" name="search_param" value="all" id="search_param">         
+                <input type="text" class="form-control" id = "params_search" name="x" placeholder="Type here...">
+
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="button_search"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+          </div>
+        </div>
+</div>
+<br>
+
 <!--Carousel -->
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -43,3 +75,95 @@
 <!--Carousel -->
 
 <br>
+
+  <div class="row">
+  <div class="col-lg-1"></div>
+    <div class="col-lg-3">
+      
+      <p>
+        <strong>About Us:</strong>
+        <br>
+        TaniMall is an innovative and exciting auction site in Malaysia. We sell fresh products from the farms like vegetables, fruits, flowers, meat, grain, poultry, dairy product and seafood.
+      </p>
+    </div>
+
+    <div class="col-lg-5">
+    <p>
+      <strong>How it works:</strong>
+      <br>
+      1.  All items on TaniMall are Brand New Fresh.
+      <br>
+      2.  Every time a bid is placed the starting price on the item will decided by the farm broker.
+      <br>
+      3.  When the Countdown clock gets to Zero, whoever is the bidder that placed the final bid, wins the auction!
+      <br>
+      4.  There is a small charge for each bid, which allows us to offer the most awesome deals on the internet!
+      <br>
+      5.  Safe and ethical entertainment shopping site.
+      <br>
+      6.  Fast and safe delivery services.
+    </p>
+    </div>
+
+    <div class="col-lg-3">
+      <p>
+      <strong>Address:</strong>
+      <br>
+      TaniMac Co.(@Waldania Group)
+      <br>
+      BLOCK 3730,PERSIARAN APEC,
+      <br>
+      63000 CYBERJAYA,
+      <br>
+      SELANGOR, MALAYSIA.
+      <br>
+      <br>
+
+      <strong>Contact:</strong>
+      <br>
+      Phone : +6012-5903983 (Ridzuan) or +6013-4015799 (Fitri) 
+      <br>
+      Email : customersupport@tanimac.com
+    </p>
+    </div>
+  </div>
+
+<script>
+
+$("#button_search").click(function(){
+  searching_for_data();
+});
+
+
+$("#params_search").keypress(function(e){
+  if(e.which == 13){searching_for_data();}
+
+});
+
+function searching_for_data(){
+
+
+  var params_search = $("#params_search").val();
+  var search_concept = $("#search_concept").text().trim();
+
+  // alert(params_search);
+  if(search_concept == "Produce"){
+    Turbolinks.visit("/produces?search=" + params_search);
+  }
+  if(search_concept == "Farmsite"){
+    Turbolinks.visit("/farmsites?search=" + params_search);
+  }
+  if(search_concept == "Farmer"){
+    Turbolinks.visit("/farmers?search=" + params_search);
+  }
+  //if(search_concept == "Company"){
+  //  Turbolinks.visit("/companies?search=" + params_search);
+  //}
+  else{
+    alert("select Search By");
+  }
+
+}
+
+
+</script>

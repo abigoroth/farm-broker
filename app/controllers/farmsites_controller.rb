@@ -5,6 +5,9 @@ class FarmsitesController < ApplicationController
   # GET /farmsites
   # GET /farmsites.json
   def index
+
+     @farmsites = Farmsite.search("#{params[:search]}") if params[:search].present?
+
     if user_signed_in?
         if current_user.meta_type == "Farmer"
         @farmsites = Farmsite.where(farmer_id: params[:farmer_id] ).order(created_at: :desc)
