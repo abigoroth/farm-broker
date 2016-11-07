@@ -23,3 +23,12 @@ Things you may want to cover:
 
 * ...
 # farm-broker
+
+# DAERAH
+* Untuk setiap negeri perlu lakukan seperti berikut (iProperty). 
+
+`arr = []`
+
+`$("#r_search_areapanel .city-list").each(function(i,v){ arr.push( $(v).text() ) } )`
+
+* dan kemudian paste di dalam text editor untuk disimpan sebagai array dan seterusnya dimasukkan kedalam ruby hash.
