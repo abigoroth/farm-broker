@@ -14,9 +14,9 @@
 }
 </style>
 
-<div class = "modal-dialog modal-lg" > 
-  <div class = "modal-content" > 
-    
+<div class = "modal-dialog modal-lg" >
+  <div class = "modal-content" >
+
     <%= simple_form_for(@farmsite) do |f| %>
     <% if @farmsite.errors.any? %>
     <div id="error_explanation">
@@ -26,24 +26,24 @@
       <li><%= message %></li>
       <% end %>
     </div>
-    
+
     <% end %>
 
     <div class = "modal-header" >
       <center><h4 class = "modal-title" >Farm Site</h4></center>
     </div>
-    
+
     <div class = "modal-body" >
       <div class="row">
         <div class="well">
           <div class="panel panel-default">
-            
+
             <div class="panel-body">
 
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-inputs">
-                    
+
                     <%= f.label "Name:" %>
                     <%= f.text_field :farmsitename, :class => "form-control", :placeholder => "Farm name" %>
 
@@ -71,13 +71,12 @@
                   <%= f.label "Where your farm located?:" %>
                     
                     
-                    
                    <!--  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
                     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> -->
                     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-                
+
                    <script src="//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" type ="text/javascript"></script>
-                     
+
                      <div id="floating-panel">
                     <input id="search_address" type="textbox" placeholder="Your Farm Area">
                     <input id="submit" type="button" value="Search">
@@ -89,9 +88,9 @@
                         <b>Current position:</b>
                         <div id="info"></div>
                         <b>Closest matching address:</b>
-                        <div id="address"></div>      
-                      
-                      
+                        <div id="address"></div>
+
+
                       <div>
                       </div>
                   </div>
@@ -100,7 +99,7 @@
               </div>
             </div>
           </div>
-          
+
 
           <center><div class="actions">
             <%= f.submit 'Create',class: 'btn btn-lg btn-success'%>
@@ -117,7 +116,7 @@
 </div>
 
 <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> 
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
  <script src =  "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 <script>
 
@@ -125,8 +124,8 @@
 
 if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
-       
+    } else {
+
     }
 
 
@@ -138,7 +137,7 @@ function showPosition(position) {
     center: latLng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
-   
+
 
   //mula map
   var marker = new google.maps.Marker({
@@ -183,7 +182,7 @@ circle.bindTo('center', marker, 'position');
             latLng.lng()
             ].join(', ');
           }
-          
+
 
           function updateMarkerAddress(str) {
             // document.getElementById('address').innerHTML = str;
@@ -241,7 +240,6 @@ circle.bindTo('center', marker, 'position');
         //search
         document.getElementById('submit').addEventListener('click', function() {
           geocodeAddress(geocoder, map);
-        });  
+        });
   }
 </script>
-

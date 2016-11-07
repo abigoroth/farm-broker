@@ -53,27 +53,28 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'simple_form'
-gem 'simple-form-datepicker'
-gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
-gem "paperclip", "~> 5.0.0"
-gem 'will_paginate-bootstrap'
-gem 'jquery-countdown-rails', '~> 2.0', '>= 2.0.2'
 
+gem 'simple-form-datepicker'
+
+gem 'momentjs-rails', '>= 2.9.0'
+
+gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
+
+gem "paperclip", "~> 5.0.0"
+
+gem 'will_paginate-bootstrap'
+
+gem 'jquery-countdown-rails', '~> 2.0', '>= 2.0.2'
 
 gem 'city-state'
 
-
 gem 'jquery-datatables'
-
 
 gem 'gmaps4rails'
 
 gem 'underscore-rails'
 
-
 gem "geocoder"
-
 
 gem 'geokit-rails'
 

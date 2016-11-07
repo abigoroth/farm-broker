@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107021209) do
+
+ActiveRecord::Schema.define(version: 20161107033611) do
+
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -38,11 +40,11 @@ ActiveRecord::Schema.define(version: 20161107021209) do
     t.decimal  "start_price"
     t.decimal  "highest_price"
     t.decimal  "max_price"
+    t.integer  "farmer_id"
     t.integer  "produce_id"
     t.integer  "bidder_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "farmer_id"
   end
 
   create_table "brokers", force: :cascade do |t|
@@ -97,8 +99,8 @@ ActiveRecord::Schema.define(version: 20161107021209) do
     t.integer  "farmsiteownerphoneno"
     t.integer  "district_id"
     t.integer  "farmer_id"
-    t.float    "longitude"
-    t.float    "latitude"
+    t.string   "longitude"
+    t.string   "latitude"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -162,7 +164,6 @@ ActiveRecord::Schema.define(version: 20161107021209) do
     t.integer  "meta_id"
     t.string   "meta_type"
     t.string   "timezone",                  default: "UTC"
-    t.integer  "role",                      default: 0
     t.string   "profilephoto_file_name"
     t.string   "profilephoto_content_type"
     t.integer  "profilephoto_file_size"
