@@ -1,6 +1,6 @@
 class Farmsite < ApplicationRecord
 	belongs_to :farmer
-	has_many :produces, through: :farmsites
+	has_many :produces
 		
 	#geocoded_by :farmsiteaddress
 	geocoded_by :latitude

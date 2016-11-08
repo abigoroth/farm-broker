@@ -29,7 +29,7 @@ class FarmersController < ApplicationController
     respond_to do |format|
       if @farmer.save
         current_user.update(meta_id: @farmer.id,meta_type: "Farmer")
-        format.html { redirect_to root_path, notice: 'Your information was successfully saved.' }
+        format.html { redirect_to user_views_profile_path(id: current_user.id), notice: 'Your information was successfully saved.' }
         format.json { render :show, status: :created, location: @farmer }
       else
         format.html { render :new }

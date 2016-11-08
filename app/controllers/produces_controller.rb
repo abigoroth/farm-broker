@@ -1,4 +1,5 @@
 class ProducesController < ApplicationController
+  before_action :check_meta , if: "user_signed_in?"
   before_action :set_produce, only: [:show, :edit, :update, :destroy]
 
   # GET /produces

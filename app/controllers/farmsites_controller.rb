@@ -34,10 +34,10 @@ class FarmsitesController < ApplicationController
    end
   end
 
-
   # GET /farmsites/1
   # GET /farmsites/1.json
   def show
+    @produces = Produce.where(farmsite_id: params[:farmsite_id] ).order(created_at: :desc)
   end
 
   # GET /farmsites/new
