@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20161107033611) do
-
+ActiveRecord::Schema.define(version: 20161108034206) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -40,11 +38,11 @@ ActiveRecord::Schema.define(version: 20161107033611) do
     t.decimal  "start_price"
     t.decimal  "highest_price"
     t.decimal  "max_price"
-    t.integer  "farmer_id"
     t.integer  "produce_id"
     t.integer  "bidder_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "farmer_id"
   end
 
   create_table "brokers", force: :cascade do |t|
@@ -99,8 +97,8 @@ ActiveRecord::Schema.define(version: 20161107033611) do
     t.integer  "farmsiteownerphoneno"
     t.integer  "district_id"
     t.integer  "farmer_id"
-    t.string   "longitude"
-    t.string   "latitude"
+    t.float    "longitude"
+    t.float    "latitude"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -150,6 +148,7 @@ ActiveRecord::Schema.define(version: 20161107033611) do
     t.integer  "farmer_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.datetime "produceharvest"
   end
 
   create_table "states", force: :cascade do |t|
