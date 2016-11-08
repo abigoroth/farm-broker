@@ -27,7 +27,9 @@
           <% @produces.each do |produce| %>
 
           <tr>
-            <td><a href="<%=produce_path(produce)%>"><%= produce.producename %></td>
+
+            <td><a href="<%= produce_path(id: produce.id) %>"><%= produce.producename %></td>
+
             <td><%= produce.producetype %></td>
             <!-- <td><img src="<%= produce.produceimage %>"/></td> -->
             <td><span><%= produce.producedate.try(:strftime,"%d/%m/%Y") %></span>

@@ -22,7 +22,7 @@
       <tbody>
         <% @farmsites.each do |farmsite| %>
         <tr>
-          <td><%= farmsite.farmsitename %></td>
+          <td><a href="<%= farmsite_path(id: farmsite.id) %>"><%= farmsite.farmsitename %></td>
           <td><%= farmsite.farmsitesize %></td>
           <td><%= farmsite.farmsiteaddress %></td>
           <td><%= farmsite.farmsiteownerphoneno %></td>

@@ -1,10 +1,12 @@
 class ProducesController < ApplicationController
+  before_action :check_meta , if: "user_signed_in?"
   before_action :set_produce, only: [:show, :edit, :update, :destroy]
 
   # GET /produces
   # GET /produces.json
   def index
     @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]).order(created_at: :desc) : Produce.all
+    @produces = @produces.search("#{params[:search]}") if params[:search].present?
     @farmsite = Farmsite.find(params[:farmsite_id]) if params[:farmsite_id].present?
   end
 

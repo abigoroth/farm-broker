@@ -1,37 +1,84 @@
-<h1>Information of the Farm</h1>
-
 
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Farmsitename:</strong>
-  <%= @farmsite.farmsitename %>
-</p>
+<!-- left -->                      
+<div class="row">
+  <div class="col-sm-1"></div>
+  <!-- first --> 
+  <div class="col-sm-5">
 
-<p>
-  <strong>Farmsitesize:</strong>
-  <%= @farmsite.farmsitesize %>
-</p>
+    <div class="panel panel-default">
+      <div class="panel-thumbnail"><img src="http://www.americangrownflowers.org/wp-content/uploads/2015/08/Barn-Buttons-930x4261.jpg" class="img-responsive"></div>
+    </div>
 
-<p>
-  <strong>Farmsiteaddress:</strong>
-  <%= @farmsite.farmsiteaddress %>
-</p>
 
-<p>
-  <strong>Farmsiteownername:</strong>
-  <%= @farmsite.farmsiteownername %>
-</p>
+    <!-- second --> 
+    <div class="panel panel-default">
+     <div class="panel-heading"></a> <h4>Review</h4></div>
+     <div class="panel-body">
+     <p>Rating: </p><img src="https://cdn4.iconfinder.com/data/icons/badges-and-votes-1/128/Badges_Votes_four_star_rating-22-512.png" class="pull-right" height="42" width="60"> 
+      <div class="clearfix"></div>
+      <hr>
 
-<p>
-  <strong>Farmsiteownerphoneno:</strong>
-  <%= @farmsite.farmsiteownerphoneno %>
-</p>
+      <p>Comment reviews</p>
 
-<p>
-  <strong>Brokerid:</strong>
-  <%= @farmsite.broker_id %>
-</p>
+      <hr>
+      <form>
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button class="btn btn-default">+1</button><button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
+          </div>
+          <input type="text" class="form-control" placeholder="Add a comment..">
+        </div>
+      </form>
 
-<%= link_to 'Edit', edit_farmsite_path(@farmsite), class: "btn btn-default" %>
-<%= link_to 'Back', farmsites_path, class: "btn btn-default" %>
+    </div>
+  </div>
+  <!-- end left --> 
+</div>
+
+
+
+
+
+<!-- right --> 
+<div class="row">
+  <div class="col-sm-6"></div>
+
+  <!-- first --> 
+  <div class="col-sm-5">
+    <div class="panel panel-default">
+      <div class="panel-heading"><center><h4><%= @farmsite.farmsitename %></h4></center></div>
+      <div class="panel-body">
+        <p>
+          <strong>Size: </strong><%= @farmsite.farmsitesize %>
+          <br><strong>Address: </strong><%= @farmsite.farmsiteaddress %>
+          <br><strong>Owner: </strong><%= @farmsite.farmsiteownername %>
+          <br><strong>Phone No: </strong><%= @farmsite.farmsiteownerphoneno %>
+          <br>
+        </p>
+
+      </div>
+    </div>
+
+    <!-- second --> 
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p class="lead">Produces</p>
+
+click on image to view details
+<br>
+        <% @farmsite.produces.each do |produce| %>
+        <a href="<%= produce_path(id: produce.id) %>" height="42" width="42"><%= image_tag produce.avatar.url (:medium)%>
+        <% end %>
+        
+        
+    </div>
+  </div>
+
+  <!-- end right --> 
+</div>
+
+
+

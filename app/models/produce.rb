@@ -8,4 +8,5 @@ class Produce < ApplicationRecord
   validates_presence_of :producename, :producequantity
 
 
+
 end

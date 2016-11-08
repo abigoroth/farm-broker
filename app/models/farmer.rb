@@ -9,4 +9,5 @@ class Farmer < ApplicationRecord
   	end
 
   	validates :name, :dob, presence: true
+  	scope :search, -> (keyword) { where("name like ?", "#{keyword}%")}
 end
