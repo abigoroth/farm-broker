@@ -100,6 +100,7 @@ class FarmsitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def farmsite_params
-      params.require(:farmsite).permit(:farmsitename, :farmsitesize, :farmsiteaddress, :farmsiteownername, :farmsiteownerphoneno, :broker_id, :latitude, :longitude)
+      params.require(:farmsite).permit(:farmsitename, :farmsitesize, :farmsiteaddress, :farmsiteownername, :farmsiteownerphoneno, :broker_id, :latitude, :longitude, :avatar, :farmsitedescription, :farmsitecity, :farmsitestate)
     end
 end
+

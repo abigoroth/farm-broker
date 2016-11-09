@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108034206) do
+ActiveRecord::Schema.define(version: 20161109070414) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -101,6 +101,13 @@ ActiveRecord::Schema.define(version: 20161108034206) do
     t.float    "latitude"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "farmsitedescription"
+    t.string   "farmsitecity"
+    t.string   "farmsitestate"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -149,6 +156,13 @@ ActiveRecord::Schema.define(version: 20161108034206) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.datetime "produceharvest"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "rating"
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "states", force: :cascade do |t|
