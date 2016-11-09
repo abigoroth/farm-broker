@@ -1,3 +1,38 @@
+<div class="container">
+  <center><h1>Farm Lists</h1></center>
+  <br>
+
+  <div class="row">
+
+    <div class="col-sm-2"></div>
+
+    <!-- first --> 
+    <div class="col-sm-8">
+
+      <% @farmsites.each do |farmsite| %>
+      <div class="panel panel-default">
+
+        <div class="panel-heading"><center><h4><%= farmsite.farmsitename %></h4></center></div>
+
+        <div class="panel-body">
+
+          <div class="col-sm-3">Picture</div>
+          <div class="col-sm-6"><a href="<%= farmsite_path(id: farmsite.id) %>">View Details</a></div>
+        </div>
+
+      </div>
+      <%end%>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+
+
+<!--
 <center>
   <div class="container">
     <div class="row col-md-6 col-md-offset-2 custyle">
@@ -79,3 +114,5 @@
       });
 
     </script>
+
+    -->

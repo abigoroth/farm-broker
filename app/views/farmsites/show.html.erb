@@ -16,14 +16,14 @@
     <div class="panel panel-default">
      <div class="panel-heading"></a> <h4>Review</h4></div>
      <div class="panel-body">
-     <p>Rating: </p><img src="https://cdn4.iconfinder.com/data/icons/badges-and-votes-1/128/Badges_Votes_four_star_rating-22-512.png" class="pull-right" height="42" width="60"> 
-      <div class="clearfix"></div>
-      <hr>
+       <p>Rating: </p><img src="https://cdn4.iconfinder.com/data/icons/badges-and-votes-1/128/Badges_Votes_four_star_rating-22-512.png" class="pull-right" height="42" width="60"> 
+       <div class="clearfix"></div>
+       <hr>
 
-      <p>Comment reviews</p>
+       <p>Comment reviews</p>
 
-      <hr>
-      <form>
+       <hr>
+       <form>
         <div class="input-group">
           <div class="input-group-btn">
             <button class="btn btn-default">+1</button><button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
@@ -67,18 +67,15 @@
       <div class="panel-body">
         <p class="lead">Produces</p>
 
-click on image to view details
-<br>
+        click on image to view details
+        <br>
         <% @farmsite.produces.each do |produce| %>
-        <a href="<%= produce_path(id: produce.id) %>" height="42" width="42"><%= image_tag produce.avatar.url (:medium)%>
-        <% end %>
-        
-        
+        <a href="<%= produce_path(id: produce.id) %>"><%= image_tag produce.avatar.url (:medium)%>
+          <% end %>
+
+
+        </div>
+      </div>
+
+      <!-- end right --> 
     </div>
-  </div>
-
-  <!-- end right --> 
-</div>
-
-
-
