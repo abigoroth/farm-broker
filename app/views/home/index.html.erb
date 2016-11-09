@@ -85,13 +85,6 @@
 </a>
 </div>
 <!--Carousel -->
-<div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Button</button>
-                    </span>
-                  </div>
 <br>
 
   <div class="row">
@@ -160,9 +153,9 @@ function searching_for_data(){
   if(search_concept == "Farmer"){
     Turbolinks.visit("/farmers?search=" + params_search);
   }
-  //if(search_concept == "Company"){
-  //  Turbolinks.visit("/companies?search=" + params_search);
-  //}
+  if(search_concept == "Company"){
+    Turbolinks.visit("/farmsite?search=" + params_search);
+  }
   else{
     alert("select Search By");
   }

@@ -6,32 +6,37 @@ class FarmsitesController < ApplicationController
   # GET /farmsites.json
   def index
 
-     @farmsites = Farmsite.search("#{params[:search]}") if params[:search].present?
+   @farmsites = Farmsite.search("#{params[:search]}") if params[:search].present?
 
-    if user_signed_in?
-        if current_user.meta_type == "Farmer"
-        @farmsites = Farmsite.where(farmer_id: params[:farmer_id] ).order(created_at: :desc)
-          @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
-           marker.lat farmsite.latitude
-           marker.lng farmsite.longitude
-           marker.infowindow farmsite.farmsitename
-          end
-        else
-          @farmsites = Farmsite.all.order(created_at: :desc)
-          @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
-           marker.lat farmsite.latitude
-           marker.lng farmsite.longitude
-           marker.infowindow farmsite.farmsitename
-           end
+    # sign in
+   #if user_signed_in?
+         #farmer
+      #  if current_user.meta_type == "Farmer"
+       #   @farmsites = Farmsite.where(farmer_id: params[:farmer_id] ).order(created_at: :desc)
+        #  @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+         #    marker.lat farmsite.latitude
+          #   marker.lng farmsite.longitude
+           #  marker.infowindow farmsite.farmsitename
+          #end
+          #not farmer
+        #else
+         # @farmsites = Farmsite.all.order(created_at: :desc)
+          #@hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+           #  marker.lat farmsite.latitude
+            # marker.lng farmsite.longitude
+            # marker.infowindow farmsite.farmsitename
+          #end
+        #end
+
+        #tak sign in/public
+   #else
+        @farmsites = Farmsite.all.order(created_at: :desc)
+        @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+          marker.lat farmsite.latitude
+          marker.lng farmsite.longitude
+          marker.infowindow farmsite.farmsitename
         end
-    else
-      @farmsites = Farmsite.all.order(created_at: :desc)
-       @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
-        marker.lat farmsite.latitude
-        marker.lng farmsite.longitude
-        marker.infowindow farmsite.farmsitename
-        end
-   end
+   #end
   end
 
   # GET /farmsites/1
@@ -100,6 +105,6 @@ class FarmsitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def farmsite_params
-      params.require(:farmsite).permit(:farmsitename, :farmsitesize, :farmsiteaddress, :farmsiteownername, :farmsiteownerphoneno, :broker_id, :latitude, :longitude)
+      params.require(:farmsite).permit(:farmsitename, :farmsitesize, :farmsiteaddress, :farmsiteownername, :farmsiteownerphoneno, :broker_id, :latitude, :longitude, :company_name)
     end
-end
+  end

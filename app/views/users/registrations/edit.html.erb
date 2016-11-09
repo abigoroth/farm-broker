@@ -26,12 +26,12 @@
         </div>
         <%= f.input :current_password, autocomplete: "off", class:'form-control' %>
 
-        <div class="actions">
-          <%= f.submit "Update Profile", class: 'btn btn-primary' %>
+        <div class="actions" align="right">
+          <%= f.submit "Update Profile", class: 'btn btn-primary btn-sm' %>
         </div>
 
+        <div align="right"><%= link_to "Back", :back %></div>
 
-        <%= link_to "Back", :back %>
       </div>
     </div>
 
@@ -64,11 +64,15 @@
                   <%= g.input :address %>
                   <%= g.input :phone %>
 
-                  <% if current_user.meta_type == "Farmer" or current_user.meta_type == "Broker" %>
+                  <!--<% if current_user.meta_type == "Farmer" or current_user.meta_type == "Broker" %>
                   <%= g.input :account_no %>
                   <% elsif current_user.meta_type == "Bidder"%>
                   <%= g.input :credit_card %>
-                  <%end%>
+                  <%end%>-->
+                  <%if current_user.meta_type == "Farmer" %>
+                    <%= g.input :company_name %>
+                    <%= g.input :company_phone %>
+                   <% end %>
                 </div>
 
               </div>

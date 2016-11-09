@@ -11,10 +11,52 @@
       <div class="panel-thumbnail"><img src="http://www.americangrownflowers.org/wp-content/uploads/2015/08/Barn-Buttons-930x4261.jpg" class="img-responsive"></div>
     </div>
 
+<!-- second --> 
 
-    <!-- second --> 
     <div class="panel panel-default">
-     <div class="panel-heading"></a> <h4>Review</h4></div>
+     <div class="panel-heading">Produces</div>
+      <div class="panel-body">
+    
+        <!--Carousel -->
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+          </ol>
+
+          <div class="carousel-inner" role="listbox">
+            <% @farmsite.produces.each_with_index do |produce,index| %>
+              <div class="item <%= 'active' if index == 0 %>">
+                <%= image_tag produce.avatar.url,class: "img-responsive",style: "height:250px;"%>
+                <div class="carousel-caption">
+                 <h1><a href="<%= produce_path(id: produce.id) %>" style="color:white"><%= produce.producename %></h1>
+               </div>
+
+             </div>
+           <% end %>
+        
+        </div>
+
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <!--Carousel -->
+
+
+
+        </div>
+      </div>
+
+    <!-- third --> 
+    <div class="panel panel-default">
+     <div class="panel-heading"></a>Review</div>
      <div class="panel-body">
        <p>Rating: </p><img src="https://cdn4.iconfinder.com/data/icons/badges-and-votes-1/128/Badges_Votes_four_star_rating-22-512.png" class="pull-right" height="42" width="60"> 
        <div class="clearfix"></div>
@@ -55,42 +97,32 @@
           <br><strong>Address: </strong><%= @farmsite.farmsiteaddress %>
           <br><strong>Owner: </strong><%= @farmsite.farmsiteownername %>
           <br><strong>Phone No: </strong><%= @farmsite.farmsiteownerphoneno %>
+          <br><strong>Company: </strong><%= @farmsite.farmer.company_name %>
           <br>
         </p>
 
+        <% if user_signed_in? %>
+            <% if current_user.meta_type == "Farmer" and @farmsite.farmer == current_user.meta %>
+
+              <%= link_to edit_farmsite_path(@farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit"> </i> Edit<% end %>
+
+              <%= link_to  @farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
+            <%end%>
+          <%end%>
+
       </div>
     </div>
 
-    <!-- second --> 
-
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <p class="lead">Produces</p>
-
-        click on image to view details
-        <br>
-        <% @farmsite.produces.each do |produce| %>
-        <a href="<%= produce_path(id: produce.id) %>"><%= image_tag produce.avatar.url (:medium)%>
-          <% end %>
-
-
-
-        </div>
-      </div>
+    
 
       <!-- end right --> 
-    </div>
-
-<div class="row">
-  <div class="col-sm-6"></div>
-
-  <!-- first --> 
-  <div class="col-sm-5">
+  
+  <!-- third --> 
     <div class="panel panel-default">
-      <div class="panel-heading"><h4>Location of the produce</h4></div>
+      <div class="panel-heading">Farm Location</div>
       <div class="panel-body">
        
-  <center>
+ 
     <div style='width: 100%;'>
        <div style='length: 100%;'>
       <div id="multi_markers" style='width: 600px; height: 400px;'></div>
@@ -108,7 +140,6 @@
       </div>
     </div>
 
-
-
+</div></div></a></div></div></div></div></div>
 
   </div>
