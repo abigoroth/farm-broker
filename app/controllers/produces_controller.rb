@@ -5,9 +5,12 @@ class ProducesController < ApplicationController
   # GET /produces
   # GET /produces.json
   def index
-    @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]).order(created_at: :desc) : Produce.all
+    @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 2)
+ : Produce.all.paginate(:page => params[:page], :per_page => 2)
+
     @produces = @produces.search("#{params[:search]}") if params[:search].present?
     @farmsite = Farmsite.find(params[:farmsite_id]) if params[:farmsite_id].present?
+
   end
 
   # GET /produces/1

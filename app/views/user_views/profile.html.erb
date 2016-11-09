@@ -13,26 +13,20 @@
             <br><br><strong style="text-transform:capitalize"><%= @user.meta_type %></strong></div></center>
             <br>
             <table class="table">
+              <tr><th>Email: </th><td><%= @user.email %></td></tr>
+              <tr><th>Birth Date: </th><td><%= @user.meta.birth_date %></td></tr>
+              <tr><th>Address: </th><td><%= @user.meta.address%></td></tr>
+              <tr><th>Phone No: </th><td><%= @user.meta.phone%></td></tr>
+              <%if current_user.meta_type == "Farmer" %>
+              <tr><th>Company: </th><td><%= @user.meta.company_name%></td></tr>
+              <tr><th>Contact: </th><td><%= @user.meta.company_phone%></td></tr>
+              <% end %>
               <tr>
-                <th>Email: </th>
-                <td><%= @user.email %></td>
-              </tr>
-              <tr>
-                <th>Birth Date: </th>
-                <td><%= @user.meta.birth_date %></td>
-              </tr>
-              <tr>
-                <th>Address: </th>
-                <td><%= @user.meta.address%></td>
-              </tr>
-              <th>Phone No: </th>
-              <td><%= @user.meta.phone%></td>
-            </tr>
-            <tr>
-              <td colspan="2" align="right">
-               <%if user_signed_in? and @user.id == current_user.id %>
-               <a href="<%= edit_user_registration_path %>" class="btn btn-primary" style="color:white"><span class="glyphicon glyphicon-pencil"></span>Edit Profile</a></td>
-               <%end%>
+                <td colspan="2" align="right">
+                  <%if user_signed_in? and @user.id == current_user.id %>
+                   <a href="<%= edit_user_registration_path %>" class="btn btn-primary btn-sm" style="color:white"><span class="glyphicon glyphicon-pencil"></span>Edit Profile</a>
+                  <%end%>
+                </td>
              </tr>
            </table>
          </div>
@@ -49,7 +43,7 @@
               <%= form_for [current_user, Wallpost.new], url: user_views_profile_path(id:current_user.id), method: :post do |f|%>
               <%= f.text_area :wall_status, class: 'form-control', placeholder: "What's on your mind?" %>
               <br>
-              <div align="right"><%= f.submit 'Post', class: 'btn btn-primary' %></div>
+              <div align="right"><%= f.submit 'Post', class: 'btn btn-primary btn-sm' %></div>
               <%end%>
 
             </div>
