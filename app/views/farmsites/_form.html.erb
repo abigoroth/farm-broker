@@ -47,6 +47,9 @@
                     <%= f.label "Name:" %>
                     <%= f.text_field :farmsitename, :class => "form-control", :placeholder => "Farm name" %>
 
+                    <%= f.label "Farm Image:" %>
+                      <%= f.file_field :avatar %>
+
                     <%= f.label "No phone:" %>
                     <%= f.text_field :farmsiteownerphoneno, :class => "form-control", :placeholder => "Phone Number" %>
 
@@ -64,6 +67,16 @@
 
                     <%= f.label "Edit Actual Address:" %>
                     <%= f.text_area :farmsiteaddress, :class => "form-control", :placeholder => "Farm address" %>
+
+                    <%= f.label "City:" %>
+                    <%= f.text_field :farmsitecity, :class => "form-control", :placeholder => "farmsitecity" %>
+
+                    <%= f.label "State:" %>
+                    <%= f.text_field :farmsitestate, :class => "form-control", :placeholder => "farmsitestates" %>
+
+                    <%= f.label "farmsite description:" %>
+                    <%= f.text_field :farmsitedescription, :class => "form-control", :placeholder => "farmsitedescription" %>
+
                   </div> </div>
 
                   <div class="col-sm-6">
