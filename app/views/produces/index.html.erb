@@ -46,7 +46,7 @@
             <td><%= image_tag produce.avatar.url (:thumb)%></td>
             
           
-            <td ><% if user_signed_in? and produce.farmer == current_user.meta %>
+            <td ><% if user_signed_in? and @farmsite and produce.farmer == current_user.meta %>
               <%= link_to edit_produce_path(produce, farmsite_id: @farmsite.id)   , class: "btn btn-primary btn-sm", remote: true  do %>
               <i class= "glyphicon glyphicon-edit">  </i> Edit <% end %>
 
@@ -61,7 +61,9 @@
 
       <br>
 
-      <% if user_signed_in? and @farmsite.farmer == current_user.meta and  @farmsite.present?  %><%= link_to 'New Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %><%end%>
+      <% if user_signed_in? and @farmsite and @farmsite.farmer == current_user.meta and  @farmsite.present?  %>
+        <%= link_to 'New Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
+      <%end%>
     </center></div>
 
 
