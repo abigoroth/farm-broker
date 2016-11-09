@@ -31,6 +31,7 @@ class User < ApplicationRecord
     has_many :farmsites
     #Comment
     has_many :comments, foreign_key: :broker_id
+    has_many :reviews
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

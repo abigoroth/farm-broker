@@ -28,5 +28,5 @@ City = { "Selangor" => ["All", "Alam Impian", "Aman Perdana", "Ambang Botanic", 
 }
 
 
-State = {"Malaysia" => ["Selangor","Johor","Sabah","Kuala Lumpur","Kedah","Kelantan",
-	"Melaka","Negeri Sembilan","Pahang","Penang","Perak", "Perlis","Putrajaya","Sarawak","Terengganu"]}
+State =["Selangor","Johor","Sabah","Kuala Lumpur","Kedah","Kelantan",
+	"Melaka","Negeri Sembilan","Pahang","Penang","Perak", "Perlis","Putrajaya","Sarawak","Terengganu"]

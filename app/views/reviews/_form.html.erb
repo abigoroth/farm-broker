@@ -1,4 +1,4 @@
-<%= simple_form_for(@review) do |f| %>
+<%= simple_form_for([@farmsite, @farmsite.reviews.build]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -10,3 +10,4 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+z
