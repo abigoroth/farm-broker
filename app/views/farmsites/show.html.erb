@@ -8,16 +8,23 @@
   <div class="col-sm-5">
 
     <div class="panel panel-default">
-      <div class="panel-thumbnail"><img src="http://www.americangrownflowers.org/wp-content/uploads/2015/08/Barn-Buttons-930x4261.jpg" class="img-responsive"></div>
+      <div class="panel-thumbnail"><%= image_tag @farmsite.avatar.url,class: "img-responsive",style: "height:250px;"%></div>
     </div>
 
 <!-- second --> 
 
     <div class="panel panel-default">
-     <div class="panel-heading">Produces</div>
+     <div class="panel-heading">Produces
+
+      <% if user_signed_in? and @farmsite and @farmsite.farmer == current_user.meta and  @farmsite.present?  %>
+        <%= link_to 'Add Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm pull-right" , data: {turbolinks: false}, remote: true %>
+      <%end%>
+
+     </div>
       <div class="panel-body">
     
         <!--Carousel -->
+        <% if @farmsite.produces.present? %>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
           <ol class="carousel-indicators">
@@ -28,7 +35,7 @@
           <div class="carousel-inner" role="listbox">
             <% @farmsite.produces.each_with_index do |produce,index| %>
               <div class="item <%= 'active' if index == 0 %>">
-                <%= image_tag produce.avatar.url,class: "img-responsive",style: "height:250px;"%>
+                <%= image_tag produce.avatar.url,class: "img-responsive",style: "height:300px;"%>
                 <div class="carousel-caption">
                  <h1><a href="<%= produce_path(id: produce.id) %>" style="color:white"><%= produce.producename %></h1>
                </div>
@@ -47,6 +54,10 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
+
+      <% else %>
+          No Produces
+       <% end %>
       <!--Carousel -->
 
 
@@ -92,21 +103,24 @@
     <div class="panel panel-default">
       <div class="panel-heading"><center><h4><%= @farmsite.farmsitename %></h4></center></div>
       <div class="panel-body">
-        <p>
-          <strong>Size: </strong><%= @farmsite.farmsitesize %>
-          <br><strong>Address: </strong><%= @farmsite.farmsiteaddress %>
-          <br><strong>Owner: </strong><%= @farmsite.farmsiteownername %>
-          <br><strong>Phone No: </strong><%= @farmsite.farmsiteownerphoneno %>
-          <br><strong>Company: </strong><%= @farmsite.farmer.company_name %>
+        <table class="table">
+          <tr><th> <strong>Size: </strong></th><td><%= @farmsite.farmsitesize %> acres</td></tr>
+          <tr><th><strong>Address: </strong></th><td><%= @farmsite.farmsiteaddress %></td></tr>
+          <tr><th><strong>Owner: </strong></th><td><%= @farmsite.farmsiteownername %></td></tr>
+          <tr><th><strong>Company: </strong></th><td><%= @farmsite.farmer.user.meta.company_name %></td></tr>
+          <tr><th><strong>Contact: </strong></th><td><%= @farmsite.farmer.user.meta.company_phone %></td></tr>
+          <tr><th><strong>Farmer: </strong></th><td><a href="<%= user_views_profile_path(id: @farmsite.farmer.user.id)%>"><%= @farmsite.farmer.user.meta.name %></td></tr>
+          <tr><th><strong>Description: </strong></th><td><%= @farmsite.farmsitedescription %></td></tr>
           <br>
-        </p>
+        </table>
 
         <% if user_signed_in? %>
             <% if current_user.meta_type == "Farmer" and @farmsite.farmer == current_user.meta %>
-
-              <%= link_to edit_farmsite_path(@farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit"> </i> Edit<% end %>
+            <div align="right">
+              <%= link_to edit_farmsite_path(@farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit" > </i> Edit<% end %>
 
               <%= link_to  @farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
+              </div>
             <%end%>
           <%end%>
 
@@ -125,7 +139,7 @@
  
     <div style='width: 100%;'>
        <div style='length: 100%;'>
-      <div id="multi_markers" style='width: 600px; height: 400px;'></div>
+      <div id="multi_markers" style=' height: 400px;'></div>
     </div></center>
 
     <script >

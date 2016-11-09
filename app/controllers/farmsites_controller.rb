@@ -7,6 +7,9 @@ class FarmsitesController < ApplicationController
   def index
 
    @farmsites = Farmsite.search("#{params[:search]}") if params[:search].present?
+    #@user = User.find(params[:id])
+    @review = Review.new
+    
 
     # sign in
    #if user_signed_in?
@@ -30,7 +33,7 @@ class FarmsitesController < ApplicationController
 
         #tak sign in/public
    #else
-        @farmsites = Farmsite.all.order(created_at: :desc)
+        @farmsites = Farmsite.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
         @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
           marker.lat farmsite.latitude
           marker.lng farmsite.longitude

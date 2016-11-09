@@ -1,3 +1,45 @@
+<center><h1>Produces</h1>
+
+  
+</center>
+<br/>
+<!-- left --> 
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <% @produces.each do |produce| %>
+      <div class="panel panel-default">
+
+      <div class="panel-heading"><center><h4><%= produce.producename %></h4></center></div>
+
+      <div class="panel-body">
+
+        
+        <div class="col-md-6"><%= image_tag produce.avatar.url,class: "img-responsive",style: "height:250px;"%> </div>
+       
+
+        <div class="col-xs-4 col-md-offset-2">
+
+          <table class="table">
+          <tr><th><strong>Farm: </strong></th><td><a href="<%= farmsite_path(id: produce.farmsite.id) %>"><%= produce.farmsite.farmsitename %></td></tr>
+          <tr><th><strong>Company: </strong></th><td><%= produce.farmsite.farmer.user.meta.company_name %></td></tr><br>
+        </table>
+          <div align="right"><a class="btn btn-warning btn-sm" href="<%= produce_path(id: produce.id) %>">Details</a></div>
+          
+        </div>
+      </div>
+    </div>
+    <%end%>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+      <center><%= will_paginate @bids, renderer: BootstrapPagination::Rails %></center>
+    </div>
+</div>
+
+
+<!--
 <center>
 
 
@@ -31,7 +73,7 @@
             <td><a href="<%= produce_path(id: produce.id) %>"><%= produce.producename %></td>
 
             <td><%= produce.producetype %></td>
-            <!-- <td><img src="<%= produce.produceimage %>"/></td> -->
+            <td><img src="<%= produce.produceimage %>"/></td>
             <td><span><%= produce.producedate.try(:strftime,"%d/%m/%Y") %></span>
               <br><span><%= produce.producedate.try(:strftime,"%I:%M %p") %></span>
             </td>
@@ -67,7 +109,7 @@
     </center></div>
 
 
-    <script >
+    <script>
 
       $("#dttb").dataTable();
-    </script>
+    </script> 

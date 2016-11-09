@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20161109040758) do
-=======
 ActiveRecord::Schema.define(version: 20161109070414) do
->>>>>>> 5b1fc008ec702243f496829f0b5a01ef0bb0be36
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"

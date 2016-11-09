@@ -9,7 +9,7 @@
 <br/>
 <!-- left --> 
 <div class="row">
-  <div class="col-md-7 col-md-offset-2">
+  <div class="col-md-8 col-md-offset-2">
     <% @farmsites.each do |farmsite| %>
       <div class="panel panel-default">
 
@@ -17,17 +17,18 @@
 
       <div class="panel-body">
 
-        <div class="col-md-6">PicturesPicturesPicturesPicturesPicturesPicturesPicturesPicturesPictures9 </div>
+        
+        <div class="col-md-6"><%= image_tag farmsite.avatar.url,class: "img-responsive",style: "height:250px;"%> </div>
+       
+
         <div class="col-xs-4 col-md-offset-2">
-          <a class="btn btn-warning btn-sm" href="<%= farmsite_path(id: farmsite.id) %>">Details</a>
-          <% if user_signed_in? %>
-            <% if current_user.meta_type == "Farmer" and farmsite.farmer == current_user.meta %>
 
-              <%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit"> </i> Edit<% end %>
-
-              <%= link_to  farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
-            <%end%>
-          <%end%>
+          <table class="table">
+          <tr><th><strong>Address: </strong></th><td><%= farmsite.farmsiteaddress %></td></tr>
+          <tr><th><strong>Company: </strong></th><td><%= farmsite.farmer.user.meta.company_name %></td></tr><br>
+        </table>
+          <div align="right"><a class="btn btn-warning btn-sm" href="<%= farmsite_path(id: farmsite.id) %>">Details</a></div>
+          
         </div>
       </div>
     </div>
@@ -35,7 +36,11 @@
   </div>
 </div>
 
-
+<div class="row">
+    <div class="col-md-12">
+      <center><%= will_paginate @bids, renderer: BootstrapPagination::Rails %></center>
+    </div>
+</div>
 
 
 
