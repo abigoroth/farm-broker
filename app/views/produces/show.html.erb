@@ -1,43 +1,104 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <%= image_tag @produce.avatar.url (:large)%>
-</p>
 
-<p>
-  <strong>Producename:</strong>
-  <%= @produce.producename %>
-</p>
+<!-- left -->                      
+<div class="row">
+  <div class="col-sm-1"></div>
+  <!-- first --> 
+  <div class="col-sm-5">
 
-<p>
-  <strong>Producetype:</strong>
-  <%= @produce.producetype %>
-</p>
+    <div class="panel panel-default">
+      <div class="panel-thumbnail"><p>
+      <%= image_tag @produce.avatar.url (:medium)%></p></div>
+      </div>
+    <!-- second --> 
+    <div class="panel panel-default">
+     <div class="panel-heading"></a> <h4>Detail Information</h4></div>
+     <div class="panel-body">
 
-<p>
-  <strong>Producedate:</strong>
-  <%= @produce.producedate %>
-</p>
+      <p><strong>Produce Name : </strong><%= @produce.producename %></p>
+      <p><strong>Produce Type : </strong><%= @produce.producetype %></p>
+      <p><strong>Planting Date : </strong><%= @produce.producedate %></p>
+      <p><strong>Harvesting Date : </strong><%= @produce.produceharvest %></p>
+      <p><strong>Quantity : </strong><%= @produce.producequantity %></p>
+      <p><strong>Description : </strong><%= @produce.producedescription %></p>
 
-<p>
-  <strong>Producequantity:</strong>
-  <%= @produce.producequantity %>
-</p>
+    </div>
+  </div>
+  <!-- end left --> 
+</div>
 
-<p>
-  <strong>Producedescription:</strong>
-  <%= @produce.producedescription %>
-</p>
 
-<p>
-  <strong>Farmsiteid:</strong>
-  <%= @produce.farmsite_id %>
-</p>
 
-<!-- <p>
-  <strong>Farmsiteid:</strong>
-  <%= @produce.produceimage %>
-</p>
--->
 
-<%= link_to 'Edit', edit_produce_path(@produce) %> |
+
+<!-- right --> 
+<div class="row">
+  <div class="col-sm-6"></div>
+
+  <!-- first --> 
+  <div class="col-sm-5">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Location of the produce</h4></div>
+      <div class="panel-body">
+       
+  <center>
+    <div style='width: 100%;'>
+       <div style='length: 100%;'>
+      <div id="multi_markers" style='width: 600px; height: 400px;'></div>
+    </div></center>
+
+    <script >
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
+        var markers = handler.addMarkers(<%=raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+
+    </script>
+      </div>
+    </div>
+
+    <!-- second --> 
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p class="lead">Message box</p>
+
+
+        
+    </div>
+  </div>
+
+  <!-- end right --> 
+</div>
+
+
+<div class="row">
+  <div class="col-sm-6"></div>
+
+  <!-- first --> 
+  <div class="col-sm-5">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Timeline</h4></div>
+      <div class="panel-body">
+       
+
+
+
+
+
+
+
+
+      </div>
+    </div>  </div>
+
+
+
+
+
+
+
+
