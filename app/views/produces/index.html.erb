@@ -11,7 +11,8 @@
           <tr>
             <th>Produce Name</th>
             <th>Produce Type</th>
-            <th>Produce Date</th>
+            <th>Produce Planting</th>
+            <th>Produce Harvesting</th>
             <th>Produce Quantity(KG)</th>
             <th>Produce Description</th>
             <th>Farm Name</th>
@@ -26,11 +27,17 @@
           <% @produces.each do |produce| %>
 
           <tr>
+
             <td><a href="<%= produce_path(id: produce.id) %>"><%= produce.producename %></td>
+
             <td><%= produce.producetype %></td>
             <!-- <td><img src="<%= produce.produceimage %>"/></td> -->
             <td><span><%= produce.producedate.try(:strftime,"%d/%m/%Y") %></span>
               <br><span><%= produce.producedate.try(:strftime,"%I:%M %p") %></span>
+            </td>
+
+            <td><span><%= produce.produceharvest.try(:strftime,"%d/%m/%Y") %></span>
+              <br><span><%= produce.produceharvest.try(:strftime,"%I:%M %p") %></span>
             </td>
             <td><%= produce.producequantity %></td>
             <td><%= produce.producedescription %></td>
@@ -38,8 +45,7 @@
             <td><%= produce.farmer.name rescue nil %></td>
             <td><%= image_tag produce.avatar.url (:thumb)%></td>
             
-            
-
+          
             <td ><% if user_signed_in? and produce.farmer == current_user.meta %>
               <%= link_to edit_produce_path(produce, farmsite_id: @farmsite.id)   , class: "btn btn-primary btn-sm", remote: true  do %>
               <i class= "glyphicon glyphicon-edit">  </i> Edit <% end %>

@@ -72,6 +72,6 @@ class ProducesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def produce_params
-      params.require(:produce).permit(:producename, :producetype, :producedate, :producequantity, :producedescription, :produceimage, :farmsite_id, :avatar, :broker_id)
+      params.require(:produce).permit(:producename, :producetype, :producedate, :produceharvest, :producequantity, :producedescription, :produceimage, :farmsite_id, :avatar, :broker_id)
     end
 end
