@@ -1,0 +1,37 @@
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.js"></script>
+
+<p>
+  <strong>Rating:</strong>
+
+<!--   <div> class="review-rating" data-score="<%= review.rating %>"></div> -->
+  <%#= @review.rating %>
+</p>
+<div id="<%=review.id%>"></div>
+
+
+<p>
+  <strong>Comment:</strong>
+  <%= @review.comment %>
+</p>
+<% if user_signed_in? %>
+	<%if review.user_id == current_user.id %>
+<%= link_to 'Edit', edit_farmsite_review_path(@farmsite,@review) %> |
+<%= link_to 'Destroy', farmsite_review_path(@farmsite,@review) , method: :delete, data: { confirm: 'Are you sure?' } %>
+<%end%><%end%>
+
+
+<script>
+/* Javascript */
+ 
+$(function () {
+ 
+  $("#<%=review.id%>").rateYo({
+    rating: "<%=review.rating%>",
+    readOnly: true
+  });
+});
+</script>

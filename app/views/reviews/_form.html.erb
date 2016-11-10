@@ -1,8 +1,15 @@
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.js"></script>
+
 <%= simple_form_for([@farmsite, @farmsite.reviews.build]) do |f| %>
-  <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :rating %>
+  	<%= f.label "Rating" %>
+  	<div id="rateYo"></div>
+    <%= f.input :rating ,:as => :hidden%>
     <%= f.input :comment %>
   </div>
 
@@ -10,4 +17,22 @@
     <%= f.button :submit %>
   </div>
 <% end %>
-z
+
+
+
+
+<script>
+
+$(function () {
+ 
+  $("#rateYo").rateYo({
+ 
+    onSet: function (rating, rateYoInstance) {
+ 
+      //alert("Rating is set to: " + rating);
+      $("#review_rating").val(rating)
+    }
+  });
+});
+
+</script>

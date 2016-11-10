@@ -79,3 +79,5 @@ gem "geocoder"
 gem 'geokit-rails'
 
 gem 'bootswatch-rails'
+
+gem 'raty_ratings'

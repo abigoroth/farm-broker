@@ -1,5 +1,9 @@
 
-<p id="notice"><%= notice %></p>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.js"></script>
+
 
 <!-- left -->                      
 <div class="row">
@@ -85,11 +89,28 @@
         </div>
       </form>
 
+<div id="average"></div>
+
+
+
+
+<span>based on <%= @farmsite.reviews.count %> reviews</span>
+
+<% @reviews = @farmsite.reviews %>
+
+<%@reviews.each do | review| %>
+
+  <% @review = review %>
+  <br>
+  <%= render "reviews/show" , :review => @review%>
+<%end%>
+<br>
+<%= link_to "Add Review", new_farmsite_review_path(@farmsite) %></br>
     </div>
   </div>
   <!-- end left --> 
 </div>
-
+<% @review_average = @reviews.sum(:rating) / @reviews.count %>
 
 
 
@@ -157,8 +178,20 @@
 
   </div>
 
-<%= link_to "add review", new_farmsite_review_path(@farmsite) %>
+
 
 </div></div></a></div></div></div></div></div>
 
+
+<script>
+/* Javascript */
+ 
+$(function () {
+ 
+  $("#average").rateYo({
+    rating: "<%=@review_average%>",
+    readOnly: true
+  });
+});
+</script>
 
