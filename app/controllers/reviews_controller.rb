@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :find_farm
 
   # GET /reviews
   # GET /reviews.json
@@ -25,10 +26,12 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def create
     @review = Review.new(review_params)
+    @review.farmsite_id = @farmsite.id
+    @review.user_id = current_user.id
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        format.html { redirect_to farmsite_path(@farmsite), notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }
@@ -71,4 +74,8 @@ class ReviewsController < ApplicationController
     def review_params
       params.require(:review).permit(:rating, :comment, :farmsite_id)
     end
+
+    def find_farm
+      @farmsite = Farmsite.find(params[:farmsite_id])
+end
 end

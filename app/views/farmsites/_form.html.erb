@@ -72,11 +72,17 @@
 
 
 
-                    <%= f.label "City:" %>
-                    <%= f.text_field :farmsitecity, :class => "form-control", :placeholder => "farmsitecity" %>
 
-                    <%= f.label "State:" %>
-                    <%= f.text_field :farmsitestate, :class => "form-control", :placeholder => "farmsitestates" %>
+               
+                    <%= f.input :farmsitestate, :collection => State, :class => "form-control", :placeholder => "farmsitestates" %>
+
+
+
+                    <%= f.input :farmsitecity, :collection => [],  :class => "form-control", :placeholder => "farmsitecity" %>
+
+
+
+
 
                     <%= f.label "farmsite description:" %>
                     <%= f.text_field :farmsitedescription, :class => "form-control", :placeholder => "farmsitedescription" %>
@@ -269,4 +275,22 @@ circle.bindTo('center', marker, 'position');
             console.log(place.address_components);
         });
   }
+city = <%= raw(City.to_json) %>
+console.log(city)
+//selection
+$('#farmsite_farmsitestate').change(function(){
+  //show alert
+//alert ($('#farmsite_farmsitestate').val())
+//array city(#farmsite_farmsitesstate)
+console.log( city[ $('#farmsite_farmsitestate').val() ] )
+//remove first element in arary
+city[ $('#farmsite_farmsitestate').val() ].shift();
+//loop 
+$.each( city[ $('#farmsite_farmsitestate').val() ],  function(i,v){
+  console.log(v)
+//append list sume dalam array selain guna html
+  $("#farmsite_farmsitecity").append("<option value='" + v + "'> " + v + "</option>")
+}) 
+});
 </script>
+

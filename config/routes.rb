@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :reviews
+  
   resources :farmers
   resources :bidders
   resources :brokers
@@ -32,7 +32,9 @@ Rails.application.routes.draw do
   get 'bidder_views/index'
   get 'cities/:state', to: 'application#cities'
   resources :produces
-  resources :farmsites
+  resources :farmsites do 
+    resources :reviews
+  end
 
   root 'home#index'
   get 'home/about'
