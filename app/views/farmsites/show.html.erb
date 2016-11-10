@@ -37,7 +37,9 @@
               <div class="item <%= 'active' if index == 0 %>">
                 <%= image_tag produce.avatar.url,class: "img-responsive",style: "height:300px;"%>
                 <div class="carousel-caption">
-                 <h1><a href="<%= produce_path(id: produce.id) %>" style="color:white"><%= produce.producename %></h1>
+                 <marquee behavior="alternate" scrollamount="10" direction="up">
+                 <center><h1><a href="<%= produce_path(id: produce.id) %>" style="color:white"><%= produce.producename %></h1></center>
+                 </marquee>
                </div>
 
              </div>
