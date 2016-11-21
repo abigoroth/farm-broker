@@ -150,6 +150,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.3.0)
+    raty_ratings (1.2.0)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -231,6 +232,7 @@ DEPENDENCIES
   paperclip (~> 5.0.0)
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
+  raty_ratings
   redis (~> 3.0)
   sass-rails (~> 5.0)
   simple-form-datepicker
@@ -244,3 +246,6 @@ DEPENDENCIES
   underscore-rails
   web-console
   will_paginate-bootstrap
+
+BUNDLED WITH
+   1.13.0

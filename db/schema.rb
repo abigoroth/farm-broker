@@ -99,8 +99,8 @@ ActiveRecord::Schema.define(version: 20161109110440) do
     t.integer  "farmsiteownerphoneno"
     t.integer  "district_id"
     t.integer  "farmer_id"
-    t.string   "longitude"
-    t.string   "latitude"
+    t.float    "longitude"
+    t.float    "latitude"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "avatar_file_name"

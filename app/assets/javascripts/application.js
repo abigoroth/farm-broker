@@ -22,3 +22,4 @@
 //= require gmaps/google
 //= require_tree .
 //= require_cable
+//= require jquery.raty
