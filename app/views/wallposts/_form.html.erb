@@ -2,30 +2,30 @@
 
 
 <div class="row">
- <div class="col-sm-3"></div>
- <div class="col-sm-6">.
-  <div class="well well-sm" style="background-color:powderblue;">
-    <h4>What's New</h4>
-    <form class="form-horizontal" role="form">
-      <div class="form-group" style="padding:14px;">
-        <div class="form-inputs">
-          <%#= f.input :wall_status ,placeholder: "What you think..." , class:"col-lg-12" ,label: false%>
-        
-          <%= f.input :wall_status, label: false , as: :text, as: :bootsy, editor_options: { blockquote: false, font_styles: false , emphasis: false, lists: false} %>
-        
-
-        </div>
+   <div class="col-sm-3"></div>
+   <div class="col-sm-6">.
+    <div class="well well-sm" style="background-color:#e1f5fe;">
+      <h4>What's New ? </h4>
+      <form class="form-horizontal" role="form">
+        <div class="form-group" style="padding:14px;">
         <div class="form-actions">
-          <%= f.button :submit, class: "btn btn-success btn-sm pull-right" ,value: "POST"%>
-        </div>
-        <br>
-        <% end %>
-      </form>
+            <%= f.button :submit, class: "btn btn-success btn-md pull-right" ,value: "POST"%>
+          </div>
+          <div class="form-inputs">
+            <%#= f.input :wall_status ,placeholder: "What you think..." , class:"col-lg-12" ,label: false%>
+          
+            <%= f.input :wall_status, as: :text,input_html: {cols: 6,rows: 6}, label: false , as: :bootsy, editor_options: { blockquote: false, font_styles: false , emphasis: false, lists: false, color: false } %>
+          
+
+          </div>
+          
+          <br>
+          <% end %>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <div class="col-sm-3"></div>
+    <div class="col-sm-3"></div>
 </div>
 
 </div>
-
