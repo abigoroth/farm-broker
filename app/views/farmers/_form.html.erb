@@ -36,7 +36,8 @@
 
            <%= f.input :address %>
            <%= f.input :phone %>
-           <%= f.input :account_no %>
+           <%= f.input :bank_company , label: "Bank Name", hint: "to receive payment later" %>
+           <%= f.input :account_no , label: "Bank Account Number", hint: "to receive payment later" %>
            <%= f.input :company_name %>
            <%= f.input :company_phone %>
          </div>

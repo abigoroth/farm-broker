@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20161122032144) do
     t.datetime "updated_at",    null: false
     t.string   "company_name"
     t.string   "company_phone"
+    t.string   "bank_company"
   end
 
   create_table "farmsites", force: :cascade do |t|

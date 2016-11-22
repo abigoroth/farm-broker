@@ -21,6 +21,10 @@
         <div class="col-md-6"><%= image_tag farmsite.avatar.url,class: "img-responsive",style: "height:250px;"%> </div>
        
 
+
+<%# if current_user.role == "farmer" %>
+<%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
+<%# end%>
         <div class="col-xs-4 col-md-offset-2">
 
           <table class="table">
