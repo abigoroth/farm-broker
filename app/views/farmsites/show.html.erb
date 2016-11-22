@@ -15,104 +15,98 @@
       <div class="panel-thumbnail"><%= image_tag @farmsite.avatar.url,class: "img-responsive",style: "height:250px;"%></div>
     </div>
 
-<!-- second --> 
+    <!-- second --> 
 
     <div class="panel panel-default">
      <div class="panel-heading">Produces
 
       <% if user_signed_in? and @farmsite and @farmsite.farmer == current_user.meta and  @farmsite.present?  %>
-        <%= link_to 'Add Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm pull-right" , data: {turbolinks: false}, remote: true %>
+      <%= link_to 'Add Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm pull-right" , data: {turbolinks: false}, remote: true %>
       <%end%>
 
-     </div>
-      <div class="panel-body">
-    
-        <!--Carousel -->
-        <% if @farmsite.produces.present? %>
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    </div>
+    <div class="panel-body">
 
-          <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-          </ol>
-
-          <div class="carousel-inner" role="listbox">
-            <% @farmsite.produces.each_with_index do |produce,index| %>
-              <div class="item <%= 'active' if index == 0 %>">
-                <%= image_tag produce.avatar.url,class: "img-responsive",style: "height:300px;"%>
-                <div class="carousel-caption">
-                 <marquee behavior="alternate" scrollamount="10" direction="up">
-                 <center><h1><a href="<%= produce_path(id: produce.id) %>" style="color:white"><%= produce.producename %></h1></center>
-                 </marquee>
-               </div>
-
-             </div>
-           <% end %>
-        
-        </div>
-
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-
-      <% else %>
-          No Produces
-       <% end %>
       <!--Carousel -->
+      <% if @farmsite.produces.present? %>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+
+        <div class="carousel-inner" role="listbox">
+          <% @farmsite.produces.each_with_index do |produce,index| %>
+          <div class="item <%= 'active' if index == 0 %>">
+            <%= image_tag produce.avatar.url,class: "img-responsive",style: "height:300px;"%>
+            <div class="carousel-caption">
+             <marquee behavior="alternate" scrollamount="10" direction="up">
+               <center><h1><a href="<%= produce_path(id: produce.id) %>" style="color:white"><%= produce.producename %></h1></center>
+             </marquee>
+           </div>
+
+         </div>
+         <% end %>
+
+       </div>
+
+       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <% else %>
+    No Produces
+    <% end %>
+    <!--Carousel -->
 
 
 
-        </div>
-      </div>
+  </div>
+</div>
 
-    <!-- third --> 
-    <div class="panel panel-default">
-     <div class="panel-heading"></a>Review</div>
-     <div class="panel-body">
-       <p>Rating: </p><img src="https://cdn4.iconfinder.com/data/icons/badges-and-votes-1/128/Badges_Votes_four_star_rating-22-512.png" class="pull-right" height="42" width="60"> 
-       <div class="clearfix"></div>
-       <hr>
+<!-- third --> 
+<div class="panel panel-default">
+ <div class="panel-heading"></a>Review</div>
+ <div class="panel-body">
 
-       <p>Comment reviews</p>
+   <div id="average"></div>
+   <span>based on <%= @farmsite.reviews.count %> reviews</span>
+   <br>
 
-       <hr>
-       <form>
-        <div class="input-group">
-          <div class="input-group-btn">
-            <button class="btn btn-default">+1</button><button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
-          </div>
-          <input type="text" class="form-control" placeholder="Add a comment..">
-        </div>
-      </form>
+  
 
-<div id="average"></div>
+  <% @reviews = @farmsite.reviews %>
 
-
-
-
-<span>based on <%= @farmsite.reviews.count %> reviews</span>
-
-<% @reviews = @farmsite.reviews %>
-
-<%@reviews.each do | review| %>
+  <%@reviews.each do | review| %>
 
   <% @review = review %>
   <br>
+
+  <% if @reviews.count != 0 %>
   <%= render "reviews/show" , :review => @review%>
-<%end%>
-<br>
-<%= link_to "Add Review", new_farmsite_review_path(@farmsite) %></br>
-    </div>
-  </div>
-  <!-- end left --> 
+  <% @review_average = @reviews.sum(:rating) / @reviews.count %>
+  <%end%>
+
+  <%end%>
+  <!--<%= link_to "Add Review", new_farmsite_review_path(@farmsite) %></br>
+  <%= render "reviews/form" , :review => @review%>-->
 </div>
-<% @review_average = @reviews.sum(:rating) / @reviews.count %>
+</div>
+
+</div>
+
+
+
+<!-- end left --> 
+
+
 
 
 
@@ -138,42 +132,42 @@
         </table>
 
         <% if user_signed_in? %>
-            <% if current_user.meta_type == "Farmer" and @farmsite.farmer == current_user.meta %>
-            <div align="right">
-              <%= link_to edit_farmsite_path(@farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit" > </i> Edit<% end %>
+        <% if current_user.meta_type == "Farmer" and @farmsite.farmer == current_user.meta %>
+        <div align="right">
+          <%= link_to edit_farmsite_path(@farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit" > </i> Edit<% end %>
 
-              <%= link_to  @farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
-              </div>
-            <%end%>
-          <%end%>
+          <%= link_to  @farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
+        </div>
+        <%end%>
+        <%end%>
 
       </div>
     </div>
 
     
 
-      <!-- end right --> 
-  
-  <!-- third --> 
+    <!-- end right --> 
+
+    <!-- third --> 
     <div class="panel panel-default">
       <div class="panel-heading">Farm Location</div>
       <div class="panel-body">
-       
- 
-    <div style='width: 100%;'>
-       <div style='length: 100%;'>
-      <div id="multi_markers" style=' height: 400px;'></div>
-    </div></center>
 
-    <script >
-      var handler = Gmaps.build('Google');
-      handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
-        var markers = handler.addMarkers(<%=raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-      });
 
-    </script>
+        <div style='width: 100%;'>
+         <div style='length: 100%;'>
+          <div id="multi_markers" style=' height: 400px;'></div>
+        </div></center>
+
+        <script >
+          var handler = Gmaps.build('Google');
+          handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
+            var markers = handler.addMarkers(<%=raw @hash.to_json %>);
+            handler.bounds.extendWith(markers);
+            handler.fitMapToBounds();
+          });
+
+        </script>
       </div>
     </div>
 
@@ -186,14 +180,19 @@
 
 
 <script>
-/* Javascript */
- 
-$(function () {
- 
-  $("#average").rateYo({
-    rating: "<%=@review_average%>",
-    readOnly: true
+  /* Javascript */
+
+  $(function () {
+
+    $("#average").rateYo({
+      rating: "<%=@review_average%>",
+      readOnly: true
+    });
   });
-});
+
 </script>
+
+
+
+
 

@@ -15,10 +15,11 @@
 
       <br><div class="panel panel-default">
       <div class="panel-heading" style="background-color:powderblue;"><b>
+        <img src="<%= wallpost.broker.profilephoto %>" class="img-circle" alt="Cinque Terre" width="60" height="60">
         <h4><%= wallpost.broker.meta.name %></b>&nbsp;<span><small><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></small></span>
 
           <%if user_signed_in? and (wallpost.broker.id == current_user.id) %>
-          <div align="right">
+         
             <%= link_to edit_wallpost_path(wallpost) do %>
             <i class="glyphicon glyphicon-pencil"></i>
             <% end %>
@@ -26,7 +27,7 @@
             <%= link_to wallpost, method: :delete, data: { confirm: 'Are you sure?' } do %>
             <i class="glyphicon glyphicon-remove"></i>
             <% end %>
-          </div>
+          
           <%end%>
         </h4>
       </div>

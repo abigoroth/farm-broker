@@ -33,7 +33,7 @@ class FarmsitesController < ApplicationController
 
         #tak sign in/public
    #else
-        @farmsites = Farmsite.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
+        @farmsites = Farmsite.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
         @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
           marker.lat farmsite.latitude
           marker.lng farmsite.longitude

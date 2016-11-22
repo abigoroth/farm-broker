@@ -7,14 +7,17 @@
 <%= simple_form_for([@farmsite, @farmsite.reviews.build]) do |f| %>
 
   <div class="form-inputs">
-  	<%= f.label "Rating" %>
-  	<div id="rateYo"></div>
-    <%= f.input :rating ,:as => :hidden%>
+  	
+    
     <%= f.input :comment %>
-  </div>
+    
+    <%= f.label "Rating" %>
+    <div id="rateYo"></div>
+    <%= f.input :rating ,:as => :hidden%>
+    
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "btn btn-primary btn-sm pull-right" %>
   </div>
 <% end %>
 
