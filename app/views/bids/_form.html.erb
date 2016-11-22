@@ -1,42 +1,44 @@
 <div class = "modal-dialog modal-md" > 
-<div class = "modal-content" > 
+  <div class = "modal-content" > 
 
-<center>
-<%= simple_form_for(@bid) do |f| %>
-<%= f.error_notification %>
+    <center>
+      <%= simple_form_for(@bid) do |f| %>
+      <%= f.error_notification %>
 
-    <div class = "modal-header" >
-      <h4 class = "modal-title" >Bid</h4>
-    </div>
-    <div class = "modal-body" >
-
-      <div class="row">
-
-        <div class="well">
-          <div class="panel panel-default">
-            <div class="panel-body">
-
-              <div class="form-inputs">
-                <%= f.input :produce_id, collection: current_broker.produces, label_method: :producename%>
-                <%= f.input :start_time, start_year: Time.now.year %>
-                <%= f.input :end_time, start_year: Time.now.year %>
-                <%= f.input :start_price, input_html: { min: 0.0 } %>
-                <%= f.input :max_price, input_html: { min: 0.0 } %>
-              </div>
-
-
-            </div>
-          </div>
-
-          <center><div class="actions"><%= f.submit 'Create',class: 'btn btn-lg btn-success btn-sm'%></div></center>
-        </div>
+      <div class = "modal-header" >
+        <h4 class = "modal-title" >Bid</h4>
       </div>
-          <% end %>
+      <div class = "modal-body" >
 
-    </div>
-   <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+        <div class="row">
 
-</center>
+          <div class="well">
+            <div class="panel panel-default">
+              <div class="panel-body">
 
-</div>
+                
+
+                <div class="form-inputs">
+                  <%= f.input :produce_id, collection:  current_user.meta.produces, label_method: :producename%>
+                  <%= f.input :start_time, start_year: Time.now.year %>
+                  <%= f.input :end_time, start_year: Time.now.year %>
+                  <%= f.input :start_price, input_html: { min: 0.0 } %>
+                  <%= f.input :max_price, input_html: { min: 0.0 } %>
+                </div>
+
+
+              </div>
+            </div>
+
+            <center><div class="actions"><%= f.submit 'Create',class: 'btn btn-lg btn-success btn-sm'%></div></center>
+          </div>
+        </div>
+        <% end %>
+
+      </div>
+      <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+
+    </center>
+
+  </div>
 </div>

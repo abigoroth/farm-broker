@@ -10,44 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028045700) do
+ActiveRecord::Schema.define(version: 20161122025206) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer  "bid_id"
     t.integer  "bidder_id"
-    t.index ["bid_id"], name: "index_bid_processes_on_bid_id"
-    t.index ["bidder_id"], name: "index_bid_processes_on_bidder_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "bidders", force: :cascade do |t|
     t.string   "name"
-    t.date     "dob"
+    t.datetime "dob"
     t.string   "address"
     t.string   "phone"
     t.string   "credit_card"
-    t.string   "email",                     default: "",    null: false
-    t.string   "encrypted_password",        default: "",    null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",             default: 0,     null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.text     "profilephoto"
-    t.string   "profilephoto_file_name"
-    t.string   "profilephoto_content_type"
-    t.integer  "profilephoto_file_size"
-    t.datetime "profilephoto_updated_at"
-    t.string   "time_zone",                 default: "UTC"
-    t.index ["email"], name: "index_bidders_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_bidders_on_reset_password_token", unique: true
+    t.string   "time_zone",   default: "UTC"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "bids", force: :cascade do |t|
@@ -56,42 +37,22 @@ ActiveRecord::Schema.define(version: 20161028045700) do
     t.datetime "end_time"
     t.decimal  "start_price"
     t.decimal  "highest_price"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "broker_id"
+    t.decimal  "max_price"
     t.integer  "produce_id"
     t.integer  "bidder_id"
-    t.decimal  "max_price"
-    t.index ["bidder_id"], name: "index_bids_on_bidder_id"
-    t.index ["broker_id"], name: "index_bids_on_broker_id"
-    t.index ["produce_id"], name: "index_bids_on_produce_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "farmer_id"
   end
 
   create_table "brokers", force: :cascade do |t|
     t.string   "name"
-    t.date     "dob"
+    t.datetime "dob"
     t.string   "address"
     t.string   "phone"
     t.string   "account_no"
-    t.string   "email",                     default: "", null: false
-    t.string   "encrypted_password",        default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",             default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.text     "profilephoto"
-    t.string   "profilephoto_file_name"
-    t.string   "profilephoto_content_type"
-    t.integer  "profilephoto_file_size"
-    t.datetime "profilephoto_updated_at"
-    t.index ["email"], name: "index_brokers_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_brokers_on_reset_password_token", unique: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "chat_rooms", force: :cascade do |t|
@@ -112,12 +73,23 @@ ActiveRecord::Schema.define(version: 20161028045700) do
   create_table "comments", force: :cascade do |t|
     t.string   "comment_message"
     t.datetime "comment_date"
+    t.integer  "broker_id"
+    t.integer  "wallpost_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "wallpost_id"
-    t.integer  "broker_id"
-    t.index ["broker_id"], name: "index_comments_on_broker_id"
-    t.index ["wallpost_id"], name: "index_comments_on_wallpost_id"
+  end
+
+  create_table "farmers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "dob"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "account_no"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "company_name"
+    t.string   "company_phone"
+    t.string   "bank_company"
   end
 
   create_table "farmsites", force: :cascade do |t|
@@ -127,11 +99,18 @@ ActiveRecord::Schema.define(version: 20161028045700) do
     t.string   "farmsiteownername"
     t.integer  "farmsiteownerphoneno"
     t.integer  "district_id"
-    t.integer  "broker_id"
+    t.integer  "farmer_id"
+    t.float    "longitude"
+    t.float    "latitude"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-    t.string   "latitude"
-    t.string   "longitude"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "farmsitedescription"
+    t.string   "farmsitecity"
+    t.string   "farmsitestate"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -159,9 +138,9 @@ ActiveRecord::Schema.define(version: 20161028045700) do
     t.string   "name"
     t.string   "address"
     t.string   "title"
+    t.float    "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float    "distance"
   end
 
   create_table "produces", force: :cascade do |t|
@@ -171,15 +150,26 @@ ActiveRecord::Schema.define(version: 20161028045700) do
     t.integer  "producequantity"
     t.text     "producedescription"
     t.integer  "farmsite_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "produceimage"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.integer  "broker_id"
-    t.index ["broker_id"], name: "index_produces_on_broker_id"
+    t.string   "produceimage"
+    t.integer  "farmer_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.datetime "produceharvest"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "rating"
+    t.text     "comment"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.integer  "farmsite_id"
+    t.index ["farmsite_id"], name: "index_reviews_on_farmsite_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -189,12 +179,15 @@ ActiveRecord::Schema.define(version: 20161028045700) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.date     "dob"
-    t.string   "address"
-    t.string   "phone_no"
     t.string   "email",                     default: "",    null: false
     t.string   "encrypted_password",        default: "",    null: false
+    t.integer  "meta_id"
+    t.string   "meta_type"
+    t.string   "timezone",                  default: "UTC"
+    t.string   "profilephoto_file_name"
+    t.string   "profilephoto_content_type"
+    t.integer  "profilephoto_file_size"
+    t.datetime "profilephoto_updated_at"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -208,12 +201,10 @@ ActiveRecord::Schema.define(version: 20161028045700) do
     t.datetime "confirmation_sent_at"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
-    t.string   "profilephoto_file_name"
-    t.string   "profilephoto_content_type"
-    t.integer  "profilephoto_file_size"
-    t.datetime "profilephoto_updated_at"
-    t.string   "timezone",                  default: "UTC"
-    t.integer  "role",                      default: 0
+    t.float    "longitude"
+    t.float    "latitude"
+    t.string   "back_company"
+    t.string   "bank_company"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -222,10 +213,9 @@ ActiveRecord::Schema.define(version: 20161028045700) do
   create_table "wallposts", force: :cascade do |t|
     t.string   "wall_status"
     t.datetime "wall_date"
+    t.integer  "broker_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "broker_id"
-    t.index ["broker_id"], name: "index_wallposts_on_broker_id"
   end
 
 end

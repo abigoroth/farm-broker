@@ -1,12 +1,25 @@
 class BidsController < ApplicationController
+  before_action :check_meta , if: "user_signed_in?"
   before_action :set_bid, only: [:show, :edit, :update, :destroy]
 
   # GET /bids
   # GET /bids.json
   def index
     update_bid_status
-    @bids = params[:broker_id].present? ? Bid.all.where( broker_id: params[:broker_id] ).order(bid_status: :desc) : Bid.all.where.not(broker_id: current_broker.try(:id)).order(bid_status: :desc)
+    if user_signed_in?
+    if current_user.meta_type == "Farmer"
+      @bids = Bid.where.not(farmer_id: current_user.id)
+    else
+      @bids = Bid.all.order(bid_status: :desc)
+    end
+  else
+      @bids = Bid.all.order(bid_status: :desc)
+  end
     @bid = Bid.new
+  end
+
+  def farmer_bids
+    @farmer_bids = Bid.where(farmer_id: current_user.meta.id).order(bid_status: :desc)
   end
 
   # GET /bids/1
@@ -16,7 +29,7 @@ class BidsController < ApplicationController
 
   # GET /bids/new
   def new
-    @bid = Bid.new
+    @bid = current_user.bids.build
   end
 
   # GET /bids/1/edit
@@ -26,7 +39,8 @@ class BidsController < ApplicationController
   # POST /bids
   # POST /bids.json
   def create
-    @bid = current_broker.bids.new(bid_params)
+
+    @bid = current_user.bids.build(bid_params)
     logger.debug @bid.inspect
     respond_to do |format|
       if @bid.save
@@ -66,8 +80,8 @@ class BidsController < ApplicationController
 
   def purchase
     bid = Bid.find(params[:bid_id])
-    BidProcess.create(bid_id: bid.id, price: bid.max_price, bidder_id: current_bidder.id)
-    redirect_to bids_path    
+    BidProcess.create(bid_id: bid.id, price: bid.max_price, bidder_id: current_user.id)
+    redirect_to bids_path
   end
 
   private
@@ -87,7 +101,7 @@ class BidsController < ApplicationController
         if Time.now >= bid.end_time or bid.bid_processes.maximum(:price) == bid.max_price
           bid.update(bid_status: "Off" )
         else
-          bid.update(bid_status: "On" ) 
+          bid.update(bid_status: "On" )
         end
       end
     end

@@ -1,42 +1,189 @@
+<div id="maincontainer">
+<br><br><br>
+<div class="row"> 
+        <div class="col-xs-8 col-md-offset-2">
+          <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <select name="state" id="state_select" class="btn btn-default dropdown-toggle">
+                      <%= State.each do |s| %>
+                        <option value="<%= s %>"><%= s %></option>
+                      <% end %>
+                    </select>
 
-<!--Carousel -->
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-    </ol>
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-      <img src="https://brokenpiggybank.files.wordpress.com/2011/03/flower-farm-4.jpg" class="img-responsive" alt="Image" style="width: 100%; height:450px">
+                    <select name="city" id="city_select" class="btn btn-default dropdown-toggle">
+                    </select>
 
-        <div class="carousel-caption">
-         <p><img align="middle" src="<%= image_url('create_thumb')%>" style="width:210px; height: 100px"/></p> 
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      <span id="search_concept">Search by</span> <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="<%= produces_path %>">Produce </a></li>
+                      <li><a href="<%= farmsites_path %>">Farmsite </a></li>
+                      <li><a href="<%= farmers_path %>">Farmer </a></li>
+                      <li><a href="#company">Company </a></li>
+                      <li class="divider"></li>
+                      <li><a href="#all">Anything</a></li>
+                    </ul>
+                </div>
+
+                <input type="hidden" name="search_param" value="all" id="search_param">         
+                <input type="text" class="form-control" id = "params_search" name="x" placeholder="Type here...">
+
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="button_search"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+          </div>
+        </div>
+        
+        <br><br><br><br><br>
+        <marquee behavior="alternate" scrollamount="10" direction="up" color="white">
+        <center>
           <h1>WELCOME TO TANIMALL</h1>
-          <p style="font-size: 24px">Come Join Us Now!</p>
-        </div>
+          <p><font size="6" color="white">Come Join Us Now!</font></p>
+        </center>
+        </marquee>
+       
+</div>
+</div>
+<br>
 
-      </div>
 
-      <div class="item">
-        <img src="<%= image_url('http://www.in.gov/isdh/files/produce.jpg') %>" class="img-responsive"  alt="Image" style="width: 100%; height:450px">
-        <div class="carousel-caption">
-          <h2>The biggest auction sale website in Malaysia!</h2>
-          <p style="font-size: 18px">All great produces are selling here!</p>
-          <p>Sign Up and See what's here.</p>
-        </div>
+<!--Carousel 
 
-      </div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators 
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+  </ol>
+  <!-- Wrapper for slides 
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="<%= image_url('Malaysia')%>"class="img-responsive" alt="Image" style="width: 99%; height:400px">
+
+      <div class="carousel-caption">
+       <p><img align="middle" src="<%= image_url('create_thumb')%>" style="width:210px; height: 100px"/></p> 
+       <h2>WELCOME TO TANIMALL</h2>
+       <p style="font-size: 20px">Come Join Us Now!</p>
+       <br> <br>
+     </div>
+
+   </div>
+
+   <div class="item">
+    <img src="http://www.pamper.my/news/wp-content/uploads/2016/05/o-FRUITS-AND-VEGETABLES-facebook.jpg" class="img-responsive"  alt="Image" style="width: 99%; height:400px">
+    <div class="carousel-caption">
+      <h2>The biggest auction sale website in Malaysia!</h2>
+      <p style="font-size: 18px">All great produces are selling here!</p>
+      <p>Sign Up and See what's here.</p>
+      <br> 
     </div>
 
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+  </div>
+</div>
+
+<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+  <span class="sr-only">Previous</span>
+</a>
+<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  <span class="sr-only">Next</span>
+</a>
 </div>
 <!--Carousel -->
+<br>
+
+  <div class="row">
+  <div class="col-lg-1"></div>
+    <div class="col-lg-3">
+      
+      <p>
+        <strong>About Us:</strong>
+        <br>
+        TaniMall is an innovative and exciting auction site in Malaysia. We sell fresh products from the farms like vegetables, fruits, flowers, meat, grain, poultry, dairy product and seafood.
+      </p>
+    </div>
+
+    <div class="col-lg-3">
+      <p>
+      <strong>Address:</strong>
+      <br>
+      TaniMac Co.(@Waldania Group)
+      <br>
+      BLOCK 3730,PERSIARAN APEC,
+      <br>
+      63000 CYBERJAYA,
+      <br>
+      SELANGOR, MALAYSIA.
+      <br>
+      </p>
+      </div>
+
+      <div class="col-lg-4">
+      </p>
+      <strong>Contact:</strong>
+      <br>
+      Phone : +6012-5903983 (Ridzuan) or +6013-4015799 (Fitri) 
+      <br>
+      Email : customersupport@tanimac.com
+    </p>
+    </div>
+    <div class="col-lg-1"></div>
+  </div>
+
+<script>
+
+$("#button_search").click(function(){
+  searching_for_data();
+});
+
+
+$("#params_search").keypress(function(e){
+  if(e.which == 13){searching_for_data();}
+
+});
+
+function searching_for_data(){
+
+
+  var params_search = $("#params_search").val();
+  var search_concept = $("#search_concept").text().trim();
+
+  // alert(params_search);
+  if(search_concept == "Produce"){
+    Turbolinks.visit("/produces?search=" + params_search);
+  }
+  if(search_concept == "Farmsite"){
+    Turbolinks.visit("/farmsites?search=" + params_search);
+  }
+  if(search_concept == "Farmer"){
+    Turbolinks.visit("/farmers?search=" + params_search);
+  }
+  if(search_concept == "Company"){
+    Turbolinks.visit("/farmsite?search=" + params_search);
+  }
+  else{
+    alert("select Search By");
+  }
+
+}
+
+city = <%= raw(City.to_json) %>
+$('#state_select').change(function(){
+    //show alert
+  //alert ($('#farmsite_farmsitestate').val())
+  //array city(#farmsite_farmsitesstate)
+  console.log( city[ $('#state_select').val() ] )
+  //remove first element in arary
+  city[ $('#state_select').val() ].shift();
+  //loop 
+  $("#city_select").html("")
+  $.each( city[ $('#state_select').val() ],  function(i,v){
+    console.log(v)
+  //append list sume dalam array selain guna html
+    $("#city_select").append("<option value='" + v + "'> " + v + "</option>")
+  }) 
+});
+</script>

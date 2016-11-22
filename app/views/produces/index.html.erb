@@ -1,3 +1,45 @@
+<center><h1>Produces</h1>
+
+  
+</center>
+<br/>
+<!-- left --> 
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <% @produces.each do |produce| %>
+      <div class="panel panel-default">
+
+      <div class="panel-heading"><center><h4><%= produce.producename %></h4></center></div>
+
+      <div class="panel-body">
+
+        
+        <div class="col-md-6"><%= image_tag produce.avatar.url,class: "img-responsive",style: "height:250px;"%> </div>
+       
+
+        <div class="col-xs-4 col-md-offset-2">
+
+          <table class="table">
+          <tr><th><strong>Farm: </strong></th><td><a href="<%= farmsite_path(id: produce.farmsite.id) %>"><%= produce.farmsite.farmsitename %></td></tr>
+          <tr><th><strong>Company: </strong></th><td><%= produce.farmsite.farmer.user.meta.company_name %></td></tr><br>
+        </table>
+          <div align="right"><a class="btn btn-warning btn-sm" href="<%= produce_path(id: produce.id) %>">Details</a></div>
+          
+        </div>
+      </div>
+    </div>
+    <%end%>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+      <center><%= will_paginate @bids, renderer: BootstrapPagination::Rails %></center>
+    </div>
+</div>
+
+
+<!--
 <center>
 
 
@@ -5,17 +47,18 @@
 
     <div class="row">
       <div class="col-sm-12"><h1>List Produces</h1></div>
-      <h1><%=@farmsite.farmsitename %></h1>
+    
       <table class="table table-striped custab" id="dttb">
         <thead>
           <tr>
             <th>Produce Name</th>
             <th>Produce Type</th>
-            <th>Produce Date</th>
+            <th>Produce Planting</th>
+            <th>Produce Harvesting</th>
             <th>Produce Quantity(KG)</th>
             <th>Produce Description</th>
             <th>Farm Name</th>
-            <th>Broker Name</th>
+            <th>Farmmer Name</th>
             <th>Produce Picture</th>
             <th width="17%"></th>
           </tr>
@@ -26,21 +69,26 @@
           <% @produces.each do |produce| %>
 
           <tr>
-            <td><%= produce.producename %></td>
+
+            <td><a href="<%= produce_path(id: produce.id) %>"><%= produce.producename %></td>
+
             <td><%= produce.producetype %></td>
-            <!-- <td><img src="<%= produce.produceimage %>"/></td> -->
+            <td><img src="<%= produce.produceimage %>"/></td>
             <td><span><%= produce.producedate.try(:strftime,"%d/%m/%Y") %></span>
               <br><span><%= produce.producedate.try(:strftime,"%I:%M %p") %></span>
+            </td>
+
+            <td><span><%= produce.produceharvest.try(:strftime,"%d/%m/%Y") %></span>
+              <br><span><%= produce.produceharvest.try(:strftime,"%I:%M %p") %></span>
             </td>
             <td><%= produce.producequantity %></td>
             <td><%= produce.producedescription %></td>
             <td><%= produce.farmsite.farmsitename rescue nil%></td>
-            <td><%= produce.broker.name rescue nil %></td>
+            <td><%= produce.farmer.name rescue nil %></td>
             <td><%= image_tag produce.avatar.url (:thumb)%></td>
             
-
-
-            <td ><% if broker_signed_in? and produce.broker == current_broker %>
+          
+            <td ><% if user_signed_in? and @farmsite and produce.farmer == current_user.meta %>
               <%= link_to edit_produce_path(produce, farmsite_id: @farmsite.id)   , class: "btn btn-primary btn-sm", remote: true  do %>
               <i class= "glyphicon glyphicon-edit">  </i> Edit <% end %>
 
@@ -55,11 +103,13 @@
 
       <br>
 
-      <% if broker_signed_in?  and  @farmsite.present? and @farmsite.broker == current_broker %><%= link_to 'New Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %><%end%>
+      <% if user_signed_in? and @farmsite and @farmsite.farmer == current_user.meta and  @farmsite.present?  %>
+        <%= link_to 'New Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
+      <%end%>
     </center></div>
 
 
-    <script >
+    <script>
 
       $("#dttb").dataTable();
-    </script>
+    </script> 

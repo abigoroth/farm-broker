@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
     def user_time_zone(&block)
       Time.use_zone(current_user.timezone, &block)
     end
+
+    def check_meta
+    	unless current_user.meta.present?
+    	redirect_to "/farmers/new" 
+    end
+    end   
 end

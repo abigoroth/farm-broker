@@ -1,20 +1,51 @@
 class FarmsitesController < ApplicationController
+  before_action :check_meta , if: "user_signed_in?"
   before_action :set_farmsite, only: [:show, :edit, :update, :destroy]
 
   # GET /farmsites
   # GET /farmsites.json
   def index
-    @farmsites = params[:broker_id].present? ? Farmsite.all.where( broker_id: params[:broker_id] ).order(created_at: :desc) : Farmsite.all.where.not(broker_id: current_broker.try(:id)).order(created_at: :desc)
-     @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
-    marker.lat farmsite.latitude
-    marker.lng farmsite.longitude
-    marker.infowindow farmsite.farmsitename
-end
+
+   @farmsites = Farmsite.search("#{params[:search]}") if params[:search].present?
+    #@user = User.find(params[:id])
+    @review = Review.new
+    
+
+    # sign in
+   #if user_signed_in?
+         #farmer
+      #  if current_user.meta_type == "Farmer"
+       #   @farmsites = Farmsite.where(farmer_id: params[:farmer_id] ).order(created_at: :desc)
+        #  @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+         #    marker.lat farmsite.latitude
+          #   marker.lng farmsite.longitude
+           #  marker.infowindow farmsite.farmsitename
+          #end
+          #not farmer
+        #else
+         # @farmsites = Farmsite.all.order(created_at: :desc)
+          #@hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+           #  marker.lat farmsite.latitude
+            # marker.lng farmsite.longitude
+            # marker.infowindow farmsite.farmsitename
+          #end
+        #end
+
+        #tak sign in/public
+   #else
+        @farmsites = Farmsite.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
+        @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+          marker.lat farmsite.latitude
+          marker.lng farmsite.longitude
+          marker.infowindow farmsite.farmsitename
+        end
+   #end
   end
 
   # GET /farmsites/1
   # GET /farmsites/1.json
   def show
+    @produces = Produce.where(farmsite_id: params[:farmsite_id] ).order(created_at: :desc)
   end
 
   # GET /farmsites/new
@@ -30,11 +61,13 @@ end
   # POST /farmsites.json
   def create
 
-    @farmsite =current_broker.farmsites.new(farmsite_params)
+
+    @farmsite =current_user.meta.farmsites.new(farmsite_params) if(current_user.meta_type == "Farmer")
+
 
     respond_to do |format|
       if @farmsite.save
-        format.html { redirect_to farmsites_path(broker_id:current_broker.id), notice: 'Farmsite was successfully created.' }
+        format.html { redirect_to farmsites_path(farmer_id:current_user.meta_id), notice: 'Farmsite was successfully created.' }
         format.json { render :show, status: :created, location: @farmsite }
       else
         format.html { render :new }
@@ -48,7 +81,7 @@ end
   def update
     respond_to do |format|
       if @farmsite.update(farmsite_params)
-        format.html { redirect_to farmsites_path(broker_id:current_broker.id), notice: 'Farmsite was successfully updated.' }
+        format.html { redirect_to farmsites_path(farmer_id:current_user.meta_id), notice: 'Farmsite was successfully updated.' }
         format.json { render :show, status: :ok, location: @farmsite }
       else
         format.html { render :edit }
@@ -62,7 +95,7 @@ end
   def destroy
     @farmsite.destroy
     respond_to do |format|
-      format.html { redirect_to farmsites_path(broker_id:current_broker.id), notice: 'Farmsite was successfully destroyed.' }
+      format.html { redirect_to farmsites_path(farmer_id:current_user.meta_id), notice: 'Farmsite was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -75,6 +108,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def farmsite_params
-      params.require(:farmsite).permit(:farmsitename, :farmsitesize, :farmsiteaddress, :farmsiteownername, :farmsiteownerphoneno, :broker_id)
+      params.require(:farmsite).permit(:farmsitename, :farmsitesize, :farmsiteaddress, :farmsiteownername, :farmsiteownerphoneno, :broker_id, :latitude, :longitude, :avatar, :farmsitedescription, :farmsitecity, :farmsitestate)
     end
 end
+

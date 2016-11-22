@@ -1,11 +1,16 @@
 class ProducesController < ApplicationController
+  before_action :check_meta , if: "user_signed_in?"
   before_action :set_produce, only: [:show, :edit, :update, :destroy]
 
   # GET /produces
   # GET /produces.json
   def index
-    @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]).order(created_at: :desc) : Produce.all
+    @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 2)
+ : Produce.all.paginate(:page => params[:page], :per_page => 2)
+
+    @produces = @produces.search("#{params[:search]}") if params[:search].present?
     @farmsite = Farmsite.find(params[:farmsite_id]) if params[:farmsite_id].present?
+
   end
 
   # GET /produces/1
@@ -25,7 +30,7 @@ class ProducesController < ApplicationController
   # POST /produces
   # POST /produces.json
   def create
-    @produce = current_broker.produces.new(produce_params)
+    @produce = current_user.meta.produces.new(produce_params) if(current_user.meta_type == "Farmer")
 
     respond_to do |format|
       if @produce.save
@@ -70,6 +75,6 @@ class ProducesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def produce_params
-      params.require(:produce).permit(:producename, :producetype, :producedate, :producequantity, :producedescription, :produceimage, :farmsite_id, :avatar, :broker_id)
+      params.require(:produce).permit(:producename, :producetype, :producedate, :produceharvest, :producequantity, :producedescription, :produceimage, :farmsite_id, :avatar, :broker_id)
     end
 end

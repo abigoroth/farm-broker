@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  
+  resources :farmers
+  resources :bidders
+  resources :brokers
+  devise_for :farmers
   resources :friendships
   resources :chat_rooms do
   resources :messages
@@ -10,7 +15,9 @@ Rails.application.routes.draw do
   resources :wallposts
   resources :comments
 
+  get 'bids/farmer_bids', to: 'bids#farmer_bids', as: 'farmer_bids'
 
+  get 'user_views/meta'
   get 'user_views/profile'
   post 'user_views/profile', to: 'user_views#create'
   get 'user_views/:id/remove_photo', to: 'user_views#remove_photo', as: 'remove_user_photo'
@@ -25,7 +32,9 @@ Rails.application.routes.draw do
   get 'bidder_views/index'
   get 'cities/:state', to: 'application#cities'
   resources :produces
-  resources :farmsites
+  resources :farmsites do 
+    resources :reviews
+  end
 
   root 'home#index'
   get 'home/about'
@@ -42,4 +51,5 @@ Rails.application.routes.draw do
   end
     mount ActionCable.server => '/cable'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  #get 'farmsites/farmprofile/:id', to: 'farmsites#farmprofile', as: 'farmprofile'
 end

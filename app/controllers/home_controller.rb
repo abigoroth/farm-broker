@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
-  def index
-  end
+  before_action :check_meta , if: "user_signed_in?"
 
   def about
   end

@@ -1,44 +1,107 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-<%= image_tag @produce.avatar.url (:medium)%>
-</p>
 
-<p>
-  <strong>Producename:</strong>
-  <%= @produce.producename %>
-</p>
+<!-- left -->                      
+<div class="row">
+  <div class="col-sm-1"></div>
+  <!-- first --> 
+  <div class="col-sm-5">
 
-<p>
-  <strong>Producetype:</strong>
-  <%= @produce.producetype %>
-</p>
+    <div class="panel panel-default">
+      <div class="panel-thumbnail"><p>
+      <center><%= image_tag @produce.avatar.url (:medium)%></p></center>
+      </div>
+      </div>
+    <!-- second --> 
+    <div class="panel panel-default">
+     <div class="panel-heading">Detail Information
+       
 
-<p>
-  <strong>Producedate:</strong>
-  <%= @produce.producedate %>
-</p>
+     </div>
 
-<p>
-  <strong>Producequantity:</strong>
-  <%= @produce.producequantity %>
-</p>
 
-<p>
-  <strong>Producedescription:</strong>
-  <%= @produce.producedescription %>
-</p>
 
-<p>
-  <strong>Farmsiteid:</strong>
-  <%= @produce.farmsite_id %>
-</p>
+     <div class="panel-body">
+      <table class="table">
+      <tr><th> <strong>Produce Name : </strong></th><td><%= @produce.producename %></td></tr>
+      <tr><th> <strong>Produce Type : </strong></th><td><%= @produce.producetype %></td></tr>
+      <tr><th> <strong>Planting Date : </strong></th><td><%= @produce.producedate %></td></tr>
+      <tr><th> <strong>Harvesting Date : </strong></th><td><%= @produce.produceharvest %></td></tr>
+      <tr><th> <strong>Quantity : </strong></th><td><%= @produce.producequantity %></td></tr>
+      <tr><th> <strong>Description : </strong></th><td><%= @produce.producedescription %></td></tr>
+</table>
 
-<!-- <p>
-  <strong>Farmsiteid:</strong>
-  <%= @produce.produceimage %>
-</p>
- -->
+<% if user_signed_in? %>
+            <% if current_user.meta_type == "Farmer" and @produce.farmsite.farmer == current_user.meta %>
+            <div align="right">
+              <%= link_to edit_produce_path(@produce)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit" > </i> Edit<% end %>
 
-<%= link_to 'Edit', edit_produce_path(@produce) %> |
+              <%= link_to  @produce, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
+              </div>
+            <%end%>
+          <%end%>
 
+    </div>
+  </div>
+  <!-- end left --> 
+</div>
+
+
+
+
+
+<!-- right --> 
+<div class="row">
+  <div class="col-sm-6"></div>
+
+  <!-- first --> 
+  <div class="col-sm-5">
+    <div class="panel panel-default">
+      <div class="panel-heading">Location of the produce</div>
+      <div class="panel-body">
+       
+  <center>
+    <div style='width: 100%;'>
+       <div style='length: 100%;'>
+      <div id="multi_markers" style=' height: 400px;'></div>
+    </div></center>
+
+    <script >
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
+        var markers = handler.addMarkers(<%=raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+
+    </script>
+      </div>
+    </div>
+
+    <!-- second --> 
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p class="lead">Message box</p>
+
+
+        
+    </div>
+  </div>
+
+  <!-- end right --> 
+</div>
+
+
+<div class="row">
+  <div class="col-sm-6"></div>
+
+  <!-- first --> 
+  <div class="col-sm-5">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Timeline</h4></div>
+      <div class="panel-body">
+       </div>
+    </div>  
+  </div>
+  </div>  

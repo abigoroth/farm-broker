@@ -1,4 +1,5 @@
 class WallpostsController < ApplicationController
+  before_action :check_meta , if: "user_signed_in?"
   before_action :set_wallpost, only: [:show, :edit, :update, :destroy]
 
   # GET /wallposts
@@ -15,7 +16,7 @@ class WallpostsController < ApplicationController
 
   # GET /wallposts/new
   def new
-    @wallpost = Wallpost.new
+    @wallpost = current_user.wallposts.build
   end
 
   # GET /wallposts/1/edit
@@ -26,18 +27,15 @@ class WallpostsController < ApplicationController
   # POST /wallposts.json
   def create
 
-    @wallpost = Wallpost.new(wallpost_params)
-     @wallpost.broker_id = current_broker.id
-    
-    respond_to do |format|
-      if @wallpost.save
-        format.html { redirect_to :back, notice: 'Wallpost was successfully created.' }
-        format.json { render :show, status: :created, location: @wallpost }
-      else
-        format.html { render :new }
-        format.json { render json: @wallpost.errors, status: :unprocessable_entity }
-      end
+    @wallpost = current_user.wallposts.build(wallpost_params)
+    if @wallpost.save
+    flash[:notice] = 'Post created'
+    redirect_to wallposts_path
+    else
+      format.html { render :new }
+      format.json { render json: @wallpost.errors, status: :unprocessable_entity }
     end
+
   end
 
   # PATCH/PUT /wallposts/1
