@@ -1,7 +1,6 @@
 <%= simple_form_for(@comment) do |f| %>
 <%= f.error_notification %>
 
-
 <!-- <%= @comment.inspect %>
 <%= @comment.errors.inspect %> -->
 
@@ -10,8 +9,8 @@
     <%= f.input :comment_message %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-success btn-sm pull-right"%>
-  </div>
+    <div class="form-actions">
+      <%= f.button :submit, class: "btn btn-success btn-sm pull-right", label: false ,value: "Comment"%>
+    </div><br></br>
 
 <% end %>

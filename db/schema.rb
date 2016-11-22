@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109110440) do
+ActiveRecord::Schema.define(version: 20161122032144) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -43,6 +43,20 @@ ActiveRecord::Schema.define(version: 20161109110440) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "farmer_id"
+  end
+
+  create_table "bootsy_image_galleries", force: :cascade do |t|
+    t.string   "bootsy_resource_type"
+    t.integer  "bootsy_resource_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bootsy_images", force: :cascade do |t|
+    t.string   "image_file"
+    t.integer  "image_gallery_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "brokers", force: :cascade do |t|
@@ -161,7 +175,7 @@ ActiveRecord::Schema.define(version: 20161109110440) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer  "rating"
+    t.float    "rating"
     t.text     "comment"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

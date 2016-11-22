@@ -11,15 +11,17 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
+//= require turbolinks
 //= require bootstrap-sprockets
+//= require bootsy
 //= require moment
 //= require bootstrap-datetimepicker
-//= require jquery_ujs
 //= require datatables
-//= require turbolinks
 //= require jquery.countdown
 //= require underscore
 //= require gmaps/google
 //= require_tree .
 //= require_cable
 //= require jquery.raty
+

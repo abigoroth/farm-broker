@@ -46,7 +46,12 @@ class FarmsitesController < ApplicationController
   # GET /farmsites/1.json
   def show
     @produces = Produce.where(farmsite_id: params[:farmsite_id] ).order(created_at: :desc)
+     @hash1 = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+      marker.lat farmsite.latitude
+      marker.lng farmsite.longitudee
+      marker.infowindow farmsite.farmsitename
   end
+end
 
   # GET /farmsites/new
   def new

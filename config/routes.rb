@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-  
   resources :farmers
   resources :bidders
   resources :brokers
@@ -50,6 +48,7 @@ Rails.application.routes.draw do
     get 'purchase', on: :collection
   end
     mount ActionCable.server => '/cable'
+mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #get 'farmsites/farmprofile/:id', to: 'farmsites#farmprofile', as: 'farmprofile'
 end
