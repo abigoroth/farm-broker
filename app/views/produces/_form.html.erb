@@ -26,10 +26,11 @@
             <div class="panel-body">
 
               <div class="input-group input-group-lg " %>
-
-                <%= f.label "Farm Name" %>
-                <%= f.hidden_field :farmsite_id, value: Farmsite.find(params[:farmsite_id]).id,:class => "form-control",readonly: true %>
-                <%= f.text_field :farmsite_name, value: Farmsite.find(params[:farmsite_id]).farmsitename,:class => "form-control",readonly: true %>
+                <% if params[:farmsite_id] %>
+                  <%= f.label "Farm Name" %>
+                  <%= f.hidden_field :farmsite_id, value: Farmsite.find(params[:farmsite_id]).id,:class => "form-control",readonly: true %>
+                  <%= f.text_field :farmsite_name, value: Farmsite.find(params[:farmsite_id]).farmsitename,:class => "form-control",readonly: true %>
+                <% end %>
                 <br>
                 <%= f.label "Name:" %>
                 <%= f.text_field :producename, :class => "form-control", :placeholder => "Product name" %>
@@ -51,9 +52,9 @@
                 <div class="checkbox">
                   <%=f.radio_button :producetype,"Vegetable",:checked => true %> Vegetable<br>
                   <%=f.radio_button :producetype,"Fruit",:checked => true %> Fruit<br>
-                  <%=f.radio_button :producetype,"Flower",:checked => true %> Flower<br>  
-                  <%=f.radio_button :producetype,"Grain",:checked => true %> Grain<br>
-                  
+                  <%=f.radio_button :producetype,"Flower" %> Flower<br>  
+                  <%=f.radio_button :producetype,"Grain" %> Grain<br>
+                  <%=f.radio_button :producetype,"Livestock" %> Livestock<br>
                 </div>
          <!--      </div>
 
@@ -91,7 +92,7 @@
            <br>
 
 
-
+<!-- HIDE IF PRODUCE TYPE = LIVESTOCK -->
            <div class="field">
             <%= f.label 'Harvets date:' %><br />
             <div class='input-group date' id='datetimepicker4'>
@@ -115,7 +116,7 @@
 
 
 
-            
+            <!-- HOW ABOUT LIVESTOCK -->
             <%= f.label "Produce quantity:" %>
             <%= f.text_field :producequantity, :class => "form-control", :placeholder => "Quantity in kilogram" %>
             <div>

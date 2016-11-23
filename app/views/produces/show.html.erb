@@ -23,6 +23,7 @@
 
      <div class="panel-body">
       <table class="table">
+      <tr><th><strong>Farm: </strong></th><td><a href="<%= farmsite_path(id: @produce.farmsite.id) %>"><%= @produce.farmsite.farmsitename %></td></tr>
       <tr><th> <strong>Produce Name : </strong></th><td><%= @produce.producename %></td></tr>
       <tr><th> <strong>Produce Type : </strong></th><td><%= @produce.producetype %></td></tr>
       <tr><th> <strong>Planting Date : </strong></th><td><%= @produce.producedate %></td></tr>

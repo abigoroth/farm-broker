@@ -1,4 +1,3 @@
-
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css">
 <!-- Latest compiled and minified JavaScript -->
@@ -15,98 +14,98 @@
       <div class="panel-thumbnail"><%= image_tag @farmsite.avatar.url,class: "img-responsive",style: "height:250px;"%></div>
     </div>
 
-    <!-- second --> 
+<!-- second --> 
 
     <div class="panel panel-default">
-     <div class="panel-heading">Produces
+     <div class="panel-heading">Produces (click on produce's name)
+         <% if user_signed_in? and @farmsite and @farmsite.farmer == current_user.meta and  @farmsite.present?  %>
+              <%= link_to 'Add Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm pull-right" , data: {turbolinks: false}, remote: true %>
+          <%end%>
+     </div>
+      <div class="panel-body">
+    
+        <!--Carousel -->
+        <% if @farmsite.produces.present? %>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-      <% if user_signed_in? and @farmsite and @farmsite.farmer == current_user.meta and  @farmsite.present?  %>
-      <%= link_to 'Add Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm pull-right" , data: {turbolinks: false}, remote: true %>
-      <%end%>
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+          </ol>
 
-    </div>
-    <div class="panel-body">
+          <div class="carousel-inner" role="listbox">
+            <% @farmsite.produces.each_with_index do |produce,index| %>
+              <div class="item <%= 'active' if index == 0 %>">
+                <%= image_tag produce.avatar.url,class: "img-responsive",style: "height:300px;"%>
+                <div class="carousel-caption">
+                 <h1><a href="<%= produce_path(id: produce.id) %>" style="color:white"><%= produce.producename %></h1>
+               </div>
 
+             </div>
+           <% end %>
+        
+        </div>
+
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+      <% else %>
+        <div align="center">
+          No Produces Available. 
+        </div>
+       <% end %>
       <!--Carousel -->
-      <% if @farmsite.produces.present? %>
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-        </ol>
-
-        <div class="carousel-inner" role="listbox">
-          <% @farmsite.produces.each_with_index do |produce,index| %>
-          <div class="item <%= 'active' if index == 0 %>">
-            <%= image_tag produce.avatar.url,class: "img-responsive",style: "height:300px;"%>
-            <div class="carousel-caption">
-             <marquee behavior="alternate" scrollamount="10" direction="up">
-               <center><h1><a href="<%= produce_path(id: produce.id) %>" style="color:white"><%= produce.producename %></h1></center>
-             </marquee>
-           </div>
-
-         </div>
-         <% end %>
-
-       </div>
-
-       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-
-    <% else %>
-    No Produces
-    <% end %>
-    <!--Carousel -->
 
 
 
-  </div>
-</div>
+        </div>
+      </div>
 
-<!-- third --> 
-<div class="panel panel-default">
- <div class="panel-heading"></a>Review</div>
- <div class="panel-body">
+    <!-- third --> 
+    <div class="panel panel-default">
+     <div class="panel-heading"></a>Review</div>
+     <div class="panel-body">
+       
 
-   <div id="average"></div>
-   <span>based on <%= @farmsite.reviews.count %> reviews</span>
-   <br>
+       
+       <form>
+        <div class="input-group">
+          <div class="input-group-btn">
+            
+          </div>
+          <input type="text" class="form-control" placeholder="Add a comment..">
+        </div>
+      </form>
+<hr>
+<div id="average"></div>
 
-  
 
-  <% @reviews = @farmsite.reviews %>
 
-  <%@reviews.each do | review| %>
+
+<span>based on <%= @farmsite.reviews.count %> reviews</span>
+
+<% @reviews = @farmsite.reviews %>
+
+<%@reviews.each do | review| %>
 
   <% @review = review %>
   <br>
-
-  <% if @reviews.count != 0 %>
   <%= render "reviews/show" , :review => @review%>
-  <% @review_average = @reviews.sum(:rating) / @reviews.count %>
-  <%end%>
-
-  <%end%>
-  <!--<%= link_to "Add Review", new_farmsite_review_path(@farmsite) %></br>
-  <%= render "reviews/form" , :review => @review%>-->
+<%end%>
+<br>
+<%= link_to "Add Review", new_farmsite_review_path(@farmsite) %></br>
+    </div>
+  </div>
+  <!-- end left --> 
 </div>
-</div>
-
-</div>
-
-
-
-<!-- end left --> 
-
-
+<% @review_average = @reviews.count != 0 ? (@reviews.sum(:rating) / @reviews.count) : 0 %>
 
 
 
@@ -124,50 +123,50 @@
           <tr><th> <strong>Size: </strong></th><td><%= @farmsite.farmsitesize %> acres</td></tr>
           <tr><th><strong>Address: </strong></th><td><%= @farmsite.farmsiteaddress %></td></tr>
           <tr><th><strong>Owner: </strong></th><td><%= @farmsite.farmsiteownername %></td></tr>
-          <tr><th><strong>Company: </strong></th><td><%= @farmsite.farmer.user.meta.company_name %></td></tr>
+          <tr><th><strong>Company: </strong></th><td><a href="<%= user_views_profile_path(id: @farmsite.farmer.user.id)%>"><%= @farmsite.farmer.user.meta.company_name %></td></tr>
           <tr><th><strong>Contact: </strong></th><td><%= @farmsite.farmer.user.meta.company_phone %></td></tr>
-          <tr><th><strong>Farmer: </strong></th><td><a href="<%= user_views_profile_path(id: @farmsite.farmer.user.id)%>"><%= @farmsite.farmer.user.meta.name %></td></tr>
           <tr><th><strong>Description: </strong></th><td><%= @farmsite.farmsitedescription %></td></tr>
           <br>
         </table>
-
+<hr>
         <% if user_signed_in? %>
-        <% if current_user.meta_type == "Farmer" and @farmsite.farmer == current_user.meta %>
-        <div align="right">
-          <%= link_to edit_farmsite_path(@farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit" > </i> Edit<% end %>
+            <% if current_user.meta_type == "Farmer" and @farmsite.farmer == current_user.meta %>
+            <div align="right">
+              <%= link_to edit_farmsite_path(@farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit" > </i> Edit<% end %>
 
-          <%= link_to  @farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
-        </div>
-        <%end%>
-        <%end%>
+              <%= link_to  @farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
+              </div>
+            <%end%>
+          <%end%>
 
       </div>
     </div>
 
     
 
-    <!-- end right --> 
-
-    <!-- third --> 
+      <!-- end right --> 
+  
+  <!-- third --> 
     <div class="panel panel-default">
       <div class="panel-heading">Farm Location</div>
       <div class="panel-body">
+       
+ 
+    <div style='width: 100%;'>
+       <div style='length: 100%;'>
+      <div id="multi_markers" style=' height: 400px;'></div>
+    </div></center>
 
-
-        <div style='width: 100%;'>
-         <div style='length: 100%;'>
-          <div id="multi_markers" style=' height: 400px;'></div>
-        </div></center>
-
-        <script >
-          var handler = Gmaps.build('Google');
-          handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
-            var markers = handler.addMarkers(<%=raw @hash.to_json %>);
-            handler.bounds.extendWith(markers);
-            handler.fitMapToBounds();
-          });
-
-        </script>
+    <script >
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'multi_markers'} } , function() {
+          var marker = handler.addMarker({lat: <%= @farmsite.latitude %>, lng: <%= @farmsite.longitude %>});
+          // handler.bounds.extendWith(markers);
+          // handler.fitMapToBounds();
+          handler.map.centerOn(marker);
+        
+      } )
+    </script>
       </div>
     </div>
 
@@ -180,19 +179,13 @@
 
 
 <script>
-  /* Javascript */
-
-  $(function () {
-
-    $("#average").rateYo({
-      rating: "<%=@review_average%>",
-      readOnly: true
-    });
+/* Javascript */
+ 
+$(function () {
+ 
+  $("#average").rateYo({
+    rating: "<%=@review_average%>",
+    readOnly: true
   });
-
+});
 </script>
-
-
-
-
-

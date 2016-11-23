@@ -6,7 +6,7 @@ class FarmsitesController < ApplicationController
   # GET /farmsites.json
   def index
 
-   @farmsites = Farmsite.search("#{params[:search]}") if params[:search].present?
+   @farmsites = Farmsite.search("#{params[:search]}").search_state("#{params[:state]}").search_city("#{params[:city]}")
     #@user = User.find(params[:id])
     @review = Review.new
     
@@ -33,7 +33,7 @@ class FarmsitesController < ApplicationController
 
         #tak sign in/public
    #else
-        @farmsites = Farmsite.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+        @farmsites = @farmsites.order(farmsitename: :desc).paginate(:page => params[:page], :per_page => 10)
         @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
           marker.lat farmsite.latitude
           marker.lng farmsite.longitude
@@ -62,7 +62,7 @@ class FarmsitesController < ApplicationController
   def create
 
 
-    @farmsite =current_user.meta.farmsites.new(farmsite_params) if(current_user.meta_type == "Farmer")
+    @farmsite =current_user.meta.build_farmsite(farmsite_params) if(current_user.meta_type == "Farmer")
 
 
     respond_to do |format|

@@ -32,8 +32,28 @@
          </div>
        </div>
      </div>
-     <!--Status -->
+     <!--Farm -->
      <div class="col-xs-6">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">My Farm</div>
+            <div class="panel-body" align="center">
+             
+              <% if @user.meta.farmsite.present? %>
+                <h3><a href="<%= farmsite_path(id: @user.meta.farmsite.id) %>"><%= @user.meta.farmsite.farmsitename %></a></h3>
+              <% else %>
+                No Farm Yet.
+                <hr>
+                <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>  
+              <% end %>
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+
       <%if user_signed_in? and @user.id == current_user.id %>
       <div class="row">
         <div class="col-xs-12">

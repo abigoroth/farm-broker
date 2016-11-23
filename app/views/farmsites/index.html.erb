@@ -1,7 +1,7 @@
 
 <center><h1>Farms</h1>
 
-<% if user_signed_in? and (current_user.meta_type == "Farmer")%>
+<% if user_signed_in? and (current_user.meta_type == "Farmer") and !current_user.meta.farmsite.present? %>
 
   <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
 <%end%>
@@ -18,14 +18,13 @@
       <div class="panel-body">
 
         
-        <div class="col-md-6"><%= image_tag farmsite.avatar.url,class: "img-responsive",style: "height:250px;"%> </div>
+        <div class="col-md-6"><%= image_tag farmsite.avatar.url,class: "img-responsive",style: "height:200px;"%> </div>
        
-
         <div class="col-xs-4 col-md-offset-2">
 
           <table class="table">
-          <tr><th><strong>Address: </strong></th><td><%= farmsite.farmsiteaddress %></td></tr>
-          <tr><th><strong>Company: </strong></th><td><%= farmsite.farmer.user.meta.company_name %></td></tr><br>
+          <tr><th><strong>Company: </strong></th><td><a href="<%= user_views_profile_path(id: farmsite.farmer.user.id)%>"><%= farmsite.farmer.user.meta.company_name %></td></tr>
+          <tr><th><strong>Location: </strong></th><td><%= farmsite.farmsitestate %>, <%= farmsite.farmsitecity %></td></tr><br>
         </table>
           <div align="right"><a class="btn btn-warning btn-sm" href="<%= farmsite_path(id: farmsite.id) %>">Details</a></div>
           
