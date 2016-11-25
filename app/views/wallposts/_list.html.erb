@@ -5,79 +5,71 @@
 <%= render "wallposts/form", :wallpost => @wallpost %>
 <%end%>
 
-<div class="row">
-  <div class="col-sm-2"></div>
 
-  <div class="col-sm-8">
-    <div class="well well-sm" style="background-color:lightseagreen;">
-
-      <% @wallposts.each do |wallpost| %><br>
-
-      <br><div class="panel panel-default">
-      <div class="panel-heading" style="background-color:powderblue;"><b>
-        <img src="<%= wallpost.broker.profilephoto %>" class="img-circle" alt="Cinque Terre" width="60" height="60">
-        <h4><%= wallpost.broker.meta.name %></b>&nbsp;<span><small><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></small></span>
-
-          <%if user_signed_in? and (wallpost.broker.id == current_user.id) %>
+    <div class="row">
+        <%#column left %>
+        <div class="col-sm-3"></div>
+        <%#column center %>
+        <div class="col-sm-6">
          
-            <%= link_to edit_wallpost_path(wallpost) do %>
-            <i class="glyphicon glyphicon-pencil"></i>
-            <% end %>
-            &nbsp;&nbsp;&nbsp;
-            <%= link_to wallpost, method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <i class="glyphicon glyphicon-remove"></i>
-            <% end %>
-          
-          <%end%>
-        </h4>
-      </div>
+          <br><% @wallposts.each do |wallpost| %><br>
 
+              <div class="panel panel-default">
+                      <div class="panel-heading" style="background-color:powderblue;">
+                       <div class="row"><div class="col-sm-2">
+                        <img src="<%= wallpost.broker.profilephoto %>" class="img-circle" alt="Cinque Terre" width="80" height="80">&nbsp;</div>
+                        <div class="col-sm-8">
+                        <span><h4><%= wallpost.broker.meta.name %></b>&nbsp;<span><small><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></small></span> </h4>
+                            <%if user_signed_in? and (wallpost.broker.id == current_user.id) %>
+                              
+                                <%= link_to edit_wallpost_path(wallpost) do %><i class="glyphicon glyphicon-pencil"></i><% end %>
+                                    &nbsp;&nbsp;&nbsp;
+                                <%= link_to wallpost, method: :delete, data: { confirm: 'Are you sure?' } do %><i class="glyphicon glyphicon-remove"></i><% end %>
+                              </span>
+                              
+                            <%end%>
+                      </div>
+                    </div></div>
+                  <div class="panel-body">
+                    <br><h4><%= raw wallpost.wall_status %></h4><br>
+                  </div>
+              </div>
 
+                <div id="comments">
+                    <h3><%= wallpost.comments.count%> Comments</h3> 
+                      <%if !user_signed_in? %><em>Please login to comment</em><%end%>
+                      <% if wallpost.comments.present? %><button onclick='toogle_div_fun("<%= wallpost.id%>");'>View Comments</button><% end %><br></br>
+                      
+                    <div id="<%= wallpost.id%>" style="display: none">
+                      <% wallpost.comments.each do |comment|%>
+                        <div class="panel panel-default" style="padding:5px" >
+                        <div class="row"><div class="col-sm-1">
+                          <img src="<%= comment.broker.profilephoto %>" class="img-circle" alt="Cinque Terre" width="40" height="40">&nbsp;</div>
+                          <div class="col-sm-6">
+                          <b><span> <%= comment.broker.meta.name %> </span></b>
+                            <%if user_signed_in? and comment.broker.id == current_user.id %>
+                              <span style="float:right;text-align:right"><%= link_to edit_comment_path(comment) do %> <i class="glyphicon glyphicon-pencil"></i><%end%>
+                                  <%= link_to comment, method: :delete, data: { confirm: 'Are you sure?' } do %><i class="glyphicon glyphicon-remove"></i><%end%>
+                                </span>
+                              <%end%>
+                            <span> <%= comment.comment_message %> </span><br>
+                          <span><small><%= comment.created_at.strftime("%d/%m/%y at %l:%M %p") %></small></span><br>
+                          </div>
+                        </div></div>
+                      <% end %>
+                    </div>
 
-      <div class="panel-body">
-        <br><h4><%= wallpost.wall_status %></h4><br>
-
-      </div></div>
-
-
-      <div id="comments">
-        <p><h3><%= wallpost.comments.count%> Comments</h3> 
-          <%if !user_signed_in? %><em>Please login to comment</em>
-          <%end%>
-        </p>
-
-        <% if wallpost.comments.present? %><button onclick='toogle_div_fun("<%= wallpost.id%>");'>View Comments</button><% end %>
-        <div id="<%= wallpost.id%>" style="display: none">
-
-          <% wallpost.comments.each do |comment|%>
-          <div class="panel panel-default" style="padding:5px" >
-            <b><span> <%= comment.broker.meta.name %> </span></b>
-            <%if user_signed_in? and comment.broker.id == current_user.id %>
-            <span style="float:right;text-align:right"><%= link_to edit_comment_path(comment) do %> <i class="glyphicon glyphicon-pencil"></i>
-              <%end%>
-              <%= link_to comment, method: :delete, data: { confirm: 'Are you sure?' } do %><i class="glyphicon glyphicon-remove"></i><%end%>
-            </span>
-            <%end%>
-            <span> <%= comment.comment_message %> </span><br>
-            <span><small><%= comment.created_at.strftime("%d/%m/%y at %l:%M %p") %></small></span>
-            <br>
+             
+                  <%if user_signed_in? %>
+                    <%@comment = wallpost.comments.new %>
+                      <%= render "comments/form", :comment => @comment %>
+                      <%end%>
+                  <%end%>
+                </div>
           </div>
-          <% end %>
-        </div>
-        
-        <%if user_signed_in? %>
+       
 
-        <%@comment = wallpost.comments.new %>
-        <%= render "comments/form", :comment => @comment %>
-        <% end %>
-        <%end%>
-      </div>
+        <%#column right %>
+        <div class="col-sm-3"></div>
+    </div>
 
-    </div><br>
-    <div class="col-sm-2"></div>
-    
-  </div>
-</div>
-</div>
-</div>
-</div>

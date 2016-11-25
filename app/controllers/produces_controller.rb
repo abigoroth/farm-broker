@@ -15,6 +15,13 @@ class ProducesController < ApplicationController
 
     @farmsite = Farmsite.find(params[:farmsite_id]) if params[:farmsite_id].present?
 
+
+        @hash = Gmaps4rails.build_markers(@produces) do |produce, marker|
+          marker.lat produce.farmsite.latitude
+          marker.lng produce.farmsite.longitude
+          marker.infowindow produce.farmsite.farmsitename + "<br> <br> Produces : " + produce.farmsite.produces.map{|x| x.producename }.join(", ")
+        end
+
   end
 
   # GET /produces/1

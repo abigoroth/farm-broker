@@ -15,7 +15,7 @@ class Farmsite < ApplicationRecord
 
 	scope :search, -> (keyword) { where("farmsitename like ?", "#{keyword}%")}
 	scope :search_state, -> (state) { where("farmsitestate like ?", "#{state}%") if state.presence }
-	scope :search_city, -> (city) { where("farmsitecity like ?", "#{city}%") if city.presence }
+	scope :search_city, -> (city) { where("farmsitecity like ?", "#{city}%") if city.presence && city != "null" }
 
 end
 

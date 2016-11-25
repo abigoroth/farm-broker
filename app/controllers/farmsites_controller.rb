@@ -6,7 +6,7 @@ class FarmsitesController < ApplicationController
   # GET /farmsites.json
   def index
 
-   @farmsites = Farmsite.search("#{params[:search]}").search_state("#{params[:state]}").search_city("#{params[:city]}")
+   @farmsites = Farmsite.search("#{params[:search]}").search_state("#{params[:state]}").search_city("#{params[:city]}").order(farmsitename: :asc).paginate(:page => params[:page], :per_page => 10)
     #@user = User.find(params[:id])
     @review = Review.new
     
@@ -33,11 +33,11 @@ class FarmsitesController < ApplicationController
 
         #tak sign in/public
    #else
-        @farmsites = @farmsites.order(farmsitename: :desc).paginate(:page => params[:page], :per_page => 10)
+        @farmsites = @farmsites.all.order(farmsitename: :asc).paginate(:page => params[:page], :per_page => 10)
         @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
           marker.lat farmsite.latitude
           marker.lng farmsite.longitude
-          marker.infowindow farmsite.farmsitename
+          marker.infowindow farmsite.farmsitename + "<br> <br> Produces : " + farmsite.produces.map{|x| x.producename }.join(", ")
         end
    #end
   end
@@ -46,7 +46,12 @@ class FarmsitesController < ApplicationController
   # GET /farmsites/1.json
   def show
     @produces = Produce.where(farmsite_id: params[:farmsite_id] ).order(created_at: :desc)
+     @hash1 = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
+      marker.lat farmsite.latitude
+      marker.lng farmsite.longitudee
+      marker.infowindow farmsite.farmsitename
   end
+end
 
   # GET /farmsites/new
   def new

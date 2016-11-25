@@ -11,7 +11,9 @@
   <div class="col-sm-5">
 
     <div class="panel panel-default">
-      <div class="panel-thumbnail"><%= image_tag @farmsite.avatar.url,class: "img-responsive",style: "height:250px;"%></div>
+      <div class="panel-thumbnail">
+          <%= image_tag @farmsite.avatar.url,class: "img-responsive",style: "height:250px;"%>
+      </div>
     </div>
 
 <!-- second --> 
@@ -61,6 +63,7 @@
           No Produces Available. 
         </div>
        <% end %>
+
       <!--Carousel -->
 
 
@@ -68,46 +71,26 @@
         </div>
       </div>
 
-    <!-- third --> 
+    <!-- third <%= link_to "Add Review", new_farmsite_review_path(@farmsite) %></br> --> 
     <div class="panel panel-default">
-     <div class="panel-heading"></a>Review</div>
-     <div class="panel-body">
-       
 
-       
-       <form>
-        <div class="input-group">
-          <div class="input-group-btn">
-            
-          </div>
-          <input type="text" class="form-control" placeholder="Add a comment..">
+      <div class="panel-heading"></a>Review</div>
+        <div class="panel-body">
+          <% @reviews = @farmsite.reviews %>
+            <%@reviews.each do | review| %>
+              <% @review = review %><br>
+                <%if @reviews.count != 0 %>
+                  
+                    <% @review_average = @reviews.sum(:rating) / @reviews.count %>
+                    <%= render "reviews/show" , :review => @review%>
+                    <%end%><hr>
+                <%end%><br>
+
+                <%= render "reviews/form" , :review => @review%></br>
         </div>
-      </form>
-<hr>
-<div id="average"></div>
+      </div>
 
-
-
-
-<span>based on <%= @farmsite.reviews.count %> reviews</span>
-
-<% @reviews = @farmsite.reviews %>
-
-<%@reviews.each do | review| %>
-
-  <% @review = review %>
-  <br>
-  <%= render "reviews/show" , :review => @review%>
-<%end%>
-<br>
-<%= link_to "Add Review", new_farmsite_review_path(@farmsite) %></br>
     </div>
-  </div>
-  <!-- end left --> 
-</div>
-<% @review_average = @reviews.count != 0 ? (@reviews.sum(:rating) / @reviews.count) : 0 %>
-
-
 
 
 <!-- right --> 
@@ -159,6 +142,7 @@
 
     <script >
       var handler = Gmaps.build('Google');
+
       handler.buildMap({ internal: {id: 'multi_markers'} } , function() {
           var marker = handler.addMarker({lat: <%= @farmsite.latitude %>, lng: <%= @farmsite.longitude %>});
           // handler.bounds.extendWith(markers);
@@ -166,6 +150,7 @@
           handler.map.centerOn(marker);
         
       } )
+
     </script>
       </div>
     </div>

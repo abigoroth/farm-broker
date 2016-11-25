@@ -14,7 +14,7 @@ class Produce < ApplicationRecord
 	.where("farmsites.farmsitestate = '#{state}'") if state.presence
 	}
 	scope :search_city, -> (city) {joins(:farmsite)
-	.where("farmsites.farmsitecity = '#{city}'") if city.presence 
+	.where("farmsites.farmsitecity = '#{city}'") if city.presence && city != "null"
 	}
 	
 

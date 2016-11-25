@@ -1,62 +1,75 @@
 <div id="maincontainer">
   <br><br><br>
-  <div class="row"> 
-    <div class="col-xs-8 col-md-offset-2">
-      <div class="input-group">
-        <div class="input-group-btn search-panel">
-          
-          
 
-       <select name="state" id="state_select" class="btn btn-default dropdown-toggle" >
-            <option value="">Any State</option>
+
+  <div class="row"> 
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      <form class="form-inline">
+        
+        <!-- Choose State -->
+        <div class="form-group">
+          <select name="state" id="state_select" class="form-control">
+            <option value="">Any State </option> 
             <%= State.each do |s| %>
             <option value="<%= s %>"><%= s %></option>
             <% end %>
           </select>
-        
-        <select name="city" id="city_select" class="btn btn-default dropdown-toggle">
-          </select> 
-
-       
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              <span id="search_concept">Search by</span> <span class="caret"></span>
-            </button>
-
-            <ul class="dropdown-menu" role="menu">
-              <li><a data-turbolinks="false" href="<%= produces_path %>">Produce </a></li>
-              <li><a data-turbolinks="false" href="<%= farmsites_path %>">Farmsite </a></li>
-              <li><a data-turbolinks="false" href="#company">Company </a></li>
-              <li class="divider"></li>
-              <li><a href="#all">Anything</a></li>
-            </ul>
-          </div>
-
-          <input type="hidden" name="search_param" value="all" id="search_param">         
-          <input type="text" class="form-control" id = "params_search" name="x" placeholder="Type here...">
-
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button" id="button_search"><span class="glyphicon glyphicon-search"></span></button>
-          </span>
         </div>
-      </div>
-    </div>
+
+        <!-- Choose City -->
+        <div class="form-group">
+          <select name="city" id="city_select" class="form-control">
+            <option value="">Any City </option> 
+          </select>
+        </div>
+
+        <div class="form-group">
+          <select name="city" id="search_concept" class="form-control">
+            <option value="">Search by </option>
+            <option value="Produce">Produce </option>
+            <option value="Farmsite">Farmsite </option>
+          </select>
+        </div>
+
+         <!-- Choose Produce/Farmsite
+        <div class="form-group">
+          <button type="button" class="form-control" data-toggle="dropdown">
+            <span id="search_concept">Search by</span> <span class="caret"></span>
+          </button>
+
+          <ul class="dropdown-menu" role="menu">
+            <li><a data-turbolinks="false" href="#">Produce </a></li>
+            <li class="divider"></li>
+            <li><a data-turbolinks="false" href="<%= farmsites_path %>">Farmsite </a></li>
+          </ul>
+      </div> -->
+
+      <!-- Type Produce Name / Farmsite Name -->
+      <input type="hidden" name="search_param" value="all" id="search_param">         
+      <input type="text" class="form-control" id = "params_search" name="x" placeholder="Produce Name / Farmsite Name">
+
+      <!-- Search button -->
+      <span class="form-group">
+        <button class="form-control" type="button" id="button_search"><span class="glyphicon glyphicon-search"></span></button>
+      </span>
+
+      </form>
+  </div><!-- Close Column -->
+
+</div><!-- Close Row -->
 
 
+  <!-- Text -->
+  <marquee behavior="alternate" scrollamount="10" direction="up">
+    <center>
+      <h1 style="font-family:Cursive">WELCOME TO TANIMALL</h1>
+      <p><font size="5" color="white">Sign Up and Join Us Now!</font></p>
+    </center>
+  </marquee>
 
 
-    <br><br><br>
-    <marquee behavior="alternate" scrollamount="10" direction="up">
-      <center>
-        <h1>WELCOME TO TANIMALL</h1>
-        <p><font size="6" color="white">Sign Up & Join Us Now!</font></p>
-      </center>
-    </marquee>
-
-  </div>
-</div>
-<br>
-
-<br>
+</div><!-- Close Container -->
 
 <!-- <div class="row">
   <div class="col-lg-1"></div>
@@ -96,39 +109,51 @@
 <div class="col-lg-1"></div>
 </div> -->
 
-<script>
+<!-- 
 
-  $("#button_search").click(function(){
-    searching_for_data();
-  });
+      <select name="state" id="state_select" class="btn btn-default dropdown-toggle" >
+          <option value="">Any State</option>
+          <%= State.each do |s| %>
+          <option value="<%= s %>"><%= s %></option>
+          <% end %>
+        </select>
+       
+
+        
+        <select name="city" id="city_select" class="btn btn-default dropdown-toggle">
+        </select>
+      -->
+
+      <script>
+
+        $("#button_search").click(function(){
+          searching_for_data();
+        });
 
 
-  $("#params_search").keypress(function(e){
-    if(e.which == 13){searching_for_data();}
+        $("#params_search").keypress(function(e){
+          if(e.which == 13){searching_for_data();}
 
-  });
+        });
 
-  function searching_for_data(){
+        function searching_for_data(){
 
 
-    var params_search = $("#params_search").val();
-    var search_concept = $("#search_concept").text().trim();
-    var city = $("#city_select").val();
-    var state = $("#state_select").val();
+          var params_search = $("#params_search").val();
+          var search_concept = $("#search_concept").val()
+          var city = $("#city_select").val();
+          var state = $("#state_select").val();
 
-   //alert(state);
+           //alert(state);
 
-   if(search_concept == "Produce"){
-    Turbolinks.visit("/produces?search=" + params_search + "&state=" + state + "&city=" + city );
-    //
-  }
-  if(search_concept == "Farmsite"){
-    Turbolinks.visit("/farmsites?search=" + params_search + "&state=" + state + "&city=" + city);
-  }
-  if(search_concept == "Company"){
-    Turbolinks.visit("/farmsites?search=" + params_search+ "&state=" + state + "&city=" + city );
-  }
-}
+          if(search_concept == "Produce"){
+            Turbolinks.visit("/produces?search=" + params_search + "&state=" + state + "&city=" + city );
+          //
+          }
+          if(search_concept == "Farmsite"){
+            Turbolinks.visit("/farmsites?search=" + params_search + "&state=" + state + "&city=" + city);
+          }
+        }
 
 city = <%= raw(City.to_json) %>
 
