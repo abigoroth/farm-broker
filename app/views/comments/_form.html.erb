@@ -1,16 +1,45 @@
-<%= simple_form_for(@comment) do |f| %>
-<%= f.error_notification %>
 
-<!-- <%= @comment.inspect %>
-<%= @comment.errors.inspect %> -->
+<div class = "modal-dialog modal-lg" >
+  <div class = "modal-content" >
 
-<div class="form-inputs">
-  	<%= f.input :wallpost_id , as: :hidden %>
-    <%= f.input :comment_message %>
+
+      <%= simple_form_for(@comment) do |f| %>
+        <% if @comment.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+            <% @comment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class = "modal-header" >
+          <center><h4 class = "modal-title" >COMMENTS</h4></center>
+        </div>
+
+
+        <div class = "modal-body" >
+                      <div class="form-inputs">
+                      	<%= f.input :wallpost_id , as: :hidden %>
+                        <%= f.input :comment_message, label: "Comment" %>
+                      </div>
+
+                        <div class="form-actions">
+                          <%= f.button :submit, class: "btn btn-success btn-sm pull-right", label: false ,value: "Comment"%>
+                        </div><br></br>
+        </div>
+
+        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+
+
+
+      <% end %>
   </div>
+</div>
 
-    <div class="form-actions">
-      <%= f.button :submit, class: "btn btn-success btn-sm pull-right", label: false ,value: "Comment"%>
-    </div><br></br>
 
-<% end %>
+
+
+
+
+

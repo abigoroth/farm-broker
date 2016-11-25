@@ -5,6 +5,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.js"></script>
 
 
+
+
 <!-- left -->                      
 <div class="row">
   <div class="col-sm-1"></div>
@@ -13,13 +15,11 @@
 
     <div class="panel panel-default">
       <div class="panel-thumbnail">
-        <div class="row">
-          <div class="col-sm-6"><%= image_tag @farmsite.avatar.url,class: "img-responsive",style: "height:250px;"%></div>
-            <div class="col-sm-6">
-              <br>
-                <p>Avarage Rating</p> 
-                  <div id="average"></div><br>
-                  <span>Based on <%= @farmsite.reviews.count %> reviews</span></div></div></div>
+
+        <center><%= image_tag @farmsite.avatar.url,class: "img-responsive",style: "height:250px;"%></center>
+           
+          
+        </div>
     </div>
 
 <!-- second --> 
@@ -82,6 +82,7 @@
         <div class="panel-body">
           <% @reviews = @farmsite.reviews %>
             <%@reviews.each do | review| %>
+
               <% @review = review %><br>
                 <%if @reviews.count != 0 %>
                   
@@ -89,7 +90,36 @@
                     <%= render "reviews/show" , :review => @review%>
                     <%end%><hr>
                 <%end%><br>
-                <%= render "reviews/form" , :review => @review%></br>
+                
+                    <%= simple_form_for([@farmsite, @farmsite.reviews.build]) do |f| %>
+                        <div class="form-inputs">
+                              <%= f.label "Rating" %>
+                              <div id="rateYo"></div>
+                              <%= f.input :rating ,:as => :hidden %>
+                              <%= f.input :comment %>
+                        </div>
+
+                        <div class="form-actions">
+                       
+                              <%= f.button :submit %>
+                        </div>
+                    <% end %>
+
+                <script>
+
+                    $(function () {
+                     
+                      $("#rateYo").rateYo({
+                     
+                        onSet: function (rating, rateYoInstance) {
+                     
+                          //alert("Rating is set to: " + rating);
+                          $("#review_rating").val(rating)
+                        }
+                      });
+                    });
+
+                </script>
         </div>
       </div>
     </div>
@@ -104,16 +134,22 @@
     <div class="panel panel-default">
       <div class="panel-heading"><center><h4><%= @farmsite.farmsitename %></h4></center></div>
       <div class="panel-body">
+      <tr><th><strong>Owner: </strong></th><td><%= @farmsite.farmsiteownername %></td></tr><br>
+      <tr><th><strong>Farmer: </strong></th><td><a href="<%= user_views_profile_path(id: @farmsite.farmer.user.id)%>"><%= @farmsite.farmer.user.meta.name %></td></tr></a><br>
         <table class="table">
-          <tr><th> <strong>Size: </strong></th><td><%= @farmsite.farmsitesize %> acres</td></tr>
           <tr><th><strong>Address: </strong></th><td><%= @farmsite.farmsiteaddress %></td></tr>
-          <tr><th><strong>Owner: </strong></th><td><%= @farmsite.farmsiteownername %></td></tr>
+          <tr><th><strong>Size: </strong></th><td><%= @farmsite.farmsitesize %> acres</td></tr>          
           <tr><th><strong>Company: </strong></th><td><%= @farmsite.farmer.user.meta.company_name %></td></tr>
           <tr><th><strong>Contact: </strong></th><td><%= @farmsite.farmer.user.meta.company_phone %></td></tr>
-          <tr><th><strong>Farmer: </strong></th><td><a href="<%= user_views_profile_path(id: @farmsite.farmer.user.id)%>"><%= @farmsite.farmer.user.meta.name %></td></tr>
+          
           <tr><th><strong>Description: </strong></th><td><%= @farmsite.farmsitedescription %></td></tr>
-          <br>
+         
+        <tr><th><strong><p>Avarage Rating</p> </th><td>
+                  <div id="average"></div><br>
+                  </strong><span>Based on <%= @farmsite.reviews.count %> reviews</span></td></tr>
+        <br>
         </table>
+
 
         <% if user_signed_in? %>
             <% if current_user.meta_type == "Farmer" and @farmsite.farmer == current_user.meta %>

@@ -18,20 +18,22 @@ class User < ApplicationRecord
         dob.strftime('%d/%m/%Y')
     end
     #Messages
-    has_many :chat_rooms, foreign_key: :sender_id
-    has_many :messages
+    has_many :chat_rooms, foreign_key: :sender_id,dependent: :destroy
+    has_many :messages,dependent: :destroy
     #Friends
-    has_many :friendships
-    has_many :friends, :through => :friendships
-    has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-    has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+    has_many :friendships,dependent: :destroy
+    has_many :friends, :through => :friendships,dependent: :destroy
+    has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id",dependent: :destroy
+    has_many :inverse_friends, :through => :inverse_friendships, :source => :user,dependent: :destroy
+
+    
     #Wallpost
-    has_many :wallposts, foreign_key: :broker_id
+    has_many :wallposts, foreign_key: :broker_id,dependent: :destroy
     #Farmsite
-    has_many :farmsites
+    has_many :farmsites,dependent: :destroy
     #Comment
-    has_many :comments, foreign_key: :broker_id
-    has_many :reviews
+    has_many :comments, foreign_key: :broker_id,dependent: :destroy
+    has_many :reviews,dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -49,13 +51,13 @@ class User < ApplicationRecord
          #birth date format
 
          #Messages
-         has_many :chat_rooms, foreign_key: :sender_id
-         has_many :messages
+         has_many :chat_rooms, foreign_key: :sender_id,dependent: :destroy
+         has_many :messages,dependent: :destroy
          #Friends
-         has_many :friendships
-         has_many :friends, :through => :friendships
-         has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-         has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+         has_many :friendships,dependent: :destroy
+         has_many :friends, :through => :friendships,dependent: :destroy
+         has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id",dependent: :destroy
+         has_many :inverse_friends, :through => :inverse_friendships, :source => :user,dependent: :destroy
 
 
     #  #broker
@@ -71,9 +73,9 @@ class User < ApplicationRecord
     # #bidder
     # has_many :bid_processes
     # has_many :bids
-    has_many :bids, foreign_key: :farmer_id
+    has_many :bids, foreign_key: :farmer_id,dependent: :destroy
 
-    has_many :comments, foreign_key: :broker_id
+    has_many :comments, foreign_key: :broker_id,dependent: :destroy
 
 
 end

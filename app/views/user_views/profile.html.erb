@@ -1,17 +1,27 @@
+<style>
+div.container {
+    width: 85%;
+    margin: auto;
+}
+
+</style>
+
 <div class="container">
-  <br>
+
   <div class="row">
     <div class="col-xs-3">
-      <div class="panel panel-default">
+      <div class="panel panel-default" >
         <div class="panel-heading"><center><strong><%= @user.meta.name %></strong></center></div>
         <div class="panel-body">
-          <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px">
-            <%if user_signed_in? and @user.id == current_user.id %><% if !@user.profilephoto.blank? %><br><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %>
-            <%else%>
-            <%if user_signed_in? %><a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: @user.id) %>" class="btn btn-danger" data-method="post">Message</a><%end%>
-            <%end%>
-            <br><br><strong style="text-transform:capitalize"><%= @user.meta_type %></strong></div></center>
-            <br>
+          <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px"><br><br><center>
+          <strong style="text-transform:capitalize"><%= @user.meta_type %></strong></div></center>
+            <%if user_signed_in? and @user.id == current_user.id %>
+              <% if !@user.profilephoto.blank? %><br>
+                <a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %>
+              <%else%>
+                <center><%if user_signed_in? %><a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: @user.id) %>" class="btn btn-info" data-method="post">Message</a><%end%>
+            </center><%end%>
+           
             <table class="table">
               <tr><th>Email: </th><td><%= @user.email %></td></tr>
               <tr><th>Birth Date: </th><td><%= @user.meta.birth_date %></td></tr>
@@ -20,7 +30,7 @@
               <%if current_user.meta_type == "Farmer" %>
               <tr><th>Company: </th><td><%= @user.meta.company_name%></td></tr>
               <tr><th>Contact: </th><td><%= @user.meta.company_phone%></td></tr>
-              <% end %>
+              <%end%>
               <tr>
                 <td colspan="2" align="right">
                   <%if user_signed_in? and @user.id == current_user.id %>
@@ -32,7 +42,7 @@
          </div>
        </div>
      </div>
-     <!--Status -->
+     <!--Create Status -->
      <div class="col-xs-6">
       <%if user_signed_in? and @user.id == current_user.id %>
       <div class="row">
@@ -41,9 +51,12 @@
             <div class="panel-heading">Status</div>
             <div class="panel-body">
               <%= form_for [current_user, Wallpost.new], url: user_views_profile_path(id:current_user.id), method: :post do |f|%>
-              <%= f.text_area :wall_status, class: 'form-control', placeholder: "What's on your mind?" %>
+              
+               <%= f.submit 'Post', class: "btn btn-success btn-md pull-right"%>
+               
+              <%= f.bootsy_area :wall_status, as: :bootsy,size: "5x5", editor_options: { blockquote: false, font_styles: false , emphasis: false, lists: false, color: false }, class: 'form-control', placeholder:"What's on your mind?" %>
               <br>
-              <div align="right"><%= f.submit 'Post', class: 'btn btn-primary btn-sm' %></div>
+             
               <%end%>
 
             </div>
@@ -61,7 +74,8 @@
                 <% @wallposts.each do |post| %>
                 <img src="<%=post.broker.profilephoto%>" style="width:50px; height:50px; border-radius:90px" />&nbsp;&nbsp;&nbsp;&nbsp;<strong><%= post.broker.meta.name %></strong>
                 &nbsp;<%= post.created_at.strftime("%d/%m/%Y at %l:%M %p") %>
-                <br><div style="padding-left:70px"><%= post.wall_status %></div><br>
+                <br><div style="padding-left:70px"><%= raw post.wall_status %></div><hr><br>
+                
                 <%end%>
               </p>
 

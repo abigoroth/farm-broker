@@ -1,3 +1,4 @@
+
 <div class = "modal-dialog modal-lg" >
   <div class = "modal-content" >
 
@@ -15,15 +16,14 @@
                   <% end %>
                 </div>
               <% end %>
-
               <div class = "modal-header" >
-                <center><h4 class = "modal-title" >REVIEWS</h4></center>
+                <center><h4 class = "modal-title" >Update Review</h4></center>
               </div>
 
               <div class = "modal-body" >
                       <div class="form-inputs">
-                      	<%= f.label "Rating" %>
-                      	<div id="rateYo"></div>
+                        <%= f.label "Rating" %>
+                        <div id="<%=@review.id%>"></div><br>
                         <%= f.input :rating ,:as => :hidden %>
                         <%= f.input :comment %>
                       </div>
@@ -58,3 +58,17 @@
 
   </div>
 </div>
+
+
+
+<script>
+/* Javascript */
+ 
+$(function () {
+ 
+  $("#<%=@review.id%>").rateYo({
+    rating: "<%=@review.rating%>",
+    readOnly: false
+  });
+});
+</script>
