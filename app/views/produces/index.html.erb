@@ -5,7 +5,8 @@
 <br/>
 <!-- left --> 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-6">
     <% @produces.each do |produce| %>
       <div class="panel panel-default">
 
@@ -14,14 +15,15 @@
       <div class="panel-body">
 
         
-        <div class="col-md-6"><%= image_tag produce.avatar.url,class: "img-responsive",style: "height:250px;"%> </div>
+        <div class="col-md-6"><%= image_tag produce.avatar.url,class: "img-responsive",style: "height:200px;"%> </div>
        
 
         <div class="col-xs-4 col-md-offset-2">
 
           <table class="table">
           <tr><th><strong>Farm: </strong></th><td><a href="<%= farmsite_path(id: produce.farmsite.id) %>"><%= produce.farmsite.farmsitename %></td></tr>
-          <tr><th><strong>Company: </strong></th><td><%= produce.farmsite.farmer.user.meta.company_name %></td></tr><br>
+          <tr><th><strong>Company: </strong></th><td><a href="<%= user_views_profile_path(id: produce.farmsite.farmer.user.id)%>"><%= produce.farmsite.farmer.user.meta.company_name %></td></tr><br>
+          <tr><th><strong>Location: </strong></th><td><%= produce.farmsite.farmsitecity %>, <%= produce.farmsite.farmsitestate %></td></tr><br>
         </table>
           <div align="right"><a class="btn btn-warning btn-sm" href="<%= produce_path(id: produce.id) %>">Details</a></div>
           
@@ -30,6 +32,36 @@
     </div>
     <%end%>
   </div>
+
+<div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">Produces Location (click on the marks)</div>
+      <div class="panel-body">
+
+        <div style='width: 100%;'>
+          <div style='length: 100%;'>
+            <div id="multi_markers" style=' height: 400px;'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script >
+
+  var handler = Gmaps.build('Google');
+  handler.buildMap({ internal: {id: 'multi_markers'}}, 
+    function(){
+  
+      var markers = handler.addMarkers(<%=raw @hash.to_json %> );
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+     
+    });
+
+</script>
+
 </div>
 
 <div class="row">

@@ -5,11 +5,22 @@ class ProducesController < ApplicationController
   # GET /produces
   # GET /produces.json
   def index
-    @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 2)
- : Produce.all.paginate(:page => params[:page], :per_page => 2)
+    @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+ : Produce.all.order(producename: :desc).paginate(:page => params[:page], :per_page => 10)
 
-    @produces = @produces.search("#{params[:search]}") if params[:search].present?
+    @produces = @produces
+    .search("#{params[:search]}")
+    .search_state("#{params[:state]}")
+    .search_city("#{params[:city]}")
+
     @farmsite = Farmsite.find(params[:farmsite_id]) if params[:farmsite_id].present?
+
+
+        @hash = Gmaps4rails.build_markers(@produces) do |produce, marker|
+          marker.lat produce.farmsite.latitude
+          marker.lng produce.farmsite.longitude
+          marker.infowindow produce.farmsite.farmsitename + "<br> <br> Produces : " + produce.farmsite.produces.map{|x| x.producename }.join(", ")
+        end
 
   end
 

@@ -5,7 +5,10 @@ class FarmersController < ApplicationController
   # GET /farmers.json
   def index
     @farmers = Farmer.all
-     @farmers = @farmers.search("#{params[:search]}") if params[:search].present?
+    @farmers = @farmers.search("#{params[:search]}")
+    .search("#{params[:search]}")
+    .search_state("#{params[:state]}")
+    .search_city("#{params[:city]}")
   end
 
   # GET /farmers/1
@@ -72,4 +75,4 @@ class FarmersController < ApplicationController
     def farmer_params
       params.require(:farmer).permit(:name, :dob, :address, :phone, :account_no, :company_name, :company_phone, :bank_company)
     end
-end
+  end

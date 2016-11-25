@@ -13,4 +13,8 @@ class HomeController < ApplicationController
   def contact
   end
 
+  # def index
+  #   @produces_with_Johor_farmsites = Produce.joins(:farmsite).where(" farmsites.farmsitestate = 'Johor' ")
+  # end
+
 end
