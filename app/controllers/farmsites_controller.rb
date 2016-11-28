@@ -39,6 +39,7 @@ class FarmsitesController < ApplicationController
           marker.lng farmsite.longitude
           marker.infowindow "<a href='#{farmsite_path(farmsite)}>'> #{farmsite.farmsitename} </a>" + "<br> <br> Produces : " + farmsite.produces.map{|x| x.producename }.join(", ")
         end
+
    #end
   end
 

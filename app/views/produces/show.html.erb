@@ -9,13 +9,13 @@
 
     <div class="panel panel-default">
       <div class="panel-thumbnail"><p>
-      <center><%= image_tag @produce.avatar.url (:medium)%></p></center>
+        <center><%= image_tag @produce.avatar.url,class: "img-responsive",style: "height:250px;"%></p></center>
       </div>
-      </div>
+    </div>
     <!-- second --> 
     <div class="panel panel-default">
      <div class="panel-heading">Detail Information
-       
+
 
      </div>
 
@@ -23,24 +23,24 @@
 
      <div class="panel-body">
       <table class="table">
-      <tr><th><strong>Farm: </strong></th><td><a href="<%= farmsite_path(id: @produce.farmsite.id) %>"><%= @produce.farmsite.farmsitename %></td></tr>
-      <tr><th> <strong>Produce Name : </strong></th><td><%= @produce.producename %></td></tr>
-      <tr><th> <strong>Produce Type : </strong></th><td><%= @produce.producetype %></td></tr>
-      <tr><th> <strong>Planting Date : </strong></th><td><%= @produce.producedate.strftime('%d %B %Y at %l:%M %p') %></td></tr>
-      <tr><th> <strong>Harvesting Date : </strong></th><td><%= @produce.produceharvest.strftime('%d %B %Y at %l:%M %p') %></td></tr>
-      <tr><th> <strong>Quantity : </strong></th><td><%= @produce.producequantity %></td></tr>
-      <tr><th> <strong>Description : </strong></th><td><%= @produce.producedescription %></td></tr>
-</table>
+        <tr><th><strong>Farm: </strong></th><td><a href="<%= farmsite_path(id: @produce.farmsite.id) %>"><%= @produce.farmsite.farmsitename %></td></tr>
+        <tr><th> <strong>Produce Name : </strong></th><td><%= @produce.producename %></td></tr>
+        <tr><th> <strong>Produce Type : </strong></th><td><%= @produce.producetype %></td></tr>
+        <tr><th> <strong>Planting Date : </strong></th><td><%= @produce.producedate.strftime('%d %B %Y at %l:%M %p') %></td></tr>
+        <tr><th> <strong>Harvesting Date : </strong></th><td><%= @produce.produceharvest.strftime('%d %B %Y at %l:%M %p') %></td></tr>
+        <tr><th> <strong>Quantity : </strong></th><td><%= @produce.producequantity %></td></tr>
+        <tr><th> <strong>Description : </strong></th><td><%= @produce.producedescription %></td></tr>
+      </table>
 
-<% if user_signed_in? %>
-            <% if current_user.meta_type == "Farmer" and @produce.farmsite.farmer == current_user.meta %>
-            <div align="right">
-              <%= link_to edit_produce_path(@produce)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit" > </i> Edit<% end %>
+      <% if user_signed_in? %>
+      <% if current_user.meta_type == "Farmer" and @produce.farmsite.farmer == current_user.meta %>
+      <div align="right">
+        <%= link_to edit_produce_path(@produce)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit" > </i> Edit<% end %>
 
-              <%= link_to  @produce, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
-              </div>
-            <%end%>
-          <%end%>
+        <%= link_to  @produce, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
+      </div>
+      <%end%>
+      <%end%>
 
     </div>
   </div>
@@ -60,90 +60,88 @@
     <div class="panel panel-default">
       <div class="panel-heading">Location of the produce</div>
       <div class="panel-body">
-       
-  <center>
-    <div style='width: 100%;'>
-       <div style='length: 100%;'>
-      <div id="multi_markers" style=' height: 400px;'></div>
-    </div></center>
 
-    <script >
-      var handler = Gmaps.build('Google');
-      handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
-        var markers = handler.addMarker({lat: <%=raw @produce.farmsite.latitude %>, lng: <%=raw @produce.farmsite.longitude %>});
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        handler.getMap().setZoom(15)
-      });
-    </script>
-      </div>
-    </div>
-
-    <!-- second --> 
-
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <p class="lead">Message box</p>
+        <center>
+          <div style='width: 100%;'>
+           <div style='length: 100%;'>
+            <div id="multi_markers" style=' height: 400px;'></div>
+          </div></center>
 
 
-        
-    </div>
-  </div>
-
-  <!-- end right --> 
-</div>
-
-
-<div class="row">
-  <div class="col-sm-5"></div>
-
-  <!-- first --> 
-  <div class="col-sm-5">
-    <div class="panel panel-default">
-      <div class="panel-heading"><h4>Timeline</h4></div>
-        <div class="panel-body">
-          <div class="container">
-            <div class="row bs-wizard" style="border-bottom:0;">
-              <div class="col-xs-3 bs-wizard-step complete">
-                <div class="text-center bs-wizard-stepnum">Planting</div>
-                <div class="progress"><div class="progress-bar"></div></div>
-                <a href="#" class="bs-wizard-dot"></a>
-                <div class="bs-wizard-info text-center"><%= @produce.producedate.strftime('%d %B %Y') %></div>
-              </div>
-              
-              <div class="col-xs-3 bs-wizard-step complete"><!-- complete -->
-                <div class="text-center bs-wizard-stepnum">Harvest</div>
-                <div class="progress"><div class="progress-bar"></div></div>
-                <a href="#" class="bs-wizard-dot"></a>
-                <div class="bs-wizard-info text-center"><%= @produce.produceharvest.strftime('%d %B %Y') %></div>
-              </div>
-            </div> 
-          </div>
         </div>
       </div>
-    </div>  
-  </div>
 
-  <style>
-      .bs-wizard {margin-top: 40px;}
 
-      /*Form Wizard*/
-      .bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
-      .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
-      .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
-      .bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
-      .bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
-      .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;} 
-      .bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #fbbd19; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 
-      .bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
-      .bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #fbe8aa;}
-      .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
-      .bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
-      .bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
-      .bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
-      .bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #f5f5f5;}
-      .bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {opacity: 0;}
-      .bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
-      .bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
-      .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
-  </style>
+      <!-- end right --> 
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-5"></div>
+
+      <!-- first --> 
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h4>Timeline</h4></div>
+          <div class="panel-body">
+            
+              <div class="row bs-wizard" style="border-bottom:0;">
+                <div class="col-xs-6 bs-wizard-step complete">
+                  <div class="text-center bs-wizard-stepnum">Planting</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center"><%= @produce.producedate.strftime('%d %B %Y') %></div>
+                </div>
+
+                <div class="col-xs-6 bs-wizard-step complete"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">Harvest</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center"><%= @produce.produceharvest.strftime('%d %B %Y') %></div>
+                </div>
+              </div> 
+
+          </div>
+        </div>
+      </div>  
+    </div>
+
+
+    <script >
+
+      var handler = Gmaps.build('Google');
+
+      handler.buildMap({ internal: {id: 'multi_markers'} } , function() {
+        var marker = handler.addMarker({lat: <%= @produce.farmsite.latitude %>, lng: <%= @produce.farmsite.longitude %>});
+          // handler.bounds.extendWith(markers);
+          // handler.fitMapToBounds();
+          handler.map.centerOn(marker);
+
+        } )
+
+      </script>
+
+
+      <style>
+        .bs-wizard {margin-top: 40px;}
+
+        /*Form Wizard*/
+        .bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
+        .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
+        .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
+        .bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
+        .bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
+        .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;} 
+        .bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #fbbd19; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 
+        .bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
+        .bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #fbe8aa;}
+        .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
+        .bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
+        .bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
+        .bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
+        .bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #f5f5f5;}
+        .bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {opacity: 0;}
+        .bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
+        .bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
+        .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
+      </style>
