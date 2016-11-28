@@ -37,7 +37,7 @@
       <% receiver = User.find(chat_room.sender_id) %>
       <% end %>
       <tr>
-        <td><%= receiver.meta.name %></td>
+        <td><%= receiver.meta.name if receiver.meta %></td>
         <td><a href="<%= chat_room_path(chat_room.id)%>" data-method="get" class="btn btn-success">See Message</a></td>
       </tr>
       <% end %>
