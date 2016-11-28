@@ -37,7 +37,7 @@ class FarmsitesController < ApplicationController
         @hash = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
           marker.lat farmsite.latitude
           marker.lng farmsite.longitude
-          marker.infowindow farmsite.farmsitename + "<br> <br> Produces : " + farmsite.produces.map{|x| x.producename }.join(", ")
+          marker.infowindow "<a href='#{farmsite_path(farmsite)}>'> #{farmsite.farmsitename} </a>" + "<br> <br> Produces : " + farmsite.produces.map{|x| x.producename }.join(", ")
         end
 
    #end
