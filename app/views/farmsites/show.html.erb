@@ -161,6 +161,7 @@
         <table class="table">
          <tr><th><strong>Owner: </strong></th><td><%= @farmsite.farmsiteownername %></td></tr><br>
           <tr><th><strong>Farmer: </strong></th><td><a href="<%= user_views_profile_path(id: @farmsite.farmer.user.id)%>"><%= @farmsite.farmer.user.meta.name %></td></tr></a><br>
+
           <tr><th><strong>Address: </strong></th><td><%= @farmsite.farmsiteaddress %></td></tr>
           <tr><th><strong>Size: </strong></th><td><%= @farmsite.farmsitesize %> acres</td></tr>          
           <tr><th><strong>Company: </strong></th><td><%= @farmsite.farmer.user.meta.company_name %></td></tr>

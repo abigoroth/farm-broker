@@ -9,7 +9,7 @@
         
         <!-- Choose State -->
         <div class="form-group">
-          <select name="state" id="state_select" class="form-control">
+          <select name="state" id="state_select" class="form-control" style="background-color:gold;">
             <option value="">Any State </option> 
             <%= State.each do |s| %>
             <option value="<%= s %>"><%= s %></option>
@@ -19,13 +19,13 @@
 
         <!-- Choose City -->
         <div class="form-group">
-          <select name="city" id="city_select" class="form-control">
+          <select name="city" id="city_select" class="form-control" style="background-color:gold;">
             <option value="">Any City </option> 
           </select>
         </div>
 
         <div class="form-group">
-          <select name="city" id="search_concept" class="form-control">
+          <select name="city" id="search_concept" class="form-control" style="background-color:gold;">
             <option value="">Search by </option>
             <option value="Produce">Produce </option>
             <option value="Farmsite">Farmsite </option>
@@ -47,11 +47,11 @@
 
       <!-- Type Produce Name / Farmsite Name -->
       <input type="hidden" name="search_param" value="all" id="search_param">         
-      <input type="text" class="form-control" id = "params_search" name="x" placeholder="Produce Name / Farmsite Name">
+      <input type="text" class="form-control" style="background-color:khaki;" id = "params_search" name="x" placeholder="Produce Name / Farmsite Name">
 
       <!-- Search button -->
       <span class="form-group">
-        <button class="form-control" type="button" id="button_search"><span class="glyphicon glyphicon-search"></span></button>
+        <button class="form-control" style="background-color:gold;" type="button" id="button_search"><span class="glyphicon glyphicon-search"></span></button>
       </span>
 
       </form>
