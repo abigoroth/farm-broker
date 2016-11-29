@@ -73,7 +73,7 @@ end
 
     respond_to do |format|
       if @farmsite.save
-        format.html { redirect_to farmsites_path(farmer_id:current_user.meta_id), notice: 'Farmsite was successfully created.' }
+        format.html { redirect_to :back, notice: 'Farmsite was successfully created.' }
         format.json { render :show, status: :created, location: @farmsite }
       else
         format.html { render :new }
@@ -87,7 +87,7 @@ end
   def update
     respond_to do |format|
       if @farmsite.update(farmsite_params)
-        format.html { redirect_to farmsites_path(farmer_id:current_user.meta_id), notice: 'Farmsite was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Farmsite was successfully updated.' }
         format.json { render :show, status: :ok, location: @farmsite }
       else
         format.html { render :edit }
@@ -101,7 +101,7 @@ end
   def destroy
     @farmsite.destroy
     respond_to do |format|
-      format.html { redirect_to farmsites_path(farmer_id:current_user.meta_id), notice: 'Farmsite was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Farmsite was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

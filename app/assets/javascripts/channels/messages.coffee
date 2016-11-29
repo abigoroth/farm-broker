@@ -15,7 +15,6 @@ App.messages = App.cable.subscriptions.create "MessagesChannel",
 
   received: (data) ->
     @collection().append(data.message) unless @userIsCurrentUser(data.message)
-    alert('new msg')
     messages_to_bottom()
 
   userIsCurrentUser: (message) ->

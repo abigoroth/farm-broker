@@ -44,7 +44,7 @@
                 <div class="col-sm-6">
                   <div class="form-inputs">
 
-                    <%= f.label "Name:" %>
+                    <%= f.label "Farm Name:" %>
                     <%= f.text_field :farmsitename, :class => "form-control", :placeholder => "Farm name" %>
 
                     <%= f.label "Farm Image:" %>
@@ -56,7 +56,7 @@
                     <%= f.label "Phone Number:" %>
                     <%= f.text_field :farmsiteownerphoneno, :class => "form-control", :placeholder => "Owner Phone Number" %>
 
-                    <%= f.label "Size:" %>
+                    <%= f.label "Farm Size:" %>
                     <%= f.text_field :farmsitesize, :class => "form-control", :placeholder => "Farm size in acres" %>
                     <span class="input-group-addon" id="basic-addon2">acres</span>
 
@@ -85,7 +85,7 @@
 
 
                     <%= f.label "farmsite description:" %>
-                    <%= f.text_field :farmsitedescription, :class => "form-control", :placeholder => "farmsitedescription" %>
+                    <%= f.text_area :farmsitedescription, :class => "form-control", :placeholder => "farmsitedescription" %>
 
                   </div> </div>
 
