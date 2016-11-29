@@ -14,11 +14,12 @@
 
   <% @farmsites.each_with_index do |farmsite,i| %>
   <a href="<%= farmsite_path(id: farmsite.id) %>"> 
+
     <div class='col-md-6 farm-hover' farm-index="<%= i %>" farm-id="<%= farmsite.id %>">
 
     <div class="panel panel-default">
 
-      <div class="panel-heading"><center><%= farmsite.farmsitename %></center></div>
+      <div class="panel-heading"><center><h4><%= farmsite.farmsitename %></h4></center></div>
 
         <div class="panel-body">
 
@@ -27,9 +28,7 @@
           <table class="table">
 
             <tr><th><strong>Company: </strong></th><td><%= farmsite.farmer.user.meta.company_name %></td></tr>
-            <tr><th><strong>Location: </strong></th><td><%= farmsite.farmsitecity %>, <%= farmsite.farmsitestate %></td></tr><br>
-            
-            
+            <tr><th><strong>Location: </strong></th><td><%= farmsite.farmsitecity %>, <%= farmsite.farmsitestate %></td></tr>
 
           </table>
           </div>
@@ -40,7 +39,6 @@
   <%end%>
 </div>
 <div id="mapCanvas" style=' width: 700px; height: 600px;'></div>
-<!-- <div id="multi_markers" style=' width: 700px; height: 600px;'></div> -->
 
 
 </div>
@@ -141,6 +139,6 @@ tmps =[]
 
 <style type="text/css">
   .highlightedFarm {
-    background: rebeccapurple;
+    background:  #ADD8E6;
   }
 </style>
