@@ -43,7 +43,7 @@ class WallpostsController < ApplicationController
   def update
     respond_to do |format|
       if @wallpost.update(wallpost_params)
-        format.html { redirect_to wallposts_url, notice: 'Wallpost was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Wallpost was successfully updated.' }
         format.json { render :show, status: :ok, location: @wallpost }
       else
         format.html { render :edit }

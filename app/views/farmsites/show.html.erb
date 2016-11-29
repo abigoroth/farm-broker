@@ -89,10 +89,25 @@
                 <%if @reviews.count != 0 %>
                   
                     <% @review_average = @reviews.sum(:rating) / @reviews.count %>
-                    <%= render "reviews/show" , :review => @review%>
-                    <%end%><hr>
-                <%end%><br>      
-                    <%= simple_form_for([@farmsite, @farmsite.reviews.build]) do |f| %>
+
+                     <div class="row">
+ 
+                        <div class="col-sm-2">
+                            <center><img src="<%= review.user.profilephoto %>" class="img-circle" alt="Cinque Terre" width="70" height="70">&nbsp; <a href="<%= user_views_profile_path(id: @review.user.id)%>">
+                        <%= @review.user.meta.name %></a></div>  </center>                      
+                        <div class="col-sm-6">
+                            <%= render "reviews/show" , :review => @review%></div></div>
+                       
+                    
+                    <%end%>
+                   <hr>
+                <%end%>   
+
+                <% if current_user.present? %>
+                <%unless @farmsite.reviews.find_by(user_id: current_user.id).present? %>
+
+                  
+                        <%= simple_form_for([@farmsite, @farmsite.reviews.build]) do |f| %>
                         <div class="form-inputs">
                               <%= f.label "Rating" %>
                               <div id="rateYo"></div>
@@ -104,8 +119,10 @@
                        
                               <%= f.button :submit %>
                         </div>
+                       
                     <% end %>
-
+                  <%end%>
+                <%end%>
                 <script>
 
                     $(function () {
@@ -134,11 +151,16 @@
   <!-- first --> 
   <div class="col-sm-5">
     <div class="panel panel-default">
+
+
       <div class="panel-heading"><center><h4><%= @farmsite.farmsitename %></h4></center></div>
       <div class="panel-body">
-      <tr><th><strong>Owner: </strong></th><td><%= @farmsite.farmsiteownername %></td></tr><br>
-      <tr><th><strong>Farmer: </strong></th><td><a href="<%= user_views_profile_path(id: @farmsite.farmer.user.id)%>"><%= @farmsite.farmer.user.meta.name %></td></tr></a><br>
+      <center>
+      <img src="<%= @farmsite.farmer.user.profilephoto %>"  class="img-thumbnail" alt="Cinque Terre" width="190" height="190">&nbsp;
+     </center>
         <table class="table">
+         <tr><th><strong>Owner: </strong></th><td><%= @farmsite.farmsiteownername %></td></tr><br>
+          <tr><th><strong>Farmer: </strong></th><td><a href="<%= user_views_profile_path(id: @farmsite.farmer.user.id)%>"><%= @farmsite.farmer.user.meta.name %></td></tr></a><br>
           <tr><th><strong>Address: </strong></th><td><%= @farmsite.farmsiteaddress %></td></tr>
           <tr><th><strong>Size: </strong></th><td><%= @farmsite.farmsitesize %> acres</td></tr>          
           <tr><th><strong>Company: </strong></th><td><%= @farmsite.farmer.user.meta.company_name %></td></tr>

@@ -17,7 +17,7 @@ div.container {
           <strong style="text-transform:capitalize"><%= @user.meta_type %></strong></div></center>
             <%if user_signed_in? and @user.id == current_user.id %>
               <% if !@user.profilephoto.blank? %><br>
-                <a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a><% end %>
+                <center><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a></center><% end %>
               <%else%>
                 <center><%if user_signed_in? %><a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: @user.id) %>" class="btn btn-info" data-method="post">Message</a><%end%>
             </center><%end%>
@@ -27,10 +27,8 @@ div.container {
               <tr><th>Birth Date: </th><td><%= @user.meta.birth_date %></td></tr>
               <tr><th>Address: </th><td><%= @user.meta.address%></td></tr>
               <tr><th>Phone No: </th><td><%= @user.meta.phone%></td></tr>
-              <%if current_user.meta_type == "Farmer" %>
               <tr><th>Company: </th><td><%= @user.meta.company_name%></td></tr>
               <tr><th>Contact: </th><td><%= @user.meta.company_phone%></td></tr>
-              <%end%>
               <tr>
                 <td colspan="2" align="right">
                   <%if user_signed_in? and @user.id == current_user.id %>
@@ -59,7 +57,9 @@ div.container {
               <% else %>
                 No Farm Yet.
                 <hr>
-                <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>  
+                 <% if @user.meta.farmsite.present? %>
+                      <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>  
+                 <% end %>
               <% end %>
               
 
@@ -96,10 +96,17 @@ div.container {
             <div class="panel-body">
               <p align="">
                 <% @wallposts.each do |post| %>
-                <img src="<%=post.broker.profilephoto%>" style="width:50px; height:50px; border-radius:90px" />&nbsp;&nbsp;&nbsp;&nbsp;<strong><%= post.broker.meta.name %></strong>
-                &nbsp;<%= post.created_at.strftime("%d/%m/%Y at %l:%M %p") %>
-                <br><div style="padding-left:70px"><%= raw post.wall_status %></div><hr><br>
-                
+                    <img src="<%=post.broker.profilephoto%>" style="width:50px; height:50px; border-radius:90px" />&nbsp;&nbsp;&nbsp;&nbsp;<strong><%= post.broker.meta.name %></strong>
+                    &nbsp;<%= post.created_at.strftime("%d/%m/%Y at %l:%M %p") %>
+                    <%= link_to edit_wallpost_path(post), data: {remote: true} do %>
+                      <i class="glyphicon glyphicon-pencil"></i>
+                    <% end %>
+                      &nbsp;&nbsp;&nbsp;
+                    <%= link_to wallpost_path(post), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                      <i class="glyphicon glyphicon-remove"></i>
+                    <% end %>
+                    <br><div style="padding-left:70px"><%= raw post.wall_status %></div><hr><br>
+                  
                 <%end%>
               </p>
 
