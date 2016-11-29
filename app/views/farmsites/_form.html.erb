@@ -146,15 +146,31 @@
 
 
 if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(successCallback,errorCallback,{timeout:10000});
+        // navigator.geolocation.getCurrentPosition(showPosition);
     } else {
 
     }
+function errorCallback(error){
+  var latLong;
+  $.getJSON("http://ipinfo.io", function(ipinfo){
+      console.log("Found location ["+ipinfo.loc+"] by ipinfo.io");
+      latLong = ipinfo.loc.split(",");
+      var latLng = {lat: latLong[0], lng: latLong[1]};
+      showPosition(latLng);
+
+  });
+}
+
+function successCallback(position){
+  latlng = { lat: position.coords.latitude , lng: position.coords.longitude }
+  showPosition(latlng)
+}
 
 
 function showPosition(position) {
 
-  var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  var latLng = new google.maps.LatLng(position.lat, position.lng);
   var map = new google.maps.Map(document.getElementById('mapCanvas'), {
     zoom: 15,
     center: latLng,
