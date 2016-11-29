@@ -52,16 +52,17 @@ div.container {
             <div class="panel-heading">My Farm</div>
             <div class="panel-body" align="center">
              
+
               <% if @user.meta.farmsite.present? %>
-                <h3><a href="<%= farmsite_path(id: @user.meta.farmsite.id) %>"><%= @user.meta.farmsite.farmsitename %></a></h3>
-              <% else %>
-                No Farm Yet.
-                <hr>
-                 <% if @user.meta.farmsite.present? %>
-                      <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>  
-                 <% end %>
-              <% end %>
-              
+                      <h3><a href="<%= farmsite_path(id: @user.meta.farmsite.id) %>"><%= @user.meta.farmsite.farmsitename %></a></h3>
+              <%end%>
+
+                <% if user_signed_in? and @user.id == current_user.id %>
+                    <% unless @user.meta.farmsite.present? %>
+                      no farm yet<hr>
+                        <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>        
+                  <% end %>
+                <% end %>
 
             </div>
           </div>
@@ -95,21 +96,120 @@ div.container {
             <div class="panel-heading">Wall Post</div>
             <div class="panel-body">
               <p align="">
-                <% @wallposts.each do |post| %>
-                    <img src="<%=post.broker.profilephoto%>" style="width:50px; height:50px; border-radius:90px" />&nbsp;&nbsp;&nbsp;&nbsp;<strong><%= post.broker.meta.name %></strong>
-                    &nbsp;<%= post.created_at.strftime("%d/%m/%Y at %l:%M %p") %>
-                    <%= link_to edit_wallpost_path(post), data: {remote: true} do %>
-                      <i class="glyphicon glyphicon-pencil"></i>
-                    <% end %>
-                      &nbsp;&nbsp;&nbsp;
-                    <%= link_to wallpost_path(post), method: :delete, data: { confirm: 'Are you sure?' } do %>
-                      <i class="glyphicon glyphicon-remove"></i>
-                    <% end %>
-                    <br><div style="padding-left:70px"><%= raw post.wall_status %></div><hr><br>
-                  
-                <%end%>
-              </p>
+             
 
+
+                        <% @wallposts.each do |wallpost| %><br>
+                            <div class="panel panel-default">
+                              <div class="panel-body">
+                                <div class="panel panel-default">
+                                  <div class="panel-heading" style="background-color:powderblue;">
+                                    <div class="row">
+                                      <div class="col-sm-2">
+                                        <img src="<%= wallpost.broker.profilephoto %>" class="img-circle" alt="Cinque Terre" width="80" height="80">&nbsp;
+                                      </div>
+                                      <div class="col-sm-8">  
+                                        <span>
+                                          <h4>
+                                            <a href="<%= user_views_profile_path(id: wallpost.broker_id)%>"><%= wallpost.broker.meta.name %></a>
+                                            <small><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></small> 
+                                          </h4>
+                                        </span>
+                                        <%if user_signed_in? and (wallpost.broker.id == current_user.id) %>
+                                          <span>
+                                            <%= link_to edit_wallpost_path(wallpost), data: {remote: true} do %>
+                                              <i class="glyphicon glyphicon-pencil"></i>
+                                            <% end %>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <%= link_to wallpost, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                                              <i class="glyphicon glyphicon-remove"></i>
+                                            <% end %>
+                                          </span>  
+                                        <%end%>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="panel-body">
+                                    <br><h4><%= raw wallpost.wall_status %></h4><br>
+                                  </div>
+                                </div>
+                                <div id="comments">
+                                  <h3><%= wallpost.comments.count%> Comments</h3> 
+                                  <%if !user_signed_in? %>
+                                    <em>Please login to comment</em>
+                                  <%end%>
+                                  <% if wallpost.comments.present? %>
+                                    <button onclick='toogle_div_fun("<%= wallpost.id%>");'>View Comments</button>
+                                  <%end%>
+                                  <br></br>
+                                  <div id="<%= wallpost.id%>" style="display: none">
+                                    <% wallpost.comments.each do |comment|%>
+                                      <div class="panel panel-default" style="padding:5px" >
+                                        <div class="row">
+                                          <div class="col-sm-1">
+                                            <img src="<%= comment.broker.profilephoto %>" class="img-circle" alt="Cinque Terre" width="50" height="50">&nbsp;
+                                          </div>
+                                          <div class="col-sm-11">
+                                            <b>
+                                              <span>
+                                                <h4>
+                                                  <a href="<%= user_views_profile_path(id: wallpost.broker_id)%>"><%= wallpost.broker.meta.name %></a>
+                                              </span>
+                                            </b>
+                                            <%if user_signed_in? and comment.broker.id == current_user.id %>
+                                              <span style="float:right;text-align:right">
+                                                <%= link_to edit_comment_path(comment), data: {remote: true} do%> 
+                                                  <i class="glyphicon glyphicon-pencil"></i>
+                                                <%end%>
+                                                <%= link_to comment, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                                                  <i class="glyphicon glyphicon-remove"></i>
+                                                <%end%>
+                                              </span>
+                                            <%end%>
+                                            <span>
+                                              <%= comment.comment_message %>
+                                            </span>
+                                            <br><br>
+                                            <span>
+                                              <small>
+                                                <%= comment.created_at.strftime("%d/%m/%y at %l:%M %p") %>
+                                              </small>
+                                            </span>
+                                            <br>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <% end %>
+                 
+                                  </div>
+
+                                  <%if user_signed_in? %>
+                                    <%@comment = wallpost.comments.new %>
+                                      <%= simple_form_for(@comment) do |f| %>
+                                      
+                                        <div class="form-inputs">
+                                          <%= f.input :wallpost_id , as: :hidden %>
+                                          <%= f.input :comment_message, label: "Comment" %>
+                                        </div>
+
+                                        <div class="form-actions">
+                                          <%= f.button :submit, class: "btn btn-success btn-sm pull-right", label: false ,value: "Comment"%>
+
+                                            <%#= f.button :submit, class: "btn btn-success btn-sm pull-right", label: false ,value: "Comment"%>
+                                        </div>
+                                        <br></br>
+                                      <% end %>
+                                  <%end%>
+                                </div>
+                              </div>
+                            </div>
+                          <%end%>
+
+
+
+
+
+                <hr>
             </div>
           </div>
         </div>
