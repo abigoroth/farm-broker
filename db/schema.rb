@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122032144) do
+ActiveRecord::Schema.define(version: 20161130033528) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 20161122032144) do
     t.string   "farmsitedescription"
     t.string   "farmsitecity"
     t.string   "farmsitestate"
+    t.float    "distance"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -217,8 +218,6 @@ ActiveRecord::Schema.define(version: 20161122032144) do
     t.datetime "updated_at",                                null: false
     t.float    "longitude"
     t.float    "latitude"
-    t.string   "back_company"
-    t.string   "bank_company"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
