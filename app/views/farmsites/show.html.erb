@@ -103,8 +103,9 @@
                    <hr>
                 <%end%>   
 
-                <% if current_user.present? %>
-                <%unless @farmsite.reviews.find_by(user_id: current_user.id).present? %>
+
+                <% if current_user.present? and (@farmsite.farmer_id != current_user.meta.id) %>
+                    <%unless @farmsite.reviews.find_by(user_id: current_user.id).present? %>
 
                   
                         <%= simple_form_for([@farmsite, @farmsite.reviews.build]) do |f| %>
@@ -120,8 +121,8 @@
                               <%= f.button :submit %>
                         </div>
                        
-                    <% end %>
-                  <%end%>
+                        <% end %>
+                    <%end%>
                 <%end%>
                 <script>
 
