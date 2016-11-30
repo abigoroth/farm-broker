@@ -1,7 +1,7 @@
 class FriendshipsController < ApplicationController
 
   def index
-    @users = User.where.not(id: current_user.id).paginate(:page => params[:page], :per_page => 3)
+    @users = User.where.not(id: current_user.id).paginate(:page => params[:page], :per_page => 7)
     @friends= current_user.friendships.pluck(:friend_id)
   end
 
