@@ -159,8 +159,7 @@
       <img src="<%= @farmsite.farmer.user.profilephoto %>"  class="img-thumbnail" alt="Cinque Terre" width="190" height="190">&nbsp;
      </center>
         <table class="table">
-         <tr><th><strong>Farm Owner: </strong></th><td><%= @farmsite.farmsiteownername %></td></tr><br>
-          <tr><th><strong>User Name: </strong></th><td><a href="<%= user_views_profile_path(id: @farmsite.farmer.user.id)%>"><%= @farmsite.farmer.user.meta.name %></td></tr></a><br>
+         <tr><th><strong>Farmer: </strong></th><td><a href="<%= user_views_profile_path(id: @farmsite.farmer.user.id)%>"><%= @farmsite.farmer.user.meta.name %></td></tr></a><br>
 
           <tr><th><strong>Farm Address: </strong></th><td><%= @farmsite.farmsiteaddress %></td></tr>
           <tr><th><strong>Farm Size: </strong></th><td><%= @farmsite.farmsitesize %> acres</td></tr>          

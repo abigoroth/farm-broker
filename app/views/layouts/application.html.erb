@@ -184,17 +184,25 @@
 				</script>
 				<!-- Javascript Time -->
 
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><% if current_user.meta_type.present?%><%= current_user.meta_type %>: <%= current_user.meta.name %><%end%></a>
-					<ul class="dropdown-menu">
-						<li><a href="<%= user_views_profile_path(id: current_user.id) %>">My Profile</a></li>
-						<li><a href="<%= chat_rooms_path %>"> Messages</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<%if user_signed_in?  %>
+						<img src="<%= current_user.profilephoto %>" style="width:25px; height:25px; border-radius: 90px">
+                     <% end %>
+					<% if current_user.meta_type.present?%><%= current_user.meta_type %>: <%= current_user.meta.name %>
+					<%end%>
+						
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="<%= user_views_profile_path(id: current_user.id) %>">My Profile</a></li>
+							<li><a href="<%= chat_rooms_path %>"> Messages</a></li>
 
-						<!--<%if current_user.meta_type == "Farmer" %>
-						<li><a href="/farmsites?farmer_id=<%= current_user.meta_id if current_user.meta_type %>"> My Farm</a></li>
-						<li><a href="/bids/farmer_bids"> My Bid</a></li>
-						<%end%>-->
+							<!--<%if current_user.meta_type == "Farmer" %>
+							<li><a href="/farmsites?farmer_id=<%= current_user.meta_id if current_user.meta_type %>"> My Farm</a></li>
+							<li><a href="/bids/farmer_bids"> My Bid</a></li>
+							<%end%>-->
 
-					</ul>
+						</ul>
 				</li>
 
 				<li><%= link_to 'Sign Out', destroy_user_session_path, :method=> :delete %></li>
@@ -216,7 +224,7 @@
 <!--footer -->
 <footer class="footer">
 
-	<p class="text-center">TaniMac Co.(@Waldania Group) | <a href="<%= home_about_path %>">About</a> |	<a href="<%= home_contact_path %>">Contact</a></p>
+	<p class="text-center">TaniMac Co.(@Waldania Group) | <a href="<%= home_about_path %>">ABOUT</a> |	<a href="<%= home_contact_path %>">CONTACT</a></p>
 </footer>
 <!--footer-->
 
