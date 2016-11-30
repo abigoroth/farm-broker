@@ -13,22 +13,33 @@ div.container {
       <div class="panel panel-default" >
         <div class="panel-heading"><center><strong><%= @user.meta.name %></strong></center></div>
         <div class="panel-body">
-          <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px"><br><br><center>
-          <strong style="text-transform:capitalize"><%= @user.meta_type %></strong></div></center>
+          <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px"><br><br></div></center>
             <%if user_signed_in? and @user.id == current_user.id %>
               <% if !@user.profilephoto.blank? %><br>
-                <center><a href="<%= remove_user_photo_path(@user.id) %>" \>Remove Photo</a></center><% end %>
+                <center><a href="<%= remove_user_photo_path(@user.id) %>" \>REMOVE PHOTO</a></center><% end %>
               <%else%>
-                <center><%if user_signed_in? %><a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: @user.id) %>" class="btn btn-info" data-method="post">Message</a><%end%>
-            </center><%end%>
+                <center>
+                <%if user_signed_in? %>
+                  <a href="<%= chat_rooms_path(sender_id: current_user.id, receiver_id: @user.id) %>" class="btn btn-info btn-sm" data-method="post">MESSAGE</a>
+                  <%end%>
+                </center><br>
+              <%end%>
            
             <table class="table">
-              <tr><th>Email: </th><td><%= @user.email %></td></tr>
-              <tr><th>Birth Date: </th><td><%= @user.meta.birth_date %></td></tr>
-              <tr><th>Address: </th><td><%= @user.meta.address%></td></tr>
-              <tr><th>Phone No: </th><td><%= @user.meta.phone%></td></tr>
-              <tr><th>Company: </th><td><%= @user.meta.company_name%></td></tr>
-              <tr><th>Contact: </th><td><%= @user.meta.company_phone%></td></tr>
+              <tr><th>EMAIL: </th><td><%= @user.email %></td></tr>
+              
+              <%if user_signed_in? and @user.id == current_user.id %>
+                <tr><th>BIRTH DATE: </th><td><%= @user.meta.birth_date %></td></tr>
+                <tr><th>ADDRESS: </th><td><%= @user.meta.address%></td></tr>
+              <% end %>
+
+              <tr><th>PHONE NUMBER: </th><td><%= @user.meta.phone%></td></tr>
+
+                <% if (@user.id != current_user.id) and (@user.meta_type == "Farmer")  %>
+                <tr><th>COMPANY: </th><td><%= @user.meta.company_name%></td></tr>
+                <tr><th>COMPANY NUMBER: </th><td><%= @user.meta.company_phone%></td></tr>
+                <%end%>
+
               <tr>
                 <td colspan="2" align="right">
                   <%if user_signed_in? and @user.id == current_user.id %>
@@ -44,8 +55,9 @@ div.container {
      <!--Create Status -->
 
      <!--Farm -->
-
+     
      <div class="col-xs-6">
+     <% if @user.meta_type == "Farmer" %>
       <div class="row">
         <div class="col-xs-12">
           <div class="panel panel-default">
@@ -53,12 +65,12 @@ div.container {
             <div class="panel-body" align="center">
              
 
-              <% if @user.meta.farmsite.present? %>
+              <% if @user.meta_type == "Farmer" and @user.meta.farmsite.present? %>
                       <h3><a href="<%= farmsite_path(id: @user.meta.farmsite.id) %>"><%= @user.meta.farmsite.farmsitename %></a></h3>
               <%end%>
 
                 <% if user_signed_in? and @user.id == current_user.id %>
-                    <% unless @user.meta.farmsite.present? %>
+                    <% unless @user.meta_type == "Farmer" and @user.meta.farmsite.present? %>
                       no farm yet<hr>
                         <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>        
                   <% end %>
@@ -68,6 +80,7 @@ div.container {
           </div>
         </div>
       </div>
+      <% end %>
 
       <%if user_signed_in? and @user.id == current_user.id %>
       <div class="row">
@@ -106,16 +119,16 @@ div.container {
                                   <div class="panel-heading" style="background-color:powderblue;">
                                     <div class="row">
                                       <div class="col-sm-2">
-                                        <img src="<%= wallpost.broker.profilephoto %>" class="img-circle" alt="Cinque Terre" width="80" height="80">&nbsp;
+                                        <img src="<%= wallpost.user.profilephoto %>" class="img-circle" alt="Cinque Terre" width="80" height="80">&nbsp;
                                       </div>
                                       <div class="col-sm-8">  
                                         <span>
                                           <h4>
-                                            <a href="<%= user_views_profile_path(id: wallpost.broker_id)%>"><%= wallpost.broker.meta.name %></a>
+                                            <a href="<%= user_views_profile_path(id: wallpost.user_id)%>"><%= wallpost.user.meta.name %></a>
                                             <small><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></small> 
                                           </h4>
                                         </span>
-                                        <%if user_signed_in? and (wallpost.broker.id == current_user.id) %>
+                                        <%if user_signed_in? and (wallpost.user.id == current_user.id) %>
                                           <span>
                                             <%= link_to edit_wallpost_path(wallpost), data: {remote: true} do %>
                                               <i class="glyphicon glyphicon-pencil"></i>
@@ -147,16 +160,16 @@ div.container {
                                       <div class="panel panel-default" style="padding:5px" >
                                         <div class="row">
                                           <div class="col-sm-1">
-                                            <img src="<%= comment.broker.profilephoto %>" class="img-circle" alt="Cinque Terre" width="50" height="50">&nbsp;
+                                            <img src="<%= comment.user.profilephoto %>" class="img-circle" alt="Cinque Terre" width="50" height="50">&nbsp;
                                           </div>
                                           <div class="col-sm-11">
                                             <b>
                                               <span>
                                                 <h4>
-                                                  <a href="<%= user_views_profile_path(id: wallpost.broker_id)%>"><%= wallpost.broker.meta.name %></a>
+                                                  <a href="<%= user_views_profile_path(id: wallpost.user_id)%>"><%= wallpost.user.meta.name %></a>
                                               </span>
                                             </b>
-                                            <%if user_signed_in? and comment.broker.id == current_user.id %>
+                                            <%if user_signed_in? and comment.user.id == current_user.id %>
                                               <span style="float:right;text-align:right">
                                                 <%= link_to edit_comment_path(comment), data: {remote: true} do%> 
                                                   <i class="glyphicon glyphicon-pencil"></i>
@@ -221,26 +234,47 @@ div.container {
     <div class="col-xs-3">
       <div class="row">
         <div class="col-xs-12">
-          <% if user_signed_in? and @user.id == current_user.id %>
+
+
+
           <div class="panel panel-default">
-            <div class="panel-heading">Following (<a href="<%= friendships_path %>">View All</a>)</div>
+            <div class="panel-heading">Following 
+              <%if @user.id == current_user.id %>
+                (<a href="<%= friendships_path %>">View All</a>) 
+              <% end%>
+            </div>
             <div class="panel-body">
               <%if current_user.friends.exists? %>
-              <table>
+                  <table>
 
-                <%  @friends.each do |friend| %>
-                <tr>
-                  <td><a href="<%= user_views_profile_path(id:friend.friend_id)%>"><%= friend.friend.meta.name%></a></td>
-                </tr>
-                <% end%>
-              </table>
+                    <%  @friends.each do |friend| %>
+                      <tr><td>
+                      
+                      <img src="<%= friend.friend.profilephoto %>" style="width:25px; height:25px; border-radius: 90px">
+                      
+                      <a href="<%= user_views_profile_path(id:friend.friend_id)%>"><%= friend.friend.meta.name%>
+                        
+                      </a></td> </tr>
+                    <% end%>
+
+                  </table>
+
               <%else%>
-              No Friend :( .<br><%if @user.id == current_user.id %><a href="<%= friendships_path %>">Add Now!</a><% end %>
+
+                  No Friend :( .
+                  <br>
+                  <%if @user.id == current_user.id %>
+                  <a href="<%= friendships_path %>">Add Now!</a>
+                  <% end %>
+
               <%end%>
+
               <%= will_paginate @friends, renderer: BootstrapPagination::Rails %>
             </div>
           </div>
-          <%end%>
+
+         
+
         </div>
       </div>
       <div class="row">
@@ -254,9 +288,10 @@ div.container {
                 <% @chat_rooms.each do |chat_room| %>
                 <% if chat_room.sender_id == current_user.id || chat_room.receiver_id == current_user.id %>
                 <% if chat_room.sender_id == current_user.id %>
-                <% receiver = User.find(chat_room.receiver_id) %>
+
+                  <% receiver = User.find(chat_room.receiver_id) %>
                 <% else %>
-                <% receiver = User.find(chat_room.sender_id) %>
+                  <% receiver = User.find(chat_room.sender_id) %>
                 <% end %>
                 <tr>
                   <td><a href="<%= user_views_profile_path(id: receiver.id)%>"><%= receiver.meta.name %></a></td>
@@ -266,11 +301,11 @@ div.container {
                 <% end %>
                 <% end %>
                 <tr>
-                  <td colspan="2"><a href="<%= chat_rooms_path %>"> View All Chat</a></td>
+                  <td colspan="2"><a href="<%= chat_rooms_path %>"> VIEW ALL CHAT</a></td>
                 </tr>
               </table>
               <% else %>
-              No message. <a href="<%= chat_rooms_path %>"> Chat Now!</a>
+              NO MESSAGE. <a href="<%= chat_rooms_path %>"> CHAT NOW!</a>
               <%end%>
             </div>
           </div>

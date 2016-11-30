@@ -7,7 +7,7 @@ class Produce < ApplicationRecord
 	validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 	validates_presence_of :producename, :producequantity
 
-	scope :search, -> (keyword) { where("producename like ?", "#{keyword}%")}
+	scope :search, -> (keyword) { where("producename like ?", "%#{keyword}%")}
 
 
 	scope :search_state, -> (state) {joins(:farmsite)

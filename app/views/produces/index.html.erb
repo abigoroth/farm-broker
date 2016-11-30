@@ -1,16 +1,17 @@
-<center><h1>Produces</h1>
+<div class="container2">
+<center><h3>Produces</h3>
 
 
 </center>
 <br/>
 <!-- left --> 
-<div class="row">
-  <div class="col-md-6" style="width:710px;height:600px;line-height:3em;overflow:scroll;padding:5px;">
+
+  <div class="col-md-6" style="height:75vh;line-height:3em;overflow:scroll;padding:5px;">
 
     <% @produces.each_with_index do |produce,i| %>
     <a href="<%= produce_path(id: produce.id) %>">
 
-      <div class='col-md-6' produce-hover' produce-index="<%= i %>" produce-id="<%= produce.id %>">
+      <div class='col-md-6 produce-hover' produce-index="<%= i %>" produce-id="<%= produce.id %>">
 
         <div class="panel panel-default">
 
@@ -23,8 +24,8 @@
             <table class="table">
 
               <tr><th><strong>Farm: </strong></th><td><%= produce.farmsite.farmsitename %></td></tr>
-              <tr><th><strong>Company: </strong></th><td><%= produce.farmsite.farmer.user.meta.company_name %></td></tr><br>
-              <tr><th><strong>Location: </strong></th><td><%= produce.farmsite.farmsitecity %>, <%= produce.farmsite.farmsitestate %></td></tr><br>
+              <tr><th><strong>Company: </strong></th><td><%= produce.farmsite.farmer.user.meta.company_name %></td></tr>
+              <tr><th><strong>Location: </strong></th><td><%= produce.farmsite.farmsitecity %>, <%= produce.farmsite.farmsitestate %></td></tr>
 
             </table>
             
@@ -35,8 +36,9 @@
     <%end%>
   </div>
 
-<div id="mapCanvas" style=' width: 700px; height: 600px;'></div>
-
+<div class="col-md-6 ">
+      <div id="mapCanvas" style=' width: 100%; height: 75vh;'></div>
+    </div>
 
 </div>
 

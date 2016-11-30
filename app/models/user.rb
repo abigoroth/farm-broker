@@ -28,38 +28,15 @@ class User < ApplicationRecord
 
     
     #Wallpost
-    has_many :wallposts, foreign_key: :broker_id,dependent: :destroy
+    has_many :wallposts,dependent: :destroy
     #Farmsite
     has_many :farmsites,dependent: :destroy
     #Comment
     has_many :comments, foreign_key: :broker_id,dependent: :destroy
+    #Review
     has_many :reviews,dependent: :destroy
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,      #:confirmable,
-  :recoverable, :rememberable, :trackable, :validatable
-  belongs_to :meta, polymorphic: true, required: false
-  accepts_nested_attributes_for :meta
-         #role
-         #enum role: [:broker, :bidder, :farmer]
-         #ROLES = %w[broker bidder farmer].freeze
-         #validates :role, presence: true
-         #photo upload
-         has_attached_file :profilephoto, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "http://www.rogerbrayrestoration.com/wp-content/uploads/2014/08/Blank-Profile.jpg"
-         validates_attachment_content_type :profilephoto, content_type: /\Aimage\/.*\z/
-         #birth date format
-
-         #Messages
-         has_many :chat_rooms, foreign_key: :sender_id,dependent: :destroy
-         has_many :messages,dependent: :destroy
-         #Friends
-         has_many :friendships,dependent: :destroy
-         has_many :friends, :through => :friendships,dependent: :destroy
-         has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id",dependent: :destroy
-         has_many :inverse_friends, :through => :inverse_friendships, :source => :user,dependent: :destroy
-
-
+        
     #  #broker
     #      has_many :farmsites
     #      has_many :bids
@@ -73,9 +50,7 @@ class User < ApplicationRecord
     # #bidder
     # has_many :bid_processes
     # has_many :bids
-    has_many :bids, foreign_key: :farmer_id,dependent: :destroy
-
-    has_many :comments, foreign_key: :broker_id,dependent: :destroy
+    # has_many :bids, foreign_key: :farmer_id,dependent: :destroy
 
 
 end

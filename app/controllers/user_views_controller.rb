@@ -6,10 +6,10 @@ class UserViewsController < ApplicationController
       @friends= Friendship.where(user_id: current_user.id).paginate(:page => params[:page], :per_page => 3)
       @inbox = current_user.chat_rooms.pluck(@user.id)
       @chat_rooms = ChatRoom.all
-      @wallposts = Wallpost.where(broker_id: @user.id).order('created_at DESC')
+      @wallposts = Wallpost.where(user_id: @user.id).order('created_at DESC')
     else
       @user = User.find(params[:id])
-      @wallposts = Wallpost.where(broker_id: @user.id).order('created_at DESC')
+      @wallposts = Wallpost.where(user_id: @user.id).order('created_at DESC')
     end
   end
 
