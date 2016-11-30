@@ -10,7 +10,7 @@
         <!-- Choose State -->
         <div class="form-group">
           <select name="state" id="state_select" class="form-control" style="background-color:gold;">
-            <option value="">Any State </option> 
+            <option value="">ANY STATE </option> 
             <%= State.each do |s| %>
             <option value="<%= s %>"><%= s %></option>
             <% end %>
@@ -20,15 +20,15 @@
         <!-- Choose City -->
         <div class="form-group">
           <select name="city" id="city_select" class="form-control" style="background-color:gold;">
-            <option value="">Any City </option> 
+            <option value="">ANY CITY </option> 
           </select>
         </div>
 
         <div class="form-group">
           <select name="city" id="search_concept" class="form-control" style="background-color:gold;">
-            <option value="">Search by </option>
-            <option value="Produce">Produce </option>
-            <option value="Farmsite">Farmsite </option>
+            <option value="">SEARCH BY </option>
+            <option value="Produce">PRODUCE </option>
+            <option value="Farmsite">FARMSITE </option>
           </select>
         </div>
 
@@ -60,10 +60,11 @@
 </div><!-- Close Row -->
 
 
+
   <!-- Text -->
   <marquee behavior="alternate" scrollamount="10" direction="up">
     <center>
-      <h1 style="font-family:Cursive">WELCOME TO TANIMALL</h1>
+      <h1 style="font-family:Georgia"> ~ Welcome to TaniMall ~ </h1>
       <p><font size="5" color="white">Sign Up and Join Us Now!</font></p>
     </center>
   </marquee>
@@ -146,11 +147,11 @@
 
            //alert(state);
 
-          if(search_concept == "Produce"){
+          if(search_concept == "PRODUCE"){
             Turbolinks.visit("/produces?search=" + params_search + "&state=" + state + "&city=" + city );
           //
           }
-          if(search_concept == "Farmsite"){
+          if(search_concept == "FARMSITE"){
             Turbolinks.visit("/farmsites?search=" + params_search + "&state=" + state + "&city=" + city);
           }
         }
@@ -166,7 +167,7 @@ $('#state_select').change(function(){
   city[ $('#state_select').val() ].shift();
   //loop 
   $("#city_select").html("")
-  $("#city_select").append("<option value=''> Any City </option>")
+  $("#city_select").append("<option value=''> ANY CITY </option>")
   $.each( city[ $('#state_select').val() ],  function(i,v){
     console.log(v)
   //append list sume dalam array selain guna html

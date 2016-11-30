@@ -82,15 +82,29 @@ function successCallback(position){
 //get current position
 function showPosition(position) {
   var latLng = new google.maps.LatLng(position.lat, position.lng);
-
+  var image = "<%= image_url('here.png', size:"20x32")%>";
   //user current location
   var youAreHere = new google.maps.Marker({
     position: latLng,
     title: "Your Location",
-    map: map
+    map: map,
+    icon: image
   });
 
+  
 
+
+  var circle = new google.maps.Circle({
+  map: map,
+  radius: 5000,    // 10 miles in metres
+  strokeColor: '#EE82EE',
+  strokeOpacity: 0.8,
+  strokeWeight: 2,
+  fillColor: '#EE82EE',
+  fillOpacity: 0.35
+  });
+
+  circle.bindTo('center', youAreHere, 'position');
 
  // // infowindow for current location
   var here = new google.maps.InfoWindow({
