@@ -139,7 +139,7 @@
 					<li class="active"><a href="<%= root_path  %>">Home</a></li>
 					<!--<li><a href="<%= bids_path %>">Bids</a></li>
 					<li><a href="<%= home_news_path %>">Sales</a></li>-->
-          			<li><a href="<%= wallposts_path %>">Wall</a></li>
+          			<li><a href="<%= wallposts_path %>">Newsfeed</a></li>
 					<li><a href="<%= farmsites_path %>">Farmsites</a></li>
 					<li><a href="<%= produces_path %>">Produces</a></li>
 					
@@ -189,11 +189,12 @@
 
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<%if user_signed_in?  %>
+					<%if user_signed_in? and current_user.meta_type.present? %>
 						<img src="<%= current_user.profilephoto %>" style="width:25px; height:25px; border-radius: 90px">
+						<%= current_user.meta.name %>
                      <% end %>
-					<% if current_user.meta_type.present?%><%= current_user.meta_type %>: <%= current_user.meta.name %>
-					<%end%>
+					<!--<% if current_user.meta_type.present?%><%= current_user.meta_type %>: <%= current_user.meta.name %>
+					<%end%>-->
 						
 					</a>
 						<ul class="dropdown-menu">

@@ -11,7 +11,7 @@
     <% @produces.each_with_index do |produce,i| %>
     <a href="<%= produce_path(id: produce.id) %>">
 
-      <div class='col-md-6' produce-hover' produce-index="<%= i %>" produce-id="<%= produce.id %>">
+      <div class='col-md-6 produce-hover' produce-index="<%= i %>" produce-id="<%= produce.id %>">
 
         <div class="panel panel-default">
 
@@ -24,8 +24,8 @@
             <table class="table">
 
               <tr><th><strong>Farm: </strong></th><td><%= produce.farmsite.farmsitename %></td></tr>
-              <tr><th><strong>Company: </strong></th><td><%= produce.farmsite.farmer.user.meta.company_name %></td></tr><br>
-              <tr><th><strong>Location: </strong></th><td><%= produce.farmsite.farmsitecity %>, <%= produce.farmsite.farmsitestate %></td></tr><br>
+              <tr><th><strong>Company: </strong></th><td><%= produce.farmsite.farmer.user.meta.company_name %></td></tr>
+              <tr><th><strong>Location: </strong></th><td><%= produce.farmsite.farmsitecity %>, <%= produce.farmsite.farmsitestate %></td></tr>
 
             </table>
             

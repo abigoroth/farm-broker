@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130033528) do
+ActiveRecord::Schema.define(version: 20161130092240) do
 
   create_table "bid_processes", force: :cascade do |t|
     t.decimal  "price"
@@ -87,10 +87,11 @@ ActiveRecord::Schema.define(version: 20161130033528) do
   create_table "comments", force: :cascade do |t|
     t.string   "comment_message"
     t.datetime "comment_date"
-    t.integer  "broker_id"
     t.integer  "wallpost_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "farmers", force: :cascade do |t|
@@ -226,9 +227,10 @@ ActiveRecord::Schema.define(version: 20161130033528) do
   create_table "wallposts", force: :cascade do |t|
     t.string   "wall_status"
     t.datetime "wall_date"
-    t.integer  "broker_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_wallposts_on_user_id"
   end
 
 end

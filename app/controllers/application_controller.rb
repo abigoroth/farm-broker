@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
     def check_meta
     	unless current_user.meta.present?
-    	redirect_to "/farmers/new" 
+    	redirect_to "/user_views/meta" 
     end
     end   
 end

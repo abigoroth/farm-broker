@@ -10,7 +10,7 @@
             <%if !@friends.include?(user.id) %>
             <tr>
 
-              <td><a href="<%= user_views_profile_path(id: user.id)%>"><%= user.meta.present? ? user.meta.name : user.meta_type%></a></td>
+              <td><%= user.meta.present? ? user.meta.name : user.meta_type%></a></td>
               <td><a class="btn btn-success" href="<%= friendships_path(:friend_id => user.id)%>" data-method="<%= :post %>">Follow</a></td>
             </tr>
             <%end%>

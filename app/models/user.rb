@@ -28,11 +28,12 @@ class User < ApplicationRecord
 
     
     #Wallpost
-    has_many :wallposts, foreign_key: :broker_id,dependent: :destroy
+    has_many :wallposts,dependent: :destroy
     #Farmsite
     has_many :farmsites,dependent: :destroy
     #Comment
     has_many :comments, foreign_key: :broker_id,dependent: :destroy
+    #Review
     has_many :reviews,dependent: :destroy
 
         
@@ -50,8 +51,6 @@ class User < ApplicationRecord
     # has_many :bid_processes
     # has_many :bids
     # has_many :bids, foreign_key: :farmer_id,dependent: :destroy
-
-    has_many :comments, foreign_key: :broker_id,dependent: :destroy
 
 
 end

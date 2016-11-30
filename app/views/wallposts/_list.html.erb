@@ -49,16 +49,16 @@ div.container {
                   <div class="panel-heading" style="background-color:powderblue;">
                     <div class="row">
                       <div class="col-sm-2">
-                        <img src="<%= wallpost.broker.profilephoto %>" class="img-circle" alt="Cinque Terre" width="80" height="80">&nbsp;
+                        <img src="<%= wallpost.user.profilephoto %>" class="img-circle" alt="Cinque Terre" width="80" height="80">&nbsp;
                       </div>
                       <div class="col-sm-8">  
                         <span>
                           <h4>
-                            <a href="<%= user_views_profile_path(id: wallpost.broker_id)%>"><%= wallpost.broker.meta.name %></a>
+                            <a href="<%= user_views_profile_path(id: wallpost.user_id)%>"><%= wallpost.user.meta.name %></a>
                             <small><%= wallpost.created_at.strftime("%d/%m/%y at %l:%M %p") %></small> 
                           </h4>
                         </span>
-                        <%if user_signed_in? and (wallpost.broker.id == current_user.id) %>
+                        <%if user_signed_in? and (wallpost.user.id == current_user.id) %>
                           <span>
                             <%= link_to edit_wallpost_path(wallpost), data: {remote: true} do %>
                               <i class="glyphicon glyphicon-pencil"></i>
@@ -90,16 +90,16 @@ div.container {
                       <div class="panel panel-default" style="padding:5px" >
                         <div class="row">
                           <div class="col-sm-1">
-                            <img src="<%= comment.broker.profilephoto %>" class="img-circle" alt="Cinque Terre" width="50" height="50">&nbsp;
+                            <img src="<%= comment.user.profilephoto %>" class="img-circle" alt="Cinque Terre" width="50" height="50">&nbsp;
                           </div>
                           <div class="col-sm-11">
                             <b>
                               <span>
                                 <h4>
-                                  <a href="<%= user_views_profile_path(id: wallpost.broker_id)%>"><%= wallpost.broker.meta.name %></a>
+                                  <a href="<%= user_views_profile_path(id: wallpost.user_id)%>"><%= comment.user.meta.name %></a>
                               </span>
                             </b>
-                            <%if user_signed_in? and comment.broker.id == current_user.id %>
+                            <%if user_signed_in? and comment.user.id == current_user.id %>
                               <span style="float:right;text-align:right">
                                 <%= link_to edit_comment_path(comment), data: {remote: true} do%> 
                                   <i class="glyphicon glyphicon-pencil"></i>
