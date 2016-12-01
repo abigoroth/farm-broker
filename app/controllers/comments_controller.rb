@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     # Rails.logger.debug"COMMENT : #{@comment.inspect}"
-    @comment.broker_id = current_user.id
+    @comment.user_id = current_user.id
 
     respond_to do |format|
       if @comment.save

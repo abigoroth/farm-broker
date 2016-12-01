@@ -1,209 +1,168 @@
-<h1 align="center">Farms
-
+<div class="container2">
   <% if user_signed_in? and (current_user.meta_type == "Farmer") and !current_user.meta.farmsite.present? %>
 
   <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
   <%end%>
-</h1>
+  <!-- left --> 
 
-<br/>
-<!-- left --> 
-<div class="row">
 
-<div class="col-md-6" style="width:710px;height:600px;line-height:3em;overflow:scroll;padding:5px;">
+  <div class="col-md-6 left-pane" style="line-height:3em;overflow:scroll;padding:5px">
+    <%= render 'search' %>
 
-  <% @farmsites.each_with_index do |farmsite,i| %>
-  <div class='col-md-6 farm-hover' farm-index="<%= i %>">
+      <% @farmsites.each_with_index do |farmsite,i| %>
+      <a href="<%= farmsite_path(id: farmsite.id) %>"> 
 
-  <div class="panel panel-default">
+        <div class='col-md-6 farm-hover' farm-index="<%= i %>" farm-id="<%= farmsite.id %>">
 
-    <div class="panel-heading"><center><a style="font-size: 20px;" href="<%= farmsite_path(id: farmsite.id) %>"><%= farmsite.farmsitename %></a></center></div>
+          <div class="panel panel-default">
 
-      <div class="panel-body">
+            <div class="panel-heading"><center><h4><%= farmsite.farmsitename %></h4></center></div>
 
-        <%= image_tag farmsite.avatar.url, class: "img-responsive",style: "height:200px;"%> 
+            <div class="panel-body">
 
-        <table class="table">
+              <%= image_tag farmsite.avatar.url, class: "img-responsive",style: "height:200px;"%> 
 
-          <tr><th><strong>Company: </strong></th><td><a href="<%= user_views_profile_path(id: farmsite.farmer.user.id)%>"><%= farmsite.farmer.user.meta.company_name %></td></tr>
-          <tr><th><strong>Location: </strong></th><td><%= farmsite.farmsitecity %>, <%= farmsite.farmsitestate %></td></tr><br>
-          
-          
+              <table class="table">
 
-        </table>
-        </div>
+                <tr><th><strong>Company: </strong></th><td><%= farmsite.farmer.user.meta.company_name %></td></tr>
+                <tr><th><strong>Location: </strong></th><td><%= farmsite.farmsitecity %>, <%= farmsite.farmsitestate %></td></tr>
+
+              </table>
+            </div>
+          </div>
+        </div> 
+      </a>
+
+      <%end%>
     </div>
-  </div> 
+    <div class="col-md-6 right-pane">
+      <div id="mapCanvas" style=' width: 100%;'></div>
+    </div>
 
-  <%end%>
+
+
 </div>
 
-<div id="multi_markers" style=' width: 700px; height: 600px;'></div>
+
+<script>
+  $(".left-pane , .right-pane, #mapCanvas").height( $("html").height() - 130 )
 
 
-</div>
+  var bounds = new google.maps.LatLngBounds();
 
-
-
-
-
-<script >
-
-  tmps = []
-  var handler = Gmaps.build('Google');
-
-  handler.buildMap({ internal: {id: 'multi_markers'}}, 
-    function(){
-
-      // var markers = handler.addMarkers(<%=raw @hash.to_json %> );
-      <% @hash.each do |m| %>
-        tmp = handler.addMarker(<%= raw m.to_json %>)
-        tmps.push(tmp)
-      <% end %>
-      test = handler
-      console.log(handler)
-      handler.bounds.extendWith(tmps);
-      handler.fitMapToBounds();
-    });
-
-  $(function () {
-
-    $("#average").rateYo({
-      rating: "<%=@review_average%>",
-      readOnly: true
-    });
+  var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+    zoom: 7,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
-  $(".farm-hover").hover( 
-    function(e){ 
-      console.log( $(this).attr("farm-index") )
-      console.log( tmps[$(this).attr("farm-index")] )
-      tmps[$(this).attr("farm-index")].setIcon( "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FEEEEE" )
-    }
-  ) 
+
+
 
   if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(youAreHere);
-  } else {
+    navigator.geolocation.getCurrentPosition(successCallback,errorCallback,{timeout:10000});
+        // navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
 
-  }
+      }
+      function errorCallback(error){
+        var latLong;
+        $.getJSON("http://ipinfo.io", function(ipinfo){
+          console.log("Found location ["+ipinfo.loc+"] by ipinfo.io");
+          latLong = ipinfo.loc.split(",");
+          var latLng = {lat: latLong[0], lng: latLong[1]};
+          showPosition(latLng);
 
-  function youAreHere(position){
-    handler.addMarker({lat: position.coords.latitude, lng: position.coords.longitude, infowindow: "You are here" })
-  }
-
-</script>
-
-<!-- <div class="row">
-    <div class="col-md-12">
-      <center><%= will_paginate @bids, renderer: BootstrapPagination::Rails %></center>
-    </div>
-  </div> 
-  -->
-
-
-
-<!--
-<center>
-  <div class="container">
-    <div class="row col-md-6 col-md-offset-2 custyle">
-    </div>
-    <div class="col-sm-12"><h1>List Farm</h1></div>
-
-    <table class=" table table-striped custab " id="dttb">
-
-
-      <thead>
-        <tr>
-          <th>Farm Name</th>
-          <th>Farms Size(Acres)</th>
-          <th>Farm Address</th>
-          <th>Farm Phoneno</th>
-          <th>Farm owner</th>
-          <th>Farm Produce</th>
-          <th width="14%"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @farmsites.each do |farmsite| %>
-        <tr>
-          <td><a href="<%= farmsite_path(id: farmsite.id) %>"><%= farmsite.farmsitename %></td>
-          <td><%= farmsite.farmsitesize %></td>
-          <td><%= farmsite.farmsiteaddress %></td>
-          <td><%= farmsite.farmsiteownerphoneno %></td>
-          <td><a href="/user_views/profile?id=<%= farmsite.farmer.user.id %>"><%= farmsite.farmer.name%></a></td>
-          <td >
-            <%= link_to produces_path(farmsite_id: farmsite.id)  , data: {turbolinks: false} , class: "btn btn-info btn-sm" do %><i class= "glyphicon glyphicon-open">  </i> Produce <% end %>
-          </td>
-
-
-          <td>
-            <% if user_signed_in? %>
-            <% if current_user.meta_type == "Farmer" and farmsite.farmer == current_user.meta %>
-
-            <%= link_to edit_farmsite_path(farmsite)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit"> </i> Edit <% end %>
-
-            <%= link_to  farmsite, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
-            <%end%>
-            <%end%>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-    <br>
-
-
-    <% if user_signed_in? and (current_user.meta_type == "Farmer")%>
-
-    <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
-    <%end%>
-
-  </center></div>
-
--->
-<!-- 
-<script >
-
-  tmps = []
-  var handler = Gmaps.build('Google');
-  handler.buildMap({ internal: {id: 'multi_markers'}}, 
-    function(){
-
-      // var markers = handler.addMarkers(<%=raw @hash.to_json %> );
-      <% @hash.each_with_index do |m,i| %>
-        var marker<%= i %> = new google.maps.Marker({
-            position: new google.maps.LatLng(<%= m[:lat] %>, <%= m[:lng] %> ),
-            map: handler,
-            id: <%= i %>,
-            title: "some marker"
         });
-        tmps.push(marker<%= i %>);
-        // tmp = handler.addMarker(<%= raw m.to_json %>)
-      <% end %>
-      test = handler
-      console.log(handler)
-      handler.bounds.extendWith(tmps);
-      handler.fitMapToBounds();
+      }
 
-    });
+      function successCallback(position){
+        latlng = { lat: position.coords.latitude , lng: position.coords.longitude }
+        showPosition(latlng)
+      }
 
-  $(function () {
-
-    $("#average").rateYo({
-      rating: "<%=@review_average%>",
-      readOnly: true
-    });
+//get current position
+function showPosition(position) {
+  var latLng = new google.maps.LatLng(position.lat, position.lng);
+  var image = "<%= image_url('here.png', size:"20x32")%>";
+  //user current location
+  var youAreHere = new google.maps.Marker({
+    position: latLng,
+    title: "Your Location",
+    map: map,
+    icon: image
   });
 
-  $(".farm-hover").hover( 
-    function(e){ 
-      console.log( $(this).attr("farm-index") )
-      console.log( tmps[$(this).attr("farm-index")] )
-      tmps[$(this).attr("farm-index")].setIcon( "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FEEEEE" )
-    }
-  ) 
+  
 
-</script> -->
+
+  var circle = new google.maps.Circle({
+    map: map,
+  radius: 5000,    // 10 miles in metres
+  strokeColor: '#EE82EE',
+  strokeOpacity: 0.8,
+  strokeWeight: 2,
+  fillColor: '#EE82EE',
+  fillOpacity: 0.35
+});
+
+  circle.bindTo('center', youAreHere, 'position');
+
+ // // infowindow for current location
+ var here = new google.maps.InfoWindow({
+  content: 'You Are Here! '
+});
+
+ here.open(map,youAreHere);
+ bounds.extend(latLng);
+ map.fitBounds(bounds);
+
+}
+
+//markers for all farmsites
+tmps =[]
+
+<% @farmsites.each_with_index do |farmsite,i| %>
+var marker<%= i %> = new google.maps.Marker({
+  position: {lat: <%= farmsite.latitude %>, lng: <%= farmsite.longitude %>},
+  title: '<%= farmsite.farmsitename %>',
+  map: map
+});
+
+bounds.extend({lat: <%= farmsite.latitude %>, lng: <%= farmsite.longitude %>});
+
+map.fitBounds(bounds);
+
+tmps.push(marker<%= i %>)
+
+var infowindow<%= i %> = new google.maps.InfoWindow({
+  content: '<a class="iHover<%= farmsite.id %>" farm-id="<%= farmsite.id %>" href="<%= farmsite_path(id: farmsite.id) %>"><%= farmsite.farmsitename %></a>' + '<br/>'  + 'Produces: ' + '<%= farmsite.produces.map{|x| x.producename }.join(", ") %>'
+
+});
+
+marker<%= i %>.addListener('click', function() {
+  infowindow<%= i %>.open(map, marker<%= i %>);
+  $(".iHover<%= farmsite.id %>").on('mouseenter', function(e){
+    $("[farm-id=<%= farmsite.id %>]").addClass('highlightedFarm')
+  })
+  $(".iHover<%= farmsite.id %>").on('mouseleave', function(e){
+    $("[farm-id=<%= farmsite.id %>]").removeClass('highlightedFarm')
+  })
+});
+<% end %>
+
+</script> 
+
+<style type="text/css">
+  .highlightedFarm {
+    background:  #ADD8E6;
+  }
+  body, html {
+
+  }
+  body {
+    display:flex;
+  }
+  .right-pane {
+    padding: 0px;
+  }
+</style>

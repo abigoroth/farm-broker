@@ -11,9 +11,8 @@ class ApplicationController < ActionController::Base
     end
 
     def check_meta
-    	unless current_user.meta.present?
-      	redirect_to "/farmers/new" 
-        # select user type, farmer / customer
+      unless current_user.meta.present?
+    	redirect_to "/user_views/meta" 
       end
     end   
 end

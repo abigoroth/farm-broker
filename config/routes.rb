@@ -34,13 +34,13 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  root 'home#index'
+  root 'produces#index'
   get 'home/about'
   get 'home/news'
   get 'home/contact'
   get 'home/district_page'
   devise_for :brokers, controllers: { registrations: 'brokers/registrations',sessions: 'brokers/sessions'}
-  devise_for :bidders, controllers: { registrations: 'bidders/registrations',sessions: 'bidders/sessions'}
+  devise_for :bidders
 
 
   resources :bid_processes

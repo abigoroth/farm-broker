@@ -44,19 +44,16 @@
                 <div class="col-sm-6">
                   <div class="form-inputs">
 
-                    <%= f.label "Name:" %>
+                    <%= f.label "Farm Name:" %>
                     <%= f.text_field :farmsitename, :class => "form-control", :placeholder => "Farm name" %>
 
                     <%= f.label "Farm Image:" %>
                       <%= f.file_field :avatar %>
 
-                      <%= f.label "Farm Owner:" %>
-                      <%= f.text_field :farmsiteownername, :class => "form-control", :placeholder => "Owner Name" %>
-
                     <%= f.label "Phone Number:" %>
                     <%= f.text_field :farmsiteownerphoneno, :class => "form-control", :placeholder => "Owner Phone Number" %>
 
-                    <%= f.label "Size:" %>
+                    <%= f.label "Farm Size:" %>
                     <%= f.text_field :farmsitesize, :class => "form-control", :placeholder => "Farm size in acres" %>
                     <span class="input-group-addon" id="basic-addon2">acres</span>
 
@@ -85,7 +82,7 @@
 
 
                     <%= f.label "farmsite description:" %>
-                    <%= f.text_field :farmsitedescription, :class => "form-control", :placeholder => "farmsitedescription" %>
+                    <%= f.text_area :farmsitedescription, :class => "form-control", :placeholder => "farmsitedescription" %>
 
                   </div> </div>
 
@@ -146,15 +143,31 @@
 
 
 if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(successCallback,errorCallback,{timeout:10000});
+        // navigator.geolocation.getCurrentPosition(showPosition);
     } else {
 
     }
+function errorCallback(error){
+  var latLong;
+  $.getJSON("http://ipinfo.io", function(ipinfo){
+      console.log("Found location ["+ipinfo.loc+"] by ipinfo.io");
+      latLong = ipinfo.loc.split(",");
+      var latLng = {lat: latLong[0], lng: latLong[1]};
+      showPosition(latLng);
+
+  });
+}
+
+function successCallback(position){
+  latlng = { lat: position.coords.latitude , lng: position.coords.longitude }
+  showPosition(latlng)
+}
 
 
 function showPosition(position) {
 
-  var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  var latLng = new google.maps.LatLng(position.lat, position.lng);
   var map = new google.maps.Map(document.getElementById('mapCanvas'), {
     zoom: 15,
     center: latLng,

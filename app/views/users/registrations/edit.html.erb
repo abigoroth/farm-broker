@@ -15,16 +15,19 @@
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <%= f.input :password, autocomplete: "off", class:'form-control' %>
+        <%= f.input :password, autocomplete: "off", class:'form-control',label: "New Password" %>
         <% if @minimum_password_length %>
         <span class="glyphicon glyphicon-info-sign">&nbsp;</span><em><%= @minimum_password_length %> characters minimum</em>
         <% end %>
-        <%= f.input :password_confirmation, autocomplete: "off", class:'form-control' %>
+        <%= f.input :password_confirmation, autocomplete: "off", class:'form-control' ,label: "New Confirmation Password"%>
         <div class="field">
+
+        <%= f.input :current_password, autocomplete: "off", class:'form-control' %>
+
           <%= f.label :timezone %><br />
           <%= f.time_zone_select :timezone, nil, {}, {class: 'form-control'} %>
         </div>
-        <%= f.input :current_password, autocomplete: "off", class:'form-control' %>
+        
 
         <div class="actions" align="right">
           <%= f.submit "Update Profile", class: 'btn btn-success btn-sm' %>
@@ -48,7 +51,7 @@
           <div class="well well-lg" >
             <div class="well well-lg" >
               <div class="form-inputs">
-                <%= g.input :name %>
+                <%= g.input :name ,label: "Full Name:" %>
                 <div class="field">
                   <%= g.label 'Date of Birth' %><br />
                   <div class='input-group date' id='datetimepicker4'>
@@ -65,11 +68,11 @@
                   <%= g.input :address %>
                   <%= g.input :phone %>
 
-                  <!--<% if current_user.meta_type == "Farmer" or current_user.meta_type == "Broker" %>
-                  <%= g.input :account_no %>
-                  <% elsif current_user.meta_type == "Bidder"%>
-                  <%= g.input :credit_card %>
-                  <%end%>-->
+                  <!--<%# if current_user.meta_type == "Farmer" or current_user.meta_type == "Broker" %>
+                  <%#= g.input :account_no %>
+                  <%# elsif current_user.meta_type == "Bidder"%>
+                  <%#= g.input :credit_card %>
+                  <%#end%>-->
                   <%if current_user.meta_type == "Farmer" %>
                     <%= g.input :company_name %>
                     <%= g.input :company_phone %>

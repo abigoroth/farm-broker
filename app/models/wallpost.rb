@@ -1,7 +1,9 @@
 class Wallpost < ApplicationRecord
-  include Bootsy::Container
-  validates :wall_status, presence: true
-  belongs_to :broker, class_name: 'User'
+  
+  
+  belongs_to :user
   has_many :comments
+
+  validates_presence_of :wall_status
 
 end
