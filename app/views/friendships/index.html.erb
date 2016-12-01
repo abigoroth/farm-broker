@@ -10,8 +10,8 @@
             <%if !@friends.include?(user.id) %>
             <tr>
 
-              <td><%= user.meta.present? ? user.meta.name : user.meta_type%></a></td>
-              <td><a class="btn btn-success" href="<%= friendships_path(:friend_id => user.id)%>" data-method="<%= :post %>">Follow</a></td>
+              <td><img src="<%= user.profilephoto %>" style="width:25px; height:25px; border-radius: 90px"><%= user.meta.present? ? user.meta.name : user.meta_type%></a></td>
+              <td><a class="btn btn-success btn-sm" href="<%= friendships_path(:friend_id => user.id)%>" data-method="<%= :post %>">Follow</a></td>
             </tr>
             <%end%>
             <%end%>
@@ -22,12 +22,12 @@
     </div>
     <div class="col-xs-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Friends</div>
+        <div class="panel-heading">Friends (<%= current_user.friends.count %> people)</div>
         <div class="panel-body">
           <table class="table">
             <% for friend in current_user.friends %>
-            <tr><td><p><a href="<%= user_views_profile_path(id:friend.id)%>"><%= friend.meta.name %></a>
-            </p></td></tr>
+            <tr><td><a href="<%= user_views_profile_path(id:friend.id)%>"><%= friend.meta.name %></a>
+            </td></tr>
             <%end%>
           </table>
         </div>

@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  root 'home#index'
+  root 'produces#index'
   get 'home/about'
   get 'home/news'
   get 'home/contact'

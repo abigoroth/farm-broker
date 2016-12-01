@@ -13,7 +13,7 @@ div.container {
       <div class="panel panel-default" >
         <div class="panel-heading"><center><strong><%= @user.meta.name %></strong></center></div>
         <div class="panel-body">
-          <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:150px; border-radius: 90px"><br><br></div></center>
+          <center><div class="photo"><img src="<%= @user.profilephoto %>" style="width:150px; height:200px; border-radius: 90px"><br><br></div></center>
             <%if user_signed_in? and @user.id == current_user.id %>
               <% if !@user.profilephoto.blank? %><br>
                 <center><a href="<%= remove_user_photo_path(@user.id) %>" \>REMOVE PHOTO</a></center><% end %>
@@ -28,8 +28,9 @@ div.container {
             <table class="table">
               <tr><th>EMAIL: </th><td><%= @user.email %></td></tr>
               
-              <%if user_signed_in? and @user.id == current_user.id %>
+              
                 <tr><th>BIRTH DATE: </th><td><%= @user.meta.birth_date %></td></tr>
+                <%if user_signed_in? and @user.id == current_user.id %>
                 <tr><th>ADDRESS: </th><td><%= @user.meta.address%></td></tr>
               <% end %>
 
@@ -238,9 +239,9 @@ div.container {
 
 
           <div class="panel panel-default">
-            <div class="panel-heading">Following 
+            <div class="panel-heading">Following (<%= current_user.friends.count %> people)
               <%if @user.id == current_user.id %>
-                (<a href="<%= friendships_path %>">View All</a>) 
+                <a href="<%= friendships_path %>">View All</a>
               <% end%>
             </div>
             <div class="panel-body">

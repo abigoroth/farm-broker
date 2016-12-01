@@ -14,7 +14,7 @@ class UserViewsController < ApplicationController
   end
 
   def create
-    @wallpost = Wallpost.create! wall_status: params[:wallpost][:wall_status], broker: current_user
+    @wallpost = Wallpost.create! wall_status: params[:wallpost][:wall_status], user: current_user
     flash[:notice] = 'Post created'
     redirect_to user_views_profile_path(id: current_user.id)
   end

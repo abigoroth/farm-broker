@@ -1,4 +1,5 @@
 class Wallpost < ApplicationRecord
+
   
   include Bootsy::Container
   belongs_to :user
