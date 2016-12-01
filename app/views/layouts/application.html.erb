@@ -136,12 +136,12 @@
 
 
 
-					<li class="active"><a href="<%= root_path  %>">Home</a></li>
+
 					<!--<li><a href="<%= bids_path %>">Bids</a></li>
 					<li><a href="<%= home_news_path %>">Sales</a></li>-->
-          			<li><a href="<%= wallposts_path %>">Newsfeed</a></li>
-					<li><a href="<%= farmsites_path %>">Farmsites</a></li>
-					<li><a href="<%= produces_path %>">Produces</a></li>
+					<li class="<%= 'active' if params[:controller] == 'produces' %>"><a href="<%= produces_path %>">Produces</a></li>
+					<li class="<%= 'active' if params[:controller] == 'farmsites' %>"><a href="<%= farmsites_path %>">Farmsites</a></li>
+    			<li class="<%= 'active' if params[:controller] == 'wallposts' %>"><a href="<%= wallposts_path %>">Newsfeed</a></li>
 					
 
 					

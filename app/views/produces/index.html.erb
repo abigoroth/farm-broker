@@ -1,13 +1,10 @@
 <div class="container2">
-<center><h3>Produces</h3>
-
 
 </center>
-<br/>
 <!-- left --> 
 
-  <div class="col-md-6" style="height:75vh;line-height:3em;overflow:scroll;padding:5px;">
-
+  <div class="col-md-6 left" style="height:75vh;line-height:3em;overflow:scroll;padding:5px;">
+    <%= render 'search' %>
     <% @produces.each_with_index do |produce,i| %>
     <a href="<%= produce_path(id: produce.id) %>">
 
@@ -36,7 +33,7 @@
     <%end%>
   </div>
 
-<div class="col-md-6 ">
+<div class="col-md-6 right">
       <div id="mapCanvas" style=' width: 100%; height: 75vh;'></div>
     </div>
 
@@ -46,6 +43,7 @@
 
 
 <script>
+$(".left-pane , .right-pane, #mapCanvas").height( $("html").height() - 105 )
 var bounds = new google.maps.LatLngBounds();
 
 var map = new google.maps.Map(document.getElementById('mapCanvas'), {

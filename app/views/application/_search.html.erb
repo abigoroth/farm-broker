@@ -1,0 +1,70 @@
+      <form class="form-inline">
+        
+        <!-- Choose State -->
+        <div class="form-group">
+          <select name="state" id="state_select" class="form-control" style="background-color:beige;">
+            <option value="">ANY STATE </option>
+            <%= State.each do |s| %>
+            <option value="<%= s %>"><%= s %></option>
+            <% end %>
+          </select>
+        </div>
+        <!-- Choose City -->
+        <div class="form-group">
+          <select name="city" id="city_select" class="form-control" style="background-color:beige;">
+            <option value="">ANY CITY </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select name="city" id="search_concept" class="form-control" style="background-color:beige;">
+            <option value="">SEARCH BY </option>
+            <option value="PRODUCE">PRODUCE </option>
+            <option value="FARMSITE">FARMSITE </option>
+          </select>
+        </div>
+        <input type="hidden" name="search_param" value="all" id="search_param">
+        <input type="text" class="form-control" style="background-color:beige;" id = "params_search" name="x" placeholder="   WRITE ITEM NAME">
+        <!-- Search button -->
+        <span class="form-group">
+          <button class="form-control" style="background-color:beige;" type="button" id="button_search"><span class="glyphicon glyphicon-search"></span></button>
+        </span>
+      </form>
+      <script>
+      $("#button_search").click(function(){
+        searching_for_data();
+      });
+      $("#params_search").keypress(function(e){
+      if(e.which == 13){e.searching_for_data();}
+      });
+      function searching_for_data(){
+        var params_search = $("#params_search").val();
+        var search_concept = $("#search_concept").val()
+        var city = $("#city_select").val();
+        var state = $("#state_select").val();
+        //alert(state);
+        if(search_concept == "PRODUCE"){
+        Turbolinks.visit("/produces?search=" + params_search + "&state=" + state + "&city=" + city );
+        //
+        }
+        if(search_concept == "FARMSITE"){
+        Turbolinks.visit("/farmsites?search=" + params_search + "&state=" + state + "&city=" + city);
+        }
+      }
+      city = <%= raw(City.to_json) %>
+      $('#state_select').change(function(){
+        //show alert
+        //alert ($('#farmsite_farmsitestate').val())
+        //array city(#farmsite_farmsitesstate)
+        console.log( city[ $('#state_select').val() ] )
+        //remove first element in arary
+        city[ $('#state_select').val() ].shift();
+        //loop
+        $("#city_select").html("")
+        $("#city_select").append("<option value=''> Any City </option>")
+        $.each( city[ $('#state_select').val() ],  function(i,v){
+        console.log(v)
+        //append list sume dalam array selain guna html
+        $("#city_select").append("<option value='" + v + "'> " + v + "</option>")
+        })
+      });
+      </script>

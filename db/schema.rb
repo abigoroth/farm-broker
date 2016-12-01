@@ -115,8 +115,8 @@ ActiveRecord::Schema.define(version: 20161130092240) do
     t.integer  "farmsiteownerphoneno"
     t.integer  "district_id"
     t.integer  "farmer_id"
-    t.string   "longitude"
-    t.string   "latitude"
+    t.float    "longitude"
+    t.float    "latitude"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "avatar_file_name"
@@ -219,6 +219,8 @@ ActiveRecord::Schema.define(version: 20161130092240) do
     t.datetime "updated_at",                                null: false
     t.float    "longitude"
     t.float    "latitude"
+    t.string   "back_company"
+    t.string   "bank_company"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

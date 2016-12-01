@@ -126,7 +126,7 @@ div.container {
  
                   </div>
 
-                  <%if user_signed_in? %>
+                  <%if user_signed_in? and current_user.id %>
                     <%@comment = wallpost.comments.new %>
                       <%= simple_form_for(@comment) do |f| %>
                       
