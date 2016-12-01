@@ -3,7 +3,7 @@
 </center>
 <!-- left --> 
 
-  <div class="col-md-6 left" style="height:75vh;line-height:3em;overflow:scroll;padding:5px;">
+  <div class="col-md-6 left-pane" style="height:300px;line-height:3em;overflow:scroll;padding:5px;">
     <%= render 'search' %>
     <% @produces.each_with_index do |produce,i| %>
     <a href="<%= produce_path(id: produce.id) %>">
@@ -33,8 +33,8 @@
     <%end%>
   </div>
 
-<div class="col-md-6 right">
-      <div id="mapCanvas" style=' width: 100%; height: 75vh;'></div>
+<div class="col-md-6 right-pane">
+      <div id="mapCanvas" style=' width: 100%; height: 300px;'></div>
     </div>
 
 </div>

@@ -6,7 +6,7 @@
   <!-- left --> 
 
 
-  <div class="col-md-6 left-pane" style="line-height:3em;overflow:scroll;padding:5px">
+  <div class="col-md-6 left-pane" style="height:300px ; line-height:3em;overflow:scroll;padding:5px">
     <%= render 'search' %>
 
       <% @farmsites.each_with_index do |farmsite,i| %>
@@ -36,7 +36,7 @@
       <%end%>
     </div>
     <div class="col-md-6 right-pane">
-      <div id="mapCanvas" style=' width: 100%;'></div>
+      <div id="mapCanvas" style=' width: 100%; height:300px ;'></div>
     </div>
 
 
