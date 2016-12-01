@@ -11,7 +11,7 @@ class User < ApplicationRecord
     #ROLES = %w[broker bidder farmer].freeze
     #validates :role, presence: true
     #photo upload
-    has_attached_file :profilephoto, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "Blank-Profile.jpg"
+    has_attached_file :profilephoto, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/Blank-Profile.jpg"
     validates_attachment_content_type :profilephoto, content_type: /\Aimage\/.*\z/
     #birth date format
     def birth_date
