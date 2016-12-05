@@ -2,12 +2,18 @@ class Broker < ApplicationRecord
   has_one :user, as: :meta, dependent: :destroy
   validates :name, presence: true
 
-  has_many :farmsites
-  has_many :produces , through: :bids
-  has_many :produces , through: :farmsites
-  has_many :produces
-  has_many :wallposts
-  has_many :comments
+  has_many :farmsites,dependent: :destroy
+
+  has_many :produces , through: :bids,dependent: :destroy
+
+  has_many :produces , through: :farmsites,dependent: :destroy
+
+  has_many :produces,dependent: :destroy
+
+  has_many :wallposts,dependent: :destroy
+
+  has_many :comments,dependent: :destroy
+
 
   def birth_date
     dob.strftime("%d/%m/%Y")

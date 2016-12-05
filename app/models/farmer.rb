@@ -1,8 +1,10 @@
 class Farmer < ApplicationRecord
 	has_one :user, as: :meta, dependent: :destroy
 	has_one :farmsite #tukar 1:1
-	has_many :produces
-	has_many :bids
+	has_many :produces,dependent: :destroy
+
+	has_many :bids,dependent: :destroy
+
 
 	def birth_date
     	dob.strftime("%d/%m/%Y")

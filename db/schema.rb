@@ -38,11 +38,11 @@ ActiveRecord::Schema.define(version: 20161130092240) do
     t.decimal  "start_price"
     t.decimal  "highest_price"
     t.decimal  "max_price"
+    t.integer  "farmer_id"
     t.integer  "produce_id"
     t.integer  "bidder_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "farmer_id"
   end
 
   create_table "bootsy_image_galleries", force: :cascade do |t|
@@ -219,15 +219,13 @@ ActiveRecord::Schema.define(version: 20161130092240) do
     t.datetime "updated_at",                                null: false
     t.float    "longitude"
     t.float    "latitude"
-    t.string   "back_company"
-    t.string   "bank_company"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "wallposts", force: :cascade do |t|
-    t.string   "wall_status"
+    t.text     "wall_status"
     t.datetime "wall_date"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

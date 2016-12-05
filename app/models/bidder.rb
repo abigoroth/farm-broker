@@ -5,7 +5,8 @@ class Bidder < ApplicationRecord
 
   has_many :bid_processes
 
-  has_many :bids
+  has_many :bids,dependent: :destroy
+
 
   def birth_date
     dob.strftime("%d/%m/%Y")

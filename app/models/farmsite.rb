@@ -1,12 +1,15 @@
 class Farmsite < ApplicationRecord
 	belongs_to :farmer
-	has_many :produces
-	has_many :reviews
+	has_many :produces,dependent: :destroy
+
+	has_many :reviews,dependent: :destroy
+
 	
 	#geocoded_by :farmsiteaddress
 	geocoded_by :latitude
 	after_validation :geocode  #, :if => :address_changed?
-	has_many :reviews
+	has_many :reviews,dependent: :destroy
+
 
 	validates_presence_of :latitude, :longitude, :farmsitename
 	
