@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   around_filter :user_time_zone, if: :current_user
-
+  respond_to :html,:js, :json
     def cities
       render json: CS.cities(params[:state], :MY).to_json
     end

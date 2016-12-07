@@ -1,0 +1,5 @@
+<% if @produce.errors.any? %>
+  $('#modal').html ("<%=j render 'form'%>");
+<%else%>
+    $('#modal').modal('hide');
+<%end%>

@@ -1,13 +1,28 @@
-<div class="container2">
+<!-- <style type="text/css">
+  .highlightedFarm {
+    background:  #ADD8E6;
+  }
+  body, html {
+
+  }
+  body {
+    display:flex;
+  }
+  .right-pane {
+    padding: 0px;
+  }
+</style> -->
+
+<div class="row">
   <% if user_signed_in? and (current_user.meta_type == "Farmer") and !current_user.meta.farmsite.present? %>
 
-  <%= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %>
+ <!--  <%#= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %> -->
   <%end%>
   <!-- left --> 
 
 
   <div class="col-md-6 left-pane" style="height:300px ; line-height:3em;overflow:scroll;padding:5px">
-    <%= render 'search' %>
+    <center><%= render 'search' %></center><br>
 
       <% @farmsites.each_with_index do |farmsite,i| %>
       <a href="<%= farmsite_path(id: farmsite.id) %>"> 
@@ -152,17 +167,3 @@ marker<%= i %>.addListener('click', function() {
 
 </script> 
 
-<style type="text/css">
-  .highlightedFarm {
-    background:  #ADD8E6;
-  }
-  body, html {
-
-  }
-  body {
-    display:flex;
-  }
-  .right-pane {
-    padding: 0px;
-  }
-</style>

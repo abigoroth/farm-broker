@@ -36,7 +36,7 @@ div.container {
 
               <tr><th>PHONE NUMBER: </th><td><%= @user.meta.phone%></td></tr>
 
-                <% if (@user.id != current_user.id) and (@user.meta_type == "Farmer")  %>
+                <% if (@user.id?) and (@user.meta_type == "Farmer")  %>
                 <tr><th>COMPANY: </th><td><%= @user.meta.company_name%></td></tr>
                 <tr><th>COMPANY NUMBER: </th><td><%= @user.meta.company_phone%></td></tr>
                 <%end%>
@@ -114,6 +114,7 @@ div.container {
 
 
                         <% @wallposts.each do |wallpost| %><br>
+                        
                             <div class="panel panel-default">
                               <div class="panel-body">
                                 <div class="panel panel-default">
@@ -237,12 +238,15 @@ div.container {
         <div class="col-xs-12">
 
 
+      <%if user_signed_in? and @user.id == current_user.id %>
 
           <div class="panel panel-default">
-            <div class="panel-heading">Following (<%= current_user.friends.count %> people)
+            <div class="panel-heading">
+         
+            Following (<%= current_user.friends.count %> people)
               <%if @user.id == current_user.id %>
                 <a href="<%= friendships_path %>">View All</a>
-              <% end%>
+              <% end%>  
             </div>
             <div class="panel-body">
               <%if current_user.friends.exists? %>
@@ -270,14 +274,13 @@ div.container {
 
               <%end%>
 
-              <%= will_paginate @friends, renderer: BootstrapPagination::Rails %>
+                <%= will_paginate @friends, renderer: BootstrapPagination::Rails %>
+              </div>
             </div>
           </div>
-
-         
-
         </div>
-      </div>
+      <% end%>
+      
       <div class="row">
         <div class="col-xs-12">
           <%if user_signed_in? and @user.id == current_user.id %>

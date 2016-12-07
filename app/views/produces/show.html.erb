@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 
 <!-- left -->                      
@@ -36,7 +36,7 @@
       <div align="right">
         <%= link_to edit_produce_path(@produce)   , class: "btn btn-primary btn-sm", remote: true  do %><i class= "glyphicon glyphicon-edit" > </i> Edit<% end %>
 
-        <%= link_to  @produce, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
+        <%= link_to  produce_path(@produce,farmsite_id: @produce.farmsite.id), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-sm" do %> <i class= "glyphicon glyphicon-remove">  </i> Remove<% end %>
       </div>
       <%end%>
       <%end%>

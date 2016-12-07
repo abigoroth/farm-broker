@@ -14,9 +14,13 @@ class UserViewsController < ApplicationController
   end
 
   def create
+    if params[:wallpost][:wall_status].present?
     @wallpost = Wallpost.create! wall_status: params[:wallpost][:wall_status], user: current_user
     flash[:notice] = 'Post created'
     redirect_to user_views_profile_path(id: current_user.id)
+    else
+      redirect_to :back, alert: "Please write something"
+    end  
   end
 
   def remove_photo

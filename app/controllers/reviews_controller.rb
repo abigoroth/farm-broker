@@ -30,15 +30,25 @@ class ReviewsController < ApplicationController
     @review.farmsite_id = @farmsite.id
     @review.user_id = current_user.id
 
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to farmsite_path(@farmsite), notice: 'Review was successfully created.' }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+if @review.save
+    flash[:notice] = 'Review created'
+    redirect_to :back
+    else
+      redirect_to :back, alert: "Please complete the review form "
     end
+
+
+
+   
+    # respond_to do |format|
+    #   if @review.save
+    #     format.html { redirect_to farmsite_path(@farmsite), notice: 'Review was successfully created.' }
+    #     format.json { render :show, status: :created, location: @review }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @review.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /reviews/1

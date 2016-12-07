@@ -9,7 +9,7 @@
     <div class="col-sm-6">
       <div class="panel panel-default" style="padding: 20px">
         <%= f.input :profilephoto %>
-        <%= f.input :email, autofocus: true, class:'form-control' %>
+        <%= f.input :email, class:'form-control' ,readonly: true%>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

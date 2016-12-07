@@ -1,10 +1,18 @@
-<div class="container2">
+<!-- <style type="text/css">
+  .highlightedProduce {
+    background: #ADD8E6;
+  }
+  body {
+    display:flex;
+  }
+</style>
+ -->
 
-</center>
+
+<div class="row">
 <!-- left --> 
-
   <div class="col-md-6 left-pane" style="height:300px;line-height:3em;overflow:scroll;padding:5px;">
-    <%= render 'search' %>
+    <center><%= render 'search' %></center><br>
     <% @produces.each_with_index do |produce,i| %>
     <a href="<%= produce_path(id: produce.id) %>">
 
@@ -39,6 +47,7 @@
 
 </div>
 
+</div>
 
 
 
@@ -149,11 +158,3 @@ tmps =[]
 
 </script>
 
-<style type="text/css">
-  .highlightedProduce {
-    background: #ADD8E6;
-  }
-  body {
-    display:flex;
-  }
-</style>

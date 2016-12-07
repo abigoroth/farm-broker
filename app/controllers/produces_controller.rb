@@ -42,16 +42,20 @@ class ProducesController < ApplicationController
   # POST /produces.json
   def create
     @produce = current_user.meta.produces.new(produce_params) if(current_user.meta_type == "Farmer")
-
-    respond_to do |format|
-      if @produce.save
-        format.html { redirect_to produces_path(farmsite_id: @produce.farmsite.id), notice: 'Produce was successfully created.' }
-        format.json { render :show, status: :created, location: @produce }
-      else
-        format.html { render :new }
-        format.json { render json: @produce.errors, status: :unprocessable_entity }
-      end
+    @produce.save
+    respond_with(@produce) do |format|
+      format.js {render :save,locals:{ object:@produce } }
     end
+    # respond_to do |format|
+    #   #produce_path(farmsite_id: @produce.farmsite.id
+    #   if @produce.save
+    #     format.html { redirect_to @produce, notice: 'Produce was successfully created.' }
+    #     format.json { render :show, status: :created, location: @produce }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @produce.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /produces/1
@@ -59,7 +63,7 @@ class ProducesController < ApplicationController
   def update
     respond_to do |format|
       if @produce.update(produce_params)
-        format.html { redirect_to produces_path(farmsite_id: @produce.farmsite.id), notice: 'Produce was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Produce was successfully updated.' }
         format.json { render :show, status: :ok, location: @produce }
       else
         format.html { render :edit }
@@ -73,7 +77,7 @@ class ProducesController < ApplicationController
   def destroy
     @produce.destroy
     respond_to do |format|
-      format.html { redirect_to produces_path(farmsite_id: params[:farmsite_id]), notice: 'Produce was successfully destroyed.' }
+      format.html { redirect_to farmsite_path(params[:farmsite_id]), notice: 'Produce was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

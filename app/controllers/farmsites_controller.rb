@@ -69,17 +69,19 @@ end
 
 
     @farmsite =current_user.meta.build_farmsite(farmsite_params) if(current_user.meta_type == "Farmer")
-
-
-    respond_to do |format|
-      if @farmsite.save
-        format.html { redirect_to :back, notice: 'Farmsite was successfully created.' }
-        format.json { render :show, status: :created, location: @farmsite }
-      else
-        format.html { render :new }
-        format.json { render json: @farmsite.errors, status: :unprocessable_entity }
-      end
+    @farmsite.save
+    respond_with(@farmsite) do |format|
+      format.js {render :save,locals:{ object:@farmsite } }
     end
+    # respond_to do |format|
+    #   if @farmsite.save
+    #     format.html { redirect_to @farmsite, notice: 'Farmsite was successfully created.' }
+    #     format.json { render :show, status: :created, location: @farmsite }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @farmsite.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /farmsites/1
@@ -101,7 +103,7 @@ end
   def destroy
     @farmsite.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Farmsite was successfully destroyed.' }
+      format.html { redirect_to user_views_profile_path(id: current_user.id), notice: 'Farmsite was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

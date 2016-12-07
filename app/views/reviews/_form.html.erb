@@ -6,7 +6,7 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.js"></script>
 
-        <%= simple_form_for([@farmsite, @review]) do |f| %>
+        <%= simple_form_for([@farmsite, @review], html: {remote: true}, authenticity_token: true) do |f| %>
               <% if @farmsite.reviews.build.errors.any? %>
                 <div id="error_explanation">
                   <h2><%= pluralize(farmsite.reviews.errors.count, "error") %> prohibited this farmsite.reviews from being saved:</h2>

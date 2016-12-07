@@ -1,13 +1,13 @@
 class Produce < ApplicationRecord
 	belongs_to :farmsite
 	belongs_to :farmer
-	has_many :bids,dependent: :destroy
+	# has_many :bids,dependent: :destroy
 
-	has_many :brokers , through: :bids,dependent: :destroy
+	# has_many :brokers , through: :bids,dependent: :destroy
 
 	has_attached_file :avatar, styles: { large: "400x400>",medium: "300x300>", thumb: "100x100>" }, default_url: "missing1.png"
 	validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
-	validates_presence_of :producename, :producequantity
+	validates_presence_of :producename, :producedate , :produceharvest , :producequantity
 
 	scope :search, -> (keyword) { where("producename like ?", "%#{keyword}%") }
 

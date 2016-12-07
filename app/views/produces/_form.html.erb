@@ -1,132 +1,106 @@
-<div class = "modal-dialog modal-md" > 
-  <div class = "modal-content" >  
+<div class = "modal-dialog modal-md" >
+  <div class = "modal-content" >
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= form_for(@produce,html:{multipart: true}) do |f| %>
+
+
+    <%= simple_form_for(@produce, html: {remote: true}, authenticity_token: true) do |f| %>
     <% if @produce.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(produce.errors.count, "error") %> prohibited this produce from being saved:</h2>
-
-      <ul>
-        <% @produce.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+      <div id="error_explanation" class= "alert alert-dismissible alert-danger">
+        <h2><%= pluralize(@produce.errors.count, "error") %> prohibited this produce from being saved:</h2>
+          <% @produce.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+      </div>
     <% end %>
-
     <div class = "modal-header" >
-      <center><h4 class = "modal-title" >Farm Site</h4></center>
-    </div>
-    
+      <center><h4 class = "modal-title" >Create Produce</h4></center>
+    </div> 
     <div class = "modal-body" >
-
       <div class="row">
         <div class="well">
           <div class="panel panel-default">
             <div class="panel-body">
-
               <div class="input-group input-group-lg " %>
                 <% if params[:farmsite_id] %>
-                  <%= f.label "Farm Name" %>
-                  <%= f.hidden_field :farmsite_id, value: Farmsite.find(params[:farmsite_id]).id,:class => "form-control",readonly: true %>
-                  <%= f.text_field :farmsite_name, value: Farmsite.find(params[:farmsite_id]).farmsitename,:class => "form-control",readonly: true %>
+                <%= f.label "Farm Name" %>
+                <%= f.hidden_field :farmsite_id, value: Farmsite.find(params[:farmsite_id]).id,:class => "form-control",readonly: true %>
+                <%= f.text_field :farmsite_name, value: Farmsite.find(params[:farmsite_id]).farmsitename,:class => "form-control",readonly: true %>
                 <% end %>
                 <br>
-                <%= f.label "Name:" %>
-                <%= f.text_field :producename, :class => "form-control", :placeholder => "Product name" %>
+                
+                <%= f.input :producename %>
                 <br>
                 <%= f.label "Produce Picture:" %>
                 <%= f.file_field :avatar %>
-
-            <br>
-
-            <%= f.label "Produce type :" %></br>
-         
+                <br>
+                <%= f.label "Produce type :" %></br>
+                
                 <div class="checkbox">
                   <%=f.radio_button :producetype,"Vegetable",:checked => true %> Vegetable<br>
                   <%=f.radio_button :producetype,"Fruit",:checked => true %> Fruit<br>
-                  <%=f.radio_button :producetype,"Flower" %> Flower<br>  
+                  <%=f.radio_button :producetype,"Flower" %> Flower<br>
                   <%=f.radio_button :producetype,"Grain" %> Grain<br>
                 </div>
-      
-            <br>
-
-            <div class="field">
-            <%= f.label 'Planting date:' %><br />
-            <div class='input-group date' id='datetimepicker5'>
-              <%= f.text_field :producedate, autofocus: true, class:'form-control'%> 
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-              <!-- JS script for datetimepicker4 -->
-              <script type="text/javascript">
-               $(function () {
-                 $('#datetimepicker5').datetimepicker(
-                 {
-                   format: 'YYYY-MM-DD'
-                 }
-                 );
-               });
-             </script>
-             <!-- JS script for datetimepicker4 -->
-           </div></div>
-           <br>
-
-
-<!-- HIDE IF PRODUCE TYPE = LIVESTOCK -->
-           <div class="field">
-            <%= f.label 'Harvets date:' %><br />
-            <div class='input-group date' id='datetimepicker4'>
-              <%= f.text_field :produceharvest, autofocus: true, class:'form-control'%> 
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-              <!-- JS script for datetimepicker4 -->
-              <script type="text/javascript">
-               $(function () {
-                 $('#datetimepicker4').datetimepicker(
-                 {
-                   format: 'YYYY-MM-DD'
-                 }
-                 );
-               });
-             </script>
-             <!-- JS script for datetimepicker4 -->
-           </div></div>
-           <br>
-
-
-
-            <!-- HOW ABOUT LIVESTOCK -->
-            <%= f.label "Produce quantity:" %>
-            <%= f.text_field :producequantity, :class => "form-control", :placeholder => "Quantity in kilogram" %>
-            <div>
-              <span class="input-group-addon" id="basic-addon2">KG</span>
-              <br>
-
-              <%= f.label "Produce information:" %>
-              <%= f.text_area :producedescription, :class => "form-control", :placeholder => "Detail information" %>
+                
+                <br>
+                <div class="field">
+                  <%= f.label 'Planting date:' %><br />
+                  <div class='input-group date' id='datetimepicker6'>
+                    <%= f.text_field :producedate, autofocus: true, class:'form-control'%>
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div>
+                </div>
+                <br>
+                <div class="field">
+                  <%= f.label 'Harvets date:' %><br />
+                  <div class='input-group date' id='datetimepicker7'>
+                    <%= f.text_field :produceharvest, autofocus: true, class:'form-control'%>
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div></div>
+                  <br>
+                
+                  <!-- HOW ABOUT LIVESTOCK -->
+                  <%= f.label "Produce quantity:" %>
+                  <%= f.text_field :producequantity, :class => "form-control", :placeholder => "Quantity in kilogram" %>
+                  <div>
+                    <span class="input-group-addon" id="basic-addon2">KG</span>
+                    <br>
+                    <%= f.label "Produce information:" %>
+                    <%= f.text_area :producedescription, :class => "form-control", :placeholder => "Detail information" %>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <center><div class="actions"><%= f.submit 'Create',class: 'btn btn-lg btn-success btn-sm'%></div></center>
+        <% end %>
+        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
       </div>
+  
     </div>
-  </div>
-
-  <center><div class="actions"><%= f.submit 'Create',class: 'btn btn-lg btn-success btn-sm'%></div></center>
-
-  <% end %>
-
-  <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
-
 </div>
-<!--
+
+
 <script type="text/javascript">
   $(function () {
-    $("#produce_producedate").datetimepicker();
+    $('#datetimepicker6').datetimepicker({
+     format: 'YYYY-MM-DD'
+    });
+    $('#datetimepicker7').datetimepicker({
+      format: 'YYYY-MM-DD'
+    });
+      $("#datetimepicker6").on("dp.change", function (e) {
+      $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+    });
+      $("#datetimepicker7").on("dp.change", function (e) {
+      $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+    });
   });
-
-</script>-->
-
-</div>
-</div>
+</script>

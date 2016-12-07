@@ -32,8 +32,7 @@ class WallpostsController < ApplicationController
     flash[:notice] = 'Post created'
     redirect_to wallposts_path
     else
-      format.html { render :new }
-      format.json { render json: @wallpost.errors, status: :unprocessable_entity }
+      redirect_to :back, alert: "Please write something on wallpost"
     end
 
   end
