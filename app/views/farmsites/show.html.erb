@@ -22,38 +22,29 @@
         </div>
     </div>
 
-<!-- second --> 
-
-    <div class="panel panel-default">
-     <div class="panel-heading">Produces (click on produce's name)
-         <% if user_signed_in? and @farmsite and @farmsite.farmer == current_user.meta and  @farmsite.present?  %>
-              <%= link_to 'Add Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm pull-right" , data: {turbolinks: false}, remote: true %>
-          <%end%>
-     </div>
-      <div class="panel-body">
+<!-- second --><!--Carousel --><!--
+<div class="panel panel-default">
+  <div class="panel-heading">List Produces</div>
+  <div class="panel-body">
     
-        <!--Carousel -->
-        <% if @farmsite.produces.present? %>
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-          <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-          </ol>
-
-          <div class="carousel-inner" role="listbox">
-            <% @farmsite.produces.each_with_index do |produce,index| %>
-              <div class="item <%= 'active' if index == 0 %>">
-                <%= image_tag produce.avatar.url,class: "img-responsive",style: "height:300px;"%>
-                <div class="carousel-caption">
-                 <h1><a href="<%= produce_path(id: produce.id) %>" style="color:white"><%= produce.producename %></h1>
-               </div>
-
-             </div>
-           <% end %>
-        
+    
+    <% if @farmsite.produces.present? %>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <% @farmsite.produces.each_with_index do |produce,index| %>
+        <div class="item <%= 'active' if index == 0 %>">
+          <%= image_tag produce.avatar.url,class: "img-responsive",style: "height:300px;"%>
+          <div class="carousel-caption">
+            <h1><a href="<%= produce_path(id: produce.id) %>" style="color:white"><%= produce.producename %></h1>
+            </div>
+          </div>
+          <% end %>
+          
         </div>
-
         <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
@@ -63,21 +54,70 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-
       <% else %>
-        <div align="center">
-          No Produces Available. 
-        </div>
-       <% end %>
-
-      <!--Carousel -->
-
+      <div align="center">
+        No Produces Available.
+      </div>
+      <% end %>
+      <br>
 
 
+
+
+      <% if user_signed_in? and @farmsite and @farmsite.farmer == current_user.meta and  @farmsite.present?  %>
+    <%= link_to 'Add Produce', new_produce_path(farmsite_id: @farmsite.id) , class: "btn btn-success btn-sm pull-right" , data: {turbolinks: false}, remote: true %>
+    <%end%>
+
+
+
+    </div>
+
+  </div> 
+  <!--Carousel -->
+
+<div class="panel panel-default">
+  <div class="panel-heading">List Produces</div>
+  <div class="panel-body" >
+
+      <% @produces.each_with_index do |produce,i| %>
+    <a href="<%= produce_path(id: produce.id) %>">
+
+      <div class='col-md-4 produce-hover' produce-index="<%= i %>" produce-id="<%= produce.id %>">
+
+        <div class="panel panel-default">
+
+        <!--   <div class="panel-heading"><center><h4><%= produce.producename %></h4></center></div> -->
+
+          <!-- <div class="panel-body"> -->
+
+            <div align="center"><%= image_tag produce.avatar.url,class: "img-responsive",style: "height:200px;"%> <!-- </div> -->
+            <div align="center"><h4><%= produce.producename %></h4></div>
+           <!--  <table class="table">
+
+              <tr><th><strong>Farm: </strong></th><td><%= @farmsite.farmsitename %></td></tr>
+              <tr><th><strong>Company: </strong></th><td><%= @farmsite.farmer.user.meta.company_name %></td></tr>
+              <tr><th><strong>Location: </strong></th><td><%= @farmsite.farmsitecity %>, <%= produce.farmsite.farmsitestate %></td></tr>
+
+            </table> -->
+            
+          </div>
         </div>
       </div>
+      </a>
+    <%end%> 
 
-    <!-- third <%= link_to "Add Review", new_farmsite_review_path(@farmsite) %></br> --> 
+ 
+
+    </div><div align="center"><%= will_paginate @produces, renderer: BootstrapPagination::Rails %></div>
+    </div>
+
+
+
+
+
+
+
+    <!-- third <%#= link_to "Add Review", new_farmsite_review_path(@farmsite) %></br> --> 
     <div class="panel panel-default">
 
       <div class="panel-heading"></a>Review</div>

@@ -18,4 +18,6 @@ class Produce < ApplicationRecord
 	scope :search_city, -> (city) {joins(:farmsite)
 	.where("farmsites.farmsitecity = '#{city}'") if city.presence && city != "null"
 	}
+
+  
 end

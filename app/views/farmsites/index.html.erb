@@ -19,11 +19,12 @@
  <!--  <%#= link_to 'Create Farm', new_farmsite_path , class: "btn btn-success btn-sm" , data: {turbolinks: false}, remote: true %> -->
   <%end%>
   <!-- left --> 
+<div align = "center"><%= render 'search' %></div><hr>
 
-
-  <div class="col-md-6 left-pane" style="height:300px ; line-height:3em;overflow:scroll;padding:5px">
-    <center><%= render 'search' %></center><br>
-
+  <div class="col-md-7 left-pane" style="height:300px ; line-height:3em;overflow:scroll;padding:5px">
+   
+<div class="row">
+ <div class="col-lg-12"><center>
       <% @farmsites.each_with_index do |farmsite,i| %>
       <a href="<%= farmsite_path(id: farmsite.id) %>"> 
 
@@ -35,7 +36,7 @@
 
             <div class="panel-body">
 
-              <%= image_tag farmsite.avatar.url, class: "img-responsive",style: "height:200px;"%> 
+              <div align="center"><%= image_tag farmsite.avatar.url, class: "img-responsive",style: "height:200px;"%>  </div>
 
               <table class="table">
 
@@ -48,9 +49,10 @@
         </div> 
       </a>
 
-      <%end%>
+      <%end%> </div>  <div class="col-lg-12"><div align="center">
+       <%= will_paginate @farmsites, renderer: BootstrapPagination::Rails %> </div> </div>  </div>
     </div>
-    <div class="col-md-6 right-pane">
+    <div class="col-md-5 right-pane">
       <div id="mapCanvas" style=' width: 100%; height:300px ;'></div>
     </div>
 
@@ -112,7 +114,7 @@ function showPosition(position) {
 
   var circle = new google.maps.Circle({
     map: map,
-  radius: 5000,    // 10 miles in metres
+  radius: 10000,    // 10 miles in metres
   strokeColor: '#EE82EE',
   strokeOpacity: 0.8,
   strokeWeight: 2,
@@ -150,7 +152,8 @@ map.fitBounds(bounds);
 tmps.push(marker<%= i %>)
 
 var infowindow<%= i %> = new google.maps.InfoWindow({
-  content: '<a class="iHover<%= farmsite.id %>" farm-id="<%= farmsite.id %>" href="<%= farmsite_path(id: farmsite.id) %>"><%= farmsite.farmsitename %></a>' + '<br/>'  + 'Produces: ' + '<%= farmsite.produces.map{|x| x.producename }.join(", ") %>'
+  
+  content: '<a class="iHover<%= farmsite.id %>" farm-id="<%= farmsite.id %>" href="<%= farmsite_path(id: farmsite.id) %>"><%= farmsite.farmsitename %></a>' + '<br/>'  + 'Produces: '+'<%= farmsite_list(farmsite.produces) %>'
 
 });
 

@@ -6,7 +6,7 @@ class ProducesController < ApplicationController
   # GET /produces.json
   def index
     @produces = params[:farmsite_id].present? ? Produce.where(farmsite_id:params[:farmsite_id]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
- : Produce.all.order(producename: :desc).paginate(:page => params[:page], :per_page => 10)
+ : Produce.all.order(producename: :asc).paginate(:page => params[:page], :per_page => 10)
 
     @produces = @produces
     .search("#{params[:search]}")

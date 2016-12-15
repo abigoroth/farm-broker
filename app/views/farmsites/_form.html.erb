@@ -175,8 +175,13 @@ function showPosition(position) {
 
     var circle = new google.maps.Circle({
         map: map,
-        radius: 50, // 10 miles in metres
-        fillColor: '##73E444'
+        radius: 100, // 10 miles in metres
+        strokeColor: '#73E444',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#73E444',
+        fillOpacity: 0.35
+
     });
     circle.bindTo('center', marker, 'position');
     //start positon
@@ -264,6 +269,7 @@ function geocodeAddress(geocoder, resultsMap) {
 document.getElementById('submit').addEventListener('click', function() {
     geocodeAddress(geocoder, map);
 });
+
 var autocomplete = new google.maps.places.Autocomplete($("#search_address")[0], {});
 google.maps.event.addListener(autocomplete, 'place_changed', function() {
     var place = autocomplete.getPlace();
@@ -306,3 +312,5 @@ if (from_db_lat.length > 0){
 }
 google.maps.event.trigger(map, 'resize');
 </script>
+
+<script src="//maps.google.com/maps/api/js?key=AIzaSyCOealGUq1fv1KL0l5QleToE83Acpxi60o&sensor=false&libraries=places&language=en-AU"></script>
