@@ -46,8 +46,8 @@ class FarmsitesController < ApplicationController
   # GET /farmsites/1
   # GET /farmsites/1.json
   def show
-    @produces = Produce.where(farmsite_id: params[:farmsite_id] ).order(created_at: :desc)
-    @produces = Produce.paginate(:page => params[:page], :per_page => 6)
+    #@produces = Produce.where(farmsite_id: params[:id] ).order(created_at: :desc)
+    @produces = @farmsite.produces.paginate(:page => params[:page], :per_page => 6)
      @hash1 = Gmaps4rails.build_markers(@farmsites) do |farmsite, marker|
       marker.lat farmsite.latitude
       marker.lng farmsite.longitudee
@@ -93,6 +93,7 @@ end
         format.html { redirect_to :back, notice: 'Farmsite was successfully updated.' }
         format.json { render :show, status: :ok, location: @farmsite }
       else
+        format.js {render :save}
         format.html { render :edit }
         format.json { render json: @farmsite.errors, status: :unprocessable_entity }
       end

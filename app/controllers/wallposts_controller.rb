@@ -44,7 +44,9 @@ class WallpostsController < ApplicationController
       if @wallpost.update(wallpost_params)
         format.html { redirect_to :back, notice: 'Wallpost was successfully updated.' }
         format.json { render :show, status: :ok, location: @wallpost }
+
       else
+        format.js {render :save}
         format.html { render :edit }
         format.json { render json: @wallpost.errors, status: :unprocessable_entity }
       end

@@ -1,4 +1,5 @@
 <% if @produce.errors.any? %>
+ <% params[:farmsite_id] = @produce.farmsite_id%> 
   $('#modal').html ("<%=j render 'form'%>");
 <%else%>
     $('#modal').modal('hide');

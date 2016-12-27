@@ -1,0 +1,6 @@
+<%if @wallpost.errors.any? %>
+$('#modal').html("<%= j render 'form'%>");
+<%else%>
+redirect_to wallposts_path
+
+<%end%>

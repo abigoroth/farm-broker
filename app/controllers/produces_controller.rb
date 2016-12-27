@@ -42,7 +42,9 @@ class ProducesController < ApplicationController
   # POST /produces.json
   def create
     @produce = current_user.meta.produces.new(produce_params) if(current_user.meta_type == "Farmer")
+    logger.debug"before#{@produce.inspect}"
     @produce.save
+    logger.debug"after#{@produce.inspect}"
     respond_with(@produce) do |format|
       format.js {render :save,locals:{ object:@produce } }
     end
@@ -66,6 +68,7 @@ class ProducesController < ApplicationController
         format.html { redirect_to :back, notice: 'Produce was successfully updated.' }
         format.json { render :show, status: :ok, location: @produce }
       else
+        format.js {render :save}
         format.html { render :edit }
         format.json { render json: @produce.errors, status: :unprocessable_entity }
       end
@@ -90,6 +93,6 @@ class ProducesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def produce_params
-      params.require(:produce).permit(:producename, :producetype, :producedate, :produceharvest, :producequantity, :producedescription, :produceimage, :farmsite_id, :avatar, :broker_id)
+      params.require(:produce).permit(:producename, :producetype, :producedate, :produceharvest, :producequantity, :producedescription, :produceimage, :farmsite_id, :avatar, :broker_id, :farmsitename)
     end
 end

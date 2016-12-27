@@ -3,10 +3,10 @@
 <div class = "modal-dialog modal-lg" >
   <div class = "modal-content" >
 
-    <%= simple_form_for(@wallpost) do |f| %>
+    <%= simple_form_for(@wallpost,html: {remote:true}) do |f| %>
       <% if @wallpost.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(wallpost.errors.count, "error") %> prohibited this wallpost from being saved:</h2>
+        <div id="error_explanation"  class= "alert alert-dismissible alert-danger">
+          <h2><%= pluralize(@wallpost.errors.count, "error") %> prohibited this wallpost from being saved:</h2>
           <% @wallpost.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>

@@ -76,9 +76,19 @@
   <!--Carousel -->
 
 <div class="panel panel-default">
-  <div class="panel-heading">List Produces</div>
-  <div class="panel-body" >
+  <div class="panel-heading">
+<div class="row">
+  <div class="col-sm-6"> List Produces</div>
+ <% if user_signed_in? and @farmsite and @farmsite.farmer == current_user.meta and  @farmsite.present?  %>
+  
+  <div class="col-sm-6">
+ <div align="right">
+   <a href="#"><span class="glyphicon glyphicon-grain">
+ <%= link_to 'Add Produce', new_produce_path(farmsite_id: @farmsite.id)  , data: {turbolinks: false}, remote: true %></span></a>   </div></div><%end%></div></div>
 
+
+  <div class="panel-body" >
+<% if @farmsite.produces.present? %>
       <% @produces.each_with_index do |produce,i| %>
     <a href="<%= produce_path(id: produce.id) %>">
 
@@ -108,7 +118,12 @@
 
  
 
-    </div><div align="center"><%= will_paginate @produces, renderer: BootstrapPagination::Rails %></div>
+    </div><div align="center"><%= will_paginate @produces, renderer: BootstrapPagination::Rails %>
+     <%end%> 
+    </div>
+   
+
+
     </div>
 
 

@@ -23,6 +23,7 @@
           <div class="panel panel-default">
             <div class="panel-body">
               <div class="input-group input-group-lg " %>
+       
                 <% if params[:farmsite_id] %>
                 <%= f.label "Farm Name" %>
                 <%= f.hidden_field :farmsite_id, value: Farmsite.find(params[:farmsite_id]).id,:class => "form-control",readonly: true %>
